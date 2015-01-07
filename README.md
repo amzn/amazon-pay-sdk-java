@@ -4,7 +4,6 @@ login-and-pay-with-amazon-sdk-java
 Login and Pay with Amazon Java Library
 Copyright 2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 Licensed under the Apache License, Version 2.0 (the "License");
-******************************************************************************
 
 ******************************************************************************
 INTRODUCTION
@@ -54,8 +53,8 @@ be easily modified to suite other operating systems)
 This SDK includes two sets of samples - a command line based example that
 requires a minimal setup in order to run, and a webserver based sample that
 demonstrates notification processing.
-To run the command line based examples:
 
+To run the command line based examples:
 (1) Open the src/OffAmazonPaymentsService.config.properties file and fill out
 the merchant id, access key and secret key fields. Please also fill out
 LWA client id field if Login with Amazon service is available in your
@@ -101,7 +100,6 @@ environment require a https endpoint.
 Using the client API:
 
 To make service calls from your application:
-
 (1) Include the com.amazonservices.offamazonpayments package
 
 (2) Create a new instance of the OffAmazonPaymentsServiceClient class - you will
@@ -110,7 +108,6 @@ can be initialized using the property file
 src/OffAmazonPaymentsService.config.properties.
 
 To handle notifications from your scripts:
-
 (1) Configure your webserver to accept incoming connections over HTTPS - the
 webserver based samples make use of notification processing which requires
 a HTTPS connection, and requires a server certificate that is signed by a
