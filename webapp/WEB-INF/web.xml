@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<!-- Example web.xml file for a tomcat server. Should be placed in the WEB-INF folder. -->
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" version="2.4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http:/java.sun.com/dtd/web-app_2_3.dtd">
+
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+	<servlet>
+		<servlet-name>IpnHandler</servlet-name>
+		<servlet-class>samples.IpnHandler</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>IpnHandler</servlet-name>
+		<url-pattern>/IpnHandler</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>SimpleCheckoutServlet</servlet-name>
+		<servlet-class>samples.servlet.SimpleCheckoutServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SimpleCheckoutServlet</servlet-name>
+		<url-pattern>/SimpleCheckoutServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ProviderCheckoutServlet</servlet-name>
+		<servlet-class>samples.servlet.ProviderCheckoutServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ProviderCheckoutServlet</servlet-name>
+		<url-pattern>/ProviderCheckoutServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ProviderRefundServlet</servlet-name>
+		<servlet-class>samples.servlet.ProviderRefundServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ProviderRefundServlet</servlet-name>
+		<url-pattern>/ProviderRefundServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ReverseProviderCreditServlet</servlet-name>
+		<servlet-class>samples.servlet.ReverseProviderCreditServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ReverseProviderCreditServlet</servlet-name>
+		<url-pattern>/ReverseProviderCreditServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>RefundServlet</servlet-name>
+		<servlet-class>samples.servlet.RefundServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RefundServlet</servlet-name>
+		<url-pattern>/RefundServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>OrderCancellationServlet</servlet-name>
+		<servlet-class>samples.servlet.OrderCancellationServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>OrderCancellationServlet</servlet-name>
+		<url-pattern>/OrderCancellationServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>SplitShipmentsCheckoutServlet</servlet-name>
+		<servlet-class>samples.servlet.SplitShipmentsCheckoutServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SplitShipmentsCheckoutServlet</servlet-name>
+		<url-pattern>/SplitShipmentsCheckoutServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>SplitShipmentsSetupServlet</servlet-name>
+		<servlet-class>samples.servlet.SplitShipmentsSetupServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SplitShipmentsSetupServlet</servlet-name>
+		<url-pattern>/SplitShipmentsSetupServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>AddressConsentServlet</servlet-name>
+		<servlet-class>samples.servlet.AddressConsentServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddressConsentServlet</servlet-name>
+		<url-pattern>/AddressConsentServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>AutomaticPaymentSimpleCheckoutServlet</servlet-name>
+		<servlet-class>samples.servlet.AutomaticPaymentSimpleCheckoutServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AutomaticPaymentSimpleCheckoutServlet</servlet-name>
+		<url-pattern>/AutomaticPaymentSimpleCheckoutServlet</url-pattern>
+	</servlet-mapping>
+
+</web-app>
