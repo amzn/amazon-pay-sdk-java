@@ -129,7 +129,9 @@ SUPPORT & PROJECT HOME
 ******************************************************************************
 The latest documentation on the Login and Pay with Amazon can be found at the LINKS
 section below:
+
 US Amazon Seller Central: https://sellercentral.amazon.com
 EU Amazon Seller Central: https://sellercentral-europe.amazon.com
+
 1. Login to the site and navigate to the integration central tab to view
 available resources.
