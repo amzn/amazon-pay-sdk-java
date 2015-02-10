@@ -1,3 +1,14 @@
+v1.0.13 - January 2015
+- Add CN name validation for certificate used to construct IPN message signature
+- Modified NotificationParser class, now recommended to use the NotificationParserFactory to create new instances of
+  a notification parser.  Existing clients will need to provide a OffAmazonPaymentsServiceConfig object into the
+  NotificationParser constructor if needing to use the existing interface
+- Update to IPNHandler sample to use new NotificationParserFactory
+- Add new 3rd party library dependency on BouncyCastle Cryptography API v1.51 (bcpkix-jdk15 & bcprov-ext-jdk151on)
+
+v1.0.12 - October 2014
+- Internal release, no changes to public SDK
+
 v1.0.11 - September 2014
 - Addressed issue with IPN metadata serialization found in newer versions of
 JAXB, upgraded bundled JAXB libraries to latest version (2.2.7)

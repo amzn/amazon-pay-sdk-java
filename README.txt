@@ -40,13 +40,33 @@ September 9th, 2014, you will need to register with Login with Amazon (LWA) and
 get a Login with Amazon (LWA) Client ID. To register with LWA contact Amazon
 Payments seller support through Seller Central and request an LwA registration.
 
-
 Once registered for LWA to get your LWA Client ID, go to Seller Central, select
 the ???Login with Amazon??? marketplace on the top right switcher, click on
 "Register Your Application" button on LWA Seller Central page. For additional 
 information, please see the following step by step guide to get your Login with 
 Amazon Client ID: https://amazonpayments.s3.amazonaws.com/documents/Get_Your_
 Login_with_Amazon_Client_ID.pdf
+
+******************************************************************************
+UPGRADE INSTRUCTIONS - for clients upgrading from versions < 1.0.13
+******************************************************************************
+Clients upgrading to this version of the SDK from versions earlier than 1.0.13
+need to be aware of the following changes to the SDK library that will require
+changes to your application:
+   - There is a new dependency on the bouncycastle cryptography libraries,
+     please ensure the library is deployed to your server if you use the
+     SDK for parsing IPN notifications
+   - There is a new system property, certCN field, that needs to be added to
+     the OffAmazonPaymentsServiceClientConfig object.  See
+     src/samples/OffAmazonPaymentsService.config.properties for a sample
+     property file with the correct value for certCN key
+   - For clients using the notification parser library, there has been a
+     change to the interface used to obtain a reference to the parser.  Clients
+     are now required to inject an instance of the OffAmazonPaymentsServiceClientConfig
+     object into a NotificationParserFactory, which provides a createNewInstance method
+     to obtain a reference to a NotificationParser object.  See
+     /src/samples/IpnHandler.java for an example on how to use the new NotificationParser
+     API.
 
 ******************************************************************************
 USAGE INSTRUCTIONS 

@@ -21,6 +21,9 @@ import java.util.Calendar;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
+import com.amazonservices.mws.offamazonpayments.OffAmazonPaymentsServiceConfig;
+import com.amazonservices.mws.offamazonpaymentsipn.INotificationParser;
+import com.amazonservices.mws.offamazonpaymentsipn.NotificationParserFactory;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -36,6 +39,7 @@ import com.amazonservices.mws.offamazonpaymentsipn.model.RefundNotification;
 import com.amazonservices.mws.offamazonpaymentsipn.model.SolutionProviderMerchantNotification;
 import com.amazonservices.mws.offamazonpaymentsipn.notifications.INotification;
 import com.amazonservices.mws.offamazonpaymentsipn.notifications.NotificationType;
+import samples.utils.PropertyBundle;
 
 /**
  * Receives and stores incoming IPN's
@@ -45,13 +49,19 @@ public class IpnHandler extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
+    private final INotificationParser notificationParser;
+
+    public IpnHandler() {
+        OffAmazonPaymentsServiceConfig config = new OffAmazonPaymentsServiceConfig(PropertyBundle.getProperties());
+        this.notificationParser = new NotificationParserFactory(config).createNewInstance();
+    }
+
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LOG.debug("IPN received");
-        
-        NotificationParser parser = new NotificationParser();
+
         INotification notification = null;
         try {
-            notification = parser.parseRawMessage(request);
+            notification = this.notificationParser.parseRawMessage(request);
             String id = null;
             String key = null;
 
