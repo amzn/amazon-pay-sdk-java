@@ -1,21 +1,6 @@
 package PayWithAmazon;
 
-import PayWithAmazon.Request.AuthorizeRequest;
-import PayWithAmazon.Request.CaptureRequest;
-import PayWithAmazon.Request.CloseOrderReferenceRequest;
-import PayWithAmazon.Request.ConfirmOrderReferenceRequest;
-import PayWithAmazon.Request.GetAuthorizationDetailsRequest;
-import PayWithAmazon.Request.GetCaptureDetailsRequest;
-import PayWithAmazon.Request.GetOrderReferenceDetailsRequest;
-import PayWithAmazon.Request.GetRefundDetailsRequest;
-import PayWithAmazon.Request.Recurring.AuthorizeOnBillingAgreementRequest;
-import PayWithAmazon.Request.Recurring.CloseBillingAgreementRequest;
-import PayWithAmazon.Request.Recurring.ConfirmBillingAgreementRequest;
-import PayWithAmazon.Request.Recurring.GetBillingAgreementDetailsRequest;
-import PayWithAmazon.Request.Recurring.SetBillingAgreementDetailsRequest;
-import PayWithAmazon.Request.Recurring.ValidateBillingAgreementRequest;
-import PayWithAmazon.Request.RefundRequest;
-import PayWithAmazon.Request.SetOrderReferenceDetailsRequest;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -32,12 +17,13 @@ import org.apache.commons.codec.binary.Base64;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-public class PayWithAmazonUtilities {
+public class Utilities {
 
-    public PayWithAmazonClientRequest client;
+    public ClientRequest client;
+    
     public static final String AMAZON_PAYMENTS_API_VERSION = "2013-01-01";
 
-    public PayWithAmazonUtilities(PayWithAmazonClientRequest r) {
+    public Utilities(ClientRequest r) {
         client = r;
     }
 

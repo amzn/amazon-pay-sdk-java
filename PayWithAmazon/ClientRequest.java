@@ -3,7 +3,7 @@ package PayWithAmazon;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PayWithAmazonClientRequest {
+public class ClientRequest {
 
     public ClientMappings c = new ClientMappings();
     
@@ -20,7 +20,7 @@ public class PayWithAmazonClientRequest {
     public String amazon_payments_endpoint;
     
 
-    public PayWithAmazonClientRequest(String merchant_id, String access_key, String secret_key, String region, String sandbox) {
+    public ClientRequest(String merchant_id, String access_key, String secret_key, String region, String sandbox) {
         this.merchant_id = merchant_id;
         this.access_key = access_key;
         this.secret_key = secret_key;
@@ -84,7 +84,6 @@ public class PayWithAmazonClientRequest {
     public void setApplication_name(String application_name) {
         this.application_name = application_name;
         this.params.put("application_name", application_name);
-        initializeAmazonPaymentEndpoints(this.sandbox, this.region);
     }
 
 
@@ -151,7 +150,7 @@ public class PayWithAmazonClientRequest {
     public void setSandbox(String sandbox) {
         this.sandbox = sandbox;
         this.params.put("sandbox", sandbox);
-
+        initializeAmazonPaymentEndpoints(this.sandbox, this.region);
     }
     
     
@@ -167,23 +166,16 @@ public class PayWithAmazonClientRequest {
         return amazon_payments_service_url;
     }
 
-        public void initializeAmazonPaymentEndpoints(String sandbox, String region){
-           ClientMappings c = new ClientMappings();
-           c.initialize();
-           amazon_payments_service_url = c.amazonPaymentsServiceURLs.get(c.regionMappings.get(region));
-           
-            String sandbox_str;
-            if(sandbox.equals("true")) {
-                sandbox_str = "OffAmazonPayments_Sandbox";
-            }
-           else { 
-                sandbox_str ="OffAmazonPayments";
-            }
-            amazon_payments_service_mode = sandbox_str;
+    public void initializeAmazonPaymentEndpoints(String sandbox, String region){
+        amazon_payments_service_url = c.getRegionEndpointMappings().get(c.getRegionMappings().get(region));   
+        if(sandbox.equals("true")) {
+            amazon_payments_service_mode = "OffAmazonPayments_Sandbox";
+        }
+        else { 
+            amazon_payments_service_mode ="OffAmazonPayments";
+        }
             amazon_payments_service_and_api_version = "/" + amazon_payments_service_mode + "/" + AMAZON_PAYMENTS_API_VERSION;
             amazon_payments_endpoint = amazon_payments_service_url + "/" + amazon_payments_service_and_api_version;
     }
-
-
 
 }

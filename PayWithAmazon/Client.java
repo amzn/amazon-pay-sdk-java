@@ -1,7 +1,6 @@
 package PayWithAmazon;
 
 import PayWithAmazon.Request.AuthorizeRequest;
-import PayWithAmazon.Response.Response;
 import PayWithAmazon.Request.CancelOrderReferenceRequest;
 import PayWithAmazon.Request.CaptureRequest;
 import PayWithAmazon.Request.CloseAuthorizationRequest;
@@ -25,7 +24,6 @@ import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TimeZone;
 import java.util.TreeMap;
@@ -35,21 +33,19 @@ import org.apache.commons.codec.binary.Base64;
 import org.jsoup.Jsoup;
 import org.jsoup.Connection;
 import java.util.Map;
-import java.util.HashMap;
-import java.lang.Thread;
 
-public class PayWithAmazonClient {
+public class Client {
 
-    public PayWithAmazonClientRequest client;
+    public ClientRequest clientRequest;
     public static final String AMAZON_PAYMENTS_API_VERSION = "2013-01-01";
 
-    public PayWithAmazonClient(PayWithAmazonClientRequest r) {
-        client = r;
+    public Client(ClientRequest request) {
+        clientRequest = request;
     }
 
 
     public String getPostURL() {
-        return "POST\n" + client.getAmazonPaymentsServiceURL().replace("https://", "") + "\n" + client.getAmazonPaymentsServiceAPIVersion() + "\n";
+        return "POST\n" + clientRequest.getAmazonPaymentsServiceURL().replace("https://", "") + "\n" + clientRequest.getAmazonPaymentsServiceAPIVersion() + "\n";
     }
 
     public PayWithAmazon.Response.Response getOrderReferenceDetails(GetOrderReferenceDetailsRequest request) {
@@ -172,7 +168,6 @@ public class PayWithAmazonClient {
         return buildRequest("Refund", request.getParamMap());
     }
 
-    
     public PayWithAmazon.Response.Response getRefundDetails(GetRefundDetailsRequest request) {
         return apiRequest("GetRefundDetails", request.getParamMap());
     }
@@ -181,7 +176,6 @@ public class PayWithAmazonClient {
         return buildRequest("GetRefundDetails", request.getParamMap());
     }
 
-    
     public PayWithAmazon.Response.Response closeOrderReference(CloseOrderReferenceRequest request) {
         return apiRequest("CloseOrderReference", request.getParamMap());
     }
@@ -208,17 +202,20 @@ public class PayWithAmazonClient {
             int statusCode = response.getStatusCode();
             int retry = 0;
             
-            System.out.println(statusCode);
-            System.out.println(retry);
-            
             while((statusCode == 500 || statusCode == 501) && retry < 3) {
                  retry++;
-                 System.out.println(statusCode);
-                 System.out.println(retry);
-                 if (retry == 1) { java.lang.Thread.sleep(1); }
-                 else if(retry == 2) { java.lang.Thread.sleep(4); }
-                 else if(retry == 3)  { java.lang.Thread.sleep(10); }
-                 else return null;
+                 if (retry == 1) { 
+                     java.lang.Thread.sleep(1); 
+                 }
+                 else if(retry == 2) { 
+                     java.lang.Thread.sleep(4); 
+                 }
+                 else if(retry == 3)  
+                 { 
+                      java.lang.Thread.sleep(10); 
+                 }
+                 else 
+                     return null;
                  response = postRequest(request);
            }
         }
@@ -247,12 +244,12 @@ public class PayWithAmazonClient {
         return apiResponse;
     }
     
-public void getParamMap(String action, Map<String,String> params) {
+    public void getParamMap(String action, Map<String,String> params) {
         String ts = urlEncode(getTimestamp());
         params.remove("Signature");
         params.put("Action", action);
-        params.put("AWSAccessKeyId", client.access_key);
-        params.put("SellerId", client.merchant_id);
+        params.put("AWSAccessKeyId", clientRequest.access_key);
+        params.put("SellerId", clientRequest.merchant_id);
         params.put("SignatureVersion", "2");
         params.put("SignatureMethod", "HmacSHA256");
         params.put("Version", AMAZON_PAYMENTS_API_VERSION);
@@ -262,12 +259,12 @@ public void getParamMap(String action, Map<String,String> params) {
 
         getParamMap(action,params);
         String sts = getStringToSign(params);
-        String sig = getSignature(sts, client.secret_key);
+        String sig = getSignature(sts, clientRequest.secret_key);
         System.out.println("sts = \n" + sts);
         System.out.println("sig = \n" + sig);
         params.put("Signature", urlEncode(sig));
         StringBuilder requestString = new StringBuilder();
-        requestString.append(client.amazon_payments_endpoint + "?");
+        requestString.append(clientRequest.amazon_payments_endpoint + "?");
         String paramsString = buildParamsString(params);
         requestString.append(paramsString);
         //System.out.println("buildRequest string: " + requestString.toString());
@@ -310,7 +307,6 @@ public void getParamMap(String action, Map<String,String> params) {
             }
         }
         sts = sts + data.toString();
-       // System.out.println("getStringToSign (end) sts = " + sts);
         return sts;
     }
 

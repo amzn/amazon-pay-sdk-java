@@ -120,6 +120,7 @@ public class IPNMessage {
          }
          ipnDataMap.putAll(messageDataMap);
     }
+    
     public boolean isNotificationValid() {
         return IPNUtility.isMessageSignatureValid(this);
     }
