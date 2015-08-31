@@ -1,11 +1,14 @@
 package PayWithAmazon.IPN;
 
+import com.google.gson.Gson;
 import java.io.InputStream;
 import java.net.URL;
 import java.security.Signature;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.util.Base64; 
+import java.util.HashMap;
+import java.util.Map;
 import javax.naming.ldap.LdapName;
 import javax.naming.ldap.Rdn;
 
@@ -78,8 +81,13 @@ public class IPNUtility {
         }
    }
     
-
-
-
+        
+    public static Map<String,String> convertJsonToMap(String notificationDataJson) {
+       Map<String,String> notificationDataMap = new HashMap<String,String>();
+       Gson gson = new Gson();
+       notificationDataMap = (Map<String,String>) gson.fromJson( notificationDataJson , notificationDataMap.getClass());
+       return notificationDataMap;
+    }
+    
     
 }
