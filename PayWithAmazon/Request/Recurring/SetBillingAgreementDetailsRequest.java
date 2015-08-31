@@ -1,39 +1,33 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package PayWithAmazon.Request.Recurring;
 
 import PayWithAmazon.Request.*;
 import java.util.*;
 
 /**
- *   
- * @author nehaa
+ * Build request for Authorize API.
+ * For documentation, refer - https://payments.amazon.com/documentation/apireference/201751630#201752010
  */
 public class SetBillingAgreementDetailsRequest {
     
-    private Map<String,String> parameters = new HashMap<String,String>();
-
+    //required parameters
     private String amazonBillingAgreementId = null;
-    private String mwsAuthToken = null;
-
+    
+    //optional parameters
     private String platformId = null;
     private String sellerNote = null;
-    
     private String sellerBillingAgreementId = null;
     private String storeName = null;
     private String customInformation = null;
-
+    private String mwsAuthToken = null;
     
+    private Map<String,String> parameters = new HashMap<String,String>();
+    
+
     public SetBillingAgreementDetailsRequest setAmazonBillingAgreementId(String amazonBillingAgreementId){
         this.amazonBillingAgreementId = amazonBillingAgreementId;
         parameters.put(ParamConstants.AMAZON_BILLING_AGREEMENT_ID, amazonBillingAgreementId);
         return this;
     }
-    
     
     public SetBillingAgreementDetailsRequest setMWSAuthToken(String mwsAuthToken) {
         this.mwsAuthToken = mwsAuthToken;
@@ -46,8 +40,7 @@ public class SetBillingAgreementDetailsRequest {
         parameters.put(ParamConstants.BILLING_AGREEMENT_PLATFORM_ID, platformId);
         return this;
     }
-
-        
+   
     public SetBillingAgreementDetailsRequest setSellerNote(String sellerNote) {
         this.sellerNote = sellerNote;
         parameters.put(ParamConstants.BILLING_AGREEMENT_SELLER_NOTE, sellerNote);

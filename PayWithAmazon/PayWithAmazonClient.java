@@ -14,7 +14,7 @@ import PayWithAmazon.Request.GetRefundDetailsRequest;
 import PayWithAmazon.Request.Recurring.AuthorizeOnBillingAgreementRequest;
 import PayWithAmazon.Request.Recurring.CloseBillingAgreementRequest;
 import PayWithAmazon.Request.Recurring.ConfirmBillingAgreementRequest;
-import PayWithAmazon.Request.Recurring.GetBillingAgreementRequest;
+import PayWithAmazon.Request.Recurring.GetBillingAgreementDetailsRequest;
 import PayWithAmazon.Request.Recurring.SetBillingAgreementDetailsRequest;
 import PayWithAmazon.Request.Recurring.ValidateBillingAgreementRequest;
 import PayWithAmazon.Request.RefundRequest;
@@ -33,6 +33,7 @@ import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import org.apache.commons.codec.binary.Base64;
 import org.jsoup.Jsoup;
+import org.jsoup.Connection;
 import java.util.Map;
 import java.util.HashMap;
 import java.lang.Thread;
@@ -51,8 +52,8 @@ public class PayWithAmazonClient {
         return "POST\n" + client.getAmazonPaymentsServiceURL().replace("https://", "") + "\n" + client.getAmazonPaymentsServiceAPIVersion() + "\n";
     }
 
-    public void getOrderReferenceDetails(GetOrderReferenceDetailsRequest request) {
-        apiRequest("GetOrderReferenceDetails", request.getParamMap());
+    public PayWithAmazon.Response.Response getOrderReferenceDetails(GetOrderReferenceDetailsRequest request) {
+        return apiRequest("GetOrderReferenceDetails", request.getParamMap());
     }
     
 
@@ -60,41 +61,40 @@ public class PayWithAmazonClient {
         return buildRequest("GetOrderReferenceDetails", request.getParamMap());
     }
 
-    public PayWithAmazon.Response.Response getBillingAgreementDetails(GetBillingAgreementRequest request) {
+    public PayWithAmazon.Response.Response getBillingAgreementDetails(GetBillingAgreementDetailsRequest request) {
         return apiRequest("GetBillingAgreementDetails", request.getParamMap());
     }
     
-    public String getBillingAgreementDetailsPostRequest(GetBillingAgreementRequest request) {
+    public String getBillingAgreementDetailsPostRequest(GetBillingAgreementDetailsRequest request) {
        return buildRequest("GetBillingAgreementDetails", request.getParamMap());
     }
     
-    public void setOrderReferenceDetails(SetOrderReferenceDetailsRequest request) {
-        apiRequest("SetOrderReferenceDetails", request.getParamMap());
+    public PayWithAmazon.Response.Response setOrderReferenceDetails(SetOrderReferenceDetailsRequest request) {
+        return apiRequest("SetOrderReferenceDetails", request.getParamMap());
     }
     
     public String setOrderReferenceDetailsPostRequest(SetOrderReferenceDetailsRequest request) {
         return buildRequest("SetOrderReferenceDetails", request.getParamMap());
     }
     
-    public void setBillingAgreementDetails(SetBillingAgreementDetailsRequest request) {
-        apiRequest("SetBillingAgreementDetails", request.getParamMap());
+    public PayWithAmazon.Response.Response setBillingAgreementDetails(SetBillingAgreementDetailsRequest request) {
+        return apiRequest("SetBillingAgreementDetails", request.getParamMap());
     }
 
     public String setBillingAgreementDetailsPostRequest(SetBillingAgreementDetailsRequest request) {
        return buildRequest("SetBillingAgreementDetails", request.getParamMap());
     }
 
-    public void validateBillingAgreementDetails(ValidateBillingAgreementRequest request) {
-        apiRequest("ValidateBillingAgreement", request.getParamMap());
+    public PayWithAmazon.Response.Response validateBillingAgreement(ValidateBillingAgreementRequest request) {
+        return apiRequest("ValidateBillingAgreement", request.getParamMap());
     }
 
-    public String validateBillingAgreementDetailsPostRequest(ValidateBillingAgreementRequest request) {
+    public String validateBillingAgreementPostRequest(ValidateBillingAgreementRequest request) {
         return buildRequest("ValidateBillingAgreement", request.getParamMap());
     }
     
-    public void confirmOrderReference(ConfirmOrderReferenceRequest request) {
-
-        apiRequest("ConfirmOrderReference", request.getParamMap());
+    public PayWithAmazon.Response.Response confirmOrderReference(ConfirmOrderReferenceRequest request) {
+        return apiRequest("ConfirmOrderReference", request.getParamMap());
     }
     
     public String confirmOrderReferencePostRequest(ConfirmOrderReferenceRequest request) {
@@ -114,8 +114,8 @@ public class PayWithAmazonClient {
         return apiRequest("Authorize", request.getParamMap());
     }
     
-    public void cancelOrderReference(CancelOrderReferenceRequest request) {
-        apiRequest("CancelOrderReference", request.getParamMap());
+    public PayWithAmazon.Response.Response cancelOrderReference(CancelOrderReferenceRequest request) {
+        return apiRequest("CancelOrderReference", request.getParamMap());
     }
     
     public String cancelOrderReferencePostRequest(CancelOrderReferenceRequest request) {
@@ -126,46 +126,46 @@ public class PayWithAmazonClient {
         return buildRequest("Authorize", request.getParamMap());
     }
 
-    public void authorizeOnBillingAgreementDetails(AuthorizeOnBillingAgreementRequest request) {
-        apiRequest("AuthorizeOnBillingAgreementDetails", request.getParamMap());
+    public PayWithAmazon.Response.Response authorizeOnBillingAgreement(AuthorizeOnBillingAgreementRequest request) {
+        return apiRequest("AuthorizeOnBillingAgreementDetails", request.getParamMap());
     }
     
     public String authorizeOnBillingAgreementPostRequest(AuthorizeOnBillingAgreementRequest request) {
         return buildRequest("AuthorizeOnBillingAgreement", request.getParamMap());
     }
     
-    public void getAuthorizationDetails(GetAuthorizationDetailsRequest request) {
-        apiRequest("GetAuthorizationDetails", request.getParamMap());
+    public PayWithAmazon.Response.Response getAuthorizationDetails(GetAuthorizationDetailsRequest request) {
+        return apiRequest("GetAuthorizationDetails", request.getParamMap());
     }
     
     public String getAuthorizationDetailsPostRequest(GetAuthorizationDetailsRequest request) {
         return buildRequest("GetAuthorizationDetails", request.getParamMap());
     }
     
-    public void closeAuthorization(CloseAuthorizationRequest request) {
-        apiRequest("CloseAuthorization", request.getParamMap());
+    public PayWithAmazon.Response.Response closeAuthorization(CloseAuthorizationRequest request) {
+        return apiRequest("CloseAuthorization", request.getParamMap());
     }
     
     public String closeAuthorizationPostRequest(CloseAuthorizationRequest request) {
         return buildRequest("CloseAuthorization", request.getParamMap());
     }
-    public void Capture(CaptureRequest request) {
-        apiRequest("Capture", request.getParamMap());
+    public PayWithAmazon.Response.Response Capture(CaptureRequest request) {
+        return apiRequest("Capture", request.getParamMap());
     }
     
     public String CapturePostRequest(CaptureRequest request) {
         return buildRequest("Capture", request.getParamMap());
     }
 
-    public void getCaptureDetails(GetCaptureDetailsRequest request) {
-        apiRequest("GetCaptureDetails", request.getParamMap());
+    public PayWithAmazon.Response.Response getCaptureDetails(GetCaptureDetailsRequest request) {
+        return apiRequest("GetCaptureDetails", request.getParamMap());
     }
 
     public String getCaptureDetailsPostRequest(GetCaptureDetailsRequest request) {
         return buildRequest("GetCaptureDetails", request.getParamMap());
     }
 
-    public PayWithAmazon.Response.Response Refund(RefundRequest request) {
+    public PayWithAmazon.Response.Response refund(RefundRequest request) {
         return apiRequest("Refund", request.getParamMap());
     }
     public String refundPostRequest(RefundRequest request) {
@@ -173,42 +173,44 @@ public class PayWithAmazonClient {
     }
 
     
-    public void GetRefundDetails(GetRefundDetailsRequest request) {
-        apiRequest("GetRefundDetails", request.getParamMap());
+    public PayWithAmazon.Response.Response getRefundDetails(GetRefundDetailsRequest request) {
+        return apiRequest("GetRefundDetails", request.getParamMap());
     }
-    public String GetRefundDetailsPostRequest(GetRefundDetailsRequest request) {
+    
+    public String getRefundDetailsPostRequest(GetRefundDetailsRequest request) {
         return buildRequest("GetRefundDetails", request.getParamMap());
     }
 
     
-    public void closeOrderReference(CloseOrderReferenceRequest request) {
-        apiRequest("CloseOrderReference", request.getParamMap());
+    public PayWithAmazon.Response.Response closeOrderReference(CloseOrderReferenceRequest request) {
+        return apiRequest("CloseOrderReference", request.getParamMap());
     }
     public String closeOrderReferencePostRequest(CloseOrderReferenceRequest request) {
         return buildRequest("CloseOrderReference", request.getParamMap());
     }
     
-    
-    public void closeBillingAgreement(CloseBillingAgreementRequest request) {
-        apiRequest("CloseBillingAgreement" , request.getParamMap());
+    public PayWithAmazon.Response.Response closeBillingAgreement(CloseBillingAgreementRequest request) {
+        return apiRequest("CloseBillingAgreement" , request.getParamMap());
     }
+    
     public String closeBillingAgreementPostRequest(CloseBillingAgreementRequest request) {
         return buildRequest("CloseBillingAgreement", request.getParamMap());
     }
     
     
     public PayWithAmazon.Response.Response apiRequest(String action, Map<String, String> params) {
-        PayWithAmazon.Response.Response apiResponse = null;
+        PayWithAmazon.Response.Response response = null;
         String request = buildRequest(action, params);
         System.out.println("apiRequest: " + request);
         try {
-            apiResponse = new PayWithAmazon.Response.Response();
-            apiResponse.setXmlString(Jsoup.connect(request).ignoreHttpErrors(true).post().toString()); 
-            apiResponse.setStatusCode(Jsoup.connect(request).ignoreHttpErrors(true).execute().statusCode());
-            int statusCode = apiResponse.getStatusCode();
+            response = postRequest(request);
+            
+            int statusCode = response.getStatusCode();
             int retry = 0;
+            
             System.out.println(statusCode);
             System.out.println(retry);
+            
             while((statusCode == 500 || statusCode == 501) && retry < 3) {
                  retry++;
                  System.out.println(statusCode);
@@ -217,15 +219,30 @@ public class PayWithAmazonClient {
                  else if(retry == 2) { java.lang.Thread.sleep(4); }
                  else if(retry == 3)  { java.lang.Thread.sleep(10); }
                  else return null;
-                 apiResponse.setXmlString(Jsoup.connect(request).ignoreHttpErrors(true).post().toString()); 
-                 apiResponse.setStatusCode(Jsoup.connect(request).ignoreHttpErrors(true).execute().statusCode());
+                 response = postRequest(request);
            }
         }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+      
         catch(Exception e) {
             e.printStackTrace();
+        }
+        return response;
+    }
+    
+    private PayWithAmazon.Response.Response postRequest(String request) {
+       PayWithAmazon.Response.Response apiResponse = null;
+
+        try{
+            Connection con = Jsoup.connect(request);
+            con.ignoreHttpErrors(true).post();
+            
+            apiResponse = new PayWithAmazon.Response.Response();
+            apiResponse.setXmlString(con.response().parse().toString());
+            apiResponse.setStatusCode(con.response().statusCode());
+            apiResponse.setDocumentResponse(con.response().parse());
+        }
+           catch (IOException e) {
+                e.printStackTrace();
         }
         return apiResponse;
     }

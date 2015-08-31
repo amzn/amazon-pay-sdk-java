@@ -49,5 +49,13 @@ public class ParamConstants {
     public static final String SELLER_NOTE = "OrderReferenceAttributes.SellerNote";
     public static final String SELLER_ORDER_ID = "OrderReferenceAttributes.SellerOrderAttributes.SellerOrderId";
     public static final String STORE_NAME = "OrderReferenceAttributes.SellerOrderAttributes.StoreName";
-
+    public static final String CUSTOM_INFORMATION = "OrderReferenceAttributes.SellerOrderAttributes.CustomInformation";
+    
+    public static final String AMAZON_PROVIDER_CREDIT_ID = "AmazonProviderCreditId";
+    public static final String CREDIT_REVERSAL_REFERENCE_ID = "CreditReversalReferenceId";
+    public static final String CREDIT_REVERSAL_AMOUNT = "CreditReversalAmount.Amount";
+    public static final String CREDIT_REVERSAL_AMOUNT_CURRENCY_CODE = "CreditReversalAmount.CurrencyCode";
+    public static final String CREDIT_REVERSAL_NOTE = "CreditReversalNote";
+    
+    public static final String AMAZON_PROVIDER_CREDIT_REVERSAL_ID = "AmazonProviderCreditReversalId";
 }

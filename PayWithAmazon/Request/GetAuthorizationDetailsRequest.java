@@ -1,29 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package PayWithAmazon.Request;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * https://payments.amazon.com/documentation/apireference/201752640#201752030
- * @author nehaa
+ * Build request for CloseOrderReference API.
+ * For documentation, refer - https://payments.amazon.com/documentation/apireference/201752640#201752030
  */
+
 public class GetAuthorizationDetailsRequest {
     
-    private Map<String,String> parameters = new HashMap<String,String>();
-    
+    //required parameters
     private String amazonAuthorizationId = null;
-    private String mwsAuthToken = null;   
-    /**
-     * Set the value of amazonAuthorizationId
-     *
-     * @param amazonAuthorizationId new value of amazonAuthorizationId
-     */
+    
+    //optional parameters
+    private String mwsAuthToken = null; 
+    
+    private Map<String,String> parameters = new HashMap<String,String>();
+  
     public GetAuthorizationDetailsRequest setAmazonAuthorizationId(String amazonAuthorizationId) {
         this.amazonAuthorizationId = amazonAuthorizationId;
         parameters.put(ParamConstants.AMAZON_AUTHORIZATION_ID, amazonAuthorizationId);

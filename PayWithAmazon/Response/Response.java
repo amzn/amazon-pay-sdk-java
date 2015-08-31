@@ -9,7 +9,7 @@ package PayWithAmazon.Response;
 import java.io.StringReader;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import org.w3c.dom.Document;
+import org.jsoup.nodes.Document;
 import org.xml.sax.InputSource;
 /**
  *
@@ -19,6 +19,7 @@ public class Response {
     
     private int statusCode;
     private String xmlString;
+    private Document documentResponse;
 
     public void setXmlString(String xmlString) {
         this.xmlString = xmlString;
@@ -28,24 +29,15 @@ public class Response {
         this.statusCode = statusCode;
     }
     
+    public void setDocumentResponse(Document document) {
+        this.documentResponse = document;
+    }
+    
     public int getStatusCode() {
         return statusCode;
     }
     public String getString() {
         return xmlString;
-    }
-    public Document convertStringToDocument(String xmlString) {
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();  
-        DocumentBuilder builder;  
-        try 
-        {  
-            builder = factory.newDocumentBuilder();  
-            Document doc = builder.parse( new InputSource( new StringReader( xmlString) ) ); 
-            return doc;
-        } catch (Exception e) {  
-            e.printStackTrace();  
-        } 
-        return null;
     }
 }
 

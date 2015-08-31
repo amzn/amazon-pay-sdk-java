@@ -11,7 +11,7 @@ import PayWithAmazon.Request.GetRefundDetailsRequest;
 import PayWithAmazon.Request.Recurring.AuthorizeOnBillingAgreementRequest;
 import PayWithAmazon.Request.Recurring.CloseBillingAgreementRequest;
 import PayWithAmazon.Request.Recurring.ConfirmBillingAgreementRequest;
-import PayWithAmazon.Request.Recurring.GetBillingAgreementRequest;
+import PayWithAmazon.Request.Recurring.GetBillingAgreementDetailsRequest;
 import PayWithAmazon.Request.Recurring.SetBillingAgreementDetailsRequest;
 import PayWithAmazon.Request.Recurring.ValidateBillingAgreementRequest;
 import PayWithAmazon.Request.RefundRequest;

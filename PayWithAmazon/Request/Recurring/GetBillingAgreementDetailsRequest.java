@@ -14,33 +14,33 @@ import java.util.*;
  * @author nehaa
  * https://payments.amazon.com/documentation/apireference/201752640#201751950
  */
-public class CloseBillingAgreementRequest {
+public class GetBillingAgreementDetailsRequest {
     
     //required parameters
     private String amazonBillingAgreementId = null;
     
     //optional parameters
-    private String closureReason = null;
+    private String addressConsentToken = null;
     private String mwsAuthToken = null;
     
     private Map<String,String> parameters = new HashMap<String,String>();
 
-
-    public CloseBillingAgreementRequest setAmazonBillingAgreementId(String amazonBillingAgreementId){
+    public GetBillingAgreementDetailsRequest setAmazonBillingAgreementId(String amazonBillingAgreementId){
         this.amazonBillingAgreementId = amazonBillingAgreementId;
         parameters.put(ParamConstants.AMAZON_BILLING_AGREEMENT_ID, amazonBillingAgreementId);
         return this;
     }
-    
-    public CloseBillingAgreementRequest setClosureReason(String closureReason) {
-        this.closureReason = closureReason;
-        parameters.put(ParamConstants.CLOSURE_REASON , closureReason);
+
+    public GetBillingAgreementDetailsRequest setMWSAuthToken(String mwsAuthToken) {
+        this.mwsAuthToken = mwsAuthToken;
+        parameters.put(ParamConstants.MWS_AUTH_TOKEN, mwsAuthToken);
         return this;
     }
 
-    public CloseBillingAgreementRequest setMWSAuthToken(String mwsAuthToken) {
-        this.mwsAuthToken = mwsAuthToken;
-        parameters.put(ParamConstants.MWS_AUTH_TOKEN, mwsAuthToken);
+        
+    public GetBillingAgreementDetailsRequest setAddressConsentToken(String addressConsentToken) {
+        this.addressConsentToken = addressConsentToken;
+        parameters.put(ParamConstants.ADDRESS_CONSENT_TOKEN , addressConsentToken);
         return this;
     }
     

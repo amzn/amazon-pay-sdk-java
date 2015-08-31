@@ -1,58 +1,31 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package PayWithAmazon.Request;
 
 import java.util.*;
 
 /**
- *    // params.put("AmazonOrderReferenceId","S01-4182319-6876838");
-      // params.put("OrderReferenceAttributes.OrderTotal.Amount","30");
-      // params.put("OrderReferenceAttributes.OrderTotal.CurrencyCode","USD");
-      // params.put("OrderReferenceAttributes.PlatformId","");
-      // params.put("OrderReferenceAttributes.SellerNote","Lorem%20ipsum");
-      // params.put("OrderReferenceAttributes.SellerOrderAttributes.SellerOrderId","5678-23");
-      // params.put("OrderReferenceAttributes.SellerOrderAttributes.StoreName","YOUR_STORE_NAME");  
- * @author nehaa
+ * Build request for SetOrderReferenceDetails API.
+ * For documentation, refer - https://payments.amazon.com/documentation/apireference/201752640#201751960
  */
+
 public class SetOrderReferenceDetailsRequest {
     
     private Map<String,String> parameters = new HashMap<String,String>();
 
+    //required parameters
     private String amazonOrderReferenceId = null;
-    private String addressConsentToken = null;
-    private String mwsAuthToken = null;
-    private String currencyCode = null;
     private String orderTotal = null;
+    
+    //optional parameters
     private String platformId = null;
     private String sellerNote = null;
     private String sellerOrderId = null;
     private String storeName = null;
-    
+    private String customInformation = null;
+    private String mwsAuthToken = null;
+
     public SetOrderReferenceDetailsRequest setAmazonOrderReferenceId(String amazonOrderReferenceId){
         this.amazonOrderReferenceId = amazonOrderReferenceId;
         parameters.put(ParamConstants.AMAZON_ORDER_REFERENCE_ID, amazonOrderReferenceId);
-        return this;
-    }
-    
-    public SetOrderReferenceDetailsRequest setAddressConsentToken(String addressConsentToken) {
-        this.addressConsentToken = addressConsentToken;
-        parameters.put(ParamConstants.ADDRESS_CONSENT_TOKEN, addressConsentToken);
-        return this;
-    }
-    
-    public SetOrderReferenceDetailsRequest setMWSAuthToken(String mwsAuthToken) {
-        this.mwsAuthToken = mwsAuthToken;
-        parameters.put(ParamConstants.MWS_AUTH_TOKEN, mwsAuthToken);
-        return this;
-    }
-    
-    public SetOrderReferenceDetailsRequest setCurrencyCode(String currencyCode){
-        this.currencyCode = currencyCode;
-        parameters.put(ParamConstants.CURRENCY_CODE, currencyCode);
         return this;
     }
     
@@ -86,6 +59,17 @@ public class SetOrderReferenceDetailsRequest {
         return this;
     }
     
+    public SetOrderReferenceDetailsRequest setCustomInformation(String customInformation) {
+        this.customInformation = customInformation;
+        parameters.put(ParamConstants.CUSTOM_INFORMATION, customInformation);
+        return this;
+    }
+    
+    public SetOrderReferenceDetailsRequest setMWSAuthToken(String mwsAuthToken) {
+        this.mwsAuthToken = mwsAuthToken;
+        parameters.put(ParamConstants.MWS_AUTH_TOKEN, mwsAuthToken);
+        return this;
+    }
     public Map<String,String> getParamMap(){
         return parameters;
         
