@@ -1,10 +1,7 @@
 package PayWithAmazon;
 
 import org.jsoup.nodes.Document;
-/**
- *
- * @author nehaa
- */
+
 public class ClientResponse {
     
     private int statusCode;
