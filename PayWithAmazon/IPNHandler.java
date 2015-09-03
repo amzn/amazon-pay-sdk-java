@@ -1,5 +1,6 @@
-package PayWithAmazon.IPN;
+package PayWithAmazon;
 
+import PayWithAmazon.Utilities.IPNUtility;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
@@ -8,8 +9,7 @@ import java.util.Map;
 /**
  * Helper class to parse the Instant Payment Notifications.
  */
-public class IPNMessage {
-    
+public class IPNHandler {
 
     String type, messageId, topicArn, message, timestamp, signature, signatureVersion, signingCertURL, 
            unsubscribeURL, notificationType, sellerId, environment, version, notificationData, messageTimeStamp;
@@ -19,7 +19,7 @@ public class IPNMessage {
     
     public boolean isNotificationValid;
 
-    public IPNMessage( String ipnPostPayload ) {
+    public IPNHandler( String ipnPostPayload ) {
         this.ipnDataJson = ipnPostPayload;
         parse(this.ipnDataJson);      
     }
@@ -104,6 +104,7 @@ public class IPNMessage {
          signingCertURL = notificationDataMap.get("SigningCertURL"); 
          unsubscribeURL = notificationDataMap.get("UnsubscribeURL"); 
          version = notificationDataMap.get("Version");
+         
          ipnDataMap = new HashMap<String,String>();
          ipnDataMap.putAll(notificationDataMap);
         

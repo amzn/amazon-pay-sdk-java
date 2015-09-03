@@ -1,5 +1,6 @@
 package PayWithAmazon.Request;
 
+import PayWithAmazon.Utilities.ParamConstants;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +18,7 @@ public class RefundRequest {
     private String amazonCaptureId = null;
     private String refundReferenceId = null;
     private String refundAmount = null;
+    private String refundCurrencyCode = null;    
     
     //optional parameters
     private String sellerRefundNote = null;
@@ -39,6 +41,12 @@ public class RefundRequest {
     public RefundRequest setRefundAmount(String refundAmount) {
         this.refundAmount = refundAmount;
         parameters.put(ParamConstants.REFUND_AMOUNT, refundAmount);
+        return this;
+    }
+
+    public RefundRequest setRefundCurrencyCode(String refundCurrencyCode) {
+        this.refundCurrencyCode = refundCurrencyCode;
+        parameters.put(ParamConstants.REFUND_AMOUNT_CURRENCY_CODE, refundCurrencyCode);
         return this;
     }
 

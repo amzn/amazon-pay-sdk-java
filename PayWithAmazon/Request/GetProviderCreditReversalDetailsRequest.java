@@ -1,6 +1,6 @@
-package PayWithAmazon.Request.SolutionProviderAPI;
+package PayWithAmazon.Request;
 
-import PayWithAmazon.Request.ParamConstants;
+import PayWithAmazon.Utilities.ParamConstants;
 import java.util.HashMap;
 import java.util.Map;
 

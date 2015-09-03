@@ -1,6 +1,6 @@
 package PayWithAmazon.Request;
 
-import PayWithAmazon.Request.Recurring.CloseBillingAgreementRequest;
+import PayWithAmazon.Utilities.ParamConstants;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
@@ -13,11 +13,13 @@ import java.util.ArrayList;
 public class AuthorizeRequest {
     
     private Map<String,String> parameters = new HashMap<String,String>();
+    private static final String action = "Authorize";
     
     //required parameters
     private String amazonOrderReferenceId = null;
     private String authorizationReferenceId = null;
     private String authorizationAmount = null;
+    private String authorizationCurrencyCode = null;
     
     //optonal parameters
     private String sellerAuthorizationNote = null;
@@ -43,6 +45,12 @@ public class AuthorizeRequest {
     public AuthorizeRequest setAuthorizationAmount(String authorizationAmount) {
         this.authorizationAmount = authorizationAmount;
         parameters.put(ParamConstants.AUTHORIZATION_AMOUNT, authorizationAmount);
+        return this;
+    }
+    
+    public AuthorizeRequest setAuthorizationCurrencyCode(String authorizationCurrencyCode) {
+        this.authorizationCurrencyCode = authorizationCurrencyCode;
+        parameters.put(ParamConstants.AUTHORIZATION_CURRENCEYCODE, authorizationCurrencyCode);
         return this;
     }
 

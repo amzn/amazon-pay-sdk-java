@@ -1,5 +1,6 @@
 package PayWithAmazon.Request;
 
+import PayWithAmazon.Utilities.ParamConstants;
 import java.util.*;
 
 /**
@@ -10,9 +11,10 @@ import java.util.*;
 public class CaptureRequest {
     
     //required parameters
-    private String amazonOrderReferenceId = null;  
+    private String amazonAuthorizationId = null;  
     private String captureReferenceId = null;
     private String captureAmount = null;
+    private String captureCurrencyCode = null;
     
     //optional parameters
     private String sellerCaptureNote = null;
@@ -21,9 +23,9 @@ public class CaptureRequest {
 
     private Map<String,String> parameters = new HashMap<String,String>();
 
-    public CaptureRequest setAmazonAuthorizationId(String amazonOrderReferenceId){
-        this.amazonOrderReferenceId = amazonOrderReferenceId;
-        parameters.put(ParamConstants.AMAZON_ORDER_REFERENCE_ID, amazonOrderReferenceId);
+    public CaptureRequest setAmazonAuthorizationId(String amazonAuthorizationId ){
+        this.amazonAuthorizationId  = amazonAuthorizationId ;
+        parameters.put(ParamConstants.AMAZON_AUTHORIZATION_ID, amazonAuthorizationId );
         return this;
     }
     
@@ -36,6 +38,11 @@ public class CaptureRequest {
     public CaptureRequest setCaptureAmount(String captureAmount) {
         this.captureAmount = captureAmount;
         parameters.put( ParamConstants.CAPTURE_AMOUNT , captureAmount );
+        return this;
+    }
+    public CaptureRequest setCaptureCurrencyCode(String captureCurrencyCode) {
+        this.captureCurrencyCode = captureCurrencyCode;
+        parameters.put( ParamConstants.CAPTURE_CURRENCEYCODE , captureCurrencyCode );
         return this;
     }
 

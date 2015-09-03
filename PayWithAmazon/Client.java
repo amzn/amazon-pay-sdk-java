@@ -1,316 +1,302 @@
 package PayWithAmazon;
 
+import PayWithAmazon.Request.AuthorizeOnBillingAgreementRequest;
 import PayWithAmazon.Request.AuthorizeRequest;
 import PayWithAmazon.Request.CancelOrderReferenceRequest;
 import PayWithAmazon.Request.CaptureRequest;
 import PayWithAmazon.Request.CloseAuthorizationRequest;
+import PayWithAmazon.Request.CloseBillingAgreementRequest;
 import PayWithAmazon.Request.CloseOrderReferenceRequest;
+import PayWithAmazon.Request.ConfirmBillingAgreementRequest;
 import PayWithAmazon.Request.ConfirmOrderReferenceRequest;
 import PayWithAmazon.Request.GetAuthorizationDetailsRequest;
+import PayWithAmazon.Request.GetBillingAgreementDetailsRequest;
 import PayWithAmazon.Request.GetCaptureDetailsRequest;
 import PayWithAmazon.Request.GetOrderReferenceDetailsRequest;
 import PayWithAmazon.Request.GetRefundDetailsRequest;
-import PayWithAmazon.Request.Recurring.AuthorizeOnBillingAgreementRequest;
-import PayWithAmazon.Request.Recurring.CloseBillingAgreementRequest;
-import PayWithAmazon.Request.Recurring.ConfirmBillingAgreementRequest;
-import PayWithAmazon.Request.Recurring.GetBillingAgreementDetailsRequest;
-import PayWithAmazon.Request.Recurring.SetBillingAgreementDetailsRequest;
-import PayWithAmazon.Request.Recurring.ValidateBillingAgreementRequest;
 import PayWithAmazon.Request.RefundRequest;
+import PayWithAmazon.Request.SetBillingAgreementDetailsRequest;
 import PayWithAmazon.Request.SetOrderReferenceDetailsRequest;
+import PayWithAmazon.Request.ValidateBillingAgreementRequest;
+import PayWithAmazon.Utilities.ClientMappings;
+import PayWithAmazon.Utilities.ParamConstants;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map.Entry;
+import java.util.Map;
 import java.util.TimeZone;
 import java.util.TreeMap;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import org.apache.commons.codec.binary.Base64;
-import org.jsoup.Jsoup;
 import org.jsoup.Connection;
-import java.util.Map;
+import org.jsoup.Jsoup;
 
 public class Client {
+    
+    String merchantId, accessKey, secretKey, regionCode, proxyName, proxyPort, proxyUser, proxyPass, applicationName, applicationVersion;
+    boolean sandboxMode; 
+    
+    String mwsDomainName , mwsPathName , mwsEndpoint;
+   
+    Map<String, String> clientParameters = new HashMap<String,String>();
 
-    public ClientRequest clientRequest;
-    public static final String AMAZON_PAYMENTS_API_VERSION = "2013-01-01";
-
-    public Client(ClientRequest request) {
-        clientRequest = request;
-    }
-
-
-    public String getPostURL() {
-        return "POST\n" + clientRequest.getAmazonPaymentsServiceURL().replace("https://", "") + "\n" + clientRequest.getAmazonPaymentsServiceAPIVersion() + "\n";
-    }
-
-    public PayWithAmazon.Response.Response getOrderReferenceDetails(GetOrderReferenceDetailsRequest request) {
-        return apiRequest("GetOrderReferenceDetails", request.getParamMap());
+    public Client(String merchantId, String accessKey, String secretKey, String regionCode, boolean sandboxMode) {
+        this.merchantId = merchantId;
+        this.accessKey = accessKey;
+        this.secretKey = secretKey;
+        this.regionCode = regionCode;
+        this.sandboxMode = sandboxMode;
+        this.clientParameters.put("SellerId" , merchantId);
+        this.clientParameters.put("AWSAccessKeyId" , accessKey);
+        this.clientParameters.put("SignatureVersion", "2");
+        this.clientParameters.put("SignatureMethod", "HmacSHA256");
+        this.clientParameters.put("Version", ParamConstants.AMAZON_PAYMENTS_API_VERSION);
+        setMwsUrlEndpoint();
     }
     
-
-    public String getOrderReferenceDetailsPostRequest(GetOrderReferenceDetailsRequest request) {
-        return buildRequest("GetOrderReferenceDetails", request.getParamMap());
-    }
-
-    public PayWithAmazon.Response.Response getBillingAgreementDetails(GetBillingAgreementDetailsRequest request) {
-        return apiRequest("GetBillingAgreementDetails", request.getParamMap());
-    }
-    
-    public String getBillingAgreementDetailsPostRequest(GetBillingAgreementDetailsRequest request) {
-       return buildRequest("GetBillingAgreementDetails", request.getParamMap());
-    }
-    
-    public PayWithAmazon.Response.Response setOrderReferenceDetails(SetOrderReferenceDetailsRequest request) {
-        return apiRequest("SetOrderReferenceDetails", request.getParamMap());
-    }
-    
-    public String setOrderReferenceDetailsPostRequest(SetOrderReferenceDetailsRequest request) {
-        return buildRequest("SetOrderReferenceDetails", request.getParamMap());
-    }
-    
-    public PayWithAmazon.Response.Response setBillingAgreementDetails(SetBillingAgreementDetailsRequest request) {
-        return apiRequest("SetBillingAgreementDetails", request.getParamMap());
+    public void setRegionCode(String regionCode) {
+        this.regionCode = regionCode;
+        setMwsUrlEndpoint();
     }
 
-    public String setBillingAgreementDetailsPostRequest(SetBillingAgreementDetailsRequest request) {
-       return buildRequest("SetBillingAgreementDetails", request.getParamMap());
+    public void setProxyName(String proxyName) {
+        this.proxyName = proxyName;
     }
 
-    public PayWithAmazon.Response.Response validateBillingAgreement(ValidateBillingAgreementRequest request) {
-        return apiRequest("ValidateBillingAgreement", request.getParamMap());
+    public void setProxyPort(String proxyPort) {
+        this.proxyPort = proxyPort;
     }
 
-    public String validateBillingAgreementPostRequest(ValidateBillingAgreementRequest request) {
-        return buildRequest("ValidateBillingAgreement", request.getParamMap());
-    }
-    
-    public PayWithAmazon.Response.Response confirmOrderReference(ConfirmOrderReferenceRequest request) {
-        return apiRequest("ConfirmOrderReference", request.getParamMap());
-    }
-    
-    public String confirmOrderReferencePostRequest(ConfirmOrderReferenceRequest request) {
-
-        return buildRequest("ConfirmOrderReference", request.getParamMap());
-    }
-    
-    public PayWithAmazon.Response.Response confirmBillingAgreement(ConfirmBillingAgreementRequest request) {
-        return apiRequest("ConfirmBillingAgreement", request.getParamMap());
-    }
-    
-    public String confirmBillingAgreementPostRequest(ConfirmBillingAgreementRequest request) {
-        return buildRequest("ConfirmBillingAgreement", request.getParamMap());
+    public void setProxyUser(String proxyUser) {
+        this.proxyUser = proxyUser;
     }
 
-    public PayWithAmazon.Response.Response Authorize(AuthorizeRequest request) {
-        return apiRequest("Authorize", request.getParamMap());
-    }
-    
-    public PayWithAmazon.Response.Response cancelOrderReference(CancelOrderReferenceRequest request) {
-        return apiRequest("CancelOrderReference", request.getParamMap());
-    }
-    
-    public String cancelOrderReferencePostRequest(CancelOrderReferenceRequest request) {
-        return buildRequest("CancelOrderReference", request.getParamMap());
-
-    }
-    public String AuthorizePostRequest(AuthorizeRequest request) {
-        return buildRequest("Authorize", request.getParamMap());
+    public void setProxyPass(String proxyPass) {
+        this.proxyPass = proxyPass;
     }
 
-    public PayWithAmazon.Response.Response authorizeOnBillingAgreement(AuthorizeOnBillingAgreementRequest request) {
-        return apiRequest("AuthorizeOnBillingAgreementDetails", request.getParamMap());
-    }
-    
-    public String authorizeOnBillingAgreementPostRequest(AuthorizeOnBillingAgreementRequest request) {
-        return buildRequest("AuthorizeOnBillingAgreement", request.getParamMap());
-    }
-    
-    public PayWithAmazon.Response.Response getAuthorizationDetails(GetAuthorizationDetailsRequest request) {
-        return apiRequest("GetAuthorizationDetails", request.getParamMap());
-    }
-    
-    public String getAuthorizationDetailsPostRequest(GetAuthorizationDetailsRequest request) {
-        return buildRequest("GetAuthorizationDetails", request.getParamMap());
-    }
-    
-    public PayWithAmazon.Response.Response closeAuthorization(CloseAuthorizationRequest request) {
-        return apiRequest("CloseAuthorization", request.getParamMap());
-    }
-    
-    public String closeAuthorizationPostRequest(CloseAuthorizationRequest request) {
-        return buildRequest("CloseAuthorization", request.getParamMap());
-    }
-    public PayWithAmazon.Response.Response Capture(CaptureRequest request) {
-        return apiRequest("Capture", request.getParamMap());
-    }
-    
-    public String CapturePostRequest(CaptureRequest request) {
-        return buildRequest("Capture", request.getParamMap());
+    public void setApplicationName(String applicationName) {
+        this.applicationName = applicationName;
     }
 
-    public PayWithAmazon.Response.Response getCaptureDetails(GetCaptureDetailsRequest request) {
-        return apiRequest("GetCaptureDetails", request.getParamMap());
+    public void setApplicationVersion(String applicationVersion) {
+        this.applicationVersion = applicationVersion;
     }
 
-    public String getCaptureDetailsPostRequest(GetCaptureDetailsRequest request) {
-        return buildRequest("GetCaptureDetails", request.getParamMap());
+    public void setSandboxMode(boolean sandboxMode) {
+        this.sandboxMode = sandboxMode;
+        setMwsUrlEndpoint();
     }
 
-    public PayWithAmazon.Response.Response refund(RefundRequest request) {
-        return apiRequest("Refund", request.getParamMap());
-    }
-    public String refundPostRequest(RefundRequest request) {
-        return buildRequest("Refund", request.getParamMap());
+    public PayWithAmazon.ClientResponse getOrderReferenceDetails(GetOrderReferenceDetailsRequest request) {
+        String postRequestString = buildPostRequest("GetOrderReferenceDetails", request.getParamMap());
+        return apiPostRequest(postRequestString);
     }
 
-    public PayWithAmazon.Response.Response getRefundDetails(GetRefundDetailsRequest request) {
-        return apiRequest("GetRefundDetails", request.getParamMap());
+
+    public PayWithAmazon.ClientResponse getBillingAgreementDetails(GetBillingAgreementDetailsRequest request) {
+        String requestString = buildPostRequest("GetBillingAgreementDetails", request.getParamMap());
+        return apiPostRequest(requestString);
     }
-    
-    public String getRefundDetailsPostRequest(GetRefundDetailsRequest request) {
-        return buildRequest("GetRefundDetails", request.getParamMap());
+   
+    public PayWithAmazon.ClientResponse setOrderReferenceDetails(SetOrderReferenceDetailsRequest request) {
+        String requestString = buildPostRequest("SetOrderReferenceDetails", request.getParamMap());
+        return apiPostRequest(requestString);
     }
 
-    public PayWithAmazon.Response.Response closeOrderReference(CloseOrderReferenceRequest request) {
-        return apiRequest("CloseOrderReference", request.getParamMap());
-    }
-    public String closeOrderReferencePostRequest(CloseOrderReferenceRequest request) {
-        return buildRequest("CloseOrderReference", request.getParamMap());
+    public PayWithAmazon.ClientResponse setBillingAgreementDetails(SetBillingAgreementDetailsRequest request) {
+        String requestString = buildPostRequest("SetBillingAgreementDetails", request.getParamMap());
+        return apiPostRequest(requestString);
     }
     
-    public PayWithAmazon.Response.Response closeBillingAgreement(CloseBillingAgreementRequest request) {
-        return apiRequest("CloseBillingAgreement" , request.getParamMap());
+    public PayWithAmazon.ClientResponse Authorize(AuthorizeRequest request) {
+        String requestString = buildPostRequest("Authorize", request.getParamMap());
+        return apiPostRequest(requestString);
     }
     
-    public String closeBillingAgreementPostRequest(CloseBillingAgreementRequest request) {
-        return buildRequest("CloseBillingAgreement", request.getParamMap());
+    public PayWithAmazon.ClientResponse getAuthorizationDetails(GetAuthorizationDetailsRequest request) {
+        String requestString = buildPostRequest("GetAuthorizationDetails", request.getParamMap());
+        return apiPostRequest(requestString);
     }
     
+    public PayWithAmazon.ClientResponse Capture(CaptureRequest request) {
+        String requestString = buildPostRequest("Capture", request.getParamMap());
+        return apiPostRequest(requestString);
+    }
+
+    public PayWithAmazon.ClientResponse getCaptureDetails(GetCaptureDetailsRequest request) {
+        String requestString = buildPostRequest("GetCaptureDetails", request.getParamMap());
+        return apiPostRequest(requestString);
+    }
+
+    public PayWithAmazon.ClientResponse confirmOrderReference(ConfirmOrderReferenceRequest request) {
+        String requestString = buildPostRequest("ConfirmOrderReference", request.getParamMap());
+        return apiPostRequest(requestString);
+    }
     
-    public PayWithAmazon.Response.Response apiRequest(String action, Map<String, String> params) {
-        PayWithAmazon.Response.Response response = null;
-        String request = buildRequest(action, params);
-        System.out.println("apiRequest: " + request);
+    public PayWithAmazon.ClientResponse closeAuthorization(CloseAuthorizationRequest request) {
+        String requestString = buildPostRequest("CloseAuthorization", request.getParamMap());
+        return apiPostRequest(requestString);
+    }
+
+    
+    public PayWithAmazon.ClientResponse cancelOrderReference(CancelOrderReferenceRequest request) {
+        String requestString = buildPostRequest("CancelOrderReference", request.getParamMap());
+        return apiPostRequest(requestString);
+    }
+    
+    public PayWithAmazon.ClientResponse closeOrderReference(CloseOrderReferenceRequest request) {
+        String requestString = buildPostRequest("CloseOrderReference", request.getParamMap());
+        return apiPostRequest(requestString);
+    }
+
+    public PayWithAmazon.ClientResponse refund(RefundRequest request) {
+        String requestString = buildPostRequest("Refund", request.getParamMap());
+        return apiPostRequest(requestString);
+    }
+
+
+    public PayWithAmazon.ClientResponse getRefundDetails(GetRefundDetailsRequest request) {
+        String requestString = buildPostRequest("GetRefundDetails", request.getParamMap());
+        return apiPostRequest(requestString);
+    }
+    
+
+
+    public PayWithAmazon.ClientResponse validateBillingAgreement(ValidateBillingAgreementRequest request) {
+        String requestString = buildPostRequest("ValidateBillingAgreement", request.getParamMap());
+        return apiPostRequest(requestString);
+    }
+
+    public PayWithAmazon.ClientResponse confirmBillingAgreement(ConfirmBillingAgreementRequest request) {
+        String requestString = buildPostRequest("ConfirmBillingAgreement" ,  request.getParamMap());
+        return apiPostRequest(requestString);
+    }
+
+    public PayWithAmazon.ClientResponse authorizeOnBillingAgreement(AuthorizeOnBillingAgreementRequest request) {
+        String requestString = buildPostRequest("AuthorizeOnBillingAgreementDetails", request.getParamMap());
+        return apiPostRequest(requestString);
+    }
+    
+    public PayWithAmazon.ClientResponse closeBillingAgreement(CloseBillingAgreementRequest request) {
+        String requestString = buildPostRequest("CloseBillingAgreement", request.getParamMap());
+        return apiPostRequest(requestString);
+    }
+ 
+    private void urlEncodeAPIParams(Map<String, String> apiParameters) {
+       for (Map.Entry<String, String> entry : apiParameters.entrySet()) {
+          entry.setValue(urlEncode(entry.getValue() ));
+        }
+    }
+    
+    public String buildPostRequest(String action, Map<String, String> apiParameters ) {
+        
+         //get all parameters
+        Map<String,String> allParams = new HashMap<String,String>();
+        urlEncodeAPIParams(apiParameters);
+        allParams.putAll(apiParameters);
+        allParams.putAll(this.clientParameters);
+        allParams.put("Action", action);
+        allParams.put("Timestamp", urlEncode(getTimestamp()));
+        
+        //Calculate the signature that needs to be signed.
+        String postURLForSignature = "POST\n" + mwsDomainName.replace("https://", "")  + "\n" + mwsPathName + "\n";
+        String stringToSign = getStringToSign(postURLForSignature , allParams);
+       
+        //add the signature to parameter list
+        String signature = urlEncode( getSignature(stringToSign, secretKey));
+        allParams.put("Signature" , signature);
+        
+        //construct the request String
+        StringBuilder requestString = new StringBuilder();
+        requestString.append(mwsEndpoint + "?");
+        String paramsString = buildParamsString(allParams);
+        requestString.append(paramsString);
+        return requestString.toString();
+        
+        
+    }
+
+    private void setMwsUrlEndpoint() { 
+        mwsDomainName = ClientMappings.regionEndpointMappings.get(ClientMappings.regionMappings.get(this.regionCode));   
+        if(sandboxMode) {
+            mwsPathName = "/" + "OffAmazonPayments_Sandbox" + "/" + ParamConstants.AMAZON_PAYMENTS_API_VERSION;
+        }
+        else { 
+            mwsPathName = "/" + "OffAmazonPayments" + "/" + ParamConstants.AMAZON_PAYMENTS_API_VERSION;
+        }
+        mwsEndpoint = mwsDomainName + "/" + mwsPathName;
+    }
+
+    private String getTimestamp() {
+        final Date date = new Date();
+        final String ISO_FORMAT = "yyyy-MM-dd'T'HH:mm:ssz";
+        final SimpleDateFormat sdf = new SimpleDateFormat(ISO_FORMAT);
+        final TimeZone utc = TimeZone.getTimeZone("UTC");
+        sdf.setTimeZone(utc);
+        String ts = sdf.format(date);
+        return (ts.replace("UTC", "Z"));
+    }
+    
+    private ClientResponse postRequest(String request) {
+        ClientResponse apiResponse = null;
         try {
-            response = postRequest(request);
-            
+            Connection con = Jsoup.connect(request);
+            con.ignoreHttpErrors(true).post();
+            apiResponse = new ClientResponse();
+            apiResponse.setXmlString(con.response().parse().toString());
+            apiResponse.setStatusCode(con.response().statusCode());
+            apiResponse.setDocumentResponse(con.response().parse());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return apiResponse;
+    }
+    private ClientResponse apiPostRequest(String requestString) {
+        ClientResponse response = null;
+        
+        //make the API call
+        System.out.println("apiRequest: " + requestString);
+        try {
+            response = postRequest(requestString);
             int statusCode = response.getStatusCode();
             int retry = 0;
-            
-            while((statusCode == 500 || statusCode == 501) && retry < 3) {
-                 retry++;
-                 if (retry == 1) { 
-                     java.lang.Thread.sleep(1); 
-                 }
-                 else if(retry == 2) { 
-                     java.lang.Thread.sleep(4); 
-                 }
-                 else if(retry == 3)  
-                 { 
-                      java.lang.Thread.sleep(10); 
-                 }
-                 else 
-                     return null;
-                 response = postRequest(request);
-           }
-        }
-      
-        catch(Exception e) {
+            while ((statusCode == 500 || statusCode == 501) && retry < 3) {
+                retry++;
+                if (retry == 1) {
+                    Thread.sleep(1);
+                } else if (retry == 2) {
+                    Thread.sleep(4);
+                } else if (retry == 3) {
+                    Thread.sleep(10);
+                } else {
+                    return null;
+                }
+                response = postRequest(requestString);
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return response;
     }
     
-    private PayWithAmazon.Response.Response postRequest(String request) {
-       PayWithAmazon.Response.Response apiResponse = null;
-
-        try{
-            Connection con = Jsoup.connect(request);
-            con.ignoreHttpErrors(true).post();
-            
-            apiResponse = new PayWithAmazon.Response.Response();
-            apiResponse.setXmlString(con.response().parse().toString());
-            apiResponse.setStatusCode(con.response().statusCode());
-            apiResponse.setDocumentResponse(con.response().parse());
-        }
-           catch (IOException e) {
-                e.printStackTrace();
-        }
-        return apiResponse;
-    }
     
-    public void getParamMap(String action, Map<String,String> params) {
-        String ts = urlEncode(getTimestamp());
-        params.remove("Signature");
-        params.put("Action", action);
-        params.put("AWSAccessKeyId", clientRequest.access_key);
-        params.put("SellerId", clientRequest.merchant_id);
-        params.put("SignatureVersion", "2");
-        params.put("SignatureMethod", "HmacSHA256");
-        params.put("Version", AMAZON_PAYMENTS_API_VERSION);
-        params.put("Timestamp", ts);
-}
-    public String buildRequest(String action, Map<String, String> params) {
-
-        getParamMap(action,params);
-        String sts = getStringToSign(params);
-        String sig = getSignature(sts, clientRequest.secret_key);
-        System.out.println("sts = \n" + sts);
-        System.out.println("sig = \n" + sig);
-        params.put("Signature", urlEncode(sig));
-        StringBuilder requestString = new StringBuilder();
-        requestString.append(clientRequest.amazon_payments_endpoint + "?");
-        String paramsString = buildParamsString(params);
-        requestString.append(paramsString);
-        //System.out.println("buildRequest string: " + requestString.toString());
-        return requestString.toString();
-    }
-
-    public String buildParamsString(Map<String, String> params) {
-        StringBuilder paramsString = new StringBuilder();
-        Iterator<Entry<String, String>> pairs = params.entrySet().iterator();
-        while (pairs.hasNext()) {
-            Map.Entry<String, String> pair = pairs.next();
-            if (pair.getValue() != null) {
-                paramsString.append(pair.getKey() + "=" + pair.getValue());
-            } else {
-                paramsString.append(pair.getKey() + "=");
-            }
-            if (pairs.hasNext()) {
-                paramsString.append("&"); // Delimit parameters with ampersand (&)
-            }
-        }
-        return paramsString.toString();
-    }
-
-    public String getStringToSign(Map<String, String> params) {
-        String sts = getPostURL();
-       // System.out.println("getStringToSign (start) sts = \n" + sts);
-        StringBuilder data = new StringBuilder();
+    private String getStringToSign(String postURL, Map<String, String> params) {
+        
+        String stringToSign = postURL;
+        //sort all parameters 
         Map<String, String> sortedParams = new TreeMap<String, String>();
         sortedParams.putAll(params);
-        Iterator<Entry<String, String>> pairs = sortedParams.entrySet().iterator();
-        while (pairs.hasNext()) {
-            Map.Entry<String, String> pair = pairs.next();
-            if (pair.getValue() != null) {
-                data.append(pair.getKey() + "=" + pair.getValue());
-            } else {
-                data.append(pair.getKey() + "=");
-            }
-            if (pairs.hasNext()) {
-                data.append("&"); // Delimit parameters with ampersand (&)
-            }
-        }
-        sts = sts + data.toString();
-        return sts;
+        stringToSign = stringToSign + buildParamsString(sortedParams);
+        return stringToSign;
     }
 
-    public String getSignature(String stringToSign, String secretKey) {
+    private String getSignature(String stringToSign, String secretKey) {
         String sig = null;
         try {
             Mac mac = Mac.getInstance("HmacSHA256");
@@ -324,17 +310,8 @@ public class Client {
         return sig;
     }
 
-    public String getTimestamp() {
-        final Date date = new Date();
-        final String ISO_FORMAT = "yyyy-MM-dd'T'HH:mm:ssz";
-        final SimpleDateFormat sdf = new SimpleDateFormat(ISO_FORMAT);
-        final TimeZone utc = TimeZone.getTimeZone("UTC");
-        sdf.setTimeZone(utc);
-        String ts = sdf.format(date);
-        return (ts.replace("UTC", "Z"));
-    }
 
-    public String urlEncode(String str) {
+    String urlEncode(String str) {
         String val = (str == null) ? "" : str;
         String encoded = null;
 
@@ -348,5 +325,26 @@ public class Client {
         }
         return encoded;
     }
+    
+    private String buildParamsString(Map<String, String> params) {
+        StringBuilder paramsString = new StringBuilder();
+        Iterator<Map.Entry<String, String>> pairs = params.entrySet().iterator();
+        while (pairs.hasNext()) {
+            Map.Entry<String, String> pair = pairs.next();
+            if (pair.getValue() != null) {
+                paramsString.append(pair.getKey() + "=" + pair.getValue());
+            } else {
+                paramsString.append(pair.getKey() + "=");
+            }
+            if (pairs.hasNext()) {
+                paramsString.append("&"); // Delimit parameters with ampersand (&)
+            }
+        }
+        
+        return paramsString.toString();
+    }
+     
 
+
+     
 }

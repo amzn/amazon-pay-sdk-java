@@ -1,5 +1,6 @@
 package PayWithAmazon.Request;
 
+import PayWithAmazon.Utilities.ParamConstants;
 import java.util.*;
 
 /**
@@ -13,7 +14,8 @@ public class SetOrderReferenceDetailsRequest {
 
     //required parameters
     private String amazonOrderReferenceId = null;
-    private String orderTotal = null;
+    private String orderAmount = null;
+    private String orderCurrencyCode = null;
     
     //optional parameters
     private String platformId = null;
@@ -29,12 +31,18 @@ public class SetOrderReferenceDetailsRequest {
         return this;
     }
     
-    public SetOrderReferenceDetailsRequest setOrderTotal(String orderTotal) {
-        this.orderTotal = orderTotal;
-        parameters.put(ParamConstants.ORDER_TOTAL, orderTotal);
+    public SetOrderReferenceDetailsRequest setOrderAmount(String orderAmount) {
+        this.orderAmount = orderAmount;
+        parameters.put(ParamConstants.ORDER_AMOUNT, orderAmount);
         return this;
     }
     
+    public SetOrderReferenceDetailsRequest setOrderCurrencyCode(String orderCurrencyCode) {
+        this.orderCurrencyCode = orderCurrencyCode;
+        parameters.put(ParamConstants.ORDER_CURRENCY_CODE, orderCurrencyCode);
+        return this;
+    }
+        
     public SetOrderReferenceDetailsRequest setPlatformId(String platformId) {
         this.platformId = platformId;
         parameters.put(ParamConstants.PLATFORM_ID, platformId);

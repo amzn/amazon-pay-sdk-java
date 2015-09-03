@@ -1,5 +1,6 @@
-package PayWithAmazon.Request.Recurring;
+package PayWithAmazon.Request;
 
+import PayWithAmazon.Utilities.ParamConstants;
 import PayWithAmazon.Request.*;
 import java.util.*;
 

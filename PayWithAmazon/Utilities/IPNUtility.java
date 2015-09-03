@@ -1,5 +1,6 @@
-package PayWithAmazon.IPN;
+package PayWithAmazon.Utilities;
 
+import PayWithAmazon.IPNHandler;
 import com.google.gson.Gson;
 import java.io.InputStream;
 import java.net.URL;
@@ -17,7 +18,7 @@ import javax.naming.ldap.Rdn;
  */
 public class IPNUtility {
 
-    private static byte [] getMessageBytesToSign (IPNMessage ipn) {
+    private static byte [] getMessageBytesToSign (IPNHandler ipn) {
 		byte [] bytesToSign = null;
 		bytesToSign = buildNotificationStringToSign(ipn).getBytes();
 		return bytesToSign;
@@ -26,7 +27,7 @@ public class IPNUtility {
    /*
     *Build the string to sign for Notification messages.
     */
-    private static String buildNotificationStringToSign( IPNMessage ipn) {
+    private static String buildNotificationStringToSign( IPNHandler ipn) {
 	   String stringToSign = null;
 		 
   	   //Build the string to sign from the values in the message.
@@ -46,7 +47,7 @@ public class IPNUtility {
 	   return stringToSign;
 	 }
 
-    public static boolean isMessageSignatureValid(IPNMessage ipn) {
+    public static boolean isMessageSignatureValid(IPNHandler ipn) {
         try {
           //extract certificate from signingURL parameter
           URL url = new URL(ipn.getSigningCertURL());
@@ -82,11 +83,11 @@ public class IPNUtility {
    }
     
         
-    public static Map<String,String> convertJsonToMap(String notificationDataJson) {
-       Map<String,String> notificationDataMap = new HashMap<String,String>();
+    public static Map<String,String> convertJsonToMap(String jsonData) {
+       Map<String,String> dataMap = new HashMap<String,String>();
        Gson gson = new Gson();
-       notificationDataMap = (Map<String,String>) gson.fromJson( notificationDataJson , notificationDataMap.getClass());
-       return notificationDataMap;
+       dataMap = (Map<String,String>) gson.fromJson( jsonData , dataMap.getClass());
+       return dataMap;
     }
     
     
