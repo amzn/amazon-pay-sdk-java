@@ -1,4 +1,4 @@
-Login and Pay with Amazon Java SDK
+### Login and Pay with Amazon Java SDK
 
 Login and Pay with Amazon API Integration
 
@@ -108,25 +108,19 @@ import PayWithAmazon.Request.*;
 
 # Your Login and Pay with Amazon keys are
 # available in your Seller Central account
-String merchantId = 'YOUR_MERCHANT_ID'
-String accessKey = 'YOUR_ACCESS_KEY'
+String merchantId = "YOUR_MERCHANT_ID";
+String accessKey = "YOUR_ACCESS_KEY";
 String secretKey = "YOUR_SECRET_Key";
 String regionCode = "na"; 
 boolean sandboxMode = false;
 
 Client client = new Client(merchantId , accessKey, secretKey, regionCode, sandboxMode);
 
-# These values are grabbed from the Login and Pay
-# with Amazon Address and Wallet widgets
-amazon_order_reference_id = 'AMAZON_ORDER_REFERENCE_ID'
-address_consent_token = 'ADDRESS_CONSENT_TOKEN'
-
 # To get the buyers full address if shipping/tax
 # calculations are needed you can use the following
 # API call to obtain the order reference details.
 GetOrderReferenceDetailsRequest req = new GetOrderReferenceDetailsRequest();
 req.setAmazonOrderReferenceId("AMAZON_ORDER_REFERENCE_ID");
-req.setAddressConsentToken("ADDRESS_CONSENT_TOKEN");
 
 client.getOrderReferenceDetails( req );
 
