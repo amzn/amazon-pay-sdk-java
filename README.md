@@ -1,19 +1,18 @@
-/*Login and Pay with Amazon Java SDK
-*Login and Pay with Amazon API Integration
+Login and Pay with Amazon Java SDK
 
-*Quick Start
-*Java
-*/
+Login and Pay with Amazon API Integration
+
+
 ```java
 import PayWithAmazon.Client;
 ```
-/*
-* Your Login and Pay with Amazon keys are
-* available in your Seller Central account
-*/
+
+ Your Login and Pay with Amazon keys are
+ available in your Seller Central account
+
 ```java
-String merchantId = 'YOUR_MERCHANT_ID'
-String accessKey = 'YOUR_ACCESS_KEY'
+String merchantId = "YOUR_MERCHANT_ID";
+String accessKey = "YOUR_ACCESS_KEY";
 String secretKey = "YOUR_SECRET_Key";
 String regionCode = "na"; 
 boolean sandboxMode = false;
@@ -43,7 +42,6 @@ Client client = new Client(merchantId , accessKey, secretKey, regionCode, sandbo
 # with Amazon Address and Wallet widgets
 GetOrderReferenceDetailsRequest req = new GetOrderReferenceDetailsRequest();
 req.setAmazonOrderReferenceId("AMAZON_ORDER_REFERENCE_ID");
-req.setAddressConsentToken("ADDRESS_CONSENT_TOKEN");
 
 client.getOrderReferenceDetails( req );
 
@@ -58,7 +56,7 @@ client.getOrderReferenceDetails( req );
 response = client.getOrderReferenceDetails( req );
 
 # This will return the original response body as a String
-response.getXmltoString();
+response.getXmlAsString();
 
 # This will return the status code of the response
 response.getStatusCode();
@@ -69,8 +67,6 @@ response.getStatusCode();
 ```java
 # This can be placed in your application for a method
 # that is configured to receive a "POST" IPN from Amazon.
-headers = request.headers
-body = request.body.read
 
 Scanner scan = new Scanner(request.getInputStream());
         StringBuilder builder = new StringBuilder();
@@ -82,7 +78,7 @@ IPNHandler ipn = new IPNHandler(builder.toString());
 
 # This will return "true" if the notification is a  
 # valid IPN from Amazon
-ipn.isNotificationValid()
+ipn.isNotificationValid();
 
 # The following are methods used to extract the necessary
 # data from the IPN
@@ -134,9 +130,6 @@ req.setAddressConsentToken("ADDRESS_CONSENT_TOKEN");
 
 client.getOrderReferenceDetails( req );
 
-# Set the amount for the transaction.
-amount = '10.00'
-
 # Make the SetOrderReferenceDetails API call to
 # configure the Amazon Order Reference Id.
 # There are additional optional parameters that
@@ -174,15 +167,6 @@ request.setSellerAuthorizationNote("Your Authorization Note");
 request.setTransactionTimeout("0"); //Set to 0 for synchronous mode
 request.setCaptureNow("true"); // Set this to true if you want to capture the amount in the same API call
 response = client.authorize( request);
-
-# You will need the Amazon Authorization Id from the
-# Authorize API response if you decide to make the
-# Capture API call separately.
-amazon_authorization_id = response.get_element('AuthorizeResponse/AuthorizeResult/AuthorizationDetails','AmazonAuthorizationId')
-
-# Set a unique id for your current capture of
-# this payment.
-capture_reference_id = 'Your Unique Id'
 
 # Make the Capture API call if you did not set the
 # 'capture_now' parameter to 'true'. There are

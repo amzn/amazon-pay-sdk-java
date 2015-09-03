@@ -1,12 +1,12 @@
 package PayWithAmazon.Request;
 
 import PayWithAmazon.Utilities.ParamConstants;
-import PayWithAmazon.Request.*;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * Build request for Authorize API.
- * For documentation, refer - https://payments.amazon.com/documentation/apireference/201751630#201752010
+ * Build request for SetBillingAgreementDetails API.
+ * For documentation, refer - https://payments.amazon.com/documentation/apireference/201751630#201751700
  */
 public class SetBillingAgreementDetailsRequest {
     

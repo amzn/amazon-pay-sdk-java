@@ -1,20 +1,15 @@
 package PayWithAmazon.Request;
 
 import PayWithAmazon.Utilities.ParamConstants;
-import PayWithAmazon.Request.*;
 import java.util.HashMap;
 import java.util.Map;
 
 
 /**
- * Build request for Authorize API.
- * For documentation, refer - https://payments.amazon.com/documentation/apireference/201751630#201752010
+ * Build request for AuthorizeOnBillingAgreement API.
+ * For documentation, refer - https://payments.amazon.com/documentation/apireference/201751630#201751940
  */
 
-/**
- * https://payments.amazon.com/documentation/apireference/201752640#201751940
- * @author nehaa
- */
 public class AuthorizeOnBillingAgreementRequest {
     
     private Map<String,String> parameters = new HashMap<String,String>();
@@ -23,6 +18,7 @@ public class AuthorizeOnBillingAgreementRequest {
     private String amazonBillingAgreementId = null;
     private String authorizationReferenceId = null;
     private String authorizationAmount = null;
+    private String authorizationCurrencyCode = null;
     
     //optional parameters
     private String sellerAuthorizationNote = null;
@@ -32,6 +28,11 @@ public class AuthorizeOnBillingAgreementRequest {
     private String platformId = null;
     private String sellerNote = null;
     private String InheritShippingAddress = null;
+
+    
+    private String sellerOrderId = null;
+    private String storeName = null;
+    private String customInformation = null;
     private String mwsAuthToken = null;
 
 
@@ -50,6 +51,12 @@ public class AuthorizeOnBillingAgreementRequest {
     public AuthorizeOnBillingAgreementRequest setAuthorizationAmount(String authorizationAmount) {
         this.authorizationAmount = authorizationAmount;
         parameters.put(ParamConstants.AUTHORIZATION_AMOUNT, authorizationAmount);
+        return this;
+    }
+    
+    public AuthorizeOnBillingAgreementRequest setAuthorizationCurrencyCode(String authorizationCurrencyCode) {
+        this.authorizationCurrencyCode = authorizationCurrencyCode;
+        parameters.put(ParamConstants.AUTHORIZATION_CURRENCEYCODE, authorizationCurrencyCode);
         return this;
     }
 
@@ -80,16 +87,33 @@ public class AuthorizeOnBillingAgreementRequest {
         return this;
     }
 
+    public AuthorizeOnBillingAgreementRequest setSellerNote(String sellerNote) {
+        this.sellerNote = sellerNote;
+        parameters.put(ParamConstants.SELLER_NOTE, sellerNote);
+        return this;
+    }
+    
     public AuthorizeOnBillingAgreementRequest setPlatformId(String platformId) {
         this.platformId = platformId;
         parameters.put(ParamConstants.PLATFORM_ID, platformId);
         return this;
     }
 
+    public AuthorizeOnBillingAgreementRequest setSellerOrderId(String sellerOrderId) {
+        this.sellerOrderId = sellerOrderId;
+        parameters.put(ParamConstants.BA_SELLER_ORDER_ID, sellerOrderId);
+        return this;
+    }
     
-    public AuthorizeOnBillingAgreementRequest setSellerNote(String sellerNote) {
-        this.sellerNote = sellerNote;
-        parameters.put(ParamConstants.SELLER_NOTE, sellerNote);
+    public AuthorizeOnBillingAgreementRequest setStoreName(String storeName) {
+        this.storeName = storeName;
+        parameters.put(ParamConstants.BA_STORE_NAME, storeName);
+        return this;
+    }
+    
+    public AuthorizeOnBillingAgreementRequest setCustomInformation(String customInformation) {
+        this.customInformation = customInformation;
+        parameters.put(ParamConstants.BA_CUSTOM_INFORMATION, customInformation);
         return this;
     }
 

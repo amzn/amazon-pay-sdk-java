@@ -179,7 +179,7 @@ public class Client {
     }
 
     public PayWithAmazon.ClientResponse authorizeOnBillingAgreement(AuthorizeOnBillingAgreementRequest request) {
-        String requestString = buildPostRequest("AuthorizeOnBillingAgreementDetails", request.getParamMap());
+        String requestString = buildPostRequest("AuthorizeOnBillingAgreement", request.getParamMap());
         return apiPostRequest(requestString);
     }
     
