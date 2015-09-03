@@ -30,8 +30,8 @@ import PayWithAmazon.Request.GetOrderReferenceDetailsRequest;
 
 # Your Login and Pay with Amazon keys are
 # available in your Seller Central account
-String merchantId = 'YOUR_MERCHANT_ID'
-String accessKey = 'YOUR_ACCESS_KEY'
+String merchantId = "YOUR_MERCHANT_ID";
+String accessKey = "YOUR_ACCESS_KEY";
 String secretKey = "YOUR_SECRET_Key";
 String regionCode = "na"; 
 boolean sandboxMode = false;
@@ -50,9 +50,6 @@ client.getOrderReferenceDetails( req );
 ### Response Parsing
 
 ```java
-# These values are grabbed from the Login and Pay
-# with Amazon Address and Wallet widgets
-
 response = client.getOrderReferenceDetails( req );
 
 # This will return the original response body as a String
@@ -160,6 +157,7 @@ request.setAuthorizationCurrencyCode("USD"); //Defaults to USD.
 request.setSellerAuthorizationNote("Your Authorization Note");
 request.setTransactionTimeout("0"); //Set to 0 for synchronous mode
 request.setCaptureNow("true"); // Set this to true if you want to capture the amount in the same API call
+
 response = client.authorize( request);
 
 # Make the Capture API call if you did not set the
@@ -173,7 +171,7 @@ request.setCaptureAmount("1");
 request.setCurrencyCode("USD"); //Default: USD
 request.setSellerCaptureNote("Your Capture Note"); 
 
-client.Capture( request );
+response = client.Capture( request );
 
 # Close the order reference once your one time
 # transaction is complete.
