@@ -1,0 +1,239 @@
+### Login and Pay with Amazon Java SDK
+
+Login and Pay with Amazon API Integration
+
+
+```java
+import com.amazon.lpa.Client;
+import com.amazon.lpa.ClientConfig;
+import com.amazon.lpa.types.Region;
+import com.amazon.lpa.types.Environment;
+```
+
+ Your Login and Pay with Amazon keys are
+ available in your Seller Central account
+
+```java
+String merchantId = "YOUR_MERCHANT_ID";
+String accessKey = "YOUR_ACCESS_KEY";
+String secretKey = "YOUR_SECRET_Key";
+Region region = Region.US;
+Environment environment = Environment.SANDBOX;
+String currencyCode = "USD";
+
+ClientConfig config = new ClientConfig(merchantId , accessKey , secretKey, region, environment, currencyCode);
+Client client = new Client(config);
+
+```
+
+### Making an API Call
+
+Below is an example on how to make the GetOrderReferenceDetails API call:
+
+```java
+import com.amazon.lpa.Client;
+import com.amazon.lpa.request.GetOrderReferenceDetailsRequest;
+import com.amazon.lpa.response.parser.GetOrderReferenceDetailsResponseParser;
+
+# These values are grabbed from the Login and Pay
+# with Amazon Address and Wallet widgets
+
+GetOrderReferenceDetailsRequest getOrderReferenceDetailsRequest = new GetOrderReferenceDetailsRequest("AMAZON_ORDER_REFERENCE_ID");
+//optional parameters
+req.setAddressConsentToken("ADDRESS_CONSENT_TOKEN");
+
+GetOrderReferenceDetailsRequestParser response = client.getOrderReferenceDetails( getOrderReferenceDetailsRequest );
+
+```
+
+### API Response Parsing
+
+```java
+# This will return the original response body as a String
+response.toXML();
+
+# RequestId
+response.getRequestId();
+
+# AmazonOrderReferenceId
+response.getDetails().getAmazonOrderReferenceId();
+
+# BuyerName
+response.getDetails().getBuyer().getBuyerName();
+
+Other data available are buyerEmail, buyerPhone, Destination Address 
+
+```
+
+### One Time Transaction API Flow
+
+```java
+import PayWithAmazon.Client;
+import PayWithAmazon.Request.*;
+
+# To get the buyers full address if shipping/tax
+# calculations are needed you can use the following
+# API call to obtain the order reference details.
+GetOrderReferenceDetailsRequest req = new GetOrderReferenceDetailsRequest("AMAZON_ORDER_REFERENCE_ID");
+req.setAddressConsentToken("ADDRESS_CONSENT_TOKEN");
+client.getOrderReferenceDetails( req );
+
+# Make the SetOrderReferenceDetails API call to
+# configure the Amazon Order Reference Id.
+# There are additional optional parameters that
+# are not used below.
+//construct request
+SetOrderReferenceDetailsRequest setOrderReferenceDetailsRequest = new SetOrderReferenceDetailsRequest("AMAZON_ORDER_REFERENCE_ID" , "ORDER_AMOUNT");
+
+//set optional parameters
+setOrderReferenceDetailsRequest.setOrderCurrencyCode("USD");
+setOrderReferenceDetailsRequest.setSellerNote("Your Seller Note");
+setOrderReferenceDetailsRequest.setSellerOrderId("Your Seller Order Id");
+setOrderReferenceDetailsRequest.setStoreName("Your Store Name");
+
+//call API
+client.setOrderReferenceDetails( setOrderReferenceDetailsRequest);
+
+
+# Make the ConfirmOrderReference API call to
+# confirm the details set in the API call
+# above.
+client.confirmOrderReference("AMAZON_ORDER_REFERENCE_ID");
+
+# Set a unique id for your current authorization
+# of this payment.
+
+# Make the Authorize API call to authorize the
+# transaction. You can also capture the amount
+# in this API call or make the Capture API call
+# separately. There are additional optional
+# parameters not used below.
+//Construct Request
+AuthorizeRequest authorizeRequest = new AuthorizeRequest("AMAZON_ORDER_REFERENCE_ID" , "Your Unique Id" , "ORDER_AMOUNT");
+
+//Set Optional parameters
+authorizeRequest.setAuthorizationCurrencyCode("USD"); //Overrides currency code set in Client
+authorizeRequest.setSellerAuthorizationNote("Your Authorization Note");
+authorizeRequest.setTransactionTimeout("0"); //Set to 0 for synchronous mode
+authorizeRequest.setCaptureNow("true"); // Set this to true if you want to capture the amount in the same API call
+
+//Call Authorize API
+response = client.authorize( authorizeRequest );
+
+# Make the Capture API call if you did not set the
+# 'capture_now' parameter to 'true'. There are
+# additional optional parameters that are not used
+# below.
+//Construct request
+CaptureRequest request = new CaptureRequest("AMAZON_AUTHORIZATION_ID" , "YOUR_UNIQUE_ID" , "ORDER_AMOUNT");
+//Set optional parameters
+request.setCurrencyCode("USD");  //Overrides currency code set in Client
+request.setSellerCaptureNote("Your Capture Note"); 
+
+response = client.Capture( request );
+
+# Close the order reference once your one time
+# transaction is complete.
+client.closeOrderReference("AMAZON_ORDER_REFERENCE_ID");
+
+```
+
+### Subscriptions/Recurring Payments API Flow 
+
+```java
+import PayWithAmazon.Client;
+import PayWithAmazon.Request.*;
+
+```java
+String merchantId = "YOUR_MERCHANT_ID";
+String accessKey = "YOUR_ACCESS_KEY";
+String secretKey = "YOUR_SECRET_Key";
+Region region = Region.US;
+Environment environment = Environment.SANDBOX;
+String currencyCode = "USD";
+
+Client client = new Client.Config(merchantId , accessKey, secretKey, regionCode, environment, currencyCode).build();
+```
+
+# These values are grabbed from the Login and Pay
+# with Amazon Address and Wallet widgets
+String billingAgreementId = 'AMAZON_BILLING_AGREEMENT_ID'
+String addressConsentToken = 'ADDRESS_CONSENT_TOKEN'
+GetBillingAgreementDetailsRequest getBillingAgreementDetailsRequest = new GetBillingAgreementDetailsRequest(billingAgreementId).setAddressConsentToken(addressConsentToken);
+
+# Next you will need to set the various details
+# for this subscription with the following API call.
+# There are additional optional parameters that
+# are not used below.
+String billingAgreementId = 'AMAZON_BILLING_AGREEMENT_ID';
+SetBillingAgreementDetailsRequest setBillingAgreementDetailsRequest = new SetBillingAgreementDetailsRequest(billingAgreementId).setSellerNote("testing");
+client.setBillingAgreementDetails(setBillingAgreementDetailsRequest);
+
+# Make the ConfirmBillingAgreement API call to confirm
+# the Amazon Billing Agreement Id with the details set above.
+# Be sure that everything is set correctly above before
+# confirming.
+ConfirmBillingAgreementRequest confirmBillingAgreementRequest = new ConfirmBillingAgreementRequest(billingAgreementId);
+client.confirmBillingAgreement(confirmBillingAgreementRequest);
+
+# The following API call is not needed at this point, but
+# can be used in the future when you need to validate that
+# the payment method is still valid with the associated billing
+# agreement id.
+ValidateBillingAgreementRequest validateBillingAgreementRequest = new ValidateBillingAgreementRequest(billingAgreementId);
+ValidateBillingAgreementResponseParser validateBillingAgreementResponse = client.validateBillingAgreement(validateBillingAgreementRequest);
+
+# Set the amount for your first authorization.
+String amount = '10.00';
+
+# Set a unique authorization reference id for your
+# first transaction on the billing agreement.
+String authorizationReferenceId = "YOUR_UNIQUE_Id";
+
+# Now you can authorize your first transaction on the
+# billing agreement id. Every month you can make the
+# same API call to continue charging your buyer
+# with the 'capture_now' parameter set to true. You can
+# also make the Capture API call separately. There are
+# additional optional parameters that are not used
+# below.
+AuthorizeOnBillingAgreementRequest authOnBillingRequest = new AuthorizeOnBillingAgreementRequest(billingAgreementId , authorizationReferenceId , amount);
+AuthorizeOnBillingAgreementResponseParser response = client.authorizeOnBillingAgreement(authOnBillingRequest);
+
+# You will need the Amazon Authorization Id from the
+# AuthorizeOnBillingAgreement API response if you decide
+# to make the Capture API call separately.
+String amazonAuthorizationId = response.getDetails().getAmazonAuthorizationId();
+
+# Set a unique id for your current capture of
+# this transaction.
+String captureReferenceId = "YOUR_UNIQUE_Id";
+
+# Make the Capture API call if you did not set the
+# 'capture_now' parameter to 'true'. There are
+# additional optional parameters that are not used
+# below.
+
+# The following API call should not be made until you
+# are ready to terminate the billing agreement.
+CloseBillingAgreementRequest request = new CloseBillingAgreementRequest(billingAgreementId).setMWSAuthToken(mwsAuthToken);
+client.closeBillingAgreement(request);
+
+
+### Get Login Profile API
+This API call allows you to obtain user profile information once a user has logged into your application using their Amazon credentials. 
+
+# Your client id is located in your Seller
+# Central account.
+String clientId = "Your Client Id";
+
+# The access token is available in the return URL
+# parameters after a user has logged in.
+String accessToken = "User Access Token";
+
+User user = Client.getUserInfo(accessToken, clientId, Environment.SANDBOX, Region.US);
+
+Below profile information can be retrieved from User object.
+user.getName();
+user.getEmail();
+user.getUserId();
