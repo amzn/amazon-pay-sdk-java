@@ -4,10 +4,10 @@ Login and Pay with Amazon API Integration
 
 
 ```java
-import com.amazon.lpa.Client;
-import com.amazon.lpa.ClientConfig;
-import com.amazon.lpa.types.Region;
-import com.amazon.lpa.types.Environment;
+import com.amazon.payments.lpa.Client;
+import com.amazon.payments.lpa.ClientConfig;
+import com.amazon.payments.lpa.types.Region;
+import com.amazon.payments.lpa.types.Environment;
 ```
 
  Your Login and Pay with Amazon keys are
@@ -31,9 +31,9 @@ Client client = new Client(config);
 Below is an example on how to make the GetOrderReferenceDetails API call:
 
 ```java
-import com.amazon.lpa.Client;
-import com.amazon.lpa.request.GetOrderReferenceDetailsRequest;
-import com.amazon.lpa.response.parser.GetOrderReferenceDetailsResponseParser;
+import com.amazon.payments.lpa.Client;
+import com.amazon.payments.lpa.request.GetOrderReferenceDetailsRequest;
+import com.amazon.payments.lpa.response.parser.GetOrderReferenceDetailsResponseParser;
 
 # These values are grabbed from the Login and Pay
 # with Amazon Address and Wallet widgets
@@ -68,8 +68,6 @@ Other data available are buyerEmail, buyerPhone, Destination Address
 ### One Time Transaction API Flow
 
 ```java
-import PayWithAmazon.Client;
-import PayWithAmazon.Request.*;
 
 # To get the buyers full address if shipping/tax
 # calculations are needed you can use the following
@@ -136,15 +134,10 @@ response = client.Capture( request );
 # transaction is complete.
 client.closeOrderReference("AMAZON_ORDER_REFERENCE_ID");
 
-```
+
 
 ### Subscriptions/Recurring Payments API Flow 
 
-```java
-import PayWithAmazon.Client;
-import PayWithAmazon.Request.*;
-
-```java
 String merchantId = "YOUR_MERCHANT_ID";
 String accessKey = "YOUR_ACCESS_KEY";
 String secretKey = "YOUR_SECRET_Key";
@@ -152,8 +145,8 @@ Region region = Region.US;
 Environment environment = Environment.SANDBOX;
 String currencyCode = "USD";
 
-Client client = new Client.Config(merchantId , accessKey, secretKey, regionCode, environment, currencyCode).build();
-```
+ClientConfig config = new ClientConfig(merchantId , accessKey , secretKey, region, environment, currencyCode);
+Client client = new Client(config);
 
 # These values are grabbed from the Login and Pay
 # with Amazon Address and Wallet widgets
