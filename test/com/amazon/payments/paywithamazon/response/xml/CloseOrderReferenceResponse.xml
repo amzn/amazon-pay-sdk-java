@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CloseOrderReferenceResponse xmlns="http://mws.amazonservices.com/schema/OffAmazonPayments/2013-01-01">
+   <ResponseMetadata>
+     <RequestId>5f20169b-7ab2-11df-bcef-d35615e2b044</RequestId>
+   </ResponseMetadata>
+ </CloseOrderReferenceResponse>

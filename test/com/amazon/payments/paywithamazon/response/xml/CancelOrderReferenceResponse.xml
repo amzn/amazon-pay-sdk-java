@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CancelOrderReferenceResponse xmlns="http://mws.amazonservices.com/schema/OffAmazonPayments/2013-01-01">
+   <CancelOrderReferenceResult />
+   <ResponseMetadata>
+      <RequestId>0714c2dd-c3fa-45af-afc7-b48055cfd7bf</RequestId>
+   </ResponseMetadata>
+</CancelOrderReferenceResponse>

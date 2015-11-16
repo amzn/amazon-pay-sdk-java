@@ -4,10 +4,10 @@ Login and Pay with Amazon API Integration
 
 
 ```java
-import com.amazon.payments.lpa.Client;
-import com.amazon.payments.lpa.ClientConfig;
-import com.amazon.payments.lpa.types.Region;
-import com.amazon.payments.lpa.types.Environment;
+import com.amazon.payments.paywithamazon.Client;
+import com.amazon.payments.paywithamazon.Config;
+import com.amazon.payments.paywithamazon.impl.PaymentsClient;
+import com.amazon.payments.paywithamazon.impl.PaymentsConfig;
 ```
 
  Your Login and Pay with Amazon keys are
@@ -17,12 +17,9 @@ import com.amazon.payments.lpa.types.Environment;
 String merchantId = "YOUR_MERCHANT_ID";
 String accessKey = "YOUR_ACCESS_KEY";
 String secretKey = "YOUR_SECRET_Key";
-Region region = Region.US;
-Environment environment = Environment.SANDBOX;
-String currencyCode = "USD";
 
-ClientConfig config = new ClientConfig(merchantId , accessKey , secretKey, region, environment, currencyCode);
-Client client = new Client(config);
+Config config = new PaymentsConfig(merchantId , accessKey , secretKey ).sandboxMode(true).withRegion(Region.US).withCurrencyCode(CurrencyCode.USD);
+Client client = new PaymentsClient(config);
 
 ```
 
@@ -31,9 +28,9 @@ Client client = new Client(config);
 Below is an example on how to make the GetOrderReferenceDetails API call:
 
 ```java
-import com.amazon.payments.lpa.Client;
-import com.amazon.payments.lpa.request.GetOrderReferenceDetailsRequest;
-import com.amazon.payments.lpa.response.parser.GetOrderReferenceDetailsResponseParser;
+import com.amazon.payments.paywithamazon.Client;
+import com.amazon.payments.paywithamazon.request.GetOrderReferenceDetailsRequest;
+import com.amazon.payments.paywithamazon.response.parser.GetOrderReferenceDetailsResponseData;
 
 # These values are grabbed from the Login and Pay
 # with Amazon Address and Wallet widgets
@@ -42,7 +39,7 @@ GetOrderReferenceDetailsRequest getOrderReferenceDetailsRequest = new GetOrderRe
 //optional parameters
 req.setAddressConsentToken("ADDRESS_CONSENT_TOKEN");
 
-GetOrderReferenceDetailsRequestParser response = client.getOrderReferenceDetails( getOrderReferenceDetailsRequest );
+GetOrderReferenceDetailsResponseData response = client.getOrderReferenceDetails( getOrderReferenceDetailsRequest );
 
 ```
 
@@ -141,12 +138,9 @@ client.closeOrderReference("AMAZON_ORDER_REFERENCE_ID");
 String merchantId = "YOUR_MERCHANT_ID";
 String accessKey = "YOUR_ACCESS_KEY";
 String secretKey = "YOUR_SECRET_Key";
-Region region = Region.US;
-Environment environment = Environment.SANDBOX;
-String currencyCode = "USD";
 
-ClientConfig config = new ClientConfig(merchantId , accessKey , secretKey, region, environment, currencyCode);
-Client client = new Client(config);
+Config config = new PaymentsConfig(merchantId , accessKey , secretKey ).sandboxMode(true).withRegion(Region.US).withCurrencyCode(CurrencyCode.USD);
+Client client = new PaymentsClient(config);
 
 # These values are grabbed from the Login and Pay
 # with Amazon Address and Wallet widgets
@@ -224,7 +218,7 @@ String clientId = "Your Client Id";
 # parameters after a user has logged in.
 String accessToken = "User Access Token";
 
-User user = Client.getUserInfo(accessToken, clientId, Environment.SANDBOX, Region.US);
+User user = client.getUserInfo(accessToken, clientId);
 
 Below profile information can be retrieved from User object.
 user.getName();
