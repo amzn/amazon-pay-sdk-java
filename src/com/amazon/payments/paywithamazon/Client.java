@@ -1,12 +1,11 @@
 package com.amazon.payments.paywithamazon;
 
-
-
 import com.amazon.payments.paywithamazon.exceptions.AmazonServiceException;
 import com.amazon.payments.paywithamazon.request.AuthorizeOnBillingAgreementRequest;
 import com.amazon.payments.paywithamazon.request.AuthorizeRequest;
 import com.amazon.payments.paywithamazon.request.CancelOrderReferenceRequest;
 import com.amazon.payments.paywithamazon.request.CaptureRequest;
+import com.amazon.payments.paywithamazon.request.ChargeRequest;
 import com.amazon.payments.paywithamazon.request.CloseAuthorizationRequest;
 import com.amazon.payments.paywithamazon.request.CloseBillingAgreementRequest;
 import com.amazon.payments.paywithamazon.request.CloseOrderReferenceRequest;
@@ -157,6 +156,30 @@ public interface Client {
      *             either a problem with the data in the request, or a server side issue.
      */
     CaptureResponseData capture(CaptureRequest request) throws AmazonServiceException;
+
+    /**
+     * This method combines multiple API calls to perform
+     * a complete transaction with minimum requirements.
+     *
+     * @param amazonReferenceId
+     *             Amazon generated identifier for the transaction. Accepts OrderReferenceId or AmazonBillingAgreementId
+     *
+     * @param amount
+     *             Amount to be charged
+     *
+     * @param authorizationReferenceId
+     *             The identifier for this authorization transaction that you specify.
+     *             This identifier must be unique for all your authorization transactions.
+     *
+     * @param mwsAuthToken
+     *             Optional, specify this value only if you are marketplace or third-party solution provider
+     *
+     * @return GetAuthorizationDetailsResponseData
+     *              Returns the authorization details of the transaction
+     *
+     * @throws AmazonServiceException
+     */
+    GetAuthorizationDetailsResponseData charge(final ChargeRequest chargeRequest) throws AmazonServiceException;
 
     /**
      * <p>

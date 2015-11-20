@@ -5,7 +5,6 @@ Login and Pay with Amazon API Integration
 
 ```java
 import com.amazon.payments.paywithamazon.Client;
-import com.amazon.payments.paywithamazon.Config;
 import com.amazon.payments.paywithamazon.impl.PaymentsClient;
 import com.amazon.payments.paywithamazon.impl.PaymentsConfig;
 ```
@@ -18,7 +17,15 @@ String merchantId = "YOUR_MERCHANT_ID";
 String accessKey = "YOUR_ACCESS_KEY";
 String secretKey = "YOUR_SECRET_Key";
 
-Config config = new PaymentsConfig(merchantId , accessKey , secretKey ).sandboxMode(true).withRegion(Region.US).withCurrencyCode(CurrencyCode.USD);
+Config config = new PaymentsConfig()
+                .withSellerId(merchantId)
+                .withAccessKey(accessKey)
+                .withSecretKey(secretKey);
+
+Default currencyCode is USD. To override this, use config.withCurrencyCode(YOUR_CURRENCY_CODE);
+Default region is US. For override this, use config.withRegion(YOUR_REGION_CODE);
+Default environment is LIVE. For testing in Sandbox mode, use config.withSandboxMode(true);
+
 Client client = new PaymentsClient(config);
 
 ```
@@ -37,7 +44,7 @@ import com.amazon.payments.paywithamazon.response.parser.GetOrderReferenceDetail
 
 GetOrderReferenceDetailsRequest getOrderReferenceDetailsRequest = new GetOrderReferenceDetailsRequest("AMAZON_ORDER_REFERENCE_ID");
 //optional parameters
-req.setAddressConsentToken("ADDRESS_CONSENT_TOKEN");
+getOrderReferenceDetailsRequest.setAddressConsentToken("ADDRESS_CONSENT_TOKEN");
 
 GetOrderReferenceDetailsResponseData response = client.getOrderReferenceDetails( getOrderReferenceDetailsRequest );
 
@@ -110,7 +117,7 @@ AuthorizeRequest authorizeRequest = new AuthorizeRequest("AMAZON_ORDER_REFERENCE
 authorizeRequest.setAuthorizationCurrencyCode("USD"); //Overrides currency code set in Client
 authorizeRequest.setSellerAuthorizationNote("Your Authorization Note");
 authorizeRequest.setTransactionTimeout("0"); //Set to 0 for synchronous mode
-authorizeRequest.setCaptureNow("true"); // Set this to true if you want to capture the amount in the same API call
+authorizeRequest.setCaptureNow(true); // Set this to true if you want to capture the amount in the same API call
 
 //Call Authorize API
 response = client.authorize( authorizeRequest );
@@ -139,7 +146,15 @@ String merchantId = "YOUR_MERCHANT_ID";
 String accessKey = "YOUR_ACCESS_KEY";
 String secretKey = "YOUR_SECRET_Key";
 
-Config config = new PaymentsConfig(merchantId , accessKey , secretKey ).sandboxMode(true).withRegion(Region.US).withCurrencyCode(CurrencyCode.USD);
+Config config = new PaymentsConfig()
+                .withSellerId(merchantId)
+                .withAccessKey(accessKey)
+                .withSecretKey(secretKey);
+
+Default currencyCode is USD. To override this, use config.withCurrencyCode(YOUR_CURRENCY_CODE);
+Default region is US. For override this, use config.withRegion(YOUR_REGION_CODE);
+Default environment is LIVE. For testing in Sandbox mode, use config.withSandboxMode(true);
+
 Client client = new PaymentsClient(config);
 
 # These values are grabbed from the Login and Pay
@@ -168,7 +183,7 @@ client.confirmBillingAgreement(confirmBillingAgreementRequest);
 # the payment method is still valid with the associated billing
 # agreement id.
 ValidateBillingAgreementRequest validateBillingAgreementRequest = new ValidateBillingAgreementRequest(billingAgreementId);
-ValidateBillingAgreementResponseParser validateBillingAgreementResponse = client.validateBillingAgreement(validateBillingAgreementRequest);
+client.validateBillingAgreement(validateBillingAgreementRequest);
 
 # Set the amount for your first authorization.
 String amount = '10.00';
@@ -185,7 +200,7 @@ String authorizationReferenceId = "YOUR_UNIQUE_Id";
 # additional optional parameters that are not used
 # below.
 AuthorizeOnBillingAgreementRequest authOnBillingRequest = new AuthorizeOnBillingAgreementRequest(billingAgreementId , authorizationReferenceId , amount);
-AuthorizeOnBillingAgreementResponseParser response = client.authorizeOnBillingAgreement(authOnBillingRequest);
+AuthorizeOnBillingAgreementResponseData response = client.authorizeOnBillingAgreement(authOnBillingRequest);
 
 # You will need the Amazon Authorization Id from the
 # AuthorizeOnBillingAgreement API response if you decide

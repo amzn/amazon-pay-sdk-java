@@ -2,7 +2,6 @@ package com.amazon.payments.paywithamazon.request;
 
 import com.amazon.payments.paywithamazon.types.CurrencyCode;
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * Container for the parameters to the {@link com.amazon.payments.lpa.Client#authorizeOnBillingAgreement(AuthorizeOnBillingAgreementRequest) AuthorizeOnBillingAgreement operation}.
@@ -21,7 +20,7 @@ public class AuthorizeOnBillingAgreementRequest implements Serializable {
     //optional parameters
     private String sellerAuthorizationNote;
     private String transactionTimeout;
-    private String captureNow;
+    private Boolean captureNow;
     private String softDescriptor;
     private String platformId;
     private String sellerNote;
@@ -94,7 +93,7 @@ public class AuthorizeOnBillingAgreementRequest implements Serializable {
     * 
     * @param CaptureNow
     */
-    public AuthorizeOnBillingAgreementRequest setCaptureNow(final String CaptureNow) {
+    public AuthorizeOnBillingAgreementRequest setCaptureNow(final boolean CaptureNow) {
         this.captureNow = CaptureNow;
         return this;
     }
@@ -254,7 +253,7 @@ public class AuthorizeOnBillingAgreementRequest implements Serializable {
      * 
      * @return Returns captureNow status from request
      */
-    public String getCaptureNow() {
+    public Boolean getCaptureNow() {
         return captureNow;
     }
 

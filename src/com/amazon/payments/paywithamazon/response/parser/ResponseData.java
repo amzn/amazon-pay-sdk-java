@@ -1,5 +1,9 @@
 package com.amazon.payments.paywithamazon.response.parser;
 
+import org.json.JSONObject;
+import org.json.JSONException;
+import org.json.XML;
+
 public class ResponseData {
     private int statusCode;
     private String responseXml;
@@ -32,6 +36,11 @@ public class ResponseData {
      */
     public String toXML() {
         return this.responseXml;
+    }
+    
+    public String toJSON() throws JSONException {
+        JSONObject jsonObj = XML.toJSONObject(this.responseXml); 
+        return jsonObj.toString();
     }
     
 
