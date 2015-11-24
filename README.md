@@ -5,6 +5,7 @@ Login and Pay with Amazon API Integration
 
 ```java
 import com.amazon.payments.paywithamazon.Client;
+import com.amazon.payments.paywithamazon.Config;
 import com.amazon.payments.paywithamazon.impl.PaymentsClient;
 import com.amazon.payments.paywithamazon.impl.PaymentsConfig;
 ```
@@ -66,6 +67,9 @@ response.getDetails().getAmazonOrderReferenceId();
 response.getDetails().getBuyer().getBuyerName();
 
 Other data available are buyerEmail, buyerPhone, Destination Address 
+
+# For testing/debugging purposes, see all response fields using below
+response.toString();
 
 ```
 
@@ -258,6 +262,7 @@ user.getUserId();
     Notification notification = NotificationFactory.parseNotification(headers, body);
 
     NotificationType type = notification.getNotificationType();
+	
         switch (type) {
             case CaptureNotification:
                 CaptureNotification cp = (CaptureNotification)notification;
@@ -285,4 +290,5 @@ user.getUserId();
                 break;
         }
 
-    To access metadata, call notification.getNotificationMetadata()
+    To access metadata, call notification.getNotificationMetadata();
+	To see the complete notification, call notification.toJSON() or notification.toMap()
