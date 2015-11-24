@@ -23,9 +23,12 @@ Config config = new PaymentsConfig()
                 .withAccessKey(accessKey)
                 .withSecretKey(secretKey);
 
-Default currencyCode is USD. To override this, use config.withCurrencyCode(YOUR_CURRENCY_CODE);
-Default region is US. For override this, use config.withRegion(YOUR_REGION_CODE);
-Default environment is LIVE. For testing in Sandbox mode, use config.withSandboxMode(true);
+#Default currencyCode is USD. To override, use below 
+#config.withCurrencyCode(YOUR_CURRENCY_CODE);
+#Default region is US. To override, use below 
+#config.withRegion(YOUR_REGION_CODE);
+#Default environment is LIVE. For testing in Sandbox mode, use 
+#config.withSandboxMode(true);
 
 Client client = new PaymentsClient(config);
 
@@ -261,8 +264,10 @@ user.getUserId();
 
     Notification notification = NotificationFactory.parseNotification(headers, body);
 
+	#Determine the notification
     NotificationType type = notification.getNotificationType();
 	
+	#Retrieve notification object based on type of notification
         switch (type) {
             case CaptureNotification:
                 CaptureNotification cp = (CaptureNotification)notification;
@@ -291,4 +296,4 @@ user.getUserId();
         }
 
     To access metadata, call notification.getNotificationMetadata();
-	To see the complete notification, call notification.toJSON() or notification.toMap()
+    To view original notification body, call notification.toJSON() or notification.toMap()
