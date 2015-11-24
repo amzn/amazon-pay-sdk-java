@@ -1,7 +1,7 @@
 package com.amazon.payments.paywithamazon.types;
 
 /**
-* This class represents user information as returned by the service.
+* Represents user information as returned by the service.
 */
 public final class User {
     

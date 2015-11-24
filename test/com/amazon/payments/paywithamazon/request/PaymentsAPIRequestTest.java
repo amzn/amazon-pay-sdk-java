@@ -1,27 +1,6 @@
 package com.amazon.payments.paywithamazon.request;
 
 import com.amazon.payments.paywithamazon.TestConstants;
-import com.amazon.payments.paywithamazon.request.CloseOrderReferenceRequest;
-import com.amazon.payments.paywithamazon.request.CancelOrderReferenceRequest;
-import com.amazon.payments.paywithamazon.request.GetOrderReferenceDetailsRequest;
-import com.amazon.payments.paywithamazon.request.GetProviderCreditReversalDetailsRequest;
-import com.amazon.payments.paywithamazon.request.ConfirmOrderReferenceRequest;
-import com.amazon.payments.paywithamazon.request.ConfirmBillingAgreementRequest;
-import com.amazon.payments.paywithamazon.request.GetBillingAgreementDetailsRequest;
-import com.amazon.payments.paywithamazon.request.ValidateBillingAgreementRequest;
-import com.amazon.payments.paywithamazon.request.CloseBillingAgreementRequest;
-import com.amazon.payments.paywithamazon.request.SetOrderReferenceDetailsRequest;
-import com.amazon.payments.paywithamazon.request.GetAuthorizationDetailsRequest;
-import com.amazon.payments.paywithamazon.request.RefundRequest;
-import com.amazon.payments.paywithamazon.request.GetProviderCreditDetailsRequest;
-import com.amazon.payments.paywithamazon.request.CaptureRequest;
-import com.amazon.payments.paywithamazon.request.AuthorizeRequest;
-import com.amazon.payments.paywithamazon.request.AuthorizeOnBillingAgreementRequest;
-import com.amazon.payments.paywithamazon.request.CloseAuthorizationRequest;
-import com.amazon.payments.paywithamazon.request.ReverseProviderCreditRequest;
-import com.amazon.payments.paywithamazon.request.GetRefundDetailsRequest;
-import com.amazon.payments.paywithamazon.request.SetBillingAgreementDetailsRequest;
-import com.amazon.payments.paywithamazon.request.GetCaptureDetailsRequest;
 import com.amazon.payments.paywithamazon.response.model.Price;
 import com.amazon.payments.paywithamazon.response.model.ProviderCredit;
 import com.amazon.payments.paywithamazon.types.CurrencyCode;
@@ -242,21 +221,21 @@ public class PaymentsAPIRequestTest {
                 .setAuthorizationCurrencyCode(CurrencyCode.USD)
                 .setSoftDescriptor("AMZN*Test");
 
-        Assert.assertEquals(request.getAmazonBillingAgreementId(), TestConstants.billingAgreementId);
-        Assert.assertEquals(request.getAuthorizationReferenceId() , TestConstants.authorizationReferenceId);
-        Assert.assertEquals(request.getAuthorizationAmount() , "2");
+        Assert.assertEquals(TestConstants.billingAgreementId, request.getAmazonBillingAgreementId());
+        Assert.assertEquals(TestConstants.authorizationReferenceId, request.getAuthorizationReferenceId());
+        Assert.assertEquals("2", request.getAuthorizationAmount());
         Assert.assertEquals(request.getAuthorizationCurrencyCode() , CurrencyCode.USD);  
-        Assert.assertEquals(request.getMwsAuthToken(), TestConstants.mwsAuthToken);
-        Assert.assertEquals(request.getCaptureNow() , true);
-        Assert.assertEquals(request.getCustomInformation() , "customInformation");
-        Assert.assertEquals(request.getTransactionTimeout() , "10");
-        Assert.assertEquals(request.getInheritShippingAddress() , "true");
-        Assert.assertEquals(request.getPlatformId() , "platformId");
-        Assert.assertEquals(request.getSellerAuthorizationNote() , "note");  
-        Assert.assertEquals(request.getSellerNote() , "sampletex");
-        Assert.assertEquals(request.getSellerOrderId() , "Order123");
-        Assert.assertEquals(request.getStoreName() , "Store");
-        Assert.assertEquals(request.getSoftDescriptor() , "AMZN*Test");
+        Assert.assertEquals(TestConstants.mwsAuthToken, request.getMwsAuthToken());
+        Assert.assertEquals(true, request.getCaptureNow());
+        Assert.assertEquals("customInformation", request.getCustomInformation());
+        Assert.assertEquals("10", request.getTransactionTimeout());
+        Assert.assertEquals("true", request.getInheritShippingAddress());
+        Assert.assertEquals("platformId", request.getPlatformId());
+        Assert.assertEquals("note", request.getSellerAuthorizationNote());  
+        Assert.assertEquals("sampletex", request.getSellerNote());
+        Assert.assertEquals("Order123", request.getSellerOrderId());
+        Assert.assertEquals("Store", request.getStoreName());
+        Assert.assertEquals("AMZN*Test", request.getSoftDescriptor());
 
     }
         
@@ -342,9 +321,9 @@ public class PaymentsAPIRequestTest {
           GetProviderCreditReversalDetailsRequest request = new GetProviderCreditReversalDetailsRequest(TestConstants.reversalProviderCreditId , TestConstants.providerSellerId)
                   .setMwsAuthToken(TestConstants.mwsAuthToken);
 
-          Assert.assertEquals(request.getAmazonProviderCreditReversalId(), TestConstants.reversalProviderCreditId);
-          Assert.assertEquals(request.getSellerId(), TestConstants.providerSellerId);
-          Assert.assertEquals(request.getMwsAuthToken(), TestConstants.mwsAuthToken);
+          Assert.assertEquals(TestConstants.reversalProviderCreditId, request.getAmazonProviderCreditReversalId());
+          Assert.assertEquals(TestConstants.providerSellerId, request.getSellerId());
+          Assert.assertEquals(TestConstants.mwsAuthToken, request.getMwsAuthToken());
           
       }
       
@@ -365,4 +344,47 @@ public class PaymentsAPIRequestTest {
           Assert.assertEquals(request.getCreditReversalAmountCurrencyCode(), CurrencyCode.USD);
           Assert.assertEquals(request.getCreditReversalNote(), TestConstants.sampletext);
       }
+      
+      
+       @Test public void testCharge() {
+           
+        ProviderCredit pc = new ProviderCredit("providerId" , new Price("1" ,"USD"));
+        List<ProviderCredit> pcl = new ArrayList<ProviderCredit>();
+        pcl.add(pc);
+        
+        ChargeRequest request = new ChargeRequest()
+                .withMWSAuthToken(TestConstants.mwsAuthToken)
+                .withCaptureNow(true)
+                .withCustomInformation("customInformation")
+                .withInheritShippingAddress("true")
+                .withChargeNote("note")
+                .withChargeOrderId("Order123")
+                .withStoreName("Store")
+                .withTransactionTimeout("10")
+                .withCurrencyCode(CurrencyCode.USD)
+                .withSoftDescriptor("AMZN*Test")
+                .withAmazonReferenceId(TestConstants.billingAgreementId)
+                .withPlatformId(TestConstants.platformId)
+                .withAmount("5")
+                .withChargeReferenceId(TestConstants.authorizationReferenceId)
+                .withProviderCreditDetails(pcl);
+
+        
+        Assert.assertEquals(TestConstants.billingAgreementId, request.getAmazonReferenceId());
+        Assert.assertEquals(TestConstants.authorizationReferenceId, request.getChargeReferenceId());
+        Assert.assertEquals("5", request.getAmount());
+        Assert.assertEquals(request.getCurrencyCode(), CurrencyCode.USD);  
+        Assert.assertEquals(TestConstants.mwsAuthToken, request.getMwsAuthToken());
+        Assert.assertEquals(true, request.getCaptureNow());
+        Assert.assertEquals("customInformation", request.getCustomInformation());
+        Assert.assertEquals("10", request.getTransactionTimeout());
+        Assert.assertEquals("true", request.getInheritShippingAddress());
+        Assert.assertEquals(TestConstants.platformId, request.getPlatformId());
+        Assert.assertEquals("note", request.getSellerNote());  
+        Assert.assertEquals("Order123", request.getChargeOrderId());
+        Assert.assertEquals("Store", request.getStoreName());
+        Assert.assertEquals("AMZN*Test", request.getSoftDescriptor());
+        Assert.assertEquals(pcl, request.getProviderCredit());
+
+    }
 }

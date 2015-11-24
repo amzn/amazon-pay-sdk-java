@@ -29,4 +29,10 @@ public class ProviderCreditReversalSummary {
         return providerCreditReversalId;
     }
 
+    @Override
+    public String toString() {
+        return "ProviderCreditReversalSummary{" + "providerId=" + providerId + ", providerCreditReversalId=" + providerCreditReversalId + '}';
+    }
+
+    
 }

@@ -54,5 +54,13 @@ public class Buyer {
         return phone;
     }
 
+    /**
+     * Returns the string representation of Buyer
+     */
+    @Override
+    public String toString() {
+        return "Buyer{" + "name=" + name + ", email=" + email + ", phone=" + phone + '}';
+    }
+
 
 }

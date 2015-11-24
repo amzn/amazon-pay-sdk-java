@@ -43,6 +43,11 @@ public class ProviderCreditReversal {
         return creditReversalAmount;
     }
 
+    @Override
+    public String toString() {
+        return "ProviderCreditReversal{" + "providerId=" + providerId + ", creditReversalAmount=" + creditReversalAmount.toString() + '}';
+    }
+
 
 
 }

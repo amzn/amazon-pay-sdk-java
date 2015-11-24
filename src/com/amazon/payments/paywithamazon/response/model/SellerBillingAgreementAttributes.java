@@ -58,6 +58,14 @@ public class SellerBillingAgreementAttributes {
         return customInformation;
     }
 
+    /**
+     * Returns the string representation of SellerBillingAgreementAttributes
+     */
+    @Override
+    public String toString() {
+        return "SellerBillingAgreementAttributes{" + "sellerBillingAgreementId=" + sellerBillingAgreementId + ", storeName=" + storeName + ", customInformation=" + customInformation + '}';
+    }
+
 
  
  

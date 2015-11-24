@@ -10,8 +10,8 @@ import java.io.Serializable;
 public class GetProviderCreditReversalDetailsRequest implements Serializable{
     
     //required parameters
-    private String amazonProviderCreditReversalId;
-    private String sellerId;
+    private final String amazonProviderCreditReversalId;
+    private final String sellerId;
     
     //optional parameters
     private String mwsAuthToken;

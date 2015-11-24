@@ -4,6 +4,9 @@ import com.amazon.payments.paywithamazon.response.model.ProviderCreditReversalDe
 import com.amazon.payments.paywithamazon.response.model.ReverseProviderCreditResponse;
 import java.io.Serializable;
 
+/**
+ * Response from ReverseProviderCredit service API, as returned by Amazon Payments
+ */
 public final class ReverseProviderCreditResponseData extends ResponseData implements Serializable{
     
     private String requestId;
@@ -20,6 +23,9 @@ public final class ReverseProviderCreditResponseData extends ResponseData implem
     }
 
     /**
+     * The requestID that uniquely identifies the service request
+     * the caller made.
+     * 
      * @return  The requestID that uniquely identifies the service request
      * the caller made.
      */
@@ -34,4 +40,12 @@ public final class ReverseProviderCreditResponseData extends ResponseData implem
     public ProviderCreditReversalDetails getDetails() {
         return providerCreditReversalDetails;
     }
+
+    @Override
+    public String toString() {
+        return "ReverseProviderCreditResponseData{" + "requestId=" + requestId + ", providerCreditReversalDetails=" 
+                + providerCreditReversalDetails.toString() + '}';
+    }
+    
+    
 }

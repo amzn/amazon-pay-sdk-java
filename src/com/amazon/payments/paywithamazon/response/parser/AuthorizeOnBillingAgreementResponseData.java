@@ -25,6 +25,9 @@ public final class AuthorizeOnBillingAgreementResponseData  extends ResponseData
     }
 
     /**
+     * The requestID that uniquely identifies the service request
+     * the caller made.
+     * 
      * @return  The requestID that uniquely identifies the service request
      * the caller made.
      */
@@ -33,6 +36,7 @@ public final class AuthorizeOnBillingAgreementResponseData  extends ResponseData
     }
 
     /**
+     * Returns the amazonOrderReferenceId
      * 
      * @return amazonOrderReferenceId
      */
@@ -54,5 +58,15 @@ public final class AuthorizeOnBillingAgreementResponseData  extends ResponseData
         return authorizationDetails;
     }
 
+    /**
+     * Returns the string representation of AuthorizeOnBillingAgreementResponseData
+     */
+    @Override
+    public String toString() {
+        return "AuthorizeOnBillingAgreementResponseData{" + "requestId=" + requestId + ", amazonOrderReferenceId=" 
+                + amazonOrderReferenceId + ", authorizationDetails=" + authorizationDetails.toString() + '}';
+    }
+
+    
     
 }

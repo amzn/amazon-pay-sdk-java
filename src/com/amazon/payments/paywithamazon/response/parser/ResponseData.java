@@ -5,8 +5,8 @@ import org.json.JSONException;
 import org.json.XML;
 
 public class ResponseData {
-    private int statusCode;
-    private String responseXml;
+    private final int statusCode;
+    private final String responseXml;
     
     public ResponseData(int responseCode , String rawXmlString) {
         this.statusCode = responseCode;
@@ -38,6 +38,12 @@ public class ResponseData {
         return this.responseXml;
     }
     
+    /** 
+     * Converts the raw XML response to JSON format
+     * 
+     * @return 
+     *          JSON representation of response returned by Amazon Service API
+     */
     public String toJSON() throws JSONException {
         JSONObject jsonObj = XML.toJSONObject(this.responseXml); 
         return jsonObj.toString();

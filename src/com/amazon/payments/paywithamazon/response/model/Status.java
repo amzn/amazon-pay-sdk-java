@@ -78,5 +78,12 @@ public class Status {
     public String getReasonDescription() {
         return reasonDescription;
     }
+
+    @Override
+    public String toString() {
+        return "Status{" + "state=" + state + ", lastUpdateTimestamp=" + lastUpdateTimestamp + ", reasonCode=" + reasonCode + ", reasonDescription=" + reasonDescription + '}';
+    }
+    
+    
  
 }

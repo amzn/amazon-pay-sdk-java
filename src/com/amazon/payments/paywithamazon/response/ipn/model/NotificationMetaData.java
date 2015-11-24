@@ -101,6 +101,11 @@ public final class NotificationMetaData {
         return unsubscribeUrl;
     }
 
+    /**
+     * Returns the string representation of NotificationMetaData 
+     * 
+     * @return  Returns the string representation of NotificationMetaData 
+     */
     @Override
     public String toString() {
         return "NotificationMetaData{" + "type=" + type + ", messageId=" + messageId 

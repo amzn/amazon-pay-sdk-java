@@ -4,6 +4,9 @@ import com.amazon.payments.paywithamazon.response.model.AuthorizationDetails;
 import com.amazon.payments.paywithamazon.response.model.GetAuthorizationDetailsResponse;
 import java.io.Serializable;
 
+/**
+ * Response from GetAuthorizationDetails service API, as returned by Amazon Payments
+ */
 public final class GetAuthorizationDetailsResponseData extends ResponseData implements  Serializable{
     
     private String requestId;
@@ -20,6 +23,9 @@ public final class GetAuthorizationDetailsResponseData extends ResponseData impl
     }
 
     /**
+     * The requestID that uniquely identifies the service request the caller
+     * made.
+     * 
      * @return  The requestID that uniquely identifies the service request
      * the caller made.
      */
@@ -38,5 +44,15 @@ public final class GetAuthorizationDetailsResponseData extends ResponseData impl
     public AuthorizationDetails getDetails() {
         return authorizationDetails;
     }
+
+    /**
+     * Returns the string representation of GetAuthorizationDetailsResponseData
+     */
+    @Override
+    public String toString() {
+        return "GetAuthorizationDetailsResponseData{" + "requestId=" + requestId + ", authorizationDetails=" + authorizationDetails.toString() + '}';
+    }
+    
+    
 
 }

@@ -4,6 +4,9 @@ import com.amazon.payments.paywithamazon.response.model.CaptureDetails;
 import com.amazon.payments.paywithamazon.response.model.GetCaptureDetailsResponse;
 import java.io.Serializable;
 
+/**
+ * Response from GetCaptureDetails service API, as returned by Amazon Payments
+ */
 public final class GetCaptureDetailsResponseData  extends ResponseData implements Serializable{
     
     private String requestId;
@@ -20,6 +23,9 @@ public final class GetCaptureDetailsResponseData  extends ResponseData implement
     }
 
     /**
+     * The requestID that uniquely identifies the service request
+     * the caller made.
+     * 
      * @return  The requestID that uniquely identifies the service request
      * the caller made.
      */
@@ -36,5 +42,15 @@ public final class GetCaptureDetailsResponseData  extends ResponseData implement
     public CaptureDetails getDetails() {
         return captureDetails;
     }
+
+    /**
+     * Returns the string representation of GetCaptureDetailsResponseData
+     */
+    @Override
+    public String toString() {
+        return "GetCaptureDetailsResponseData{" + "requestId=" + requestId + ", captureDetails=" + captureDetails.toString() + '}';
+    }
+    
+    
 
 }

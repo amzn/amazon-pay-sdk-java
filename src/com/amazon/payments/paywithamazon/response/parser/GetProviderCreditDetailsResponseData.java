@@ -4,6 +4,9 @@ import com.amazon.payments.paywithamazon.response.model.GetProviderCreditDetails
 import com.amazon.payments.paywithamazon.response.model.ProviderCreditDetails;
 import java.io.Serializable;
 
+/**
+ * Response from GetProviderCreditDetails service API, as returned by Amazon Payments
+ */
 public final class GetProviderCreditDetailsResponseData  extends ResponseData implements Serializable {
     
     private String requestId;
@@ -21,6 +24,9 @@ public final class GetProviderCreditDetailsResponseData  extends ResponseData im
 
 
     /**
+     * The requestID that uniquely identifies the service request
+     * the caller made.
+     * 
      * @return  The requestID that uniquely identifies the service request
      * the caller made.
      */
@@ -29,11 +35,23 @@ public final class GetProviderCreditDetailsResponseData  extends ResponseData im
     }
 
     /**
+     * Encapsulates details about providerCreditDetails
      * 
      * @return providerCreditDetails
      */
     public ProviderCreditDetails getDetails() {
         return providerCreditDetails;
     }
+
+    /**
+     * Returns the string representation of GetProviderCreditDetailsResponseData
+     * @return 
+     */
+    @Override
+    public String toString() {
+        return "GetProviderCreditDetailsResponseData{" + "requestId=" + requestId + ", providerCreditDetails=" + providerCreditDetails.toString() + '}';
+    }
+    
+    
 
 }

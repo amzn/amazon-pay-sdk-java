@@ -21,11 +21,24 @@ public final class ConfirmBillingAgreementResponseData extends ResponseData impl
 
 
     /**
+     * The requestID that uniquely identifies the service request
+     * the caller made.
+     * 
      * @return  The requestID that uniquely identifies the service request
      * the caller made.
      */
     public String getRequestId() {
         return requestId;
     }
+
+    /**
+     * Returns the string representation of ConfirmBillingAgreementResponseData
+     */
+    @Override
+    public String toString() {
+        return "ConfirmBillingAgreementResponseData{" + "requestId=" + requestId + '}';
+    }
+    
+    
     
 }

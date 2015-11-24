@@ -40,6 +40,16 @@ public class OrderReferenceNotification  extends Notification {
         return orderReference;
     }
 
+    /**
+     * Returns the string representation of OrderReferenceNotification
+     * 
+     * @return Returns the string representation of OrderReferenceNotification
+     */
+    @Override
+    public String toString() {
+        return "OrderReferenceNotification{" + "orderReference=" + orderReference.toString() + '}';
+    }
+
 
 
 }

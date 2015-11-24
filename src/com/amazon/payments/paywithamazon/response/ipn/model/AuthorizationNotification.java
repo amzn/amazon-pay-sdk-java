@@ -39,18 +39,19 @@ public class AuthorizationNotification  extends Notification {
     /**
      * Gets the value of the authorizationDetails property.
      *
-     * @return
-     *     possible object is
-     *     {@link AuthorizationDetails }
+     * @return authorizationDetails
      *
      */
     public AuthorizationDetails getAuthorizationDetails() {
         return this.authorizationDetails;
     }
 
+    /**
+     * String representation of authorization notification
+     */
     @Override
     public String toString() {
-        return "AuthorizationNotification{" + "authorizationDetails=" + authorizationDetails + '}';
+        return "AuthorizationNotification{" + "authorizationDetails=" + authorizationDetails.toString() + '}';
     }
 
 

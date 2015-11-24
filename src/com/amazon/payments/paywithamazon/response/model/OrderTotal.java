@@ -42,5 +42,10 @@ public class OrderTotal {
         return amount;
     }
 
+    @Override
+    public String toString() {
+        return "OrderTotal{" + "currencyCode=" + currencyCode + ", amount=" + amount + '}';
+    }
+
 
 }

@@ -48,5 +48,10 @@ public class Price {
         return currencyCode;
     }
 
+    @Override
+    public String toString() {
+        return "Price{" + "amount=" + amount + ", currencyCode=" + currencyCode + '}';
+    }
+
 
 }

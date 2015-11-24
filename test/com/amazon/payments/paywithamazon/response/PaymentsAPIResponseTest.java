@@ -1,6 +1,5 @@
 package com.amazon.payments.paywithamazon.response;
 
-import com.amazon.payments.paywithamazon.TestConstants;
 import com.amazon.payments.paywithamazon.response.parser.RefundResponseData;
 import com.amazon.payments.paywithamazon.response.parser.AuthorizeOnBillingAgreementResponseData;
 import com.amazon.payments.paywithamazon.response.parser.CloseOrderReferenceResponseData;
@@ -25,7 +24,6 @@ import com.amazon.payments.paywithamazon.response.parser.CancelOrderReferenceRes
 import com.amazon.payments.paywithamazon.response.parser.CaptureResponseData;
 import com.amazon.payments.paywithamazon.exceptions.AmazonClientException;
 import com.amazon.payments.paywithamazon.exceptions.AmazonServiceException;
-import com.amazon.payments.paywithamazon.impl.ipn.NotificationFactoryTest;
 import com.amazon.payments.paywithamazon.response.model.ErrorResponse;
 import com.amazon.payments.paywithamazon.response.parser.ResponseData;
 import com.amazon.payments.paywithamazon.response.model.RefundType;
@@ -309,6 +307,9 @@ public class PaymentsAPIResponseTest {
         Assert.assertEquals(res.getDetails().getProviderId() , "A2K7NDRCTOTPW9");    
         Assert.assertEquals(res.getDetails().getSellerId() , "A37GX652OWOXVH");    
         Assert.assertEquals(res.getDetails().getCreditReversalReferenceId() , "S01-2117025-2155793nesasdh");  
+        Assert.assertEquals(res.getDetails().getCreditReversalStatus().getState(), "Closed");  
+        Assert.assertEquals(res.getDetails().getCreditReversalStatus().getReasonCode(), "MaxAmountReversed");  
+
         XMLGregorianCalendar xgc=DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-10-23T00:30:42.996Z");
         Assert.assertEquals(res.getDetails().getCreationTimestamp() , xgc);    
 

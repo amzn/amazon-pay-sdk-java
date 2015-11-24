@@ -35,4 +35,10 @@ public class ProviderCredit {
         return creditAmount;
     }
 
+    @Override
+    public String toString() {
+        return "ProviderCredit{" + "providerId=" + providerId + ", creditAmount=" + creditAmount + '}';
+    }
+
+    
 }

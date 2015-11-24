@@ -10,9 +10,8 @@ import java.io.Serializable;
  *   to parse the response, using this exception you can still retrieve the raw API response.
  */
 public class AmazonClientException extends RuntimeException implements Serializable {
-    
      
-    private String message;
+    private final String message;
     private int statusCode;
     private String rawResponse;
     
@@ -20,7 +19,7 @@ public class AmazonClientException extends RuntimeException implements Serializa
 
     /**
      * Constructs AmazonClientException with given ResponseData response, 
- message and underlying exception object
+     * message and underlying exception object
      * 
      * @param response
      *              Response object containing API response and statusCode information 
@@ -82,6 +81,7 @@ public class AmazonClientException extends RuntimeException implements Serializa
      * 
      * @return message
      */
+    @Override
     public String getMessage() {
         return message;
     }
@@ -89,7 +89,7 @@ public class AmazonClientException extends RuntimeException implements Serializa
     /**
      * The string representation of exception message details
      * 
-     * @return 
+     * @return The string representation of exception message details
      */
     @Override
     public String toString() {

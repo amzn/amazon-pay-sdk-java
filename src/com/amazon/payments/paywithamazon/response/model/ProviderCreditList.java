@@ -31,4 +31,10 @@ public class ProviderCreditList {
         return this.member;
     }
 
+    @Override
+    public String toString() {
+        return "ProviderCreditList{" + "member=" + member + '}';
+    }
+
+    
 }

@@ -73,4 +73,16 @@ public class BillingAgreementStatus {
         return reasonDescription;
     }
 
+    /** 
+     * Returns the string representation of BillingAgreementStatus
+     */
+    @Override
+    public String toString() {
+        return "BillingAgreementStatus{" + "state=" + state + ", lastUpdatedTimestamp=" 
+                + lastUpdatedTimestamp + ", reasonCode=" + reasonCode + ", reasonDescription=" 
+                + reasonDescription + '}';
+    }
+    
+    
+
 }

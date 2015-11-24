@@ -25,6 +25,9 @@ public final class CaptureResponseData extends ResponseData implements Serializa
     
 
     /**
+     * The requestID that uniquely identifies the service request
+     * the caller made.
+     * 
      * @return  The requestID that uniquely identifies the service request
      * the caller made.
      */
@@ -42,4 +45,14 @@ public final class CaptureResponseData extends ResponseData implements Serializa
         return captureDetails;
     }
 
+    /**
+     * Returns the string representation of CaptureResponseData
+     * @return 
+     */
+    @Override
+    public String toString() {
+        return "CaptureResponseData{" + "requestId=" + requestId + ", captureDetails=" + captureDetails.toString() + '}';
+    }
+
+    
 }

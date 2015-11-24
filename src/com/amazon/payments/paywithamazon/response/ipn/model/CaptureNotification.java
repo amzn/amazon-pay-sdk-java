@@ -43,6 +43,14 @@ public class CaptureNotification extends Notification   {
     public CaptureDetails getCaptureDetails() {
         return this.captureDetails;
     }
+
+    /**
+     * String representation of Capture Notification
+     */
+    @Override
+    public String toString() {
+        return "CaptureNotification{" + "captureDetails=" + captureDetails.toString() + '}';
+    }
     
     
 }

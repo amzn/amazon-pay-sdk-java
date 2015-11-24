@@ -1,7 +1,5 @@
 package com.amazon.payments.paywithamazon.response.ipn.model;
 
-import com.amazon.payments.paywithamazon.response.ipn.model.Notification;
-import com.amazon.payments.paywithamazon.response.model.ProviderCreditDetails;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -45,16 +43,14 @@ public class ProviderCreditNotification  extends Notification {
     }
 
     /**
-     * Sets the details for this providerCredit notification.
-     * @param details the new providerCredit details for this notification
+     * String representation of providerCreditNotificaiton 
      */
-    public void setProviderCreditDetails(final ProviderCreditDetails details) {
-        this.providerCreditDetails = details;
+    @Override
+    public String toString() {
+        return "ProviderCreditNotification{" + "providerCreditDetails=" + providerCreditDetails.toString() + '}';
+        
     }
 
-    public boolean isSetProviderCreditDetails() {
-        return (this.providerCreditDetails != null);
-    }
 
 
 }

@@ -188,4 +188,22 @@ public class AuthorizationDetails {
     public String getAddressVerificationCode() {
         return addressVerificationCode;
     }
+
+    /**
+     * String representation of Authorization Details
+     */
+    @Override
+    public String toString() {
+        return "AuthorizationDetails{" + "amazonAuthorizationId=" + amazonAuthorizationId 
+                + ", authorizationReferenceId=" + authorizationReferenceId + ", authorizationBillingAddress=" 
+                + authorizationBillingAddress + ", sellerAuthorizationNote=" + sellerAuthorizationNote 
+                + ", authorizationAmount=" + authorizationAmount + ", capturedAmount=" + capturedAmount 
+                + ", authorizationFee=" + authorizationFee + ", idList=" + idList + ", creationTimestamp=" 
+                + creationTimestamp + ", expirationTimestamp=" + expirationTimestamp + ", authorizationStatus=" 
+                + authorizationStatus + ", orderItemCategories=" + orderItemCategories + ", captureNow=" 
+                + captureNow + ", softDescriptor=" + softDescriptor + ", addressVerificationCode=" 
+                + addressVerificationCode + '}';
+    }
+    
+    
 }

@@ -76,5 +76,15 @@ public class BillingAgreementLimits {
         return currentRemainingBalance;
     }
 
+    /**
+     * Returns the string representation of BillingAgreementLimits
+     */
+    @Override
+    public String toString() {
+        return "BillingAgreementLimits{" + "amountLimitPerTimePeriod=" + amountLimitPerTimePeriod 
+                + ", timePeriodStartDate=" + timePeriodStartDate + ", timePeriodEndDate=" + timePeriodEndDate 
+                + ", currentRemainingBalance=" + currentRemainingBalance + '}';
+    }
+
 
 }

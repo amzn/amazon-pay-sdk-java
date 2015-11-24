@@ -4,7 +4,9 @@ import com.amazon.payments.paywithamazon.response.model.GetOrderReferenceDetails
 import com.amazon.payments.paywithamazon.response.model.OrderReferenceDetails;
 import java.io.Serializable;
 
-
+/**
+ * Response from GetOrderReferenceDetails service API, as returned by Amazon Payments
+ */
 public final class GetOrderReferenceDetailsResponseData  extends ResponseData implements Serializable{
     
     private String requestId;
@@ -21,6 +23,9 @@ public final class GetOrderReferenceDetailsResponseData  extends ResponseData im
     }
 
     /**
+     * The requestID that uniquely identifies the service request
+     * the caller made.
+     * 
      * @return  The requestID that uniquely identifies the service request
      * the caller made.
      */
@@ -35,6 +40,14 @@ public final class GetOrderReferenceDetailsResponseData  extends ResponseData im
      */
     public OrderReferenceDetails getDetails() {
         return orderReferenceDetails;
+    }
+
+    /**
+     * Returns the string representation of GetOrderReferenceDetailsResponseData
+     */
+    @Override
+    public String toString() {
+        return "GetOrderReferenceDetailsResponseData{" + "requestId=" + requestId + ", orderReferenceDetails=" + orderReferenceDetails.toString() + '}';
     }
     
     

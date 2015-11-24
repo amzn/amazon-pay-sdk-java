@@ -4,6 +4,9 @@ import com.amazon.payments.paywithamazon.response.model.GetRefundDetailsResponse
 import com.amazon.payments.paywithamazon.response.model.RefundDetails;
 import java.io.Serializable;
 
+/**
+ * Response from GetRefundDetails service API, as returned by Amazon Payments
+ */
 public final class GetRefundDetailsResponseData  extends ResponseData implements Serializable{
     
     private String requestId;
@@ -20,6 +23,9 @@ public final class GetRefundDetailsResponseData  extends ResponseData implements
     }
     
     /**
+     * The requestID that uniquely identifies the service request
+     * the caller made.
+     * 
      * @return  The requestID that uniquely identifies the service request
      * the caller made.
      */
@@ -37,4 +43,13 @@ public final class GetRefundDetailsResponseData  extends ResponseData implements
         return refundDetails;
     }
 
+    /**
+     * Returns the string representation of GetRefundDetailsResponseData
+     */
+    @Override
+    public String toString() {
+        return "GetRefundDetailsResponseData{" + "requestId=" + requestId + ", refundDetails=" + refundDetails.toString() + '}';
+    }
+
+    
 }

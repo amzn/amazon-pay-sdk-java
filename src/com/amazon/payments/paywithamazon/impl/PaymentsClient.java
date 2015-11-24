@@ -1,7 +1,6 @@
 package com.amazon.payments.paywithamazon.impl;
 
 import com.amazon.payments.paywithamazon.Client;
-import com.amazon.payments.paywithamazon.Client;
 import com.amazon.payments.paywithamazon.Config;
 import com.amazon.payments.paywithamazon.exceptions.AmazonClientException;
 import com.amazon.payments.paywithamazon.exceptions.AmazonServiceException;
@@ -62,8 +61,6 @@ import java.io.IOException;
 import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /* 
 * Client for accessing Pay with Amazon API.  
@@ -80,8 +77,8 @@ import java.util.logging.Logger;
 */
 public class PaymentsClient implements Client  {
     
-    private RequestHelper helper;
-    private PaymentsConfig paymentsConfig;
+    private final RequestHelper helper;
+    private final PaymentsConfig paymentsConfig;
     
 
      /**
@@ -902,8 +899,8 @@ public class PaymentsClient implements Client  {
      *             Amount to be charged
      * 
      * @param authorizationReferenceId
-     *             The identifier for this authorization transaction that you specify. 
-     *             This identifier must be unique for all your authorization transactions.
+     *             Specify any unique identifier to identify this authorization transaction. 
+     *             Note that this identifier must be unique for all your authorization transactions.
      * 
      * @param mwsAuthToken
      *             Optional, specify this value only if you are marketplace or third-party solution provider
@@ -990,6 +987,7 @@ public class PaymentsClient implements Client  {
             //503 status code is returned when request is throttled and 500 is returned for InternalServerError
             while ((statusCode == 503  || statusCode == 500) && retry < 3 && paymentsConfig.isUseAutoRetryOnThrottle()) {
                 retry++;
+                //retry request 3 times
                 if (retry == 1) {
                     Thread.sleep(ServiceConstants.FIRST_RETRY_WAIT_TIME);
                 } else if (retry == 2) {

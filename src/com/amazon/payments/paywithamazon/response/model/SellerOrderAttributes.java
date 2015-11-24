@@ -73,4 +73,13 @@ public class SellerOrderAttributes {
         return customInformation;
     }
 
+    /**
+     * Returns string representation of SellerOrderAttributes
+     */
+    @Override
+    public String toString() {
+        return "SellerOrderAttributes{" + "sellerOrderId=" + sellerOrderId + ", storeName=" + storeName + ", orderItemCategories=" 
+                + orderItemCategories.toString() + ", customInformation=" + customInformation + '}';
+    }
+
 }

@@ -8,13 +8,12 @@ import java.io.Serializable;
  * For more information documentation, see  
  * <a href="https://payments.amazon.com/documentation/apireference/201751630#201751940">AuthorizeOnBillingAgreement API Reference</a>
  */
-
 public class AuthorizeOnBillingAgreementRequest implements Serializable {
         
     //required parameters
-    private String amazonBillingAgreementId;
-    private String authorizationReferenceId;
-    private String authorizationAmount;
+    private final String amazonBillingAgreementId;
+    private final String authorizationReferenceId;
+    private final String authorizationAmount;
     private CurrencyCode authorizationCurrencyCode;
     
     //optional parameters

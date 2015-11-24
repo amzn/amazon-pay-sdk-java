@@ -232,4 +232,19 @@ public class OrderReferenceDetails {
         return orderLanguage;
     }
 
+    /**
+     * String representation of OrderReferenceDetails
+     */
+    @Override
+    public String toString() {
+        return "OrderReferenceDetails{" + "amazonOrderReferenceId=" + amazonOrderReferenceId + ", buyer=" + buyer + ", orderTotal=" 
+                + orderTotal + ", sellerNote=" + sellerNote + ", platformId=" + platformId + ", destination=" + destination 
+                + ", billingAddress=" + billingAddress + ", releaseEnvironment=" + releaseEnvironment + ", sellerOrderAttributes=" 
+                + sellerOrderAttributes + ", orderReferenceStatus=" + orderReferenceStatus + ", constraints=" 
+                + constraints + ", creationTimestamp=" + creationTimestamp + ", expirationTimestamp=" + expirationTimestamp 
+                + ", parentDetails=" + parentDetails + ", idList=" + idList + ", orderLanguage=" + orderLanguage + '}';
+    }
+    
+    
+
 }

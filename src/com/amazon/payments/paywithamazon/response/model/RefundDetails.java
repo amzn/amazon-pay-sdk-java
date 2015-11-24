@@ -146,4 +146,17 @@ public class RefundDetails {
         return providerCreditReversalSummaryList;
     }
 
+    /**
+     * String representation of refundDetails
+     */
+    @Override
+    public String toString() {
+        return "RefundDetails{" + "amazonRefundId=" + amazonRefundId + ", refundReferenceId=" 
+                + refundReferenceId + ", sellerRefundNote=" + sellerRefundNote + ", refundType=" + refundType 
+                + ", refundAmount=" + refundAmount + ", feeRefunded=" + feeRefunded + ", creationTimestamp=" 
+                + creationTimestamp + ", refundStatus=" + refundStatus + ", softDescriptor=" + softDescriptor 
+                + ", providerCreditReversalSummaryList=" + providerCreditReversalSummaryList + '}';
+    }
+
+    
 }

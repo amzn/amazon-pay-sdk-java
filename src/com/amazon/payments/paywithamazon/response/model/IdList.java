@@ -37,5 +37,10 @@ public class IdList {
         return this.member;
     }
 
+    @Override
+    public String toString() {
+        return "IdList{" + "member=" + member + '}';
+    }
+
  
 }

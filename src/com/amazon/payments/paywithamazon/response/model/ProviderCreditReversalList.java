@@ -27,5 +27,10 @@ public class ProviderCreditReversalList {
         return this.member;
     }
 
+    @Override
+    public String toString() {
+        return "ProviderCreditReversalList{" + "member=" + member.toString() + '}';
+    }
+
 
 }

@@ -74,6 +74,12 @@ public class OrderReferenceAttributes {
         return sellerOrderAttributes;
     }
 
+    @Override
+    public String toString() {
+        return "OrderReferenceAttributes{" + "orderTotal=" + orderTotal.toString() + ", platformId=" 
+                + platformId + ", sellerNote=" + sellerNote + ", sellerOrderAttributes=" + sellerOrderAttributes.toString() + '}';
+    }
+
 
  
 }

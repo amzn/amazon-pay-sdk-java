@@ -72,5 +72,11 @@ public class OrderReferenceStatus {
         return reasonDescription;
     }
 
+    @Override
+    public String toString() {
+        return "OrderReferenceStatus{" + "state=" + state + ", lastUpdateTimestamp=" + lastUpdateTimestamp 
+                + ", reasonCode=" + reasonCode + ", reasonDescription=" + reasonDescription + '}';
+    }
+
 
 }

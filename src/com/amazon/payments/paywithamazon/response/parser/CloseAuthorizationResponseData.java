@@ -20,10 +20,23 @@ public final class CloseAuthorizationResponseData  extends ResponseData implemen
     }
 
      /**
+      * The requestID that uniquely identifies the service request
+     * the caller made.
+     * 
      * @return  The requestID that uniquely identifies the service request
      * the caller made.
      */
     public String getRequestId() {
         return requestId;
     }
+
+    /**
+     * Returns the string representation of CloseAuthorizationResponseData
+     */
+    @Override
+    public String toString() {
+        return "CloseAuthorizationResponseData{" + "requestId=" + requestId + '}';
+    }
+    
+    
 }

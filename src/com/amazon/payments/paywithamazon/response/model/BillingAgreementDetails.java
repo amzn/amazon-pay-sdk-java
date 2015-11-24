@@ -209,5 +209,20 @@ public class BillingAgreementDetails {
         return orderLanguage;
     }
 
+    /**
+     * String representation of Billing Agreement
+     */
+    @Override
+    public String toString() {
+        return "BillingAgreementDetails{" + "amazonBillingAgreementId=" + amazonBillingAgreementId 
+                + ", billingAgreementLimits=" + billingAgreementLimits + ", buyer=" + buyer + ", sellerNote=" 
+                + sellerNote + ", platformId=" + platformId + ", destination=" + destination + ", billingAddress=" 
+                + billingAddress + ", releaseEnvironment=" + releaseEnvironment + ", sellerBillingAgreementAttributes=" 
+                + sellerBillingAgreementAttributes + ", billingAgreementStatus=" + billingAgreementStatus 
+                + ", constraints=" + constraints + ", creationTimestamp=" + creationTimestamp 
+                + ", expirationTimestamp=" + expirationTimestamp + ", billingAgreementConsent=" 
+                + billingAgreementConsent + ", orderLanguage=" + orderLanguage + '}';
+    }
+
 
 }

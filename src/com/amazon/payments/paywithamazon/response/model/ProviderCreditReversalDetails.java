@@ -75,4 +75,16 @@ public class ProviderCreditReversalDetails {
         return creditReversalNote;
     }
 
+    /**
+     * String representation of providerCreditReversalNotification
+     */
+    @Override
+    public String toString() {
+        return "ProviderCreditReversalDetails{" + "amazonProviderCreditReversalId=" + amazonProviderCreditReversalId 
+                + ", sellerId=" + sellerId + ", providerId=" + providerId + ", creditReversalReferenceId=" 
+                + creditReversalReferenceId + ", creditReversalAmount=" + creditReversalAmount + ", creationTimestamp=" 
+                + creationTimestamp + ", creditReversalStatus=" + creditReversalStatus + ", creditReversalNote=" 
+                + creditReversalNote + '}';
+    }
+
 }

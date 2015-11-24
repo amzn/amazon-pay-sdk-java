@@ -31,6 +31,11 @@ public class CaptureIds {
         return this.member;
     }
 
+    @Override
+    public String toString() {
+        return "CaptureIds{" + "member=" + member.toString() + '}';
+    }
+
 
  
 }

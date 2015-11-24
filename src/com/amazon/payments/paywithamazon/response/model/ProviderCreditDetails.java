@@ -12,6 +12,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "amazonProviderCreditId",
     "sellerId",
     "providerId",
+    "providerSellerId",
     "creditReferenceId",
     "creditAmount",
     "creditReversalAmount",
@@ -27,6 +28,8 @@ public class ProviderCreditDetails {
     protected String sellerId;
     @XmlElement(name = "ProviderId", required = true)
     protected String providerId;
+    @XmlElement(name = "ProviderSellerId", required = false)
+    protected String providerSellerId;
     @XmlElement(name = "CreditReferenceId", required = true)
     protected String creditReferenceId;
     @XmlElement(name = "CreditAmount", required = true)
@@ -45,17 +48,33 @@ public class ProviderCreditDetails {
         super();
     }
 
+    /**
+     * Returns the amazonProviderCreditId
+     */
     public String getAmazonProviderCreditId() {
         return amazonProviderCreditId;
     }
 
-
+    /**
+     * Returns the sellerId
+     */
     public String getSellerId() {
         return sellerId;
     }
 
+    /**
+     * Returns the providerId
+     */
     public String getProviderId() {
         return providerId;
+    }
+    
+    /**
+     * Returns the providerSellerId 
+     * (applicable while processing ProviderCreditNotification only)
+     */
+    public String getProviderSellerId() {
+        return providerSellerId;
     }
 
     public String getCreditReferenceId() {
@@ -80,6 +99,18 @@ public class ProviderCreditDetails {
 
     public Status getCreditStatus() {
         return creditStatus;
+    }
+
+    /**
+     * String representation of providerCreditDetails
+     */
+    @Override
+    public String toString() {
+        return "ProviderCreditDetails{" + "amazonProviderCreditId=" + amazonProviderCreditId + ", sellerId=" 
+                + sellerId + ", providerId=" + providerId + ", creditReferenceId=" + creditReferenceId 
+                + ", creditAmount=" + creditAmount + ", creditReversalAmount=" + creditReversalAmount 
+                + ", creditReversalIdList=" + creditReversalIdList + ", creationTimestamp=" + creationTimestamp 
+                + ", creditStatus=" + creditStatus + '}';
     }
 
 

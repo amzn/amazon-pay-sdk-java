@@ -155,4 +155,16 @@ public class CaptureDetails {
         return providerCreditSummaryList;
     }
 
+    /**
+     * Returns the string representation of captureDetails
+     */
+    @Override
+    public String toString() {
+        return "CaptureDetails{" + "amazonCaptureId=" + amazonCaptureId + ", captureReferenceId=" + captureReferenceId 
+                + ", sellerCaptureNote=" + sellerCaptureNote + ", captureAmount=" + captureAmount + ", refundedAmount=" 
+                + refundedAmount + ", captureFee=" + captureFee + ", idList=" + idList + ", creationTimestamp=" 
+                + creationTimestamp + ", captureStatus=" + captureStatus + ", softDescriptor=" + softDescriptor 
+                + ", providerCreditSummaryList=" + providerCreditSummaryList + '}';
+    }
+
 }

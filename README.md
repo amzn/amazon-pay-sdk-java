@@ -139,9 +139,11 @@ response = client.Capture( request );
 client.closeOrderReference("AMAZON_ORDER_REFERENCE_ID");
 
 
+```
 
 ### Subscriptions/Recurring Payments API Flow 
 
+```java
 String merchantId = "YOUR_MERCHANT_ID";
 String accessKey = "YOUR_ACCESS_KEY";
 String secretKey = "YOUR_SECRET_Key";
@@ -221,8 +223,10 @@ String captureReferenceId = "YOUR_UNIQUE_Id";
 CloseBillingAgreementRequest request = new CloseBillingAgreementRequest(billingAgreementId).setMWSAuthToken(mwsAuthToken);
 client.closeBillingAgreement(request);
 
-
+```
 ### Get Login Profile API
+```java
+
 This API call allows you to obtain user profile information once a user has logged into your application using their Amazon credentials. 
 
 # Your client id is located in your Seller
@@ -239,3 +243,46 @@ Below profile information can be retrieved from User object.
 user.getName();
 user.getEmail();
 user.getUserId();
+
+```
+
+### Handling Instant Payment Notifications
+
+```java
+
+# This can be placed in your java application for a method
+# that is configured to receive a "POST" IPN from Amazon.
+    Map<String,String> headers = IPN_MESSAGE_HEADER
+    String body = IPN_MESSAGE_BODY
+
+    Notification notification = NotificationFactory.parseNotification(headers, body);
+
+    NotificationType type = notification.getNotificationType();
+        switch (type) {
+            case CaptureNotification:
+                CaptureNotification cp = (CaptureNotification)notification;
+                break;
+            case AuthorizationNotification:
+                 AuthorizationNotification an = (AuthorizationNotification)notification;
+                 break;
+            case BillingAgreementNotification:
+                BillingAgreementNotification bn = (BillingAgreementNotification)notification;
+                break;
+            case OrderReferenceNotification:
+                OrderReferenceNotification on = (OrderReferenceNotification)notification;
+                break;
+            case ProviderCreditNotification:
+                ProviderCreditNotification pc = (ProviderCreditNotification)notification;
+                break;
+            case ProviderCreditReversalNotification:
+                ProviderCreditReversalNotification pcrn = (ProviderCreditReversalNotification)notification;
+                break;
+            case RefundNotification:
+                RefundNotification rn = (RefundNotification)notification;
+                break;
+            case SolutionProviderMerchantNotification:
+                SolutionProviderMerchantNotification sp = (SolutionProviderMerchantNotification)notification;
+                break;
+        }
+
+    To access metadata, call notification.getNotificationMetadata()

@@ -1,7 +1,7 @@
 package com.amazon.payments.paywithamazon.types;
 
 /**
-* This represents an enum class representing the currency code.
+* Represents the currency code supported by Amazon Payments API
 */
 public enum CurrencyCode {
 	USD,

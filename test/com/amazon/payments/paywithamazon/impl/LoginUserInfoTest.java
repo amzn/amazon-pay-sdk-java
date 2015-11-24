@@ -22,8 +22,8 @@ import org.powermock.modules.junit4.PowerMockRunner;
 @PrepareForTest(Util.class)
 public class LoginUserInfoTest {
     
-    private String accessToken =  TestConstants.addressConsentToken;
-    private String clientId = TestConstants.clientId;
+    private final String accessToken =  TestConstants.addressConsentToken;
+    private final String clientId = TestConstants.clientId;
     private PaymentsConfig config;
     private PaymentsClient client;
     
@@ -54,9 +54,9 @@ public class LoginUserInfoTest {
 
         User user = client.getUserInfo( accessToken, clientId );
 
-        Assert.assertEquals(user.getEmail(), "testbuyer2@amazon.com");
-        Assert.assertEquals(user.getName(), "Test Buyer");
-        Assert.assertEquals(user.getUserId(), "amzn1.account.AF5W6J2OG52NKFJGEN52GEZ5CWFQ");
+        Assert.assertEquals("testbuyer2@amazon.com", user.getEmail());
+        Assert.assertEquals("Test Buyer", user.getName());
+        Assert.assertEquals("amzn1.account.AF5W6J2OG52NKFJGEN52GEZ5CWFQ", user.getUserId());
                
     }
     
@@ -66,6 +66,5 @@ public class LoginUserInfoTest {
         String tokenInfoURL = TestConstants.tokenInfoURL + URLDecoder.decode(accessToken);
         PowerMockito.doReturn(userProfileErrorResponse).when(Util.class, "httpSendRequest" , "GET", tokenInfoURL , null , new HashMap<String,String>());
         User user = client.getUserInfo(accessToken, clientId );
-                    
     }
 }

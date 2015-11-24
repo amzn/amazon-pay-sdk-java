@@ -22,12 +22,28 @@ public class BillingAddress {
         super();
     }
 
+    /**
+     * 
+     * @return Returns the address type
+     */
     public String getAddressType() {
         return addressType;
     }
 
+    /**
+     * 
+     * @return Returns the physical address
+     */
     public Address getPhysicalAddress() {
         return physicalAddress;
+    }
+
+    /**
+     * Returns the string representation of BillingAddress
+     */
+    @Override
+    public String toString() {
+        return "BillingAddress{" + "addressType=" + addressType + ", physicalAddress=" + physicalAddress.toString() + '}';
     }
 
 

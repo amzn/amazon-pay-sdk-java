@@ -54,5 +54,14 @@ public class BillingAgreementNotification  extends Notification {
         return this.billingAgreement;
     }
 
+    /**
+     * String representation of BliingAgreement Notification
+     * @return 
+     */
+    @Override
+    public String toString() {
+        return "BillingAgreementNotification{" + "billingAgreement=" + billingAgreement.toString() + '}';
+    }
+
 
 }

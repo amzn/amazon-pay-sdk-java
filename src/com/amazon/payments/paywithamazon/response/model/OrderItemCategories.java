@@ -41,5 +41,10 @@ public class OrderItemCategories {
         return this.orderItemCategory;
     }
 
+    @Override
+    public String toString() {
+        return "OrderItemCategories{" + "orderItemCategory=" + orderItemCategory + '}';
+    }
+
 
 }

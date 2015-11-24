@@ -1,5 +1,8 @@
 package com.amazon.payments.paywithamazon.types;
 
+/**
+ * Represents the payments configuration values
+ */
 public enum Key {
     ACCESS_KEY,
     SECRET_KEY,

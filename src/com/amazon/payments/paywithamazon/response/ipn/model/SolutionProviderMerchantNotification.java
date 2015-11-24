@@ -27,8 +27,24 @@ public class SolutionProviderMerchantNotification  extends Notification {
         merchantRegistrationDetails = details;
     }
 
+    /**
+     * Returns the details of merchantRegistrationDetails
+     * 
+     * @return Returns the details of merchantRegistrationDetails
+     */
     public MerchantRegistrationDetails getMerchantRegistrationDetails() {
         return this.merchantRegistrationDetails;
     }
 
+    /**
+     * String representation of SolutionProviderMerchantNotification
+     * 
+     * @return Returns the string representation of SolutionProviderMerchantNotification
+     */
+    @Override
+    public String toString() {
+        return "SolutionProviderMerchantNotification{" + "merchantRegistrationDetails=" + merchantRegistrationDetails.toString() + '}';
+    }
+
+    
 }

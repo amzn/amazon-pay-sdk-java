@@ -136,4 +136,17 @@ public class Address {
         return phone;
     }
 
+    /**
+     * String representation of Address object
+     */
+    @Override
+    public String toString() {
+        return "Address{" + "name=" + name + ", addressLine1=" + addressLine1 + ", addressLine2=" + addressLine2 
+                + ", addressLine3=" + addressLine3 + ", city=" + city + ", county=" + county + ", district=" 
+                + district + ", stateOrRegion=" + stateOrRegion + ", postalCode=" + postalCode + ", countryCode=" 
+                + countryCode + ", phone=" + phone + '}';
+    }
+
+    
+    
 }

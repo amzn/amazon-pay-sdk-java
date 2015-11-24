@@ -42,4 +42,10 @@ public class Destination {
         return physicalDestination;
     }
 
+    @Override
+    public String toString() {
+        return "Destination{" + "destinationType=" + destinationType + ", physicalDestination=" + physicalDestination.toString() + '}';
+    }
+
+    
 }

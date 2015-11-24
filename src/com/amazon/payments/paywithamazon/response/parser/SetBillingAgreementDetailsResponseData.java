@@ -4,7 +4,9 @@ import com.amazon.payments.paywithamazon.response.model.BillingAgreementDetails;
 import com.amazon.payments.paywithamazon.response.model.SetBillingAgreementDetailsResponse;
 import java.io.Serializable;
 
-
+/**
+ * Response from SetBillingAgreementDetails service API, as returned by Amazon Payments
+ */
 public final class SetBillingAgreementDetailsResponseData extends ResponseData implements Serializable{
     
     private String requestId;
@@ -37,6 +39,11 @@ public final class SetBillingAgreementDetailsResponseData extends ResponseData i
      */
     public BillingAgreementDetails getDetails() {
         return billingAgreementDetails;
+    }
+
+    @Override
+    public String toString() {
+        return "SetBillingAgreementDetailsResponseData{" + "requestId=" + requestId + ", billingAgreementDetails=" + billingAgreementDetails.toString() + '}';
     }
     
     

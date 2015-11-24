@@ -25,6 +25,14 @@ public class ResponseMetadata {
         return requestId;
     }
 
+    /**
+     * Returns the string representation of ResponseMetadata
+     */
+    @Override
+    public String toString() {
+        return "ResponseMetadata{" + "requestId=" + requestId + '}';
+    }
+
 
 
 }

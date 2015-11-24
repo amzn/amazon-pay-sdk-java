@@ -9,8 +9,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import org.w3c.dom.Element;
-
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "type",
@@ -76,4 +74,14 @@ public class Error {
 
 
     }
+
+    /**
+     * String representation of error object
+     * @return 
+     */
+    @Override
+    public String toString() {
+        return "Error{" + "type=" + type + ", code=" + code + ", message=" + message + ", detail=" + detail + '}';
+    }
+    
 }

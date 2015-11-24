@@ -76,6 +76,9 @@ public class AmazonServiceException extends Exception implements Serializable {
     }
 
     /**
+     * The HTTP status code that was returned with this service
+     *         exception.
+     * 
      * @return The HTTP status code that was returned with this service
      *         exception.
      */
@@ -84,6 +87,8 @@ public class AmazonServiceException extends Exception implements Serializable {
     }
 
     /**
+     * An error code that identifies the type of error that occurred.
+     * 
      * @return An error code that identifies the type of error that occurred.
      */
     public String getErrorCode() {
@@ -102,6 +107,9 @@ public class AmazonServiceException extends Exception implements Serializable {
     }
 
     /**
+     * The requestID that uniquely identifies the service request
+     * the caller made.
+     * 
      * @return The requestID that uniquely identifies the service request
      * the caller made.
      */
@@ -110,6 +118,7 @@ public class AmazonServiceException extends Exception implements Serializable {
     }
     
     /**
+     * A message code that describes the error condition in a human-readable form.
      * 
      * @return A message code that describes the error condition in a human-readable form.
      */

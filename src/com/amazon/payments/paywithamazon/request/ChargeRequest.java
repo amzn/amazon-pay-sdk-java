@@ -184,6 +184,7 @@ public class ChargeRequest implements Serializable {
      * @return ChargeRequest  
      */
      public ChargeRequest withInheritShippingAddress(String inheritShippingAddress) {
+            this.inheritShippingAddress = inheritShippingAddress;
             return this;
      }
 
@@ -244,7 +245,8 @@ public class ChargeRequest implements Serializable {
      * @return ChargeRequest  
      */
      public ChargeRequest withSoftDescriptor(String soft_descriptor) {
-            return this;
+         this.softDescriptor = soft_descriptor;
+         return this;
      }
 
     /**
@@ -329,6 +331,11 @@ public class ChargeRequest implements Serializable {
 
     public List<ProviderCredit> getProviderCredit() {
         return providerCredit;
+    }
+
+    @Override
+    public String toString() {
+        return "ChargeRequest{" + "amazonReferenceId=" + amazonReferenceId + ", type=" + type + ", chargeReferenceId=" + chargeReferenceId + ", amount=" + amount + ", currencyCode=" + currencyCode + ", transactionTimeout=" + transactionTimeout + ", captureNow=" + captureNow + ", chargeOrderId=" + chargeOrderId + ", storeName=" + storeName + ", customInformation=" + customInformation + ", platformId=" + platformId + ", sellerNote=" + sellerNote + ", softDescriptor=" + softDescriptor + ", mwsAuthToken=" + mwsAuthToken + ", inheritShippingAddress=" + inheritShippingAddress + ", providerCredit=" + providerCredit + '}';
     }
     
     

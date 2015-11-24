@@ -1,7 +1,6 @@
 package com.amazon.payments.paywithamazon.request;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * Container for the parameters to the {@link com.amazon.payments.lpa.Client#cancelOrderReference(CancelOrderReferenceRequest) CancelOrderReference operation}.
@@ -11,7 +10,7 @@ import java.util.Objects;
 public class CancelOrderReferenceRequest implements Serializable{
         
     //required parameters
-    private String amazonOrderReferenceId;
+    private final String amazonOrderReferenceId;
     
     //optional parameters
     private String cancelationReason;

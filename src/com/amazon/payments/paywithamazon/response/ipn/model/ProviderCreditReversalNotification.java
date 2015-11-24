@@ -1,6 +1,5 @@
 package com.amazon.payments.paywithamazon.response.ipn.model;
 
-import com.amazon.payments.paywithamazon.response.model.ProviderCreditReversalDetails;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -38,7 +37,7 @@ public class ProviderCreditReversalNotification extends Notification  {
     }
 
     /**
-     * @return the details for this providerCredit notification
+     * @return the details for this providerCreditReversal notification
      */
     public ProviderCreditReversalDetails getProviderCreditReversalDetails() {
         return this.providerCreditReversalDetails;

@@ -20,11 +20,24 @@ public final class CancelOrderReferenceResponseData  extends ResponseData implem
     }
 
     /**
+     * The requestID that uniquely identifies the service request
+     * the caller made.
+     * 
      * @return  The requestID that uniquely identifies the service request
      * the caller made.
      */
     public String getRequestId() {
         return requestId;
     }
+
+    /**
+     * Returns the string representation of CancelOrderReferenceResponseData
+     */
+    @Override
+    public String toString() {
+        return "CancelOrderReferenceResponseData{" + "requestId=" + requestId + '}';
+    }
+    
+    
     
 }
