@@ -25,8 +25,10 @@ Config config = new PaymentsConfig()
 
 #Default currencyCode is USD. To override, use below 
 #config.withCurrencyCode(YOUR_CURRENCY_CODE);
+
 #Default region is US. To override, use below 
 #config.withRegion(YOUR_REGION_CODE);
+
 #Default environment is LIVE. For testing in Sandbox mode, use 
 #config.withSandboxMode(true);
 
@@ -136,7 +138,7 @@ response = client.authorize( authorizeRequest );
 //Construct request
 CaptureRequest request = new CaptureRequest("AMAZON_AUTHORIZATION_ID" , "YOUR_UNIQUE_ID" , "ORDER_AMOUNT");
 //Set optional parameters
-request.setCurrencyCode("USD");  //Overrides currency code set in Client
+request.setCaptureCurrencyCode("USD");  //Overrides currency code set in Client
 request.setSellerCaptureNote("Your Capture Note"); 
 
 response = client.Capture( request );
@@ -236,12 +238,10 @@ client.closeBillingAgreement(request);
 
 This API call allows you to obtain user profile information once a user has logged into your application using their Amazon credentials. 
 
-# Your client id is located in your Seller
-# Central account.
+// Your client id is located in your Seller Central account.
 String clientId = "Your Client Id";
 
-# The access token is available in the return URL
-# parameters after a user has logged in.
+// The access token is available in the return URL parameters after a user has logged in.
 String accessToken = "User Access Token";
 
 User user = client.getUserInfo(accessToken, clientId);
@@ -257,23 +257,32 @@ user.getUserId();
 
 ```java
 
-# This can be placed in your java application for a method
-# that is configured to receive a "POST" IPN from Amazon.
+    /** 
+    * This can be placed in your java application for a method
+    * that is configured to receive a "POST" IPN from Amazon.
+    **/
     Map<String,String> headers = IPN_MESSAGE_HEADER
     String body = IPN_MESSAGE_BODY
 
     Notification notification = NotificationFactory.parseNotification(headers, body);
+    
+    //To view received notification JSON body
+    notification.toJSON(); //We recommend to log this value for debugging purposes
 
-	#Determine the notification
+    //Determine the notification type
     NotificationType type = notification.getNotificationType();
 	
-	#Retrieve notification object based on type of notification
+	//Retrieve notification object based on type
         switch (type) {
             case CaptureNotification:
-                CaptureNotification cp = (CaptureNotification)notification;
+                CaptureNotification cn = (CaptureNotification)notification;
+                //To access capture details like captureId, captureAmount etc. 
+                cn.getCaptureDetails().getAmazonCaptureId();
                 break;
             case AuthorizationNotification:
                  AuthorizationNotification an = (AuthorizationNotification)notification;
+                 //To access authorizationDetails like authorizationReferenceId, authorizationAmount etc..
+                 an.getAuthorizationDetails().getAmazonAuthorizationId();
                  break;
             case BillingAgreementNotification:
                 BillingAgreementNotification bn = (BillingAgreementNotification)notification;
@@ -288,12 +297,15 @@ user.getUserId();
                 ProviderCreditReversalNotification pcrn = (ProviderCreditReversalNotification)notification;
                 break;
             case RefundNotification:
-                RefundNotification rn = (RefundNotification)notification;
+                RefundNotification refundNotification = (RefundNotification)notification;
                 break;
             case SolutionProviderMerchantNotification:
                 SolutionProviderMerchantNotification sp = (SolutionProviderMerchantNotification)notification;
                 break;
         }
 
-    To access metadata, call notification.getNotificationMetadata();
-    To view original notification body, call notification.toJSON() or notification.toMap()
+    //To access metadata 
+    notification.getNotificationMetadata();
+
+    //To view original notification body
+    notification.toJSON(); or notification.toMap();

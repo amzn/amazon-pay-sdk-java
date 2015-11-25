@@ -840,73 +840,14 @@ public class PaymentsClient implements Client  {
     }
     
     
-    private GetAuthorizationDetailsResponseData chargeORO(ChargeRequest chargeRequest) throws AmazonServiceException {
-        
-        GetAuthorizationDetailsResponseData authDetails = null;
-        
-        String amazonReferenceId = chargeRequest.getAmazonReferenceId();
-        String mwsAuthToken = chargeRequest.getMwsAuthToken();
-        
-        //call getOrderReferenceDetails 
-        GetOrderReferenceDetailsRequest getOrderDetailsRequest = new GetOrderReferenceDetailsRequest(amazonReferenceId).setMWSAuthToken(mwsAuthToken);
-        OrderReferenceDetails response = getOrderReferenceDetails(getOrderDetailsRequest).getDetails();
-        
-        //call setOrderReferenceDetails only in Draft state
-        if("Draft".equals(response.getOrderReferenceStatus().getState())) {
-            setOrderReferenceDetails(
-                    new SetOrderReferenceDetailsRequest(amazonReferenceId , chargeRequest.getAmount())
-                        .setMWSAuthToken(mwsAuthToken)
-                        .setSellerOrderId(chargeRequest.getChargeOrderId())
-                        .setStoreName(chargeRequest.getStoreName())
-                        .setSellerNote(chargeRequest.getSellerNote())
-                        .setCustomInformation(chargeRequest.getCustomInformation())
-                        .setPlatformId(chargeRequest.getPlatformId())
-                        .setOrderCurrencyCode(chargeRequest.getCurrencyCode()));
-        }
-        
-        confirmOrderReference(new ConfirmOrderReferenceRequest(amazonReferenceId).setMWSAuthToken(mwsAuthToken));
-                
-        //authorize only if in Open state
-        OrderReferenceDetails postConfirmResponse = getOrderReferenceDetails(getOrderDetailsRequest).getDetails();
-        if("Open".equals(postConfirmResponse.getOrderReferenceStatus().getState())) { 
-            String authId = authorize(
-                    new AuthorizeRequest(amazonReferenceId, chargeRequest.getChargeReferenceId() , chargeRequest.getAmount() )
-                        .setMWSAuthToken(mwsAuthToken)
-                        .setCaptureNow(chargeRequest.getCaptureNow())
-                        .setTransactionTimeout(chargeRequest.getTransactionTimeout())
-                        .setProviderCredit(chargeRequest.getProviderCredit())
-                        .setSellerAuthorizationNote(chargeRequest.getSellerNote())
-                        .setSoftDescriptor(chargeRequest.getSoftDescriptor())
-                        .setProviderCredit(chargeRequest.getProviderCredit())
-                        ).getDetails().getAmazonAuthorizationId();
-            authDetails = getAuthorizationDetails(new GetAuthorizationDetailsRequest(authId).setMWSAuthToken(mwsAuthToken));
-        } else {
-            //if not open state, throw exception
-            throw new AmazonClientException("Order Reference is in "+ postConfirmResponse.getOrderReferenceStatus().getState() +" state, unable to authorize transaction: "); 
-        }
-        
-        return authDetails;
-    }
+
     
     /**
-     * This method combines multiple API calls to perform
-     * a complete transaction with minimum requirements.
+     * This method combines multiple API calls to perform a complete transaction with minimum requirements.
      * 
-     * @param amazonReferenceId 
-     *             Amazon generated identifier for the transaction. Accepts OrderReferenceId or AmazonBillingAgreementId 
+     * @param chargeRequest Container for the necessary parameters to call Charge method
      * 
-     * @param amount
-     *             Amount to be charged
-     * 
-     * @param authorizationReferenceId
-     *             Specify any unique identifier to identify this authorization transaction. 
-     *             Note that this identifier must be unique for all your authorization transactions.
-     * 
-     * @param mwsAuthToken
-     *             Optional, specify this value only if you are marketplace or third-party solution provider
-     * 
-     * @return GetAuthorizationDetailsResponseData
-     *              Returns the authorization details of the transaction
+     * @return GetAuthorizationDetailsResponseData Returns the authorization details of the transaction
      * 
      * @throws AmazonServiceException 
      */
@@ -978,6 +919,54 @@ public class PaymentsClient implements Client  {
   
     }
     
+    private GetAuthorizationDetailsResponseData chargeORO(ChargeRequest chargeRequest) throws AmazonServiceException {
+        
+        GetAuthorizationDetailsResponseData authDetails = null;
+        
+        String amazonReferenceId = chargeRequest.getAmazonReferenceId();
+        String mwsAuthToken = chargeRequest.getMwsAuthToken();
+        
+        //call getOrderReferenceDetails 
+        GetOrderReferenceDetailsRequest getOrderDetailsRequest = new GetOrderReferenceDetailsRequest(amazonReferenceId).setMWSAuthToken(mwsAuthToken);
+        OrderReferenceDetails response = getOrderReferenceDetails(getOrderDetailsRequest).getDetails();
+        
+        //call setOrderReferenceDetails only in Draft state
+        if("Draft".equals(response.getOrderReferenceStatus().getState())) {
+            setOrderReferenceDetails(
+                    new SetOrderReferenceDetailsRequest(amazonReferenceId , chargeRequest.getAmount())
+                        .setMWSAuthToken(mwsAuthToken)
+                        .setSellerOrderId(chargeRequest.getChargeOrderId())
+                        .setStoreName(chargeRequest.getStoreName())
+                        .setSellerNote(chargeRequest.getSellerNote())
+                        .setCustomInformation(chargeRequest.getCustomInformation())
+                        .setPlatformId(chargeRequest.getPlatformId())
+                        .setOrderCurrencyCode(chargeRequest.getCurrencyCode()));
+        }
+        
+        confirmOrderReference(new ConfirmOrderReferenceRequest(amazonReferenceId).setMWSAuthToken(mwsAuthToken));
+                
+        //authorize only if in Open state
+        OrderReferenceDetails postConfirmResponse = getOrderReferenceDetails(getOrderDetailsRequest).getDetails();
+        if("Open".equals(postConfirmResponse.getOrderReferenceStatus().getState())) { 
+            String authId = authorize(
+                    new AuthorizeRequest(amazonReferenceId, chargeRequest.getChargeReferenceId() , chargeRequest.getAmount() )
+                        .setMWSAuthToken(mwsAuthToken)
+                        .setCaptureNow(chargeRequest.getCaptureNow())
+                        .setTransactionTimeout(chargeRequest.getTransactionTimeout())
+                        .setProviderCredit(chargeRequest.getProviderCredit())
+                        .setSellerAuthorizationNote(chargeRequest.getSellerNote())
+                        .setSoftDescriptor(chargeRequest.getSoftDescriptor())
+                        .setProviderCredit(chargeRequest.getProviderCredit())
+                        ).getDetails().getAmazonAuthorizationId();
+            authDetails = getAuthorizationDetails(new GetAuthorizationDetailsRequest(authId).setMWSAuthToken(mwsAuthToken));
+        } else {
+            //if not open state, throw exception
+            throw new AmazonClientException("Order Reference is in "+ postConfirmResponse.getOrderReferenceStatus().getState() +" state, unable to authorize transaction: "); 
+        }
+        
+        return authDetails;
+    }
+    
     private ResponseData sendRequest(String httpPostRequest)  {
         ResponseData response = null;
         try { 
@@ -998,6 +987,7 @@ public class PaymentsClient implements Client  {
                     return null;
                 }
                 response = postRequest(httpPostRequest);
+                statusCode = response.getStatusCode();
             } 
         }catch (IOException e) {
             throw new AmazonClientException("Encountered IOException: ", e);

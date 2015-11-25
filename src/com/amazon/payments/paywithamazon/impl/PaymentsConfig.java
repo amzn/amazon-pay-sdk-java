@@ -32,9 +32,9 @@ public class PaymentsConfig implements Config  {
      * Specify them using 
      * .withSellerId() & .withAccessKeyId() & .withSecretKey()
  
- Note that default currency code is USD and default region code is US
- You can override default values using 
- .withRegionCode() & .withCurrencyCode()
+     * Note that default currency code is USD and default region code is US
+     * You can override default values using 
+     * .withRegionCode() & .withCurrencyCode()
      * 
      * Default environment is Live mode.
      * You can override default environment using
@@ -219,7 +219,7 @@ public class PaymentsConfig implements Config  {
      *  Sets environment in PaymentsConfig. 
      *  {@link com.amazon.payments.lpa.types.Environment Environment}.
      * 
-     * @param isSandbox 
+     * @param environment 
      */
     @Override
     public void setEnvironment(Environment environment) {
@@ -512,6 +512,8 @@ public class PaymentsConfig implements Config  {
     /**
      * Returns true if Client retries on service exceptions that are either 500 internal server
      * errors, 503 service unavailable errors, service throttling errors.
+     * 
+     * @return useAutoRetryOnThrottle
      */
     @Override
     public boolean isUseAutoRetryOnThrottle() {
@@ -534,6 +536,8 @@ public class PaymentsConfig implements Config  {
      * Sets autoRetryOnThrottle in PaymentsConfig
      * If set to true, client will retry on service exceptions that are either 500 internal server
      * errors, 503 service unavailable errors, service throttling errors.
+     * 
+     * @param useAutoRetryOnThrottle
      * 
      * @return Returns updated PaymentsConfig object
      */
@@ -566,41 +570,41 @@ public class PaymentsConfig implements Config  {
                         this.setSellerId(prop.getProperty(property));
                         break;
                     case ENVIRONMENT:
-                        Environment environment = Environment.valueOf(prop.getProperty(property).toUpperCase());
-                        this.setEnvironment(environment);
+                        Environment env = Environment.valueOf(prop.getProperty(property).toUpperCase());
+                        this.setEnvironment(env);
                         break;
                     case REGION:
-                        Region region = Region.valueOf((prop.getProperty(property)).toUpperCase());
-                        this.setRegion(region);
+                        Region reg = Region.valueOf((prop.getProperty(property)).toUpperCase());
+                        this.setRegion(reg);
                         break;
                     case CURRENCY_CODE:
                         CurrencyCode currency = CurrencyCode.valueOf((prop.getProperty(property)).toUpperCase());
                         this.setCurrencyCode(currency);
                         break;
                     case PROXY_HOST:
-                        String proxyHost = prop.getProperty(property);
-                        this.setProxyHost(proxyHost);
+                        String proxyHostProperty = prop.getProperty(property);
+                        this.setProxyHost(proxyHostProperty);
                         break;
                     case PROXY_PORT:
-                        String proxyPort = prop.getProperty(property);
-                        if(proxyPort != null && !proxyPort.isEmpty())
-                            this.setProxyPort(Integer.parseInt(proxyPort));
+                        String proxyPortProperty = prop.getProperty(property);
+                        if(proxyPortProperty != null && !proxyPortProperty.isEmpty())
+                            this.setProxyPort(Integer.parseInt(proxyPortProperty));
                         break;
                     case PROXY_USERNAME:
-                        String proxyUsername = prop.getProperty(property);
-                        this.setProxyUsername(proxyUsername);
+                        String proxyUsernameProperty = prop.getProperty(property);
+                        this.setProxyUsername(proxyUsernameProperty);
                         break;
                     case PROXY_PASSWORD:
-                        String proxyPassword = prop.getProperty(property);
-                        this.setProxyPassword(proxyPassword);
+                        String proxyPasswordProperty = prop.getProperty(property);
+                        this.setProxyPassword(proxyPasswordProperty);
                         break;
                     case APPLICATION_NAME:
-                        String applicationName = prop.getProperty(property);
-                        this.setApplicationName(applicationName);
+                        String applicationNameProperty = prop.getProperty(property);
+                        this.setApplicationName(applicationNameProperty);
                         break;
                     case APPLICATION_VERSION:
-                        String applicationVersion = prop.getProperty(property);
-                        this.setApplicationVersion(applicationVersion);
+                        String applicationVersionProperty = prop.getProperty(property);
+                        this.setApplicationVersion(applicationVersionProperty);
                         break;
                     case AUTO_RETRY_ON_THROTTLE:
                         String useAutoRetyOnThrottle = prop.getProperty(property);
