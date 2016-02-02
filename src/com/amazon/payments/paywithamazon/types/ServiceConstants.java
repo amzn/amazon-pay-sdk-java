@@ -35,7 +35,7 @@ public class ServiceConstants {
     public static final String BILLING_AGREEMENT_SELLER_CUSTOM_INFORMATION = "BillingAgreementAttributes.SellerBillingAgreementAttributes.CustomInformation";
 
     public static final String CAPTURE_NOW = "CaptureNow";
-    public static final String CAPTURE_NOTE = "CaptureNote";
+    public static final String CAPTURE_NOTE = "SellerCaptureNote";
     public static final String CAPTURE_AMOUNT = "CaptureAmount.Amount";
     public static final String CAPTURE_CURRENCEYCODE = "CaptureAmount.CurrencyCode"; 
     public static final String CAPTURE_REFERENCE_ID = "CaptureReferenceId";
