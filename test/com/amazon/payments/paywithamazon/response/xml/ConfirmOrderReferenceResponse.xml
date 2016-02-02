@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ConfirmOrderReferenceResponse xmlns="http://mws.amazonservices.com/schema/OffAmazonPayments/2013-01-01">
+   <ResponseMetadata>
+      <RequestId>f1f52572-a347-4f7a-a630-be066f3ba827</RequestId>
+   </ResponseMetadata>
+</ConfirmOrderReferenceResponse>

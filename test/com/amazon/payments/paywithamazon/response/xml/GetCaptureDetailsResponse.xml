@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GetCaptureDetailsResponse xmlns="http://mws.amazonservices.com/schema/OffAmazonPayments/2013-01-01">
+   <GetCaptureDetailsResult>
+      <CaptureDetails>
+         <CaptureReferenceId>asdcdsd5iiiii</CaptureReferenceId>
+         <CaptureFee>
+            <CurrencyCode>USD</CurrencyCode>
+            <Amount>0.00</Amount>
+         </CaptureFee>
+         <CreationTimestamp>2015-10-30T21:02:38.608Z</CreationTimestamp>
+         <AmazonCaptureId>S01-9821095-1837200-C041953</AmazonCaptureId>
+         <SoftDescriptor>AMZ*testikiki</SoftDescriptor>
+         <IdList />
+         <CaptureStatus>
+            <LastUpdateTimestamp>2015-10-30T21:02:38.608Z</LastUpdateTimestamp>
+            <State>Completed</State>
+         </CaptureStatus>
+         <RefundedAmount>
+            <CurrencyCode>USD</CurrencyCode>
+            <Amount>0</Amount>
+         </RefundedAmount>
+         <SellerCaptureNote>testing</SellerCaptureNote>
+         <CaptureAmount>
+            <CurrencyCode>USD</CurrencyCode>
+            <Amount>1.00</Amount>
+         </CaptureAmount>
+      </CaptureDetails>
+   </GetCaptureDetailsResult>
+   <ResponseMetadata>
+      <RequestId>21acf393-d625-497e-b2c0-d1dc0b0d2bb6</RequestId>
+   </ResponseMetadata>
+</GetCaptureDetailsResponse>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ReverseProviderCreditResponse xmlns="http://mws.amazonservices.com/schema/OffAmazonPayments/2013-01-01">
+   <ReverseProviderCreditResult>
+      <ProviderCreditReversalDetails>
+         <AmazonProviderCreditReversalId>S01-0458164-4040121-Q021623</AmazonProviderCreditReversalId>
+         <SellerId>A37GX652OWOXVH</SellerId>
+         <CreditReversalAmount>
+            <CurrencyCode>USD</CurrencyCode>
+            <Amount>0.50</Amount>
+         </CreditReversalAmount>
+         <CreditReversalReferenceId>kvAKLMtYprId</CreditReversalReferenceId>
+         <ProviderId>A2K7NDRCTOTPW9</ProviderId>
+         <CreditReversalStatus>
+            <LastUpdateTimestamp>2015-11-03T19:21:09.762Z</LastUpdateTimestamp>
+            <State>Completed</State>
+         </CreditReversalStatus>
+         <CreationTimestamp>2015-11-03T19:21:09.638Z</CreationTimestamp>
+      </ProviderCreditReversalDetails>
+   </ReverseProviderCreditResult>
+   <ResponseMetadata>
+      <RequestId>a7e0af53-ee4e-4557-a190-265cae27407d</RequestId>
+   </ResponseMetadata>
+</ReverseProviderCreditResponse>

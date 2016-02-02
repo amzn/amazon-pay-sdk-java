@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidateBillingAgreementResponse xmlns="http://mws.amazonservices.com/schema/OffAmazonPayments/2013-01-01">
+   <ValidateBillingAgreementResult>
+      <BillingAgreementStatus>
+         <LastUpdatedTimestamp>2015-11-02T17:38:29.511Z</LastUpdatedTimestamp>
+         <State>Open</State>
+      </BillingAgreementStatus>
+      <ValidationResult>Success</ValidationResult>
+   </ValidateBillingAgreementResult>
+   <ResponseMetadata>
+      <RequestId>0f48a4e0-2a7c-4036-9a8a-339e419fd53f</RequestId>
+   </ResponseMetadata>
+</ValidateBillingAgreementResponse>

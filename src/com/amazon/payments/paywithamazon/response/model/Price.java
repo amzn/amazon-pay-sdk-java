@@ -1,0 +1,57 @@
+package com.amazon.payments.paywithamazon.response.model;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
+
+/**
+ * Currency type and amount.
+ */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "Price", propOrder = {
+    "amount",
+    "currencyCode"
+})
+public class Price {
+
+    @XmlElement(name = "Amount", required = true)
+    protected String amount;
+    @XmlElement(name = "CurrencyCode", required = true)
+    protected String currencyCode;
+
+    public Price() {
+        super();
+    }
+
+    public Price(String amount , String currencyCode) {
+        this.amount = amount;
+        this.currencyCode = currencyCode;
+    }
+    /**
+     * The currency amount. The number of decimal places must be appropriate 
+     * for the currency code specified. A period is the only valid decimal 
+     * separator for the amount value.
+     * 
+     * @return amount
+     */
+    public String getAmount() {
+        return amount;
+    }
+
+    /**
+     * Three-digit currency code. In ISO 4217 format.
+     * 
+     * @return currencyCode
+     */
+    public String getCurrencyCode() {
+        return currencyCode;
+    }
+
+    @Override
+    public String toString() {
+        return "Price{" + "amount=" + amount + ", currencyCode=" + currencyCode + '}';
+    }
+
+
+}
