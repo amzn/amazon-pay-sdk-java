@@ -1,0 +1,11 @@
+{  
+    "Type" : "Notification",  
+    "MessageId" : "21af668c-be1b-5a6d-89a6-28462a66113d",  
+    "TopicArn" : "arn:aws:sns:us-east-1:291180941288:A3BXB0YN3XH17HA2K7NDRCTOTPW9",  
+    "Message" : "{\"ReleaseEnvironment\":\"Sandbox\",\"MarketplaceID\":\"623690\",\"Version\":\"2013-01-01\",\"NotificationType\":\"PaymentRefund\",\"SellerId\":\"A37GX652OWOXVH\",\"NotificationReferenceId\":\"7d3a0f78-82d0-4309-9126-1677c07a9577a2k7ndrctotpw9\",\"Timestamp\":\"2015-11-21T03:48:13Z\",\"NotificationData\":\"<?xml version=\\\"1.0\\\" encoding=\\\"UTF-8\\\"?><RefundNotification xmlns=\\\"https://mws.amazonservices.com/ipn/OffAmazonPayments/2013-01-01\\\">\\n    <RefundDetails>\\n        <AmazonRefundId>S01-1024662-1173740-R095796<\\/AmazonRefundId>\\n        <RefundReferenceId>rGcWFywnref12<\\/RefundReferenceId>\\n        <RefundType>SellerInitiated<\\/RefundType>\\n        <RefundAmount>\\n            <Amount>1.0<\\/Amount>\\n            <CurrencyCode>USD<\\/CurrencyCode>\\n        <\\/RefundAmount>\\n        <FeeRefunded>\\n            <Amount>0.0<\\/Amount>\\n            <CurrencyCode>USD<\\/CurrencyCode>\\n        <\\/FeeRefunded>\\n        <CreationTimestamp>2015-11-21T15:47:42.174Z<\\/CreationTimestamp>\\n        <RefundStatus>\\n            <State>Completed<\\/State>\\n            <LastUpdateTimestamp>2015-11-21T15:48:13.411Z<\\/LastUpdateTimestamp>\\n        <\\/RefundStatus>\\n        <SoftDescriptor>AMZ*Neha MWS<\\/SoftDescriptor>\\n    <\\/RefundDetails>\\n<\\/RefundNotification>\"}", 
+    "Timestamp" : "2015-11-21T15:48:13.798Z",  
+    "SignatureVersion" : "1",  
+    "Signature" : "P4pXyf+W/F4OOs2sKY8tcqo0w4M3fHBHhhhJk44YWNjFmAaxqXfxZIRdXiWT0GP6E2t/t2SlEO1I2KRGhrAl61TLAsUdQGYey6pKu5GJ1i7rtY5fxoVbHlMnz4wTDwBj8240TC6CBFx+WXl3vQ1ziBJJuqjMp6NBZRUQOmTLy7Vop9k1bEOoDCdH+FpmhoxcE++Kp0mL6HRBjbrfwwtTGvv2k2iiGW/62dfYDrB53FZTvaL8p3F0T7/MbqndsEjgVfjvNBtRjPsf4rqo2s4l1c6lA3V7nwkmVxmHJrunmFD2scAll91KW5fOl5VSeI6jVPFsfvsq/A+wjQOZkMBr5A==",  
+    "SigningCertURL" : "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-bb750dd426d95ee9390147a5624348ee.pem",  
+    "UnsubscribeURL" : "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:291180941288:A3BXB0YN3XH17HA2K7NDRCTOTPW9:05542723-375e-4609-98f1-8abcf427d95f"
+}

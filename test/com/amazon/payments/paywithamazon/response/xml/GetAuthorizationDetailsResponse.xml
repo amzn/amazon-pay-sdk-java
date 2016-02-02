@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GetAuthorizationDetailsResponse xmlns="http://mws.amazonservices.com/schema/OffAmazonPayments/2013-01-01">
+   <GetAuthorizationDetailsResult>
+      <AuthorizationDetails>
+         <AuthorizationAmount>
+            <CurrencyCode>USD</CurrencyCode>
+            <Amount>1.00</Amount>
+         </AuthorizationAmount>
+         <CapturedAmount>
+            <CurrencyCode>USD</CurrencyCode>
+            <Amount>1.00</Amount>
+         </CapturedAmount>
+         <SoftDescriptor>AMZ*testikiki</SoftDescriptor>
+         <ExpirationTimestamp>2015-11-29T21:02:38.508Z</ExpirationTimestamp>
+         <IdList>
+            <member>S01-9821095-1837200-C041953</member>
+         </IdList>
+         <AuthorizationStatus>
+            <LastUpdateTimestamp>2015-10-30T21:02:38.508Z</LastUpdateTimestamp>
+            <ReasonCode>MaxCapturesProcessed</ReasonCode>
+            <State>Closed</State>
+         </AuthorizationStatus>
+         <AuthorizationFee>
+            <CurrencyCode>USD</CurrencyCode>
+            <Amount>0.00</Amount>
+         </AuthorizationFee>
+         <CaptureNow>true</CaptureNow>
+         <SellerAuthorizationNote>testing</SellerAuthorizationNote>
+         <CreationTimestamp>2015-10-30T21:02:38.508Z</CreationTimestamp>
+         <AmazonAuthorizationId>S01-9821095-1837200-A041953</AmazonAuthorizationId>
+         <AuthorizationReferenceId>asdcdsd5iiiii</AuthorizationReferenceId>
+      </AuthorizationDetails>
+   </GetAuthorizationDetailsResult>
+   <ResponseMetadata>
+      <RequestId>6173ac5a-8915-4541-922f-f9e104930731</RequestId>
+   </ResponseMetadata>
+</GetAuthorizationDetailsResponse>

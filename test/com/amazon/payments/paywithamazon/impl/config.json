@@ -1,0 +1,15 @@
+{
+   "merchant_id": "A2K7NDRMCETORTCHANTID", 
+   "access_key": "AKIAUIIACAEPPP3A66AA",
+   "secret_key": "yoursecretkeyasdfQdstsdf",
+   "currency_code": "usd",
+   "region": "US",
+   "environment": "Live",
+   "application_name": "myApp",
+   "application_version": "1.0",
+   "proxy_host": "host",
+   "proxy_port": "80",
+   "proxy_Username": "test",
+   "proxy_password": "crypto",
+   "auto_retry_on_throttle" : "true"
+}

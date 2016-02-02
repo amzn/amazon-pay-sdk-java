@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ConfirmBillingAgreementResponse xmlns="http://mws.amazonservices.com/schema/OffAmazonPayments/2013-01-01">
+   <ConfirmBillingAgreementResult />
+   <ResponseMetadata>
+      <RequestId>3d1db999-b790-47bb-87d3-9c673c38a1ed</RequestId>
+   </ResponseMetadata>
+</ConfirmBillingAgreementResponse>

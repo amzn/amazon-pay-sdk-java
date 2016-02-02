@@ -1,0 +1,357 @@
+package com.amazon.payments.paywithamazon.request;
+
+import com.amazon.payments.paywithamazon.types.CurrencyCode;
+import java.io.Serializable;
+
+/**
+ * Container for the parameters to the {@link com.amazon.payments.lpa.Client#authorizeOnBillingAgreement(AuthorizeOnBillingAgreementRequest) AuthorizeOnBillingAgreement operation}.
+ * For more information documentation, see  
+ * <a href="https://payments.amazon.com/documentation/apireference/201751630#201751940">AuthorizeOnBillingAgreement API Reference</a>
+ */
+public class AuthorizeOnBillingAgreementRequest implements Serializable {
+        
+    //required parameters
+    private final String amazonBillingAgreementId;
+    private final String authorizationReferenceId;
+    private final String authorizationAmount;
+    private CurrencyCode authorizationCurrencyCode;
+    
+    //optional parameters
+    private String sellerAuthorizationNote;
+    private String transactionTimeout;
+    private Boolean captureNow;
+    private String softDescriptor;
+    private String platformId;
+    private String sellerNote;
+    private String InheritShippingAddress;
+
+    private String sellerOrderId;
+    private String storeName;
+    private String customInformation;
+    private String mwsAuthToken;
+
+    /**
+    * Constructs request for AuthorizeOnBillingAgreement operation 
+    * 
+    * @param amazonBillingAgreementId 
+    *                       The billing agreement identifier. This value is 
+    *                       retrieved from the Amazon Button, AddressBook, or 
+    *                       Wallet widgets.
+    * 
+    * @param authorizationReferenceId
+    *                       The identifier for this authorization transaction that you specify. 
+    *                       This identifier must be unique for all your authorization transactions.
+    * @param authorizationAmount
+    *                       Represents the amount to be authorized.
+    * 
+    * @return AuthorizeOnBillingAgreementRequest
+    */
+    public AuthorizeOnBillingAgreementRequest(final String amazonBillingAgreementId, final String authorizationReferenceId, final String authorizationAmount) {
+        this.amazonBillingAgreementId = amazonBillingAgreementId;
+        this.authorizationReferenceId = authorizationReferenceId;
+        this.authorizationAmount = authorizationAmount;
+    }
+
+    /**
+    * Sets the three-digit currency code.
+    * 
+    * @param authorizationCurrencyCode
+    */
+    public AuthorizeOnBillingAgreementRequest setAuthorizationCurrencyCode(final CurrencyCode authorizationCurrencyCode){
+        this.authorizationCurrencyCode = authorizationCurrencyCode;
+        return this;
+
+    }
+    
+    /**
+    * A description for the transaction that is displayed in emails to the buyer.
+    * 
+    * @param sellerAuthorizationNote
+    */
+    public AuthorizeOnBillingAgreementRequest setSellerAuthorizationNote(final String sellerAuthorizationNote){
+        this.sellerAuthorizationNote = sellerAuthorizationNote;
+        return this;
+    }
+    
+    /**
+    * The number of minutes after which the authorization will automatically be 
+    * closed and you will not be able to capture funds against the authorization.
+    * 
+    * @param transactionTimeout
+    */
+    public AuthorizeOnBillingAgreementRequest setTransactionTimeout(final String TransactionTimeout) {
+        this.transactionTimeout = TransactionTimeout;
+        return this;
+
+    }
+    
+    /** 
+    * Indicates whether to directly capture the amount specified by the 
+    * AuthorizationAmount request parameter against an order reference 
+    * (without needing to call Capture and without waiting until the order ships). 
+    * 
+    * @param CaptureNow
+    */
+    public AuthorizeOnBillingAgreementRequest setCaptureNow(final boolean CaptureNow) {
+        this.captureNow = CaptureNow;
+        return this;
+    }
+
+    /** 
+    * The description to be shown on the buyer's payment instrument statement 
+    * if CaptureNow is set to true. 
+    * 
+    * @param softDescriptor
+    */
+    public AuthorizeOnBillingAgreementRequest setSoftDescriptor(final String softDescriptor) {
+        this.softDescriptor = softDescriptor;
+        return this;
+    }
+
+    /** 
+    * Represents a description of the order that is displayed in emails to the buyer.
+    * 
+    * @param sellerNote
+    */
+    public AuthorizeOnBillingAgreementRequest setSellerNote(final String sellerNote) {
+        this.sellerNote = sellerNote;
+        return this;
+    }
+    
+    /**
+    * Represents the SellerId of the Solution Provider that developed the platform. 
+    * This value should only be provided by Solution Providers. It should 
+    * not be provided by merchants creating their own custom integration.
+    * 
+    * @param platformId
+    */
+    public AuthorizeOnBillingAgreementRequest setPlatformId(final String platformId) {
+        this.platformId = platformId;
+        return this;
+    }
+
+    /** 
+    * The merchant-specified identifier of this order. This is displayed to the 
+    * buyer in their emails and transaction history on the Amazon Payments website.
+    * 
+    * @param sellerOrderId
+    * 
+    * @return 
+    *       Returns a reference to this object so that methods can be chained together.
+    */
+    public AuthorizeOnBillingAgreementRequest setSellerOrderId(final String sellerOrderId) {
+        this.sellerOrderId = sellerOrderId;
+        return this;
+    }
+    
+    /** 
+    * The identifier of the store from which the order was placed. 
+    * This overrides the default value in Seller Central under Settings > Account Settings.
+    * 
+    * @param storeName
+    */
+    public AuthorizeOnBillingAgreementRequest setStoreName(final String storeName) {
+        this.storeName = storeName;
+        return this;
+    }
+    
+    /**
+     * Sets any additional information that you want to include with this order reference.
+     * 
+     * @param customInformation
+     * 
+     */
+    public AuthorizeOnBillingAgreementRequest setCustomInformation(final String customInformation) {
+        this.customInformation = customInformation;
+        return this;
+    }
+
+    /**
+     * Sets InheritShippingAddress parameter
+     * 
+     * @param InheritShippingAddress
+     */
+    public AuthorizeOnBillingAgreementRequest setInheritShippingAddress(final String InheritShippingAddress) {
+        this.InheritShippingAddress = InheritShippingAddress;
+        return this;
+    }
+
+    /**
+     * Sets MWSAuthToken parameter in request. MWSAuthToken is required only 
+     * for third-party solution providers and marketplaces. Do not specify 
+     * this parameter for merchants creating their own custom integration. 
+     *
+     * @param mwsAuthToken new value of mwsAuthToken
+     */
+    public AuthorizeOnBillingAgreementRequest setMWSAuthToken(final String mwsAuthToken) {
+        this.mwsAuthToken = mwsAuthToken;
+        return this;
+    }
+
+    /**
+     * The billing agreement identifier. This value is 
+    *  retrieved from the Amazon Button, AddressBook, or 
+    *  Wallet widgets.
+    * 
+     * @return amazonBillingAgreementId
+     */
+    public String getAmazonBillingAgreementId() {
+        return amazonBillingAgreementId;
+    }
+    
+    /**
+     *The identifier for this authorization transaction that you specify. 
+     * 
+     * @return 
+     *          Returns authorizationReferenceId from request
+     */
+    public String getAuthorizationReferenceId() {
+        return authorizationReferenceId;
+    }
+
+    /**
+     * Represents the amount to be authorized.
+     * @return  
+     *          Returns authorizationAmount from request    
+     */
+    public String getAuthorizationAmount() {
+        return authorizationAmount;
+    }
+
+    /**
+     * Represents the three-digit currency code.
+     * 
+     * @return Returns authorizationCurrencyCode from request  
+     */
+    public CurrencyCode getAuthorizationCurrencyCode() {
+        return authorizationCurrencyCode;
+    }
+
+    /**
+     * 
+     * @return Returns sellerAuthorizationNote from request  
+     */
+    public String getSellerAuthorizationNote() {
+        return sellerAuthorizationNote;
+    }
+
+    /**
+     * The number of minutes after which the authorization will automatically be 
+     * closed and you will not be able to capture funds against the authorization.
+     * 
+     * @return Returns transactionTimeout from request
+     */
+    public String getTransactionTimeout() {
+        return transactionTimeout;
+    }
+
+    /**
+     * Indicates whether to directly capture the amount specified by the 
+     * AuthorizationAmount request parameter against an order reference 
+     * (without needing to call Capture and without waiting until the order ships). 
+     * 
+     * @return Returns captureNow status from request
+     */
+    public Boolean getCaptureNow() {
+        return captureNow;
+    }
+
+    /**
+    * The description to be shown on the buyer's payment instrument statement 
+    * if CaptureNow is set to true. 
+    * 
+     * @return Returns softDescriptor status from request
+     */
+    public String getSoftDescriptor() {
+        return softDescriptor;
+    }
+    
+    /**
+    * Represents the SellerId of the Solution Provider that developed the platform. 
+    * This value should only be provided by Solution Providers. It should 
+    * not be provided by merchants creating their own custom integration. 
+    * 
+     * @return Returns platformId status from request
+     */
+    public String getPlatformId() {
+        return platformId;
+    }
+
+    /**
+    * Represents a description of the order that is displayed in emails to the buyer.
+    * 
+     * @return Returns sellerNote status from request
+     */
+    public String getSellerNote() {
+        return sellerNote;
+    }
+
+    /**
+     * Returns InheritShippingAddress parameter
+     * 
+     * @return Returns InheritShippingAddress status from request
+     */
+    public String getInheritShippingAddress() {
+        return InheritShippingAddress;
+    }
+
+    /**
+     * 
+     * @return Returns sellerOrderId status from request
+     */
+    public String getSellerOrderId() {
+        return sellerOrderId;
+    }
+
+    /**
+    * The identifier of the store from which the order was placed. 
+    * This overrides the default value in Seller Central under Settings > Account Settings.
+    * 
+    * @return Returns storeName status from request
+     */
+    public String getStoreName() {
+        return storeName;
+    }
+
+    /**
+     * Sets any additional information that you want to include with this order reference.
+     * 
+     * @return Returns customInformation status from request
+     */
+    public String getCustomInformation() {
+        return customInformation;
+    }
+
+    /**
+     * 
+     * @return Returns mwsAuthToken status from request
+     */
+    public String getMwsAuthToken() {
+        return mwsAuthToken;
+    }
+
+
+    /**
+     * Returns a string representation of this object; useful for testing and
+     * debugging.
+     *
+     * @return A string representation of this object.
+     *
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "AuthorizeOnBillingAgreementRequest{" + "amazonBillingAgreementId=" + amazonBillingAgreementId + ", authorizationReferenceId=" 
+                + authorizationReferenceId + ", authorizationAmount=" + authorizationAmount + ", authorizationCurrencyCode=" 
+                + authorizationCurrencyCode + ", sellerAuthorizationNote=" + sellerAuthorizationNote + ", transactionTimeout=" 
+                + transactionTimeout + ", captureNow=" + captureNow + ", softDescriptor=" + softDescriptor + ", platformId=" 
+                + platformId + ", sellerNote=" + sellerNote + ", InheritShippingAddress=" + InheritShippingAddress + ", sellerOrderId=" 
+                + sellerOrderId + ", storeName=" + storeName + ", customInformation=" + customInformation + ", mwsAuthToken=" 
+                + mwsAuthToken + '}';
+    }
+
+
+   
+
+    
+}
