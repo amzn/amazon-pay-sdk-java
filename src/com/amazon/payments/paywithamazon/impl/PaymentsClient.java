@@ -828,7 +828,7 @@ public class PaymentsClient implements Client  {
         }
         
        headerValues.put("Authorization" , "bearer " + decodedAccessToken);
-       response = Util.httpSendRequest("GET" , profileEndpoint + "/user/profile" , null, headerValues, null );
+       response = Util.httpSendRequest("GET" , profileEndpoint + "/user/profile" , null, headerValues );
         
         m = Util.convertJsonToObject(response.toXML() , Map.class);
         if(m.containsKey("error")) {
