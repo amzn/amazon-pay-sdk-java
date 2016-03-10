@@ -23,7 +23,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "orderItemCategories",
     "captureNow",
     "softDescriptor",
-    "addressVerificationCode"
+    "addressVerificationCode",
+    "softDecline"
+
 })
 public class AuthorizationDetails {
 
@@ -59,6 +61,8 @@ public class AuthorizationDetails {
     protected String softDescriptor;
     @XmlElement(name = "AddressVerificationCode")
     protected String addressVerificationCode;
+    @XmlElement(name = "softDecline")
+    protected boolean softDecline;
     
     public AuthorizationDetails() {
         super();
@@ -190,6 +194,16 @@ public class AuthorizationDetails {
     }
 
     /**
+     * @return Indicates whether an authorization resulted in a soft decline. If true, the authorization 
+     * resulted in a soft decline and may be successful if you try again. 
+     * If false, the authorization was a hard decline, and you should contact the buyer to update their
+     * information.
+     */
+    public boolean isSoftDecline() {
+        return softDecline;
+    }
+    
+    /**
      * String representation of Authorization Details
      */
     @Override
@@ -202,7 +216,7 @@ public class AuthorizationDetails {
                 + creationTimestamp + ", expirationTimestamp=" + expirationTimestamp + ", authorizationStatus=" 
                 + authorizationStatus + ", orderItemCategories=" + orderItemCategories + ", captureNow=" 
                 + captureNow + ", softDescriptor=" + softDescriptor + ", addressVerificationCode=" 
-                + addressVerificationCode + '}';
+                + addressVerificationCode +", softDecline="  + softDecline + '}';
     }
     
     
