@@ -241,6 +241,9 @@ public class AuthorizeSample {
                 if (authorizationDetails.isSetAddressVerificationCode()) {
                     Utilities.printVariable("AddressVerificationCode", authorizationDetails.getAddressVerificationCode(), tabLevel, outStream);
                 }
+                if (authorizationDetails.isSetSoftDecline()) {
+                    Utilities.printVariable("SoftDecline", authorizationDetails.isSoftDecline() + "", tabLevel, outStream);
+                }
                 tabLevel--;
             } 
         }

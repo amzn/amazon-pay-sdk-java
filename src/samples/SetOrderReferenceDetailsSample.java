@@ -338,6 +338,7 @@ public class SetOrderReferenceDetailsSample {
                     if (orderReferenceDetails.isSetExpirationTimestamp()) {
                         Utilities.printVariable("ExpirationTimestamp", orderReferenceDetails.getExpirationTimestamp().toString(), tabLevel, outStream);
                     }
+                    Utilities.printVariable("RequestPaymentAuthorization", String.valueOf(orderReferenceDetails.isRequestPaymentAuthorization()), tabLevel, outStream);
                     if (orderReferenceDetails.isSetIdList()) {
                         Utilities.printVariable("IdList", null, tabLevel, outStream);
                         IdList  idList = orderReferenceDetails.getIdList();

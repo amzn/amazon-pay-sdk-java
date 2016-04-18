@@ -62,7 +62,7 @@ public class ProviderCheckoutServlet extends IpnExampleServletBase {
             example.addOrderReferenceDetails(request.getParameter("SellerNote"),
                     request.getParameter("OrderReferenceId"), request.getParameter("CustomNote"),
                     request.getParameter("StoreName"), request.getParameter("Subtotal"),
-                    request.getParameter("ShippingType"));
+                    request.getParameter("ShippingType"), request.getParameter("RequestPaymentAuthorization"));
 
             this.printMessage("Order Reference is set with provided details.");
             this.printMessage("Now confirming this order reference...");

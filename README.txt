@@ -40,8 +40,12 @@ September 9th, 2014, you will need to register with Login with Amazon (LWA) and
 get a Login with Amazon (LWA) Client ID. To register with LWA contact Amazon
 Payments seller support through Seller Central and request an LwA registration.
 
+In JP, you will need to register with Login with Amazon (LWA) and
+get a Login with Amazon (LWA) Client ID. To register with LWA contact Amazon
+Payments seller support through Seller Central and request an LwA registration.
+
 Once registered for LWA to get your LWA Client ID, go to Seller Central, select
-the ???Login with Amazon??? marketplace on the top right switcher, click on
+the “Login with Amazon” marketplace on the top right switcher, click on
 "Register Your Application" button on LWA Seller Central page. For additional 
 information, please see the following step by step guide to get your Login with 
 Amazon Client ID: https://amazonpayments.s3.amazonaws.com/documents/Get_Your_

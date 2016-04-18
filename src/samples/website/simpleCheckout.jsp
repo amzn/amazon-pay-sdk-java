@@ -49,6 +49,10 @@
 				<td><input type="text" name="StoreName"></td>
 			</tr>
 			<tr>
+		                <td>RequestPaymentAuthorization:</td>
+				<td><input type="text" name="RequestPaymentAuthorization"></td>
+			</tr>
+			<tr>
 				<td>Authorization Type:</td>
 				<td><input type="radio" name="AuthorizeOption" value="1" checked>Regular 
 					Authorization (Asynchronous)<br> <input type="radio" name="AuthorizeOption" 

@@ -47,7 +47,7 @@ public class SimpleCheckoutExample extends CheckoutExampleBase {
     private String authorizationId = null;
     private String amazonAuthorizationId = null;
     private String captureId = null;
-
+    
     public SimpleCheckoutExample(String amazonOrderReferenceId, OffAmazonPaymentsServiceConfig config,
             OffAmazonPaymentsServiceClient service, PrintWriter outStream) {
         super(config, service, outStream);
@@ -65,7 +65,7 @@ public class SimpleCheckoutExample extends CheckoutExampleBase {
      * @throws OffAmazonPaymentsServiceException
      */
     public void addOrderReferenceDetails(String sellerNote, String orderId, String customNote, String storeName,
-            String subtotal, String shippingType) throws OffAmazonPaymentsServiceException {
+            String subtotal, String shippingType, String requestPaymentAuthorization) throws OffAmazonPaymentsServiceException {
         OrderReferenceDetails response = getOrderDetails();
         Utilities.validateResponseNotNull(response, "OrderReferenceDetails");
         Destination destination = response.getDestination();
@@ -94,7 +94,7 @@ public class SimpleCheckoutExample extends CheckoutExampleBase {
          * added to this Amazon order reference Id
          */
         SetOrderReferenceDetailsResponse setOrderReferenceDetailResponse = setOrderDetails(orderTotal, sellerNote,
-                optionalSellerOrderAttributes);
+                optionalSellerOrderAttributes, requestPaymentAuthorization);
         Utilities.validateResponseNotNull(setOrderReferenceDetailResponse, "SetOrderReferenceDetailResponse");
         SetOrderReferenceDetailsSample.printResponse(setOrderReferenceDetailResponse, outStream);
 
@@ -124,11 +124,12 @@ public class SimpleCheckoutExample extends CheckoutExampleBase {
      * @param orderTotalCharge
      * @param optionalSellerNote
      * @param optionalSellerOrderAttributes
+     * @param optionalRequestPaymentAuthorization 
      * @return SetOrderReferenceDetailsResponse
      * @throws OffAmazonPaymentsServiceException
      */
     public SetOrderReferenceDetailsResponse setOrderDetails(double orderTotalCharge, String optionalSellerNote,
-            SellerOrderAttributes optionalSellerOrderAttributes) throws OffAmazonPaymentsServiceException {
+            SellerOrderAttributes optionalSellerOrderAttributes, String optionalRequestPaymentAuthorization) throws OffAmazonPaymentsServiceException {
 
         OrderTotal orderTotal = new OrderTotal();
         if ((orderTotalCharge < 0.00)) {
@@ -156,6 +157,13 @@ public class SimpleCheckoutExample extends CheckoutExampleBase {
             if (optionalSellerOrderAttributes != null) {
                 orderReferenceAttributes.setSellerOrderAttributes(optionalSellerOrderAttributes);
             }
+            
+	    /*
+	     * Set request payment authorization attribute, this is optional parameter
+	     */
+	    if (optionalRequestPaymentAuthorization != null) {
+	        orderReferenceAttributes.setRequestPaymentAuthorization(Boolean.valueOf(optionalRequestPaymentAuthorization));
+	    }
 
             SetOrderReferenceDetailsRequest request = new SetOrderReferenceDetailsRequest();
             request.setAmazonOrderReferenceId(this.amazonOrderReferenceId);

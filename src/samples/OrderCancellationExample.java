@@ -61,7 +61,7 @@ public class OrderCancellationExample extends SimpleCheckoutExample {
      * @throws OffAmazonPaymentsServiceException
      */
     public void setOrderReferenceDetail() throws OffAmazonPaymentsServiceException {
-        SetOrderReferenceDetailsResponse response = setOrderDetails(100.00, null, null);
+        SetOrderReferenceDetailsResponse response = setOrderDetails(100.00, null, null, null);
         Utilities.validateResponseNotNull(response, "SetOrderReferenceDetailsResponse");
         SetOrderReferenceDetailsSample.printResponse(response, outStream);
 

@@ -142,10 +142,12 @@ public class ProviderCheckoutExampleCLI extends CLIHelperClass {
          */
         String optionalSellerNote = getUserStringFromConsole("Seller Note");
         SellerOrderAttributes optionalSellerOrderAttributes = getSellerOrderAttributes();
+        
+        String optionalRequestPaymentAuthorization = getUserStringFromConsole("RequestPaymentAuthorization");
 
         example.addOrderReferenceDetails(optionalSellerNote, response.getAmazonOrderReferenceId(),
                 optionalSellerOrderAttributes.getCustomInformation(), optionalSellerOrderAttributes.getStoreName(),
-                String.valueOf(subTotal), String.valueOf(shippingOption));
+                String.valueOf(subTotal), String.valueOf(shippingOption), optionalRequestPaymentAuthorization);
 
     }
 

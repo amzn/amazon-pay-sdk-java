@@ -1,3 +1,16 @@
+v1.0.17
+- Added additional validation for IPN parsing.
+
+v1.0.16 - May 2015
+- Updated sample code and web server based examples for Order Reference object and Billing Agreement object 
+  containing orderLanguage parameter.
+- Updated library and added orderLanguage as an additional parameter in GetOrderReferenceDetails and 
+  GetBillingAgreementDetails response objects.
+
+v1.0.15 - February 2015
+- Add support for Java SDK in Japan
+- Move region dependent values into config folders for faster country launches
+
 v1.0.14 - February 2015
 - Add support for MWSAuthToken field on all request objects
 - Deprecated toJSON/toXML methods on model objects, for removal in future version of the sdk client

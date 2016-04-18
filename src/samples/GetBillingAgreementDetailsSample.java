@@ -458,7 +458,13 @@ public class GetBillingAgreementDetailsSample {
           System.out.println("                    " + billingAgreementDetails.isBillingAgreementConsent());
           System.out.println();
         }
-      } 
+        if (billingAgreementDetails.isSetOrderLanguage()) {
+          System.out.println("                OrderLanguage");
+          System.out.println();
+          System.out.println("                    " + billingAgreementDetails.getOrderLanguage());
+          System.out.println();
+        }
+  	  } 
     } 
     if (response.isSetResponseMetadata()) {
       System.out.println("        ResponseMetadata");
@@ -475,5 +481,4 @@ public class GetBillingAgreementDetailsSample {
     System.out.println(response.getResponseHeaderMetadata());
     System.out.println();
   }
-
 }
