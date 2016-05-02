@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?><AuthorizationNotification xmlns="https://mws.amazonservices.com/ipn/OffAmazonPayments/2013-01-01">
+    <AuthorizationDetails>
+        <AmazonAuthorizationId>SD0-1389007-4907339-A058031</AmazonAuthorizationId>
+        <AuthorizationReferenceId>435345345</AuthorizationReferenceId>
+        <AuthorizationAmount>
+            <Amount>10.0</Amount>
+            <CurrencyCode>USD</CurrencyCode>
+        </AuthorizationAmount>
+        <CapturedAmount>
+            <Amount>0.5</Amount>
+            <CurrencyCode>USD</CurrencyCode>
+        </CapturedAmount>
+        <AuthorizationFee>
+            <Amount>0.0</Amount>
+            <CurrencyCode>USD</CurrencyCode>
+        </AuthorizationFee>
+        <IdList>
+            <Id>SD0-1389007-4907339-C070129</Id>
+        </IdList>
+        <CreationTimestamp>2013-05-03T22:43:39.153Z</CreationTimestamp>
+        <ExpirationTimestamp>2013-06-02T22:43:39.153Z</ExpirationTimestamp>
+        <AddressVerificationCode>AddressOnlyMatch</AddressVerificationCode>
+        <AuthorizationStatus>
+            <State>Closed</State>
+            <LastUpdateTimestamp>2013-05-03T22:45:24.916Z</LastUpdateTimestamp>
+            <ReasonCode>MaxCapturesProcessed</ReasonCode>
+        </AuthorizationStatus>
+        <OrderItemCategories/>
+        <CaptureNow>false</CaptureNow>
+        <SoftDescriptor/>
+    </AuthorizationDetails>
+</AuthorizationNotification>

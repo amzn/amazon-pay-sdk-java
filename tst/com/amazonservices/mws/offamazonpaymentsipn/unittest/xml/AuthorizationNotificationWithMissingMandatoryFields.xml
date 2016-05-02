@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AuthorizationNotification xmlns="https://mws.amazonservices.com/ipn/OffAmazonPayments/2013-01-01">
+   <AuthorizationDetails>
+      <AuthorizationReferenceId>2c60e227d615481fae59eb7cd30c2ffe</AuthorizationReferenceId>
+      <AuthorizationAmount>
+         <Amount>5.0</Amount>
+         <CurrencyCode>USD</CurrencyCode>
+      </AuthorizationAmount>
+      <CapturedAmount>
+         <Amount>5.0</Amount>
+         <CurrencyCode>USD</CurrencyCode>
+      </CapturedAmount>
+      <AuthorizationFee>
+         <Amount>0.5</Amount>
+         <CurrencyCode>USD</CurrencyCode>
+      </AuthorizationFee>
+      <IdList>
+         <Id>P0R-3qDULjU-tcTzqWU-C014488</Id>
+      </IdList>
+      <CreationTimestamp>2013-03-27T10:51:28.045Z</CreationTimestamp>
+      <ExpirationTimestamp>2013-04-26T10:51:28.045Z</ExpirationTimestamp>
+      <AddressVerificationCode>AddressOnlyMatch</AddressVerificationCode>
+      <AuthorizationStatus>
+         <State>CLOSED</State>
+         <LastUpdateTimestamp>2013-03-27T10:52:08.648Z</LastUpdateTimestamp>
+         <ReasonCode>MaxCapturesProcessed</ReasonCode>
+         <ReasonDescription>Exceed max captures</ReasonDescription>
+      </AuthorizationStatus>
+      <OrderItemCategories>
+        <OrderItemCategory>TOYS</OrderItemCategory>
+      </OrderItemCategories>
+      <CaptureNow>true</CaptureNow>
+      <SoftDescriptor>AMZN****Test</SoftDescriptor>
+   </AuthorizationDetails>
+</AuthorizationNotification>

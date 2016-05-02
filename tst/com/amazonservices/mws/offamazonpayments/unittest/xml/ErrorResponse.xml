@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ErrorResponse xmlns="http://mws.amazonservices.com/schema/OffAmazonPayments/2013-01-01">
+  <Error>
+    <Type>Sender</Type>
+    <Code>string</Code>
+    <Message>string</Message>
+    <Detail>
+      <Any>Test</Any>
+    </Detail>
+  </Error>
+  <RequestId>string</RequestId>
+</ErrorResponse>

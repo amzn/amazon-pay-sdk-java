@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CloseBillingAgreementResponse xmlns="http://mws.amazonservices.com/schema/OffAmazonPayments/2013-01-01">
+    <CloseBillingAgreementResult></CloseBillingAgreementResult>  
+    <ResponseMetadata>
+        <RequestId>string</RequestId>
+    </ResponseMetadata>
+</CloseBillingAgreementResponse>

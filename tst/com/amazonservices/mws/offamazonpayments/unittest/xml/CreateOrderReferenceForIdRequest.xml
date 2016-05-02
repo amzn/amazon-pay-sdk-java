@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CreateOrderReferenceForIdRequest xmlns="http://mws.amazonservices.com/schema/OffAmazonPayments/2013-01-01">
+    <Id>string</Id>
+    <SellerId>string</SellerId>
+    <MWSAuthToken>SampleToken</MWSAuthToken>
+    <IdType>string</IdType>
+    <InheritShippingAddress>false</InheritShippingAddress>
+    <ConfirmNow>false</ConfirmNow>
+    <OrderReferenceAttributes>
+        <OrderTotal>
+            <CurrencyCode>232</CurrencyCode>
+            <Amount>23</Amount>
+        </OrderTotal>
+        <PlatformId>platfomId</PlatformId>
+        <SellerNote>Test</SellerNote>
+        <SellerOrderAttributes>
+            <SellerOrderId>23232</SellerOrderId>
+            <StoreName>dfdf</StoreName>
+            <OrderItemCategories>
+                <OrderItemCategory>Toys</OrderItemCategory>
+            </OrderItemCategories>
+            <CustomInformation>dsfsfdsfds</CustomInformation>
+        </SellerOrderAttributes>
+    </OrderReferenceAttributes>
+</CreateOrderReferenceForIdRequest>

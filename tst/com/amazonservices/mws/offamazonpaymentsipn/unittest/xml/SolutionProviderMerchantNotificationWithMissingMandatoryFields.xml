@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SolutionProviderMerchantNotification xmlns="https://mws.amazonservices.com/ipn/OffAmazonPayments/2013-01-01">
+	<MerchantRegistrationDetails>
+		<Type>Register</Type>
+		<Options>
+			<SolutionProviderOption>
+				<name>hostingType</name>
+				<value>hosted</value>
+			</SolutionProviderOption>
+			<SolutionProviderOption>
+				<name>lwaClientId</name>
+				<value>amzn1.application-oa2-client.8a22facbfb9644efbae198886cef911f</value>
+			</SolutionProviderOption>
+			<SolutionProviderOption>
+				<name>lwaApplicatiId</name>
+				<value>amzn1.application.c316edb6eac3465eaf19f04b9af83c92</value>
+			</SolutionProviderOption>
+		</Options>
+	</MerchantRegistrationDetails>
+</SolutionProviderMerchantNotification>

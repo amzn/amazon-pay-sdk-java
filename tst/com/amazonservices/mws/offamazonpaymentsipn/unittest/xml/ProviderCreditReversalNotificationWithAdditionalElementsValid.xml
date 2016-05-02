@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ProviderCreditReversalNotification xmlns="https://mws.amazonservices.com/ipn/OffAmazonPayments/2013-01-01">
+	<ProviderCreditReversalDetails>
+		<AmazonProviderCreditReversalId>S01-1678873-0904884-Q069932</AmazonProviderCreditReversalId>
+		<SellerId>A0677458196RUTCRWHDJQ</SellerId>
+		<ProviderSellerId>A08593053M41F7TQ7YR7W</ProviderSellerId>
+		<CreditReversalReferenceId>S0116788730904884C093921r622</CreditReversalReferenceId>
+		<CreditReversalAmount>
+			<Amount>2</Amount>
+			<CurrencyCode>USD</CurrencyCode>
+		</CreditReversalAmount>
+		<TestElement>
+			<NewElement>Test</NewElement>
+		</TestElement>
+		<CreationTimestamp>2014-04-26T01:34:45.124Z</CreationTimestamp>
+		<CreditReversalStatus>
+			<State>Completed</State>
+			<LastUpdateTimestamp>2014-04-26T01:35:21.866Z</LastUpdateTimestamp>
+			<ReasonCode>Reason</ReasonCode>
+			<ReasonDescription>Description</ReasonDescription>
+		</CreditReversalStatus>
+		<CreditReversalNote>Note</CreditReversalNote>
+	</ProviderCreditReversalDetails>
+</ProviderCreditReversalNotification>

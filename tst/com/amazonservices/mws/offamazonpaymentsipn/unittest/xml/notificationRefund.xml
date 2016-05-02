@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><RefundNotification xmlns="https://mws.amazonservices.com/ipn/OffAmazonPayments/2013-01-01">
+    <RefundDetails>
+        <AmazonRefundId>SD0-1389007-4907339-R050385</AmazonRefundId>
+        <RefundReferenceId>sfdsfdsf</RefundReferenceId>
+        <RefundType>SellerInitiated</RefundType>
+        <RefundAmount>
+            <Amount>1.0</Amount>
+            <CurrencyCode>USD</CurrencyCode>
+        </RefundAmount>
+        <FeeRefunded>
+            <Amount>0.0</Amount>
+            <CurrencyCode>USD</CurrencyCode>
+        </FeeRefunded>
+        <CreationTimestamp>2013-05-03T23:18:55.638Z</CreationTimestamp>
+        <RefundStatus>
+            <State>Completed</State>
+            <LastUpdateTimestamp>2013-05-03T23:19:36.895Z</LastUpdateTimestamp>
+        </RefundStatus>
+        <SoftDescriptor>AMZ*foo</SoftDescriptor>
+    </RefundDetails>
+</RefundNotification>

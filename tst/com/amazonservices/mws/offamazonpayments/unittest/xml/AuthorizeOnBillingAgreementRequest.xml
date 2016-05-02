@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AuthorizeOnBillingAgreementRequest
+	xmlns="http://mws.amazonservices.com/schema/OffAmazonPayments/2013-01-01">
+	<SellerId>Test</SellerId>
+	<MWSAuthToken>SampleToken</MWSAuthToken>
+	<AmazonBillingAgreementId>Sample-ORO-With-32423
+	</AmazonBillingAgreementId>
+	<AuthorizationReferenceId>2323-23232-323</AuthorizationReferenceId>
+	<AuthorizationAmount>
+		<CurrencyCode>USD</CurrencyCode>
+		<Amount>22.32</Amount>
+	</AuthorizationAmount>
+	<SellerAuthorizationNote>23423</SellerAuthorizationNote>
+	<TransactionTimeout>5</TransactionTimeout>
+	<CaptureNow>false</CaptureNow>
+	<SoftDescriptor>sdfsdf</SoftDescriptor>
+	<SellerNote>string</SellerNote>
+	<PlatformId>string</PlatformId>
+	<SellerOrderAttributes>
+		<SellerOrderId>string</SellerOrderId>
+		<StoreName>string</StoreName>
+		<OrderItemCategories>
+			<OrderItemCategory>23232</OrderItemCategory>
+		</OrderItemCategories>
+		<CustomInformation>string</CustomInformation>
+	</SellerOrderAttributes>
+	<InheritShippingAddress>false</InheritShippingAddress>
+</AuthorizeOnBillingAgreementRequest>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BillingAgreementNotification xmlns="https://mws.amazonservices.com/ipn/OffAmazonPayments/2013-01-01">
+    <BillingAgreement>
+        <AmazonBillingAgreementId>S01-4213199-9938271</AmazonBillingAgreementId>
+        <SellerBillingAgreementAttributes>
+            <SellerId>3312689</SellerId>
+            <SellerBillingAgreementId>BA-81H22AHJ</SellerBillingAgreementId>
+        </SellerBillingAgreementAttributes>
+        <BillingAgreementStatus>
+            <State>Closed</State>
+            <LastUpdateTimestamp>2014-02-01T11:05:25.532Z</LastUpdateTimestamp>
+            <ReasonCode>SellerClosed</ReasonCode>
+            <ReasonDescription>Seller did not tell us</ReasonDescription>
+        </BillingAgreementStatus>
+        <CreationTimestamp>2014-02-01T10:49:59.532Z</CreationTimestamp>
+        <BillingAgreementLimits>
+            <AmountLimitPerTimePeriod>
+                <CurrencyCode>USD</CurrencyCode>
+                <Amount>500</Amount>
+            </AmountLimitPerTimePeriod>
+            <TimePeriodStartDate>2014-02-01T11:05:25.532Z</TimePeriodStartDate>
+            <TimePeriodEndDate>2015-02-01T11:05:25.532Z</TimePeriodEndDate>
+            <CurrentRemainingBalance>
+                <CurrencyCode>USD</CurrencyCode>
+                <Amount>450</Amount>
+            </CurrentRemainingBalance>
+        </BillingAgreementLimits>
+        <BillingAgreementConsent>true</BillingAgreementConsent>
+        <TestElement>
+            <NewElement>Test</NewElement>
+        </TestElement>
+    </BillingAgreement>
+</BillingAgreementNotification>

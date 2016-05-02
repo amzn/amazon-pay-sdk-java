@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RefundRequest xmlns="http://mws.amazonservices.com/schema/OffAmazonPayments/2013-01-01">
+    <SellerId>Test</SellerId>
+    <MWSAuthToken>SampleToken</MWSAuthToken>
+    <AmazonCaptureId>Sample-ORO-With-32423</AmazonCaptureId>
+    <RefundReferenceId>2323-23232-323</RefundReferenceId>
+    <RefundAmount>
+        <CurrencyCode>USD</CurrencyCode>
+        <Amount>232.32</Amount>
+    </RefundAmount>
+    <SellerRefundNote>23423</SellerRefundNote>
+    <SoftDescriptor>sdfsdf</SoftDescriptor>
+    <ProviderCreditReversalList>
+        <member>
+            <ProviderId>Provider-Id</ProviderId>
+            <CreditReversalAmount>
+                <Amount>2.22</Amount>
+                <CurrencyCode>USD</CurrencyCode>
+            </CreditReversalAmount>
+        </member>
+    </ProviderCreditReversalList>
+</RefundRequest>

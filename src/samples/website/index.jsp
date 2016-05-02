@@ -19,7 +19,7 @@
     <title>Samples Index Page</title>
 </head>
 <body>
-    <h1>Login and Pay with Amazon Java Sample Code</h1>
+    <h1>@@ProductName@@ Java Sample Code</h1>
     
     <br/>
     

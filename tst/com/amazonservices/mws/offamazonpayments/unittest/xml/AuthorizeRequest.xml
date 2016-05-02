@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AuthorizeRequest xmlns="http://mws.amazonservices.com/schema/OffAmazonPayments/2013-01-01">
+    <SellerId id="123">Test</SellerId>
+    <MWSAuthToken>SampleToken</MWSAuthToken>
+    <AmazonOrderReferenceId>Sample-ORO-With-32423</AmazonOrderReferenceId>
+    <AuthorizationReferenceId>2323-23232-323</AuthorizationReferenceId>
+    <AuthorizationAmount>
+        <CurrencyCode>USD</CurrencyCode>
+        <Amount>22.32</Amount>
+    </AuthorizationAmount>
+    <SellerAuthorizationNote>23423</SellerAuthorizationNote>
+    <OrderItemCategories>
+        <OrderItemCategory>23232</OrderItemCategory>
+    </OrderItemCategories>
+    <TransactionTimeout>5</TransactionTimeout>
+    <CaptureNow>true</CaptureNow>
+    <SoftDescriptor>sdfsdf</SoftDescriptor>
+    <ProviderCreditList>
+            <member>
+                <ProviderId>provideridtest</ProviderId>
+                <CreditAmount>
+                    <Amount>2.22</Amount>
+                    <CurrencyCode>USD</CurrencyCode>
+                </CreditAmount>
+            </member>
+    </ProviderCreditList>
+</AuthorizeRequest>

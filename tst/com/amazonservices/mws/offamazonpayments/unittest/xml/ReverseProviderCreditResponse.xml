@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ReverseProviderCreditResponse xmlns="http://mws.amazonservices.com/schema/OffAmazonPayments/2013-01-01">
+  <ReverseProviderCreditResult>
+    <ProviderCreditReversalDetails>
+      <AmazonProviderCreditReversalId>string</AmazonProviderCreditReversalId>
+      <SellerId>string</SellerId>
+      <ProviderId>string</ProviderId>
+      <CreditReversalReferenceId>string</CreditReversalReferenceId>
+      <CreditReversalAmount>
+        <Amount>string</Amount>
+        <CurrencyCode>string</CurrencyCode>
+      </CreditReversalAmount>
+      <CreationTimestamp>2008-09-28T18:49:45</CreationTimestamp>
+      <CreditReversalStatus>
+        <State>Closed</State>
+        <LastUpdateTimestamp>2004-02-14T10:44:14</LastUpdateTimestamp>
+        <ReasonCode>string</ReasonCode>
+        <ReasonDescription>string</ReasonDescription>
+      </CreditReversalStatus>
+      <CreditReversalNote>string</CreditReversalNote>
+    </ProviderCreditReversalDetails>
+  </ReverseProviderCreditResult>
+  <ResponseMetadata>
+    <RequestId>string</RequestId>
+  </ResponseMetadata>
+</ReverseProviderCreditResponse>

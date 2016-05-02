@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CloseAuthorizationRequest xmlns="http://mws.amazonservices.com/schema/OffAmazonPayments/2013-01-01">
+    <SellerId>Test</SellerId>
+    <MWSAuthToken>SampleToken</MWSAuthToken>
+    <AmazonAuthorizationId>Sample-ORO-With-32423</AmazonAuthorizationId>
+    <ClosureReason>sdfdsf</ClosureReason>
+</CloseAuthorizationRequest>

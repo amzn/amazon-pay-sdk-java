@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><OrderReferenceNotification xmlns="https://mws.amazonservices.com/ipn/OffAmazonPayments/2013-01-01">
+    <OrderReference>
+        <AmazonOrderReferenceId>SD0-1389007-4907339</AmazonOrderReferenceId>
+        <OrderTotal>
+            <Amount>10.00</Amount>
+            <CurrencyCode>USD</CurrencyCode>
+        </OrderTotal>
+        <SellerOrderAttributes>
+            <SellerId>A074997131C7YZGL81KKR</SellerId>
+            <SellerOrderId>foo</SellerOrderId>
+            <OrderItemCategories>
+                <OrderItemCategory>Beauty</OrderItemCategory>
+                <OrderItemCategory>Books</OrderItemCategory>
+            </OrderItemCategories>
+        </SellerOrderAttributes>
+        <OrderReferenceStatus>
+            <State>Closed</State>
+            <LastUpdateTimestamp>2013-05-03T23:20:51.350Z</LastUpdateTimestamp>
+            <ReasonCode>SellerClosed</ReasonCode>
+        </OrderReferenceStatus>
+        <CreationTimestamp>2013-05-03T22:40:00.697Z</CreationTimestamp>
+        <ExpirationTimestamp>2013-10-30T22:40:00.697Z</ExpirationTimestamp>
+    </OrderReference>
+</OrderReferenceNotification>

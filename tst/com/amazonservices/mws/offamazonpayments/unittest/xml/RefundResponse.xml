@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RefundResponse xmlns="http://mws.amazonservices.com/schema/OffAmazonPayments/2013-01-01">
+  <RefundResult>
+    <RefundDetails>
+        <AmazonRefundId>sdfsdf</AmazonRefundId>
+        <RefundReferenceId>32323-2323-2323</RefundReferenceId>
+        <SellerRefundNote>sdfdsfdsf</SellerRefundNote>
+        <RefundType>SellerInitiated</RefundType>
+        <RefundAmount>
+            <CurrencyCode>USD</CurrencyCode>
+            <Amount>23.23</Amount>
+        </RefundAmount>
+        <FeeRefunded>
+            <CurrencyCode>USD</CurrencyCode>
+            <Amount>2.23</Amount>
+        </FeeRefunded>
+        <CreationTimestamp>2004-02-14T10:44:14</CreationTimestamp>
+        <RefundStatus>
+            <State>Completed</State>
+            <ReasonCode>FINISHED</ReasonCode>
+            <ReasonDescription>sfdsfdsf</ReasonDescription>
+            <LastUpdateTimestamp>2004-02-14T10:44:14</LastUpdateTimestamp>
+        </RefundStatus>
+        <SoftDescriptor>jhidfd</SoftDescriptor>
+        <ProviderCreditReversalSummaryList>
+            <member>
+                <ProviderId>A08593053M41F7TQ7YR7W</ProviderId>
+                <ProviderCreditReversalId>S01-5387015-3492932-Q008728</ProviderCreditReversalId>
+            </member>
+        </ProviderCreditReversalSummaryList>
+    </RefundDetails>
+  </RefundResult>
+  <ResponseMetadata>
+    <RequestId>string</RequestId>
+  </ResponseMetadata>
+</RefundResponse>

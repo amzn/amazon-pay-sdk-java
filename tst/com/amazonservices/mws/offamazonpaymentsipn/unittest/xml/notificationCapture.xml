@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><CaptureNotification xmlns="https://mws.amazonservices.com/ipn/OffAmazonPayments/2013-01-01">
+    <CaptureDetails>
+        <AmazonCaptureId>SD0-1389007-4907339-C070129</AmazonCaptureId>
+        <CaptureReferenceId>234r2edwf</CaptureReferenceId>
+        <CaptureAmount>
+            <Amount>10.0</Amount>
+            <CurrencyCode>USD</CurrencyCode>
+        </CaptureAmount>
+        <RefundedAmount>
+            <Amount>0.0</Amount>
+            <CurrencyCode>USD</CurrencyCode>
+        </RefundedAmount>
+        <CaptureFee>
+            <Amount>0.0</Amount>
+            <CurrencyCode>USD</CurrencyCode>
+        </CaptureFee>
+        <IdList/>
+        <CreationTimestamp>2013-05-03T22:45:23.068Z</CreationTimestamp>
+        <CaptureStatus>
+            <State>Completed</State>
+            <LastUpdateTimestamp>2013-05-03T22:45:24.761Z</LastUpdateTimestamp>
+        </CaptureStatus>
+        <SoftDescriptor>AMZ*foo</SoftDescriptor>
+    </CaptureDetails>
+</CaptureNotification>

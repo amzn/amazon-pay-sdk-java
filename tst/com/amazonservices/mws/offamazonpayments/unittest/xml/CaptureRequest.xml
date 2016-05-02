@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CaptureRequest xmlns="http://mws.amazonservices.com/schema/OffAmazonPayments/2013-01-01">
+    <SellerId>Test</SellerId>
+    <MWSAuthToken>SampleToken</MWSAuthToken>
+    <AmazonAuthorizationId>Sample-ORO-With-32423</AmazonAuthorizationId>
+    <CaptureReferenceId>2323-23232-323</CaptureReferenceId>
+    <CaptureAmount>
+        <CurrencyCode>USD</CurrencyCode>
+        <Amount>232.32</Amount>
+    </CaptureAmount>
+    <SellerCaptureNote>23423</SellerCaptureNote>
+    <SoftDescriptor>sdfsdf</SoftDescriptor>
+    <ProviderCreditList>
+            <member>
+                <ProviderId>provideridtest</ProviderId>
+                <CreditAmount>
+                    <Amount>2.22</Amount>
+                    <CurrencyCode>USD</CurrencyCode>
+                </CreditAmount>
+            </member>
+    </ProviderCreditList>
+</CaptureRequest>

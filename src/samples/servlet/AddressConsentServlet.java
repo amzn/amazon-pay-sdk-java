@@ -31,7 +31,7 @@ import samples.utils.PropertyBundle;
 /**
  * Execute the service call to show the usage of the address consent token
  * 
- * This example is for US based customers of Login and Pay with Amazon.
+ * This example is for US based customers of @@ProductName@@.
  * 
  */
 public class AddressConsentServlet extends IpnExampleServletBase {

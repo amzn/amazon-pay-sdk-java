@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CaptureNotification
+	xmlns="https://mws.amazonservices.com/ipn/OffAmazonPayments/2013-01-01">
+	<CaptureDetails>
+		<CaptureReferenceId>2c60e227d615481fae59eb7cd30c2ffe
+		</CaptureReferenceId>
+		<CaptureAmount>
+			<Amount>5.0</Amount>
+			<CurrencyCode>USD</CurrencyCode>
+		</CaptureAmount>
+		<RefundedAmount>
+			<Amount>5.0</Amount>
+			<CurrencyCode>USD</CurrencyCode>
+		</RefundedAmount>
+		<CaptureFee>
+			<Amount>0.5</Amount>
+			<CurrencyCode>USD</CurrencyCode>
+		</CaptureFee>
+		<IdList>
+			<Id>P0R-3qDULjU-tcTzqWU-C014488</Id>
+		</IdList>
+		<CreationTimestamp>2013-03-27T10:51:28.045Z</CreationTimestamp>
+		<CaptureStatus>
+			<State>CLOSED</State>
+			<LastUpdateTimestamp>2013-03-27T10:52:08.648Z</LastUpdateTimestamp>
+			<ReasonCode>MaxCapturesProcessed</ReasonCode>
+			<ReasonDescription>Exceed max captures</ReasonDescription>
+		</CaptureStatus>
+		<ProviderCreditSummaryList>
+			<ProviderCreditSummary>
+				<ProviderSellerId>A08593053M41F7TQ7YR7W</ProviderSellerId>
+				<ProviderCreditId>S01-5077650-6300949-P057934</ProviderCreditId>
+			</ProviderCreditSummary>
+		</ProviderCreditSummaryList>
+		<SoftDescriptor>AMZN****Test</SoftDescriptor>
+	</CaptureDetails>
+</CaptureNotification>
