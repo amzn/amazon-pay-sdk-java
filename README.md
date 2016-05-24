@@ -11,7 +11,12 @@ import com.amazon.payments.paywithamazon.impl.PaymentsConfig;
 ```
 
  Your Login and Pay with Amazon keys are
- available in your Seller Central account
+ available in your Seller Central account.
+ 
+ >It is recommended that you use environment variables 
+ when storing your keys on your server. Storing your 
+ keys in a config file, database, or source code are 
+ not recommended but acceptable. 
 
 ```java
 String merchantId = "YOUR_MERCHANT_ID";
