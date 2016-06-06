@@ -1,5 +1,6 @@
-package com.amazon.payments.paywithamazon.impl.ipn;
+package test.com.amazon.payments.paywithamazon.impl.ipn;
 
+import com.amazon.payments.paywithamazon.impl.ipn.*;
 import com.amazon.payments.paywithamazon.exceptions.AmazonClientException;
 import com.amazon.payments.paywithamazon.response.ipn.model.Notification;
 import java.util.HashMap;

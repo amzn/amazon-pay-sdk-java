@@ -1,5 +1,4 @@
-
-package com.amazon.payments.paywithamazon;
+package test.com.amazon.payments.paywithamazon;
 
 public class TestConstants {
     public static final String billingAgreementId = "C01-2603200-6123270";

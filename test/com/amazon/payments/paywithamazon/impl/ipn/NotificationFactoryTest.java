@@ -1,5 +1,6 @@
-package com.amazon.payments.paywithamazon.impl.ipn;
+package test.com.amazon.payments.paywithamazon.impl.ipn;
 
+import com.amazon.payments.paywithamazon.impl.ipn.*;
 import com.amazon.payments.paywithamazon.response.ipn.model.ProviderCreditNotification;
 import com.amazon.payments.paywithamazon.response.ipn.model.RefundNotification;
 import com.amazon.payments.paywithamazon.exceptions.AmazonClientException;
@@ -51,8 +52,8 @@ public class NotificationFactoryTest {
          
         private Map<String,String> ipnHeader;
         @Mock private InputStream is;
-	@Mock private CertificateFactory mockCertificateFactory; 
-	@Mock private X509Certificate mockX509Certificate;
+	    @Mock private CertificateFactory mockCertificateFactory; 
+	    @Mock private X509Certificate mockX509Certificate;
         @Mock private Signature signatureC;
         @Mock private PublicKey publicKey;
         @Mock private URL url;
@@ -67,12 +68,12 @@ public class NotificationFactoryTest {
         PowerMockito.whenNew(URL.class).withParameterTypes(String.class).withArguments(Mockito.anyString()).thenReturn(url);
         PowerMockito.when(url.openStream()).thenReturn(is);
         PowerMockito.mockStatic(CertificateFactory.class);
-	PowerMockito.when(CertificateFactory.getInstance("X.509")).thenReturn(mockCertificateFactory);
+	    PowerMockito.when(CertificateFactory.getInstance("X.509")).thenReturn(mockCertificateFactory);
         PowerMockito.when(mockCertificateFactory.generateCertificate(is)).thenReturn((X509Certificate)mockX509Certificate);
         PowerMockito.mockStatic(Signature.class);
-	PowerMockito.when(Signature.getInstance("SHA1withRSA")).thenReturn(signatureC);
+	    PowerMockito.when(Signature.getInstance("SHA1withRSA")).thenReturn(signatureC);
         PowerMockito.when(mockX509Certificate.getPublicKey()).thenReturn(publicKey);
-	PowerMockito.when(signatureC.verify(toByteArray(Mockito.any()))).thenReturn(true);
+	    PowerMockito.when(signatureC.verify(toByteArray(Mockito.any()))).thenReturn(true);
     }
     
     /**

@@ -1,7 +1,8 @@
-package com.amazon.payments.paywithamazon.impl;
+package test.com.amazon.payments.paywithamazon.impl;
 
+import com.amazon.payments.paywithamazon.impl.*;
 import com.amazon.payments.paywithamazon.request.RequestHelper;
-import com.amazon.payments.paywithamazon.TestConstants;
+import test.com.amazon.payments.paywithamazon.TestConstants;
 import com.amazon.payments.paywithamazon.request.GetOrderReferenceDetailsRequest;
 import com.amazon.payments.paywithamazon.request.SetOrderReferenceDetailsRequest;
 import com.amazon.payments.paywithamazon.response.model.Environment;

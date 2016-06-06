@@ -1,5 +1,6 @@
-package com.amazon.payments.paywithamazon.impl.ipn;
+package test.com.amazon.payments.paywithamazon.impl.ipn;
 
+import com.amazon.payments.paywithamazon.impl.ipn.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;

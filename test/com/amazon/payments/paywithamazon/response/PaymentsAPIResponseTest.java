@@ -46,7 +46,7 @@ import org.junit.Test;
 public class PaymentsAPIResponseTest {
     
     
-        private String loadTestFile(String fileName) throws UnsupportedEncodingException, IOException {
+    private String loadTestFile(String fileName) throws UnsupportedEncodingException, IOException {
         InputStream is = new FileInputStream(System.getProperty("user.dir") +"/test/com/amazon/payments/paywithamazon/response/xml/" + fileName);
         if (is != null) {
             Writer writer = new StringWriter();
@@ -66,6 +66,7 @@ public class PaymentsAPIResponseTest {
             return "";
         }
     }
+    
     @Test
     public void testGetOrderReferenceDetailsResponse() throws Exception{
         String rawResponse = loadTestFile("GetOrderReferenceDetailsResponse.xml");

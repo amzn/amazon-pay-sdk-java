@@ -1,6 +1,7 @@
-package com.amazon.payments.paywithamazon.impl;
+package test.com.amazon.payments.paywithamazon.impl;
 
-import com.amazon.payments.paywithamazon.TestConstants;
+import com.amazon.payments.paywithamazon.impl.*;
+import test.com.amazon.payments.paywithamazon.TestConstants;
 import com.amazon.payments.paywithamazon.response.model.Environment;
 import com.amazon.payments.paywithamazon.types.CurrencyCode;
 import com.amazon.payments.paywithamazon.types.Region;
