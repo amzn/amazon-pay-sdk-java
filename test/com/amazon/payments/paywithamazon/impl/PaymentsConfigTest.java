@@ -1,7 +1,6 @@
-package test.com.amazon.payments.paywithamazon.impl;
+package com.amazon.payments.paywithamazon.impl;
 
-import com.amazon.payments.paywithamazon.impl.*;
-import test.com.amazon.payments.paywithamazon.TestConstants;
+import com.amazon.payments.paywithamazon.TestConstants;
 import com.amazon.payments.paywithamazon.response.model.Environment;
 import com.amazon.payments.paywithamazon.types.CurrencyCode;
 import com.amazon.payments.paywithamazon.types.Region;
@@ -17,7 +16,7 @@ public class PaymentsConfigTest {
         PaymentsConfig config = new PaymentsConfig(new Properties());
         assertConfigValues(config);
     }
-    
+
     @Test
     public void testPaymentsConfig() {
         PaymentsConfig config = new PaymentsConfig().withAccessKey(TestConstants.accessKey)
@@ -30,23 +29,23 @@ public class PaymentsConfigTest {
                 .withApplicationVersion("1.0").withProxyUsername("test").withProxyPassword("crypto");
         assertConfigValues(config);
     }
-    
+
     @Test
     public void testPaymentsJSONConfig() throws Exception {
         String workingDir = System.getProperty("user.dir");
-        PaymentsConfig config = PaymentsConfigLoaderFactory.loadConfigFromJSON(workingDir 
+        PaymentsConfig config = PaymentsConfigLoaderFactory.loadConfigFromJSON(workingDir
                 + "/test/com/amazon/payments/paywithamazon/impl/config.json");
         assertConfigValues(config);
     }
-    
+
     @Test
     public void testPaymentsPropertiesConfig() throws Exception {
         String workingDir = System.getProperty("user.dir");
-        PaymentsConfig config = PaymentsConfigLoaderFactory.loadConfigFromPropertiesFile(workingDir 
+        PaymentsConfig config = PaymentsConfigLoaderFactory.loadConfigFromPropertiesFile(workingDir
                 + "/test/com/amazon/payments/paywithamazon/impl/config.properties");
         assertConfigValues(config);
     }
-    
+
     private void assertConfigValues(PaymentsConfig config) {
         Assert.assertEquals(config.getAccessKey() , TestConstants.accessKey);
         Assert.assertEquals(config.getSecretKey() , TestConstants.secretKey);
@@ -61,7 +60,7 @@ public class PaymentsConfigTest {
         Assert.assertEquals(config.getProxyPort(), 80);
         Assert.assertEquals(config.getProxyUsername(), "test");
         Assert.assertEquals(config.getProxyPassword(), "crypto");
-        Assert.assertEquals(config.getSellerId(), "A2K7NDRMCETORTCHANTID");
+        Assert.assertEquals(config.getSellerId(), "TEST_MERCHANT_ID");
     }
-    
+
 }

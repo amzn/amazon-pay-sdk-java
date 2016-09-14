@@ -10,11 +10,11 @@
             <DestinationType>Physical</DestinationType>
             <PhysicalDestination>
                <StateOrRegion>BC</StateOrRegion>
-               <Phone>4084395180</Phone>
+               <Phone>9999999999</Phone>
                <City>Vancouver</City>
                <CountryCode>CA</CountryCode>
                <PostalCode>V6C 3B5</PostalCode>
-               <Name>Neha</Name>
+               <Name>TEST_NAME</Name>
                <AddressLine1>999 Canada Place 140</AddressLine1>
             </PhysicalDestination>
          </Destination>

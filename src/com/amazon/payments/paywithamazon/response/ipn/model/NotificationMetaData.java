@@ -1,7 +1,12 @@
 package com.amazon.payments.paywithamazon.response.ipn.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import java.util.Map;
 
+
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public final class NotificationMetaData {
 
     private final String type;
@@ -12,7 +17,7 @@ public final class NotificationMetaData {
     private final String signature;
     private final String signingCertUrl;
     private final String unsubscribeUrl;
-    
+
     public NotificationMetaData(Map<String,String> notificationMap) {
         type = notificationMap.get("Type");
         messageId = notificationMap.get("MessageId");
@@ -24,9 +29,10 @@ public final class NotificationMetaData {
         unsubscribeUrl = notificationMap.get("UnsubscribeURL");
     }
 
+
     /**
      * The type of message. For a notification, the type is Notification.
-     * 
+     *
      * @return type
      */
     public String getType() {
@@ -37,7 +43,7 @@ public final class NotificationMetaData {
      * A Universally Unique Identifier, unique for each message published. 
      * For a message that Amazon SNS resends during a retry, the 
      * message ID of the original message is used.
-     * 
+     *
      * @return messageId
      */
     public String getMessageId() {
@@ -46,7 +52,7 @@ public final class NotificationMetaData {
 
     /**
      * The Amazon Resource Name (ARN) for the topic that this message was published to.
-     * 
+     *
      * @return topicArn
      */
     public String getTopicArn() {
@@ -55,7 +61,7 @@ public final class NotificationMetaData {
 
     /**
      * The time (GMT) when the notification was published.
-     * 
+     *
      * @return timeStamp
      */
     public String getTimeStamp() {
@@ -64,7 +70,7 @@ public final class NotificationMetaData {
 
     /**
      * Version of the Amazon SNS signature used.
-     * 
+     *
      * @return signatureVersion
      */
     public String getSignatureVersion() {
@@ -74,7 +80,7 @@ public final class NotificationMetaData {
     /**
      * Base64-encoded "SHA1withRSA" signature of the Message, MessageId, Type, 
      * Timestamp, and TopicArn values. 
-     * 
+     *
      * @return signature
      */
     public String getSignature() {
@@ -83,7 +89,7 @@ public final class NotificationMetaData {
 
     /**
      * The URL to the certificate that was used to sign the message. 
-     * 
+     *
      * @return signingCertUrl
      */
     public String getSigningCertUrl() {
@@ -94,7 +100,7 @@ public final class NotificationMetaData {
      * A URL that you can use to unsubscribe the endpoint from this topic. 
      * If you visit this URL, Amazon SNS unsubscribes the endpoint and stops 
      * sending notifications to this endpoint.
-     * 
+     *
      * @return unsubscribeUrl
      */
     public String getUnsubscribeUrl() {
@@ -103,14 +109,14 @@ public final class NotificationMetaData {
 
     /**
      * Returns the string representation of NotificationMetaData 
-     * 
+     *
      * @return  Returns the string representation of NotificationMetaData 
      */
     @Override
     public String toString() {
-        return "NotificationMetaData{" + "type=" + type + ", messageId=" + messageId 
-                + ", topicArn=" + topicArn + ", timeStamp=" + timeStamp + ", signatureVersion=" 
-                + signatureVersion + ", signature=" + signature + ", signingCertUrl=" 
+        return "NotificationMetaData{" + "type=" + type + ", messageId=" + messageId
+                + ", topicArn=" + topicArn + ", timeStamp=" + timeStamp + ", signatureVersion="
+                + signatureVersion + ", signature=" + signature + ", signingCertUrl="
                 + signingCertUrl + ", unsubscribeUrl=" + unsubscribeUrl + '}';
     }
 

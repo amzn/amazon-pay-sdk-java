@@ -13,62 +13,59 @@ public class PaymentsConfigLoaderFactory {
 
     /**
      * Loads configuration from specified JSON file
-     * See {@link com.amazon.payments.lpa.types.Key} for allowed configuration values
-     * 
+     *
      * @param fileLocation
      *             The file location from which to load the client configuration
-     * 
+     *
      * @throws IllegalArgumentException
      *             If required properties are missing. Or if an invalid property key or value is encountered.
-     * 
+     *
      * @throws FileNotFoundException
      *             If specified file isn't found
-     * 
-     * @throws IOException 
+     *
+     * @throws IOException
      *             If any problems are encountered while reading from file
-     * 
-     * @return PaymentConfig 
+     *
+     * @return PaymentConfig
      */
     public static PaymentsConfig loadConfigFromJSON(String fileLocation) throws IllegalArgumentException, FileNotFoundException, IOException{
         BufferedReader br = null;
         Properties prop = null;
-        try { 
+        try {
             br = new BufferedReader(new FileReader(fileLocation));
             prop = new Gson().fromJson(br, Properties.class);
         } finally {
             if(br != null)
                 br.close();
-        }   
+        }
         return new PaymentsConfig(prop);
     }
 
 
     /**
      * Loads configuration from specified Java properties file
-     * See {@link com.amazon.payments.lpa.types.Key} for allowed configuration values
-     * 
-     * 
+     *
      * @param fileLocation
      *             The file location from which to load the client configuration
-     * 
+     *
      * @throws IllegalArgumentException
      *             If required properties are missing. Or if an invalid property key or value is encountered.
-     * 
+     *
      * @throws FileNotFoundException
      *             If specified file isn't found
-     * 
-     * @throws IOException 
+     *
+     * @throws IOException
      *             If any problems are encountered while reading from file
-     * 
-     * @return PaymentsConfig 
+     *
+     * @return PaymentsConfig
      */
     public static PaymentsConfig loadConfigFromPropertiesFile(String fileLocation) throws IllegalArgumentException, FileNotFoundException, IOException {
         InputStream input = null;
         Properties prop = new Properties();
-        try { 
+        try {
             input = new FileInputStream(fileLocation);
             prop.load(input);
-        } finally { 
+        } finally {
             if(input != null)
                 input.close();
         }

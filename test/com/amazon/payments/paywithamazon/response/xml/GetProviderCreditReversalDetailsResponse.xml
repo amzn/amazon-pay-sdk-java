@@ -3,13 +3,13 @@
    <GetProviderCreditReversalDetailsResult>
       <ProviderCreditReversalDetails>
          <AmazonProviderCreditReversalId>S01-2117025-2155793-P045170</AmazonProviderCreditReversalId>
-         <SellerId>A37GX652OWOXVH</SellerId>
+         <SellerId>TEST_SELLER_ID</SellerId>
          <CreditReversalAmount>
             <CurrencyCode>USD</CurrencyCode>
             <Amount>1.00</Amount>
          </CreditReversalAmount>
          <CreditReversalReferenceId>S01-2117025-2155793nesasdh</CreditReversalReferenceId>
-         <ProviderId>A2K7NDRCTOTPW9</ProviderId>
+         <ProviderId>TEST_PROVIDER_ID</ProviderId>
          <CreditReversalStatus>
             <LastUpdateTimestamp>2015-10-26T23:26:46.945Z</LastUpdateTimestamp>
             <State>Closed</State>

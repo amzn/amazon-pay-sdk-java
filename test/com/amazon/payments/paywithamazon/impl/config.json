@@ -1,7 +1,7 @@
 {
-   "merchant_id": "A2K7NDRMCETORTCHANTID", 
-   "access_key": "AKIAUIIACAEPPP3A66AA",
-   "secret_key": "yoursecretkeyasdfQdstsdf",
+   "merchant_id": "TEST_MERCHANT_ID",
+   "access_key": "TEST_ACCESS_KEY",
+   "secret_key": "TEST_SECRET_KEY",
    "currency_code": "usd",
    "region": "US",
    "environment": "Live",

@@ -27,7 +27,7 @@ import javax.crypto.spec.SecretKeySpec;
 import org.apache.commons.codec.binary.Base64;
 
 public class Util {
-    
+
     /**
      * Helper method to calculate base64 encoded signature using specified secret key
      *
@@ -38,7 +38,6 @@ public class Util {
         byte[] signature = mac.doFinal(stringToSign.getBytes("UTF-8"));
         String signatureBase64 = new String(Base64.encodeBase64(signature), "UTF-8");
         return signatureBase64;
-         
     }
 
     public static String getTimestamp() {
@@ -50,16 +49,16 @@ public class Util {
         String timeStamp = sdf.format(date);
         return timeStamp.replace("UTC", "Z");
     }
-    
+
     /**
      * This method uses HttpURLConnection instance to make requests.
-     * 
+     *
      * @param method The HTTP method (GET,POST,PUT,etc.).
      * @param url The URL
      * @param urlParameters URL Parameters 
      * @param headers Header key-value pairs
      * @return ResponseData
-     * @throws IOException 
+     * @throws IOException
      */
     public static ResponseData httpSendRequest(String method, String url, String urlParameters, Map<String,String> headers) throws IOException{
         URL obj = new URL(url);
@@ -71,14 +70,14 @@ public class Util {
         }
         con.setDoOutput(true);
         con.setRequestMethod(method);
-        if(urlParameters != null) { 
+        if(urlParameters != null) {
             DataOutputStream wr = new DataOutputStream(con.getOutputStream());
             wr.writeBytes(urlParameters);
             wr.flush();
             wr.close();
         }
         int responseCode = con.getResponseCode();
-        
+
         BufferedReader in;
         if (responseCode != 200) {
             in = new BufferedReader(new InputStreamReader(con.getErrorStream()));
@@ -91,39 +90,39 @@ public class Util {
             response.append(inputLine);
         }
         in.close();
-        return new ResponseData(responseCode, response.toString());    
+        return new ResponseData(responseCode, response.toString());
     }
 
 
-     /**
+    /**
      * This method uses PaymentsConfig to set proxy settings and uses 
      * HttpURLConnection instance to make requests.
-     * 
+     *
      * @param method The HTTP method (GET,POST,PUT,etc.).
      * @param url The URL
      * @param urlParameters URL Parameters 
      * @param config client configuration container
      * @return ResponseData
-     * @throws IOException 
+     * @throws IOException
      */
     public static ResponseData httpSendRequest(String method, String url, String urlParameters, Map<String,String> headers , PaymentsConfig config) throws IOException  {
-        
+
         Map<String,String> headerMap = new HashMap<String,String>();
         if(config!= null) {
             String userAgent = "Language=Java; ApplicationLibraryVersion="+ ServiceConstants.APPLICATION_LIBRARY_VERSION +"; "
                     + "Platform=JAVA_PLATFORM; MWSClientVersion="+ServiceConstants.AMAZON_PAYMENTS_API_VERSION
-                    + ";" +" ApplicationName="+ config.getApplicationName()+";"+ "ApplicationVersion=" +config.getApplicationName(); 
+                    + ";" +" ApplicationName="+ config.getApplicationName()+";"+ "ApplicationVersion=" +config.getApplicationName();
             headerMap.put("User-Agent", userAgent);
-        
+
             if( config.getProxyHost() != null ) {
                 Properties systemSettings = System.getProperties();
                 systemSettings.put("proxySet", "true");
                 systemSettings.put("http.proxyHost", config.getProxyHost());
                 systemSettings.put("http.proxyPort", config.getProxyPort());
-                if(config.getProxyUsername() != null && config.getProxyPassword()!= null) { 
+                if(config.getProxyUsername() != null && config.getProxyPassword()!= null) {
                     String password = config.getProxyUsername() +":"+ config.getProxyPassword();
                     byte[] encodedPassword =  Base64.encodeBase64(password.getBytes());
-                    if(encodedPassword != null) { 
+                    if(encodedPassword != null) {
                         headerMap.put("Proxy-Authorization",   new String(encodedPassword));
                     }
                 }
@@ -133,7 +132,7 @@ public class Util {
         ResponseData response = Util.httpSendRequest(method, url, urlParameters, headerMap);
         return response;
     }
-    
+
     /**
      * Performs additional processing on top of the URLEncoder.encode function to
      * make the string encoding conform to RFC3986
@@ -154,21 +153,21 @@ public class Util {
             entry.setValue(urlEncode(entry.getValue()));
         }
     }
-    
+
     /**
      * Helper method to convert JSON data to Object specified using GSON
-     * 
+     *
      */
     public static <T> T convertJsonToObject(String jsonData, Class<T> clazz) {
-      Gson gson = new Gson();
-      T object =  gson.fromJson(jsonData, clazz);
-      return object;
+        Gson gson = new Gson();
+        T object =  gson.fromJson(jsonData, clazz);
+        return object;
     }
 
     /**
      * Helper method to convert specified parameter map to URL string  
      * separated by ampersand
-     * 
+     *
      */
     public static String convertParameterMapToString(Map<String, String> params) {
         StringBuilder parameterString = new StringBuilder();
@@ -187,21 +186,21 @@ public class Util {
         return parameterString.toString();
     }
 
-        /**
+    /**
      * Helper method to get Service URL endpoint including service version name
      * Ex: 
      */
-    public static String getServiceURLEndpoint(Region region , Environment environment) { 
+    public static String getServiceURLEndpoint(Region region , Environment environment) {
         return ServiceConstants.mwsEndpointMappings.get(region) + "/" + getServiceVersionName(environment);
     }
-    
+
 
     public static String getServiceVersionName(Environment environment) {
         String mwsServiceAPIVersionName;
         if(environment == Environment.SANDBOX) {
             mwsServiceAPIVersionName = "/" + "OffAmazonPayments_Sandbox" + "/" + ServiceConstants.AMAZON_PAYMENTS_API_VERSION;
         }
-        else { 
+        else {
             mwsServiceAPIVersionName = "/" + "OffAmazonPayments" + "/" + ServiceConstants.AMAZON_PAYMENTS_API_VERSION;
         }
         return mwsServiceAPIVersionName;

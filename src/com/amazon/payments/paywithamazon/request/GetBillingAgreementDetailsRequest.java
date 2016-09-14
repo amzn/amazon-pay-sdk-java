@@ -4,22 +4,23 @@ import java.io.Serializable;
 import java.net.URLDecoder;
 
 /**
- * Container for the parameters to the {@link com.amazon.payments.lpa.Client#getBillingAgreementDetails(GetBillingAgreementDetailsRequest) GetBillingAgreementDetails operation}.
- * For more information documentation, see  
- * <a href="https://payments.amazon.com/documentation/"> API Reference</a>
+ * Container for the parameters to the GetBillingAgreementDetails operation.
+ *
+ * For more information documentation, see
+ * https://payments.amazon.com/documentation/
  */
 public class GetBillingAgreementDetailsRequest implements Serializable{
-    
+
     //required parameters
     private String amazonBillingAgreementId;
-    
+
     //optional parameters
     private String addressConsentToken;
     private String mwsAuthToken;
-    
+
     /**
-     * 
-     * @param amazonBillingAgreementId 
+     *
+     * @param amazonBillingAgreementId
      *              The billing agreement identifier. This value is retrieved 
      *              from the Amazon Button, AddressBook, or Wallet widgets.
      */
@@ -28,16 +29,16 @@ public class GetBillingAgreementDetailsRequest implements Serializable{
     }
 
     /**
-     * 
+     *
      * @param mwsAuthToken
      */
     public GetBillingAgreementDetailsRequest setMWSAuthToken(String mwsAuthToken) {
         this.mwsAuthToken = mwsAuthToken;
         return this;
     }
-    
+
     /**
-     * 
+     *
      * @param addressConsentToken
      *              The buyer address consent token. You must provide a valid 
      *              AddressConsentToken if you want to get the full shipping address before 
@@ -49,7 +50,7 @@ public class GetBillingAgreementDetailsRequest implements Serializable{
     }
 
     /**
-     * 
+     *
      * @return AmazonBillingAgreementId
      */
     public String getAmazonBillingAgreementId() {
@@ -57,7 +58,7 @@ public class GetBillingAgreementDetailsRequest implements Serializable{
     }
 
     /**
-     * 
+     *
      * @return AddressConsentToken
      */
     public String getAddressConsentToken() {
@@ -65,7 +66,7 @@ public class GetBillingAgreementDetailsRequest implements Serializable{
     }
 
     /**
-     * 
+     *
      * @return MWSAuthToken
      */
     public String getMwsAuthToken() {
@@ -82,9 +83,9 @@ public class GetBillingAgreementDetailsRequest implements Serializable{
      */
     @Override
     public String toString() {
-        return "GetBillingAgreementDetailsRequest{" + "amazonBillingAgreementId=" + amazonBillingAgreementId + ", addressConsentToken=" 
+        return "GetBillingAgreementDetailsRequest{" + "amazonBillingAgreementId=" + amazonBillingAgreementId + ", addressConsentToken="
                 + addressConsentToken + ", mwsAuthToken=" + mwsAuthToken + '}';
     }
-    
-    
+
+
 }

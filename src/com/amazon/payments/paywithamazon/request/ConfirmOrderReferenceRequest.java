@@ -3,28 +3,29 @@ package com.amazon.payments.paywithamazon.request;
 import java.io.Serializable;
 
 /**
- * Container for the parameters to the {@link com.amazon.payments.lpa.Client#confirmOrderReference(ConfirmOrderReferenceRequest) ConfirmOrderReference operation}.
- * For more information documentation, see  
- * <a href="https://payments.amazon.com/documentation/"> API Reference</a>
+ * Container for the parameters to the ConfirmOrderReference operation.
+ *
+ * For more information documentation, see
+ * https://payments.amazon.com/documentation/
  */
 public class ConfirmOrderReferenceRequest implements Serializable{
-    
+
     //required parameters
     private String amazonOrderReferenceId;
-    
+
     //optional parameters
-    private String mwsAuthToken;   
+    private String mwsAuthToken;
 
     /**
-     * 
+     *
      * @param amazonOrderReferenceId The order reference identifier.
      */
     public ConfirmOrderReferenceRequest(String amazonOrderReferenceId){
         this.amazonOrderReferenceId = amazonOrderReferenceId;
     }
-    
+
     /**
-     * 
+     *
      * @param mwsAuthToken
      */
     public ConfirmOrderReferenceRequest setMWSAuthToken(String mwsAuthToken) {
@@ -33,7 +34,7 @@ public class ConfirmOrderReferenceRequest implements Serializable{
     }
 
     /**
-     * 
+     *
      * @return AmazonOrderReferenceId
      */
     public String getAmazonOrderReferenceId() {
@@ -41,7 +42,7 @@ public class ConfirmOrderReferenceRequest implements Serializable{
     }
 
     /**
-     * 
+     *
      * @return MWSAuthToken
      */
     public String getMwsAuthToken() {
@@ -60,10 +61,5 @@ public class ConfirmOrderReferenceRequest implements Serializable{
     public String toString() {
         return "ConfirmOrderReferenceRequest{" + "amazonOrderReferenceId=" + amazonOrderReferenceId + ", mwsAuthToken=" + mwsAuthToken + '}';
     }
-    
 
-    
-    
-    
-    
 }

@@ -3,21 +3,22 @@ package com.amazon.payments.paywithamazon.request;
 import java.io.Serializable;
 
 /**
- * Container for the parameters to the {@link com.amazon.payments.lpa.Client#confirmBillingAgreement(ConfirmBillingAgreementRequest) ConfirmBillingAgreement operation}.
- * For more information documentation, see  
- * <a href="https://payments.amazon.com/documentation/"> API Reference</a>
+ * Container for the parameters to the ConfirmBillingAgreement operation.
+ *
+ * For more information documentation, see
+ * https://payments.amazon.com/documentation/
  */
 public class ConfirmBillingAgreementRequest implements Serializable{
 
     //required parameters
     private String amazonBillingAgreementId;
-    
+
     //optional parameters
     private String mwsAuthToken;
-    
+
     /**
-     * 
-     * @param amazonBillingAgreementId 
+     *
+     * @param amazonBillingAgreementId
      *                  The billing agreement identifier.
      */
     public ConfirmBillingAgreementRequest(String amazonBillingAgreementId) {
@@ -30,12 +31,12 @@ public class ConfirmBillingAgreementRequest implements Serializable{
      */
     public ConfirmBillingAgreementRequest setMWSAuthToken(String mwsAuthToken) {
         this.mwsAuthToken = mwsAuthToken;
-        return this; 
+        return this;
     }
 
     /**
      * The billing agreement identifier. 
-     * 
+     *
      * @return Returns AmazonBillingAgreementId from request
      */
     public String getAmazonBillingAgreementId() {
@@ -62,6 +63,6 @@ public class ConfirmBillingAgreementRequest implements Serializable{
     public String toString() {
         return "ConfirmBillingAgreementRequest{" + "amazonBillingAgreementId=" + amazonBillingAgreementId + ", mwsAuthToken=" + mwsAuthToken + '}';
     }
-    
-    
+
+
 }

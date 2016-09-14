@@ -1,6 +1,5 @@
-package test.com.amazon.payments.paywithamazon.impl.ipn;
+package com.amazon.payments.paywithamazon.impl.ipn;
 
-import com.amazon.payments.paywithamazon.impl.ipn.*;
 import com.amazon.payments.paywithamazon.exceptions.AmazonClientException;
 import com.amazon.payments.paywithamazon.response.ipn.model.Notification;
 import java.util.HashMap;
@@ -15,16 +14,16 @@ import org.powermock.modules.junit4.PowerMockRunner;
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(value = { NotificationVerification.class})
 public class NotificationVerificationTest {
-         
+
     private Map<String,String> ipnHeader = new HashMap<String,String>();
     private String sampleNotification;
-        
+
     @Before
     public void setUp() throws Exception {
         ipnHeader.put("x-amz-sns-message-type" , "Notification");
         sampleNotification = new NotificationFactoryTest().loadTestFile("AuthorizeNotification.json");
     }
-    
+
     /**
      * Empty payload and empty header 
      */
@@ -43,7 +42,7 @@ public class NotificationVerificationTest {
         NotificationFactory.parseNotification(emptyheader, sampleNotification);
         Assert.fail();
     }
-    
+
     /**
      * Null header
      */
@@ -52,7 +51,7 @@ public class NotificationVerificationTest {
         NotificationFactory.parseNotification(null, sampleNotification);
         Assert.fail();
     }
-    
+
     /**
      * Incorrect header
      */
@@ -63,7 +62,7 @@ public class NotificationVerificationTest {
         NotificationFactory.parseNotification(null, sampleNotification);
         Assert.fail();
     }
-    
+
     /**
      * Null Payload
      */
@@ -72,7 +71,7 @@ public class NotificationVerificationTest {
         Notification notification = NotificationFactory.parseNotification(ipnHeader, null);
         Assert.fail();
     }
-    
+
     /**
      * Empty Payload
      */

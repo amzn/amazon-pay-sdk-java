@@ -4,18 +4,19 @@ import java.io.Serializable;
 import java.net.URLDecoder;
 
 /**
- * Container for the parameters to the {@link com.amazon.payments.lpa.Client#getOrderReferenceDetails(GetOrderReferenceDetailsRequest) GetOrderReferenceDetails operation}.
- * For more information documentation, see  
- * <a href="https://payments.amazon.com/documentation/"> API Reference</a>
+ * Container for the parameters to the GetOrderReferenceDetails operation.
+ *
+ * For more information documentation, see
+ * https://payments.amazon.com/documentation/
  */
 public class GetOrderReferenceDetailsRequest implements Serializable{
-        
+
     private String amazonOrderReferenceId;
     private String addressConsentToken;
-    private String mwsAuthToken;   
-    
+    private String mwsAuthToken;
+
     /**
-     * 
+     *
      * @param amazonOrderReferenceId The order reference identifier. 
      *                               This value is retrieved from the Amazon Button widget 
      *                               after the buyer has successfully authenticated with Amazon.
@@ -23,9 +24,9 @@ public class GetOrderReferenceDetailsRequest implements Serializable{
     public GetOrderReferenceDetailsRequest(String amazonOrderReferenceId) {
         this.amazonOrderReferenceId = amazonOrderReferenceId;
     }
-    
+
     /**
-     * 
+     *
      * @param addressConsentToken The buyer address consent token. This value is retrieved 
      *                            from the Amazon Button widget after the buyer has 
      *                            successfully authenticated with Amazon.
@@ -34,15 +35,15 @@ public class GetOrderReferenceDetailsRequest implements Serializable{
         this.addressConsentToken = URLDecoder.decode(addressConsentToken);
         return this;
     }
-    
+
     /**
-     * 
+     *
      * @return AddressConsentToken
      */
     public String getAddressConsentToken() {
         return this.addressConsentToken;
     }
-    
+
     /**
      * Sets MWSAuthToken parameter in request. MWSAuthToken is required only for third-party solution providers
      * and marketplaces. Do not specify this parameter for merchants creating their own custom integration. 
@@ -55,7 +56,7 @@ public class GetOrderReferenceDetailsRequest implements Serializable{
     }
 
     /**
-     * 
+     *
      * @return AmazonOrderReferenceId
      */
     public String getAmazonOrderReferenceId() {
@@ -63,7 +64,7 @@ public class GetOrderReferenceDetailsRequest implements Serializable{
     }
 
     /**
-     * 
+     *
      * @return MWSAuthToken
      */
     public String getMwsAuthToken() {
@@ -80,11 +81,11 @@ public class GetOrderReferenceDetailsRequest implements Serializable{
      */
     @Override
     public String toString() {
-        return "GetOrderReferenceDetailsRequest{" + "amazonOrderReferenceId=" + amazonOrderReferenceId + ", addressConsentToken=" 
+        return "GetOrderReferenceDetailsRequest{" + "amazonOrderReferenceId=" + amazonOrderReferenceId + ", addressConsentToken="
                 + addressConsentToken + ", mwsAuthToken=" + mwsAuthToken + '}';
     }
-    
 
 
-    
+
+
 }

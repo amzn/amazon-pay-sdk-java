@@ -3,21 +3,22 @@ package com.amazon.payments.paywithamazon.request;
 import java.io.Serializable;
 
 /**
- * Container for the parameters to the {@link com.amazon.payments.lpa.Client#closeBillingAgreement(CloseBillingAgreementRequest) CloseBillingAgreement operation}.
- * For more information documentation, see  
- * <a href="https://payments.amazon.com/documentation/"> API Reference</a>
+ * Container for the parameters to the CloseBillingAgreement operation.
+ *
+ * For more information documentation, see
+ * https://payments.amazon.com/documentation/
  */
 public class CloseBillingAgreementRequest implements Serializable{
-    
+
     //required parameters
     private String amazonBillingAgreementId;
-    
+
     //optional parameters
     private String closureReason;
     private String mwsAuthToken;
-    
+
     /**
-     * 
+     *
      * @param amazonBillingAgreementId
      *              The billing agreement identifier. This value is retrieved 
      *              from the Amazon Button, AddressBook, or Wallet widgets.
@@ -25,9 +26,9 @@ public class CloseBillingAgreementRequest implements Serializable{
     public CloseBillingAgreementRequest(String amazonBillingAgreementId) {
         this.amazonBillingAgreementId = amazonBillingAgreementId;
     }
-    
+
     /**
-     * @param closureReason 
+     * @param closureReason
      *              Describes the reason for closing the billing agreement.
      */
     public CloseBillingAgreementRequest setClosureReason(String closureReason) {
@@ -54,7 +55,7 @@ public class CloseBillingAgreementRequest implements Serializable{
     }
 
     /**
-     * 
+     *
      * @return ClosureResason specified in request
      */
     public String getClosureReason() {
@@ -62,7 +63,7 @@ public class CloseBillingAgreementRequest implements Serializable{
     }
 
     /**
-     * 
+     *
      * @return MWSAuthToken specified in request
      */
     public String getMwsAuthToken() {
@@ -79,9 +80,9 @@ public class CloseBillingAgreementRequest implements Serializable{
      */
     @Override
     public String toString() {
-        return "CloseBillingAgreementRequest{" + "amazonBillingAgreementId=" + amazonBillingAgreementId + ", closureReason=" 
+        return "CloseBillingAgreementRequest{" + "amazonBillingAgreementId=" + amazonBillingAgreementId + ", closureReason="
                 + closureReason + ", mwsAuthToken=" + mwsAuthToken + '}';
     }
-    
-    
+
+
 }

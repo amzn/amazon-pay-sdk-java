@@ -10,22 +10,22 @@ import java.io.Serializable;
  *   to parse the response, using this exception you can still retrieve the raw API response.
  */
 public class AmazonClientException extends RuntimeException implements Serializable {
-     
+
     private final String message;
     private int statusCode;
     private String rawResponse;
-    
-    private static final long serialVersionUID = 1L; 
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Constructs AmazonClientException with given ResponseData response, 
      * message and underlying exception object
-     * 
+     *
      * @param response
      *              Response object containing API response and statusCode information 
      * @param message
      *              An error message describing the error
-     * @param exception 
+     * @param exception
      *              Original underlying exception
      */
     public AmazonClientException(ResponseData response , String message , Exception exception) {
@@ -34,30 +34,30 @@ public class AmazonClientException extends RuntimeException implements Serializa
         this.statusCode = response.getStatusCode();
         this.message = message;
     }
-    
+
     /**
      * Constructs AmazonClientException with given message and underlying exception
-     * 
-     * @param message 
+     *
+     * @param message
      *              An error message describing the error
-     * @param exception 
+     * @param exception
      *              Original underlying exception
      */
     public AmazonClientException(String message , Exception exception) {
         super(message , exception);
         this.message = message;
     }
-    
+
     /**
      * Constructs AmazonClientException with given message
-     * 
-     * @param message 
+     *
+     * @param message
      *              An error message describing the error
      */
     public AmazonClientException(String message) {
         this.message = message;
     }
-    
+
     /**
      * @return The HTTP status code that was returned with this service
      *         exception.
@@ -75,28 +75,28 @@ public class AmazonClientException extends RuntimeException implements Serializa
     public String getResponseXml() {
         return rawResponse;
     }
-    
+
     /**
      * A message code that describes the error condition in a human-readable form.
-     * 
+     *
      * @return message
      */
     @Override
     public String getMessage() {
         return message;
     }
-    
+
     /**
      * The string representation of exception message details
-     * 
+     *
      * @return The string representation of exception message details
      */
     @Override
     public String toString() {
         return getMessage()
-            + " (Status Code: " + getStatusCode()
-            + "; Raw Response XML: " + getResponseXml() +")";
+                + " (Status Code: " + getStatusCode()
+                + "; Raw Response XML: " + getResponseXml() +")";
     }
-    
-    
+
+
 }

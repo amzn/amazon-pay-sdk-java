@@ -13,7 +13,7 @@ public class PaymentsConfig implements Config  {
 
     private String accessKey;
     private String secretKey;
-    private String sellerId;
+    private String merchantId;
     private Region region;
     private Environment environment;
     private CurrencyCode currencyCode;
@@ -28,7 +28,7 @@ public class PaymentsConfig implements Config  {
     /**
      * Constructor for PaymentsConfig - container that stores all configuration parameters for client
      *
-     * Required parameters are merchantId/sellerId, accessKey and secretKey.
+     * Required parameters are merchantId, accessKey and secretKey.
      * Specify them using
      * .withSellerId() & .withAccessKeyId() & .withSecretKey()
 
@@ -45,10 +45,7 @@ public class PaymentsConfig implements Config  {
      *
      */
     public PaymentsConfig()  {
-        // Example setup for required values:
-        // this.region = Region.US;
-        // this.environment = Environment.LIVE; //or Environment.SANDBOX
-        // this.currencyCode = CurrencyCode.USD;
+
     }
 
     public PaymentsConfig(Properties prop) {
@@ -56,38 +53,38 @@ public class PaymentsConfig implements Config  {
         checkIfRequriedPropertiesExist();
     }
 
+
     /**
-     * Returns the MerchantId/SellerId from PaymentsConfig
+     * Returns the MerchantId from PaymentsConfig
      *
-     * @return sellerId
+     * @return merchantId
      */
     @Override
     public String getSellerId() {
-        return sellerId;
+        return merchantId;
     }
 
+
     /**
-     * Sets MerchantId/SellerId in PaymentsConfig
      *
-     * @param sellerId
+     * @param merchantId - Sets MerchantId/SellerId in PaymentsConfig
      */
     @Override
-    public void setSellerId(String sellerId) {
-        this.sellerId = sellerId;
+    public void setSellerId(String merchantId) {
+        this.merchantId = merchantId;
     }
 
+
     /**
-     * Your merchantId/sellerId is a unique identifier supplied by
+     *
+     * @param merchantId - merchantId/sellerId is a unique identifier supplied by
      * Amazon when you first created your account. This ID can be found
      * in the Amazon Seller Central account.
      *
-     * @param sellerId
-     *
      * @return Returns updated PaymentsConfig object
      */
-    @Override
-    public PaymentsConfig withSellerId(String sellerId) {
-        this.sellerId = sellerId;
+    public PaymentsConfig withSellerId(String merchantId) {
+        this.merchantId = merchantId;
         return this;
     }
 
@@ -103,28 +100,25 @@ public class PaymentsConfig implements Config  {
 
 
     /**
-     * Sets AccessKey in PaymentsConfig
      *
-     * @param accessKey
+     * @param accessKey - Sets AccessKey in PaymentsConfig
      */
     @Override
     public void setAccessKey(String accessKey) {
         this.accessKey = accessKey;
     }
 
+
     /**
-     * Sets AccessKey in PaymentsConfig
      *
-     * @param accessKey
+     * @param accessKey - Sets AccessKey in PaymentsConfig
      *
      * @return Returns updated PaymentsConfig object
      */
-    @Override
     public PaymentsConfig withAccessKey(String accessKey) {
         this.accessKey = accessKey;
         return this;
     }
-
 
 
     /**
@@ -138,33 +132,32 @@ public class PaymentsConfig implements Config  {
         return secretKey;
     }
 
+
     /**
-     * Sets SecretKey in PaymentsConfig
      *
-     * @param secretKey
+     * @param secretKey - Sets SecretKey in PaymentsConfig
      */
     @Override
     public void setSecretKey(String secretKey) {
         this.secretKey = secretKey;
     }
 
+
     /**
-     * Sets SecretKey in PaymentsConfig
-     * @param secretKey
+     *
+     * @param secretKey - Sets SecretKey in PaymentsConfig
      * @return Returns updated PaymentsConfig object
      */
-    @Override
     public PaymentsConfig withSecretKey(String secretKey) {
         this.secretKey = secretKey;
         return this;
     }
 
 
-
     /**
      * Returns region code from PaymentsConfig
      *
-     * @see com.amazon.payments.lpa.types.Region
+     * @see com.amazon.payments.paywithamazon.Config
      *
      * @return region
      */
@@ -173,11 +166,10 @@ public class PaymentsConfig implements Config  {
         return region;
     }
 
+
     /**
-     * Identifies region associated with Login And Pay with Amazon API operations.
-     *                  {@link com.amazon.payments.lpa.types.Region Region}.
      *
-     * @param region
+     * @param region - Identifies region associated with Login And Pay with Amazon API operations.
      *
      */
     @Override
@@ -187,26 +179,20 @@ public class PaymentsConfig implements Config  {
 
 
     /**
-     * Identifies region associated with Login And Pay with Amazon API operations.
-     *                  {@link com.amazon.payments.lpa.types.Region Region}.
      *
-     * @param region
+     * @param region - Identifies region associated with Login And Pay with Amazon API operations.
      *
      * @return Returns updated PaymentsConfig object
      *
      */
-    @Override
     public PaymentsConfig withRegion(Region region) {
         this.region = region;
         return this;
     }
 
 
-
-
     /**
      * Returns the environment from PaymentsConfig
-     * @see com.amazon.payments.lpa.types.Environment
      *
      * @return environment
      */
@@ -215,11 +201,10 @@ public class PaymentsConfig implements Config  {
         return environment;
     }
 
+
     /**
-     *  Sets environment in PaymentsConfig.
-     *  {@link com.amazon.payments.lpa.types.Environment Environment}.
      *
-     * @param environment
+     * @param environment - Sets environment in PaymentsConfig.
      */
     @Override
     public void setEnvironment(Environment environment) {
@@ -228,14 +213,12 @@ public class PaymentsConfig implements Config  {
 
 
     /**
-     *  If true, sets environment to SANDBOX mode.
-     *  {@link com.amazon.payments.lpa.types.Environment Environment}.
      *
-     * @param isSandbox
+     *
+     * @param isSandbox - If true, sets environment to SANDBOX mode.
      *
      * @return Returns updated PaymentsConfig object
      */
-    @Override
     public PaymentsConfig withSandboxMode(boolean isSandbox) {
         if(isSandbox)
             this.environment = Environment.SANDBOX;
@@ -245,13 +228,9 @@ public class PaymentsConfig implements Config  {
     }
 
 
-
-
-
-
     /**
      * Returns currencyCode in PaymentsConfig
-     * @see com.amazon.payments.lpa.types.CurrencyCode
+     * @see com.amazon.payments.paywithamazon.impl.PaymentsConfig
      *
      * @return currencyCode
      */
@@ -260,33 +239,29 @@ public class PaymentsConfig implements Config  {
         return currencyCode;
     }
 
+
     /**
-     * Sets currencyCode in PaymentsConfig
-     * @see com.amazon.payments.lpa.types.CurrencyCode
-     * @param currencyCode
+     *
+     * @param currencyCode  - Sets currencyCode in PaymentsConfig
      */
     @Override
     public void setCurrencyCode(CurrencyCode currencyCode) {
         this.currencyCode = currencyCode;
     }
 
+
     /**
-     * Represents currency code to be used for all Login And Pay with Amazon API operations.
-     *                  Accepts three-digit currency code. In ISO 4217 format.
-     *                  {@link com.amazon.payments.lpa.types.CurrencyCode CurrencyCode}
      *
-     * @param currencyCode
+     * @param currencyCode - Represents currency code to be used for all Login And Pay with Amazon API operations.
+     *                       Accepts three-digit currency code, such as USD (dollars), EUR (euros), GBP (pounds) or JPY (Japanese Yen).
+     *                       The currency code in ISO 4217 format.
      *
      * @return Returns updated PaymentsConfig object
      */
-    @Override
     public PaymentsConfig withCurrencyCode(CurrencyCode currencyCode) {
         this.currencyCode = currencyCode;
         return this;
     }
-
-
-
 
 
     /**
@@ -300,32 +275,29 @@ public class PaymentsConfig implements Config  {
         return applicationName;
     }
 
+
     /**
      * Sets Application Name in PaymentsConfig
      *
-     * @param applicationName
+     * @param applicationName - Sets application name
      */
     @Override
     public void setApplicationName(String applicationName) {
         this.applicationName = applicationName;
     }
 
+
     /**
-     * This method sets application name in PaymentsConfig
      *
-     * @param applicationName
+     * @param applicationName - This method sets application name in PaymentsConfig
      *
-     * @return
-     *          Returns updated PaymentsConfig object
+     * @return - Returns updated PaymentsConfig object
+     *
      */
-    @Override
     public PaymentsConfig withApplicationName(String applicationName) {
         this.applicationName = applicationName;
         return this;
     }
-
-
-
 
 
     /**
@@ -339,30 +311,27 @@ public class PaymentsConfig implements Config  {
         return applicationVersion;
     }
 
+
     /**
-     * Sets Application Version in PaymentsConfig
      *
-     * @param applicationVersion
+     * @param applicationVersion -Sets Application Version in PaymentsConfig
      */
     @Override
     public void setApplicationVersion(String applicationVersion) {
         this.applicationVersion = applicationVersion;
     }
 
+
     /**
-     * This method sets application version in PaymentsConfig
      *
-     * @param applicationVersion
+     * @param applicationVersion - This method sets application version in PaymentsConfig
      *
      * @return Returns updated PaymentsConfig object
      */
-    @Override
     public PaymentsConfig withApplicationVersion(String applicationVersion) {
         this.applicationVersion = applicationVersion;
         return this;
     }
-
-
 
 
     /**
@@ -375,30 +344,27 @@ public class PaymentsConfig implements Config  {
         return proxyHost;
     }
 
+
     /**
-     * Sets proxy host in PaymentsConfig
      *
-     * @param proxyHost
+     * @param proxyHost - Sets proxy host in PaymentsConfig
      */
     @Override
     public void setProxyHost(String proxyHost) {
         this.proxyHost = proxyHost;
     }
 
+
     /**
-     * This method sets proxy host in PaymentsConfig
      *
-     * @param proxyHost
+     * @param proxyHost - This method sets proxy host in PaymentsConfig
      *
      * @return Returns updated PaymentsConfig object
      */
-    @Override
     public PaymentsConfig withProxyHost(String proxyHost) {
         this.proxyHost = proxyHost;
         return this;
     }
-
-
 
 
     /**
@@ -411,30 +377,27 @@ public class PaymentsConfig implements Config  {
         return proxyPort;
     }
 
+
     /**
-     * Sets proxy port in PaymentsConfig
      *
-     * @param proxyPort
+     * @param proxyPort - Sets proxy port in PaymentsConfig
      */
     @Override
     public void setProxyPort(int proxyPort) {
         this.proxyPort = proxyPort;
     }
 
+
     /**
-     * This method sets proxy port in PaymentsConfig
      *
-     * @param proxyPort
+     * @param proxyPort - This method sets proxy port in PaymentsConfig
      *
      * @return Returns updated PaymentsConfig object
      */
-    @Override
     public PaymentsConfig withProxyPort(int proxyPort) {
         this.proxyPort = proxyPort;
         return this;
     }
-
-
 
 
     /**
@@ -448,9 +411,8 @@ public class PaymentsConfig implements Config  {
     }
 
     /**
-     * Sets proxy username in PaymentsConfig
      *
-     * @param proxyUsername
+     * @param proxyUsername - Sets proxy username in PaymentsConfig
      */
     @Override
     public void setProxyUsername(String proxyUsername) {
@@ -459,19 +421,15 @@ public class PaymentsConfig implements Config  {
 
 
     /**
-     *  This methods sets proxy username in PaymentsConfig
      *
-     * @param proxyUsername
+     * @param proxyUsername - This methods sets proxy username in PaymentsConfig
      *
      * @return Returns updated PaymentsConfig object
      */
-    @Override
     public PaymentsConfig withProxyUsername(String proxyUsername) {
         this.proxyUsername = proxyUsername;
         return this;
     }
-
-
 
 
     /**
@@ -484,29 +442,28 @@ public class PaymentsConfig implements Config  {
         return proxyPassword;
     }
 
+
     /**
-     * Set proxy password in PaymentsConfig
      *
-     * @param proxyPassword
+     * @param proxyPassword - Set proxy password in PaymentsConfig
      */
     @Override
     public void setProxyPassword(String proxyPassword) {
         this.proxyPassword = proxyPassword;
     }
 
+
     /**
-     * Sets proxy username in PaymentsConfig.
-     * @param proxyPassword
+     *
+     * @param proxyPassword - Sets proxy username in PaymentsConfig.
      *
      * @return
      *          Returns updated PaymentsConfig object
      */
-    @Override
     public PaymentsConfig withProxyPassword(String proxyPassword) {
         this.proxyPassword = proxyPassword;
         return this;
     }
-
 
 
     /**
@@ -520,34 +477,33 @@ public class PaymentsConfig implements Config  {
         return useAutoRetryOnThrottle;
     }
 
+
     /**
      * Sets autoRetryOnThrottle in PaymentsConfig
      * If set to true, client will retry on service exceptions that are either 500 internal server
      * errors, 503 service unavailable errors, service throttling errors.
      *
-     * @param useAutoRetryOnThrottle
+     * @param useAutoRetryOnThrottle - argument that sets autoRetryOnThrottle in PaymentsConfig
      */
     @Override
     public void setUseAutoRetryOnThrottle(boolean useAutoRetryOnThrottle) {
         this.useAutoRetryOnThrottle = useAutoRetryOnThrottle;
     }
 
+
     /**
      * Sets autoRetryOnThrottle in PaymentsConfig
      * If set to true, client will retry on service exceptions that are either 500 internal server
      * errors, 503 service unavailable errors, service throttling errors.
      *
-     * @param useAutoRetryOnThrottle
+     * @param useAutoRetryOnThrottle  - argument that sets autoRetryOnThrottle in PaymentsConfig
      *
      * @return Returns updated PaymentsConfig object
      */
-    @Override
     public PaymentsConfig withUseAutoRetryOnThrottle(boolean useAutoRetryOnThrottle) {
         this.useAutoRetryOnThrottle = useAutoRetryOnThrottle;
         return this;
     }
-
-
 
 
     private PaymentsConfig loadConfigurationFromProperties(Properties prop) {
@@ -612,16 +568,17 @@ public class PaymentsConfig implements Config  {
                         break;
                     default:
                         throw new AmazonClientException(("Client error, unable to set client configuration property [Key: "
-                            + property +", Value: " + prop.getProperty(property) + "]. " ));
-                    }
-                } catch(IllegalArgumentException e) {
-                    throw new IllegalArgumentException("Unable to process client configuration parameter [Key: "
-                            + property +", Value: " + prop.getProperty(property) + "]. " , e);
+                                + property +", Value: " + prop.getProperty(property) + "]. " ));
                 }
+            } catch(IllegalArgumentException e) {
+                throw new IllegalArgumentException("Unable to process client configuration parameter [Key: "
+                        + property +", Value: " + prop.getProperty(property) + "]. " , e);
             }
+        }
 
         return this;
     }
+
 
     /**
      * Helper method to check if required values are set.
@@ -633,22 +590,24 @@ public class PaymentsConfig implements Config  {
             generateException(Key.ACCESS_KEY);
         else if(this.secretKey == null)
             generateException(Key.SECRET_KEY);
-        else if(this.sellerId == null)
+        else if(this.merchantId == null)
             generateException(Key.MERCHANT_ID);
         else if(this.environment == null)
             generateException(Key.ENVIRONMENT);
-       else if(this.region == null)
+        else if(this.region == null)
             generateException(Key.REGION);
-       else if(this.currencyCode == null)
+        else if(this.currencyCode == null)
             generateException(Key.CURRENCY_CODE);
         return true;
 
     }
 
+
     private void generateException(Key propertyKey) {
-            throw new IllegalArgumentException(propertyKey.toString() +
-                    " property is not set, this is a required property for Amazon Payments client configuration");
+        throw new IllegalArgumentException(propertyKey.toString() +
+                " property is not set, this is a required property for Amazon Payments client configuration");
     }
+
 
     /**
      * The string representation of configuration parameters
@@ -658,7 +617,7 @@ public class PaymentsConfig implements Config  {
     @Override
     public String toString() {
         return "PaymentsConfig{" + "accessKeyId=" + accessKey + ", secretAccessKey=" + secretKey + ", "
-                + "sellerId=" + sellerId + ", region=" + region + ", environment=" + environment + ", currencyCode=" +
+                + "sellerId=" + merchantId + ", region=" + region + ", environment=" + environment + ", currencyCode=" +
                 currencyCode + ", applicationName=" + applicationName + ", applicationVersion=" + applicationVersion + ", "
                 + "proxyHost=" + proxyHost + ", proxyPort=" + proxyPort + ", proxyUsername=" + proxyUsername + ", proxyPassword=" +
                 proxyPassword + ", useAutoRetryOnThrottle=" + useAutoRetryOnThrottle + '}';

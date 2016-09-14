@@ -1,82 +1,64 @@
 package com.amazon.payments.paywithamazon.request;
 
-import com.amazon.payments.paywithamazon.request.AuthorizeRequest;
-import com.amazon.payments.paywithamazon.request.CloseAuthorizationRequest;
-import com.amazon.payments.paywithamazon.request.CaptureRequest;
-import com.amazon.payments.paywithamazon.request.GetProviderCreditReversalDetailsRequest;
-import com.amazon.payments.paywithamazon.request.GetOrderReferenceDetailsRequest;
-import com.amazon.payments.paywithamazon.request.SetBillingAgreementDetailsRequest;
-import com.amazon.payments.paywithamazon.request.ReverseProviderCreditRequest;
-import com.amazon.payments.paywithamazon.request.ConfirmBillingAgreementRequest;
-import com.amazon.payments.paywithamazon.request.CloseBillingAgreementRequest;
-import com.amazon.payments.paywithamazon.request.GetBillingAgreementDetailsRequest;
-import com.amazon.payments.paywithamazon.request.GetProviderCreditDetailsRequest;
-import com.amazon.payments.paywithamazon.request.ConfirmOrderReferenceRequest;
-import com.amazon.payments.paywithamazon.request.CloseOrderReferenceRequest;
-import com.amazon.payments.paywithamazon.request.SetOrderReferenceDetailsRequest;
-import com.amazon.payments.paywithamazon.request.GetRefundDetailsRequest;
-import com.amazon.payments.paywithamazon.request.GetAuthorizationDetailsRequest;
-import com.amazon.payments.paywithamazon.request.CancelOrderReferenceRequest;
-import com.amazon.payments.paywithamazon.request.AuthorizeOnBillingAgreementRequest;
-import com.amazon.payments.paywithamazon.request.GetCaptureDetailsRequest;
-import com.amazon.payments.paywithamazon.request.RefundRequest;
-import com.amazon.payments.paywithamazon.request.ValidateBillingAgreementRequest;
 import com.amazon.payments.paywithamazon.exceptions.AmazonClientException;
 import com.amazon.payments.paywithamazon.impl.PaymentsConfig;
 import com.amazon.payments.paywithamazon.types.ServiceConstants;
 import com.amazon.payments.paywithamazon.impl.Util;
-import com.amazon.payments.paywithamazon.response.parser.ResponseData;
+import com.amazon.payments.paywithamazon.impl.PaymentsLogUtil;
 import com.amazon.payments.paywithamazon.response.model.Price;
 import com.amazon.payments.paywithamazon.response.model.ProviderCredit;
-import com.amazon.payments.paywithamazon.response.model.Environment;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class RequestHelper {
 
     public PaymentsConfig paymentsConfig;
+    private PaymentsLogUtil payUtil;
+
 
     public RequestHelper(PaymentsConfig paymentsConfig){
         this.paymentsConfig = paymentsConfig;
+        this.payUtil = new PaymentsLogUtil();
     }
 
+
     private Map<String,String> addClientParameters(Map<String,String> params) {
-     try {
-        params.put(ServiceConstants.SELLER_ID , paymentsConfig.getSellerId());
-        params.put(ServiceConstants.AWSACCESSKEYID , paymentsConfig.getAccessKey());
-        params.put(ServiceConstants.SIGNATUREVERSION, "2");
-        params.put(ServiceConstants.SIGNATUREMETHOD, "HmacSHA256");
-        params.put(ServiceConstants.VERSION, ServiceConstants.AMAZON_PAYMENTS_API_VERSION);
-        params.put(ServiceConstants.TIMESTAMP, Util.getTimestamp());
-        Util.urlEncodeAPIParams(params);
-        String signature = constructSignature(params);
-        params.put(ServiceConstants.SIGNATURE , signature);
-        return params;
-     } catch(UnsupportedEncodingException e) {
+        try {
+            params.put(ServiceConstants.SELLER_ID , paymentsConfig.getSellerId());
+            params.put(ServiceConstants.AWSACCESSKEYID , paymentsConfig.getAccessKey());
+            params.put(ServiceConstants.SIGNATUREVERSION, "2");
+            params.put(ServiceConstants.SIGNATUREMETHOD, "HmacSHA256");
+            params.put(ServiceConstants.VERSION, ServiceConstants.AMAZON_PAYMENTS_API_VERSION);
+            params.put(ServiceConstants.TIMESTAMP, Util.getTimestamp());
+            Util.urlEncodeAPIParams(params);
+            String signature = constructSignature(params);
+            params.put(ServiceConstants.SIGNATURE , signature);
+            return params;
+        } catch(UnsupportedEncodingException e) {
             throw new AmazonClientException("Encountered client exception:", e);
-     }
+        }
     }
 
     private String constructSignature(Map<String, String> params ) {
-      String signature = null;
-      try {
-        String domainName = ServiceConstants.mwsEndpointMappings.get(paymentsConfig.getRegion());
-        String postHeader = "POST\n" + domainName.replace("https://", "")  + "\n" + Util.getServiceVersionName(paymentsConfig.getEnvironment()) + "\n";
-        Map<String, String> sortedParams = new TreeMap<String, String>();
-        sortedParams.putAll(params);
-        String stringToSign = postHeader + Util.convertParameterMapToString(sortedParams);
-        signature = Util.urlEncode(Util.getSignature(stringToSign, paymentsConfig.getSecretKey()));
-      } catch(UnsupportedEncodingException ex )  {
+        String signature = null;
+        try {
+            String domainName = ServiceConstants.mwsEndpointMappings.get(paymentsConfig.getRegion());
+            String postHeader = "POST\n" + domainName.replace("https://", "")  + "\n" + Util.getServiceVersionName(paymentsConfig.getEnvironment()) + "\n";
+            Map<String, String> sortedParams = new TreeMap<String, String>();
+            sortedParams.putAll(params);
+
+           /* Log all the client parameters */
+            payUtil.logMessage("Client Parameters: " + sortedParams.toString());
+
+            String stringToSign = postHeader + Util.convertParameterMapToString(sortedParams);
+            signature = Util.urlEncode(Util.getSignature(stringToSign, paymentsConfig.getSecretKey()));
+        } catch(UnsupportedEncodingException ex )  {
             throw new AmazonClientException("Encountered UnsupportedEncodingException:", ex);
-      } catch (IllegalStateException ex) {
+        } catch (IllegalStateException ex) {
             throw new AmazonClientException("Encountered IllegalStateException:", ex);
         } catch (NoSuchAlgorithmException ex) {
             throw new AmazonClientException("Encountered NoSuchAlgorithmException:", ex);
@@ -88,7 +70,7 @@ public class RequestHelper {
 
 
     public  String getPostURL(GetOrderReferenceDetailsRequest request) {
-        Map<String,String> parameters = new HashMap<String,String>();
+        Map<String,String> parameters = new TreeMap<String,String>();
         parameters.put(ServiceConstants.ACTION , ServiceConstants.GET_ORDER_REFERENCE_DETAILS);
         if(request.getAmazonOrderReferenceId() != null) {
             parameters.put(ServiceConstants.AMAZON_ORDER_REFERENCE_ID, request.getAmazonOrderReferenceId());
@@ -103,7 +85,7 @@ public class RequestHelper {
     }
 
     public  String getPostURL(SetOrderReferenceDetailsRequest request) {
-        Map<String,String> parameters = new HashMap<String,String>();
+        Map<String,String> parameters = new TreeMap<String, String>();
         if(request.getOrderCurrencyCode() == null)
             request.setOrderCurrencyCode(paymentsConfig.getCurrencyCode());
 
@@ -121,18 +103,18 @@ public class RequestHelper {
         } if(request.getSellerOrderId() != null) {
             parameters.put(ServiceConstants.SELLER_ORDER_ID, request.getSellerOrderId());
         } if(request.getStoreName() != null) {
-        parameters.put(ServiceConstants.STORE_NAME, request.getStoreName());
+            parameters.put(ServiceConstants.STORE_NAME, request.getStoreName());
         } if(request.getCustomInformation() != null) {
             parameters.put(ServiceConstants.CUSTOM_INFORMATION, request.getCustomInformation());
         } if(request.getMwsAuthToken() != null) {
-        parameters.put(ServiceConstants.MWS_AUTH_TOKEN, request.getMwsAuthToken());
+            parameters.put(ServiceConstants.MWS_AUTH_TOKEN, request.getMwsAuthToken());
         }
         addClientParameters(parameters);
         return Util.convertParameterMapToString(parameters);
     }
 
     public  String getPostURL(AuthorizeRequest request)  {
-        Map<String,String> parameters = new HashMap<String,String>();
+        Map<String,String> parameters = new TreeMap<String,String>();
         if(request.getAuthorizationCurrencyCode()== null)
             request.setAuthorizationCurrencyCode(paymentsConfig.getCurrencyCode());
 
@@ -163,7 +145,7 @@ public class RequestHelper {
     }
 
     public  String getPostURL(GetAuthorizationDetailsRequest request) {
-        Map<String,String> parameters = new HashMap<String,String>();
+        Map<String,String> parameters = new TreeMap<String,String>();
         parameters.put(ServiceConstants.ACTION , ServiceConstants.GET_AUTHORIZATION_DETAILS);
         if(request.getAmazonAuthorizationId() != null) {
             parameters.put(ServiceConstants.AMAZON_AUTHORIZATION_ID, request.getAmazonAuthorizationId());
@@ -175,7 +157,7 @@ public class RequestHelper {
     }
 
     public  String getPostURL(CaptureRequest request) {
-        Map<String,String> parameters = new HashMap<String,String>();
+        Map<String,String> parameters = new TreeMap<String,String>();
         parameters.put(ServiceConstants.ACTION , ServiceConstants.CAPTURE);
 
         if(request.getCaptureCurrencyCode()== null)
@@ -203,7 +185,7 @@ public class RequestHelper {
     }
 
     public  String getPostURL(GetCaptureDetailsRequest request) {
-        Map<String,String> parameters = new HashMap<String,String>();
+        Map<String,String> parameters = new TreeMap<String,String>();
         parameters.put(ServiceConstants.ACTION , ServiceConstants.GET_CAPTURE_DETAILS);
         if(request.getAmazonCaptureId() != null) {
             parameters.put(ServiceConstants.AMAZON_CAPTURE_ID, request.getAmazonCaptureId());
@@ -215,7 +197,7 @@ public class RequestHelper {
     }
 
     public  String getPostURL(ConfirmOrderReferenceRequest request)  {
-        Map<String,String> parameters = new HashMap<String,String>();
+        Map<String,String> parameters = new TreeMap<String,String>();
         parameters.put(ServiceConstants.ACTION , ServiceConstants.CONFIRM_ORDER_REFERENCE);
         if(request.getAmazonOrderReferenceId() != null) {
             parameters.put(ServiceConstants.AMAZON_ORDER_REFERENCE_ID , request.getAmazonOrderReferenceId());
@@ -227,7 +209,7 @@ public class RequestHelper {
     }
 
     public  String getPostURL(CancelOrderReferenceRequest request)  {
-        Map<String,String> parameters = new HashMap<String,String>();
+        Map<String,String> parameters = new TreeMap<String,String>();
         parameters.put(ServiceConstants.ACTION , ServiceConstants.CANCEL_ORDER_REFERENCE);
         if(request.getAmazonOrderReferenceId() != null) {
             parameters.put(ServiceConstants.AMAZON_ORDER_REFERENCE_ID, request.getAmazonOrderReferenceId());
@@ -241,7 +223,7 @@ public class RequestHelper {
     }
 
     public  String getPostURL(CloseOrderReferenceRequest request)  {
-        Map<String,String> parameters = new HashMap<String,String>();
+        Map<String,String> parameters = new TreeMap<String,String>();
         parameters.put(ServiceConstants.ACTION , ServiceConstants.CLOSE_ORDER_REFERENCE);
         if(request.getAmazonOrderReferenceId() != null) {
             parameters.put(ServiceConstants.AMAZON_ORDER_REFERENCE_ID , request.getAmazonOrderReferenceId());
@@ -255,7 +237,7 @@ public class RequestHelper {
     }
 
     public  String getPostURL(CloseAuthorizationRequest request)  {
-        Map<String,String> parameters = new HashMap<String,String>();
+        Map<String,String> parameters = new TreeMap<String,String>();
         parameters.put(ServiceConstants.ACTION , ServiceConstants.CLOSE_AUTHORIZATION);
         if(request.getAmazonAuthorizationId() != null) {
             parameters.put(ServiceConstants.AMAZON_AUTHORIZATION_ID, request.getAmazonAuthorizationId());
@@ -269,7 +251,7 @@ public class RequestHelper {
     }
 
     public  String getPostURL(RefundRequest request) {
-        Map<String,String> parameters = new HashMap<String,String>();
+        Map<String,String> parameters = new TreeMap<String,String>();
         parameters.put(ServiceConstants.ACTION , ServiceConstants.REFUND);
         if(request.getRefundCurrencyCode()== null)
             request.setRefundCurrencyCode(paymentsConfig.getCurrencyCode());
@@ -296,7 +278,7 @@ public class RequestHelper {
     }
 
     public String getPostURL(GetRefundDetailsRequest request)  {
-        Map<String,String> parameters = new HashMap<String,String>();
+        Map<String,String> parameters = new TreeMap<String,String>();
         parameters.put(ServiceConstants.ACTION , ServiceConstants.GET_REFUND_DETAILS);
         if(request.getAmazonRefundId() != null)
             parameters.put(ServiceConstants.AMAZON_REFUND_ID, request.getAmazonRefundId());
@@ -307,7 +289,7 @@ public class RequestHelper {
     }
 
     public String getPostURL(GetProviderCreditDetailsRequest request) {
-        Map<String,String> parameters = new HashMap<String,String>();
+        Map<String,String> parameters = new TreeMap<String,String>();
         parameters.put(ServiceConstants.ACTION , ServiceConstants.GET_PROVIDER_CREDIT_DETAILS);
         if(request.getAmazonProviderCreditId() != null)
             parameters.put(ServiceConstants.AMAZON_PROVIDER_CREDIT_ID , request.getAmazonProviderCreditId());
@@ -320,7 +302,7 @@ public class RequestHelper {
     }
 
     public String getPostURL(GetProviderCreditReversalDetailsRequest request) {
-        Map<String,String> parameters = new HashMap<String,String>();
+        Map<String,String> parameters = new TreeMap<String,String>();
         parameters.put(ServiceConstants.ACTION , ServiceConstants.GET_REVERSE_PROVIDER_CREDIT_DETAILS);
         if(request.getAmazonProviderCreditReversalId() != null)
             parameters.put(ServiceConstants.AMAZON_PROVIDER_CREDIT_REVERSAL_ID , request.getAmazonProviderCreditReversalId());
@@ -333,7 +315,7 @@ public class RequestHelper {
     }
 
     public String getPostURL(ReverseProviderCreditRequest request) {
-        Map<String,String> parameters = new HashMap<String,String>();
+        Map<String,String> parameters = new TreeMap<String,String>();
         parameters.put(ServiceConstants.ACTION , ServiceConstants.REVERSE_PROVIDER_CREDIT_DETAILS);
         if(request.getCreditReversalAmountCurrencyCode()== null)
             request.setCreditReversalCurrencyCode(paymentsConfig.getCurrencyCode());
@@ -356,7 +338,7 @@ public class RequestHelper {
     }
 
     public  String getPostURL(GetBillingAgreementDetailsRequest request) {
-        Map<String,String> parameters = new HashMap<String,String>();
+        Map<String,String> parameters = new TreeMap<String,String>();
         parameters.put(ServiceConstants.ACTION , ServiceConstants.GET_BILLING_AGREEMENT_DETAILS);
         if(request.getAmazonBillingAgreementId() != null )
             parameters.put(ServiceConstants.AMAZON_BILLING_AGREEMENT_ID, request.getAmazonBillingAgreementId());
@@ -369,7 +351,7 @@ public class RequestHelper {
     }
 
     public String getPostURL(SetBillingAgreementDetailsRequest request) {
-        Map<String,String> parameters = new HashMap<String,String>();
+        Map<String,String> parameters = new TreeMap<String,String>();
         parameters.put(ServiceConstants.ACTION , ServiceConstants.SET_BILLING_AGREEMENT_DETAILS);
         if(request.getAmazonBillingAgreementId() != null)
             parameters.put(ServiceConstants.AMAZON_BILLING_AGREEMENT_ID, request.getAmazonBillingAgreementId());
@@ -386,11 +368,11 @@ public class RequestHelper {
         if(request.getCustomInformation() != null)
             parameters.put(ServiceConstants.BILLING_AGREEMENT_SELLER_CUSTOM_INFORMATION, request.getCustomInformation());
         addClientParameters(parameters);
-       return Util.convertParameterMapToString(parameters);
+        return Util.convertParameterMapToString(parameters);
     }
 
     public String getPostURL(ConfirmBillingAgreementRequest request) {
-        Map<String,String> parameters = new HashMap<String,String>();
+        Map<String,String> parameters = new TreeMap<String,String>();
         parameters.put(ServiceConstants.ACTION , ServiceConstants.CONFIRM_BILLING_AGREEMENT_DETAILS);
         if(request.getAmazonBillingAgreementId() != null)
             parameters.put(ServiceConstants.AMAZON_BILLING_AGREEMENT_ID, request.getAmazonBillingAgreementId());
@@ -401,7 +383,7 @@ public class RequestHelper {
     }
 
     public String getPostURL(CloseBillingAgreementRequest request) {
-        Map<String,String> parameters = new HashMap<String,String>();
+        Map<String,String> parameters = new TreeMap<String,String>();
         parameters.put(ServiceConstants.ACTION , ServiceConstants.CLOSE_BILLING_AGREEMENT_DETAILS);
         if(request.getAmazonBillingAgreementId() != null)
             parameters.put(ServiceConstants.AMAZON_BILLING_AGREEMENT_ID, request.getAmazonBillingAgreementId());
@@ -410,14 +392,14 @@ public class RequestHelper {
         if(request.getMwsAuthToken() != null)
             parameters.put(ServiceConstants.MWS_AUTH_TOKEN, request.getMwsAuthToken());
         addClientParameters(parameters);
-       return Util.convertParameterMapToString(parameters);
+        return Util.convertParameterMapToString(parameters);
     }
 
-   public String getPostURL(AuthorizeOnBillingAgreementRequest request) {
-        Map<String,String> parameters = new HashMap<String,String>();
-            parameters.put(ServiceConstants.ACTION , ServiceConstants.AUTHORIZE_BILLING_AGREEMENT_DETAILS);
+    public String getPostURL(AuthorizeOnBillingAgreementRequest request) {
+        Map<String,String> parameters = new TreeMap<String,String>();
+        parameters.put(ServiceConstants.ACTION , ServiceConstants.AUTHORIZE_BILLING_AGREEMENT_DETAILS);
         if(request.getAuthorizationCurrencyCode()== null)
-           request.setAuthorizationCurrencyCode(paymentsConfig.getCurrencyCode());
+            request.setAuthorizationCurrencyCode(paymentsConfig.getCurrencyCode());
         if(request.getAmazonBillingAgreementId() != null )
             parameters.put(ServiceConstants.AMAZON_BILLING_AGREEMENT_ID, request.getAmazonBillingAgreementId());
         if(request.getAuthorizationReferenceId()  != null)
@@ -452,19 +434,19 @@ public class RequestHelper {
         return Util.convertParameterMapToString(parameters);
     }
 
-   public String getPostURL(ValidateBillingAgreementRequest request)  {
-        Map<String,String> parameters = new HashMap<String,String>();
+    public String getPostURL(ValidateBillingAgreementRequest request)  {
+        Map<String,String> parameters = new TreeMap<String,String>();
         parameters.put(ServiceConstants.ACTION , ServiceConstants.VALIDATE_BILLING_AGREEMENT_DETAILS);
         if(request.getAmazonBillingAgreementId() != null)
             parameters.put(ServiceConstants.AMAZON_BILLING_AGREEMENT_ID, request.getAmazonBillingAgreementId());
         if(request.getMwsAuthToken() != null)
             parameters.put(ServiceConstants.MWS_AUTH_TOKEN , request.getMwsAuthToken());
         addClientParameters(parameters);
-       return Util.convertParameterMapToString(parameters);
+        return Util.convertParameterMapToString(parameters);
     }
 
-   private void addProviderCreditToParamMap(List<ProviderCredit> providerCreditList , Map<String,String> parameters) {
-       if(providerCreditList != null) {
+    private void addProviderCreditToParamMap(List<ProviderCredit> providerCreditList , Map<String,String> parameters) {
+        if(providerCreditList != null) {
             int memberListIndex = 1;
             for (ProviderCredit member : providerCreditList) {
                 if(member != null) {
@@ -480,7 +462,7 @@ public class RequestHelper {
                 }
             }
         }
-   }
+    }
 
 
 

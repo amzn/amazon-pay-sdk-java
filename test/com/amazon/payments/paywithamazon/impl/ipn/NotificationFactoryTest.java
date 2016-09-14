@@ -1,6 +1,5 @@
-package test.com.amazon.payments.paywithamazon.impl.ipn;
+package com.amazon.payments.paywithamazon.impl.ipn;
 
-import com.amazon.payments.paywithamazon.impl.ipn.*;
 import com.amazon.payments.paywithamazon.response.ipn.model.ProviderCreditNotification;
 import com.amazon.payments.paywithamazon.response.ipn.model.RefundNotification;
 import com.amazon.payments.paywithamazon.exceptions.AmazonClientException;
@@ -43,20 +42,21 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.Mock;
+import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(value = { NotificationVerification.class})
 public class NotificationFactoryTest {
-         
-        private Map<String,String> ipnHeader;
-        @Mock private InputStream is;
-	    @Mock private CertificateFactory mockCertificateFactory; 
-	    @Mock private X509Certificate mockX509Certificate;
-        @Mock private Signature signatureC;
-        @Mock private PublicKey publicKey;
-        @Mock private URL url;
+
+    private Map<String,String> ipnHeader;
+    @Mock private InputStream is;
+    @Mock private CertificateFactory mockCertificateFactory;
+    @Mock private X509Certificate mockX509Certificate;
+    @Mock private Signature signatureC;
+    @Mock private PublicKey publicKey;
+    @Mock private URL url;
 
     @Before
     public void setUp() throws Exception {
@@ -68,20 +68,20 @@ public class NotificationFactoryTest {
         PowerMockito.whenNew(URL.class).withParameterTypes(String.class).withArguments(Mockito.anyString()).thenReturn(url);
         PowerMockito.when(url.openStream()).thenReturn(is);
         PowerMockito.mockStatic(CertificateFactory.class);
-	    PowerMockito.when(CertificateFactory.getInstance("X.509")).thenReturn(mockCertificateFactory);
+        PowerMockito.when(CertificateFactory.getInstance("X.509")).thenReturn(mockCertificateFactory);
         PowerMockito.when(mockCertificateFactory.generateCertificate(is)).thenReturn((X509Certificate)mockX509Certificate);
         PowerMockito.mockStatic(Signature.class);
-	    PowerMockito.when(Signature.getInstance("SHA1withRSA")).thenReturn(signatureC);
+        PowerMockito.when(Signature.getInstance("SHA1withRSA")).thenReturn(signatureC);
         PowerMockito.when(mockX509Certificate.getPublicKey()).thenReturn(publicKey);
-	    PowerMockito.when(signatureC.verify(toByteArray(Mockito.any()))).thenReturn(true);
+        PowerMockito.when(signatureC.verify(toByteArray(Mockito.any()))).thenReturn(true);
     }
-    
+
     /**
      * Incorrect signature in IPN
      */
     @Test
     public void testInvalidSignatureIPN() throws SignatureException, IOException {
-        try { 
+        try {
             PowerMockito.when(signatureC.verify(toByteArray(Mockito.any()))).thenReturn(false);
             NotificationFactory.parseNotification(ipnHeader, loadTestFile("AuthorizeNotification.json"));
             Assert.fail();
@@ -90,21 +90,21 @@ public class NotificationFactoryTest {
         }
     }
 
-    
+
     /**
      * Incorrect notification type
      */
     @Test
     public void testUnrecognizedNotificationTypeIPN() throws IOException {
-        try { 
+        try {
             NotificationFactory.parseNotification(ipnHeader,loadTestFile("BadNotification.json"));
             Assert.fail();
         } catch (AmazonClientException e) {
             Assert.assertEquals("Unknown notification type: BlahBlah" , e.getMessage());
         }
     }
-    
-    
+
+
 
     /**
      * Test Authorization Notification
@@ -115,9 +115,9 @@ public class NotificationFactoryTest {
         Notification notification = NotificationFactory.parseNotification(ipnHeader, notificationPayload);
         testIPNValues(notification , notificationPayload);
     }
-    
+
     /**
-     * Test Capture Notification 
+     * Test Capture Notification
      */
     @Test
     public void testCaptureIPN() throws IOException, DatatypeConfigurationException {
@@ -125,10 +125,10 @@ public class NotificationFactoryTest {
         Notification notification = NotificationFactory.parseNotification(ipnHeader, notificationPayload);
         testIPNValues(notification , notificationPayload);
     }
-    
-    
+
+
     /**
-     * Test Order Reference Notification 
+     * Test Order Reference Notification
      */
     @Test
     public void testOrderReferenceIPN() throws IOException, DatatypeConfigurationException {
@@ -136,10 +136,10 @@ public class NotificationFactoryTest {
         Notification notification = NotificationFactory.parseNotification(ipnHeader, notificationPayload);
         testIPNValues(notification , notificationPayload);
     }
-    
-    
+
+
     /**
-     * Test Refund Notification 
+     * Test Refund Notification
      */
     @Test
     public void testRefundIPN() throws IOException, DatatypeConfigurationException {
@@ -147,8 +147,8 @@ public class NotificationFactoryTest {
         Notification notification = NotificationFactory.parseNotification(ipnHeader, notificationPayload);
         testIPNValues(notification , notificationPayload);
     }
-    
-    
+
+
     /**
      * Test ProviderCredit Notification
      */
@@ -158,7 +158,7 @@ public class NotificationFactoryTest {
         Notification notification = NotificationFactory.parseNotification(ipnHeader, notificationPayload);
         testIPNValues(notification , notificationPayload);
     }
-    
+
     /**
      * Test ProviderCredit Notification
      */
@@ -168,11 +168,11 @@ public class NotificationFactoryTest {
         Notification notification = NotificationFactory.parseNotification(ipnHeader, notificationPayload);
         testIPNValues(notification , notificationPayload);
     }
-    
+
     /**
      * Helper method to test IPN Notification values
      * @param notification
-     * @param payLoad 
+     * @param payLoad
      */
     private void testIPNValues(Notification notification , String payLoad) throws DatatypeConfigurationException {
         NotificationType type = notification.getNotificationType();
@@ -213,27 +213,27 @@ public class NotificationFactoryTest {
 
         }
     }
-    
-    
+
+
     /**
      * Helper method to test notification values
-     * @param notification 
+     * @param notification
      */
     private void testIPNMetaData(Notification notification) {
-         Assert.assertEquals(notification.getNotificationMetadata().getSigningCertUrl() , "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-bb750dd426d95ee9390147a5624348ee.pem");
-         Assert.assertEquals(notification.getNotificationMetadata().getMessageId(), "33bd40e3-6a9a-58cf-b6be-0eb9ca6bc4e9");
-         Assert.assertEquals(notification.getNotificationMetadata().getSignature(), "eUInUlaydzV4eoOcSKHSyNqt9yFAa1r0kFQz2PxXlNV4Ik04pYRyZlgbXy5NdhzdRzGKwIlPG8QcL2HlNe7nFkKecQapQZYmI7cWpvEslO/xrJgP6jTH5j18Xkk7/lmhV79wgwIWjT7LtbMrc3jC7QNDqwiNcRT694WKpFx1+PFa4BdUd0cUCyPLQrWFcNpS0z8fcaERqO98BUZkkPVfwWA7bQhIwQnxJNVzL9dFxWAhs98W7N89/8yEEg7nz/OK0hr9vfaT0P7ZGCYNsrDlwooGbhtJlhj2aLjfFwR91P7h5cK20nx3eBgN3Nen6BXU1jqnz7plA3QVuygzRIUJmA==");
-         Assert.assertEquals(notification.getNotificationMetadata().getSignatureVersion(), "1");
-         Assert.assertEquals(notification.getNotificationMetadata().getTimeStamp(), "2015-08-28T17:47:29.280Z");
-         Assert.assertEquals(notification.getNotificationMetadata().getTopicArn(), "arn:aws:sns:us-east-1:291180941288:A3BXB0YN3XH17HA2K7NDRCTOTPW9");
-         Assert.assertEquals(notification.getNotificationMetadata().getType(), "Notification");
-         Assert.assertEquals(notification.getNotificationMetadata().getUnsubscribeUrl(), "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:291180941288:A3BXB0YN3XH17HA2K7NDRCTOTPW9:05542723-375e-4609-98f1-8abcf427d95f");
-         
-         Assert.assertEquals(notification.getMessageMetadata().getNotificationReferenceId(), "1111111-1111-11111-1111-11111EXAMPLE");
-         Assert.assertEquals(notification.getMessageMetadata().getVersion(), "2013-01-01");
-         Assert.assertEquals(notification.getMessageMetadata().getSellerId(), "A2K7NDRCTOTPW9");
-         Assert.assertEquals(notification.getMessageMetadata().getTimeStamp(), "2015-08-28T17:47:29.215Z");
-         Assert.assertEquals(notification.getMessageMetadata().getReleaseEnvironment(), "Sandbox");
+        Assert.assertEquals(notification.getNotificationMetadata().getSigningCertUrl() , "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-bb750dd426d95ee9390147a5624348ee.pem");
+        Assert.assertEquals(notification.getNotificationMetadata().getMessageId(), "33bd40e3-6a9a-58cf-b6be-0eb9ca6bc4e9");
+        Assert.assertEquals(notification.getNotificationMetadata().getSignature(), "eUInUlaydzV4eoOcSKHSyNqt9yFAa1r0kFQz2PxXlNV4Ik04pYRyZlgbXy5NdhzdRzGKwIlPG8QcL2HlNe7nFkKecQapQZYmI7cWpvEslO/xrJgP6jTH5j18Xkk7/lmhV79wgwIWjT7LtbMrc3jC7QNDqwiNcRT694WKpFx1+PFa4BdUd0cUCyPLQrWFcNpS0z8fcaERqO98BUZkkPVfwWA7bQhIwQnxJNVzL9dFxWAhs98W7N89/8yEEg7nz/OK0hr9vfaT0P7ZGCYNsrDlwooGbhtJlhj2aLjfFwR91P7h5cK20nx3eBgN3Nen6BXU1jqnz7plA3QVuygzRIUJmA==");
+        Assert.assertEquals(notification.getNotificationMetadata().getSignatureVersion(), "1");
+        Assert.assertEquals(notification.getNotificationMetadata().getTimeStamp(), "2015-08-28T17:47:29.280Z");
+        Assert.assertEquals(notification.getNotificationMetadata().getTopicArn(), "arn:aws:sns:us-east-1:291180941288:A3BXB0YN3XH17HA2K7NDRCTOTPW9");
+        Assert.assertEquals(notification.getNotificationMetadata().getType(), "Notification");
+        Assert.assertEquals(notification.getNotificationMetadata().getUnsubscribeUrl(), "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:291180941288:A3BXB0YN3XH17HA2K7NDRCTOTPW9:05542723-375e-4609-98f1-8abcf427d95f");
+
+        Assert.assertEquals(notification.getMessageMetadata().getNotificationReferenceId(), "1111111-1111-11111-1111-11111EXAMPLE");
+        Assert.assertEquals(notification.getMessageMetadata().getVersion(), "2013-01-01");
+        Assert.assertEquals(notification.getMessageMetadata().getSellerId(), "A2K7NDRCTOTPW9");
+        Assert.assertEquals(notification.getMessageMetadata().getTimeStamp(), "2015-08-28T17:47:29.215Z");
+        Assert.assertEquals(notification.getMessageMetadata().getReleaseEnvironment(), "Sandbox");
     }
 
     private void testOrderReferenceIPNDetails(OrderReferenceNotification or) throws DatatypeConfigurationException {
@@ -256,7 +256,7 @@ public class NotificationFactoryTest {
         Assert.assertEquals(or.getOrderReference().getSellerNote(), null);
         Assert.assertEquals(or.getOrderReference().getSellerOrderAttributes().getCustomInformation(), null);
     }
-    
+
     private void testBillingAgreementIPNDetails(BillingAgreementNotification bn) throws DatatypeConfigurationException {
         Assert.assertEquals(bn.getBillingAgreement().getAmazonBillingAgreementId() , "");
         Assert.assertEquals(bn.getBillingAgreement().getBillingAddress(), "");
@@ -275,7 +275,7 @@ public class NotificationFactoryTest {
         Assert.assertEquals(bn.getBillingAgreement().getSellerBillingAgreementAttributes(), "");
         Assert.assertEquals(bn.getBillingAgreement().getSellerNote(), "");
     }
-    
+
     private void testProviderCreditIPNDetails(ProviderCreditNotification pc) throws DatatypeConfigurationException {
         Assert.assertEquals(pc.getProviderCreditDetails().getAmazonProviderCreditId(), "S01-0458164-4040121-P098523");
         XMLGregorianCalendar xgc = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-10-29T16:48:59.040Z");
@@ -290,7 +290,7 @@ public class NotificationFactoryTest {
         Assert.assertEquals(pc.getProviderCreditDetails().getSellerId(), "A37GX652OWOXVH");
         Assert.assertEquals(pc.getProviderCreditDetails().getProviderSellerId(), "A2K7NDRCTOTPW9");
     }
-    
+
     private void testRefundIPNDetails(RefundNotification rn) throws DatatypeConfigurationException {
         Assert.assertEquals(rn.getRefundDetails().getAmazonRefundId(), "P01-0000000-0000000-000000");
         XMLGregorianCalendar xgc = DatatypeFactory.newInstance().newXMLGregorianCalendar("2013-01-01T01:01:01.001Z");
@@ -320,8 +320,8 @@ public class NotificationFactoryTest {
 
     }
     /**
-     * Helper method to test the capture notification 
-     * @param CaptureNotification 
+     * Helper method to test the capture notification
+     * @param cp
      */
     private void testCaptureIPNDetails(CaptureNotification cp) throws DatatypeConfigurationException {
         Assert.assertEquals(cp.getCaptureDetails().getAmazonCaptureId(), "P01-0000000-0000000-000000");
@@ -342,7 +342,7 @@ public class NotificationFactoryTest {
         Assert.assertEquals(cp.getCaptureDetails().getCaptureStatus().getState(), "Completed");
         Assert.assertEquals(cp.getCaptureDetails().getSoftDescriptor(), "AMZ*softDescriptor");
     }
-    
+
     private void testAuthorizeIPNDetails(AuthorizationNotification an) throws DatatypeConfigurationException {
         Assert.assertEquals(an.getAuthorizationDetails().getAmazonAuthorizationId(), "P01-0000000-0000000-000000");
         Assert.assertEquals(an.getAuthorizationDetails().getAuthorizationAmount().getAmount(), "5.0");
@@ -379,17 +379,17 @@ public class NotificationFactoryTest {
                 Reader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
                 int n;
                 while ((n = reader.read(buffer)) != -1) {
-                writer.write(buffer, 0, n);
-             }
+                    writer.write(buffer, 0, n);
+                }
             } finally {
                 is.close();
             }
             return writer.toString();
-        } else {        
+        } else {
             return "";
         }
     }
-    
+
     public static byte[] toByteArray(Object obj) throws IOException {
         byte[] bytes = null;
         ByteArrayOutputStream bos = null;

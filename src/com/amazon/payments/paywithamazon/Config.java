@@ -32,7 +32,6 @@ public interface Config {
 
     /**
      * Returns currencyCode in PaymentsConfig
-     * @see com.amazon.payments.lpa.types.CurrencyCode
      *
      * @return currencyCode
      */
@@ -40,7 +39,6 @@ public interface Config {
 
     /**
      * Returns the environment from PaymentsConfig
-     * @see com.amazon.payments.lpa.types.Environment
      *
      * @return environment
      */
@@ -77,7 +75,7 @@ public interface Config {
     /**
      * Returns region code from PaymentsConfig
      *
-     * @see com.amazon.payments.lpa.types.Region
+     * @see com.amazon.payments.paywithamazon.impl.PaymentsConfig
      *
      * @return region
      */
@@ -127,16 +125,14 @@ public interface Config {
 
     /**
      * Sets currencyCode in PaymentsConfig
-     * @see com.amazon.payments.lpa.types.CurrencyCode
      * @param currencyCode
      */
     void setCurrencyCode(CurrencyCode currencyCode);
 
     /**
      *  Sets environment in PaymentsConfig.
-     *  {@link com.amazon.payments.lpa.types.Environment Environment}.
      *
-     * @param isSandbox
+     * @param environment
      */
     void setEnvironment(Environment environment);
 
@@ -170,7 +166,6 @@ public interface Config {
 
     /**
      * Identifies region associated with Login And Pay with Amazon API operations.
-     *                  {@link com.amazon.payments.lpa.types.Region Region}.
      *
      * @param region
      *
@@ -200,127 +195,5 @@ public interface Config {
      */
     void setUseAutoRetryOnThrottle(boolean useAutoRetryOnThrottle);
 
-    /**
-     * Sets AccessKey in PaymentsConfig
-     *
-     * @param accessKeyId
-     *
-     * @return Returns updated PaymentsConfig object
-     */
-    PaymentsConfig withAccessKey(String accessKeyId);
 
-    /**
-     * This method sets application name in PaymentsConfig
-     *
-     * @param applicationName
-     *
-     * @return
-     *          Returns updated PaymentsConfig object
-     */
-    PaymentsConfig withApplicationName(String applicationName);
-
-    /**
-     * This method sets application version in PaymentsConfig
-     *
-     * @param applicationVersion
-     *
-     * @return Returns updated PaymentsConfig object
-     */
-    PaymentsConfig withApplicationVersion(String applicationVersion);
-
-    /**
-     * Represents currency code to be used for all Login And Pay with Amazon API operations.
-     *                  Accepts three-digit currency code. In ISO 4217 format.
-     *                  {@link com.amazon.payments.lpa.types.CurrencyCode CurrencyCode}
-     *
-     * @param currencyCode
-     *
-     * @return Returns updated PaymentsConfig object
-     */
-    PaymentsConfig withCurrencyCode(CurrencyCode currencyCode);
-
-    /**
-     * This method sets proxy host in PaymentsConfig
-     *
-     * @param proxyHost
-     *
-     * @return Returns updated PaymentsConfig object
-     */
-    PaymentsConfig withProxyHost(String proxyHost);
-
-    /**
-     * Sets proxy username in PaymentsConfig.
-     * @param proxyPassword
-     *
-     * @return
-     *          Returns updated PaymentsConfig object
-     */
-    PaymentsConfig withProxyPassword(String proxyPassword);
-
-    /**
-     * This method sets proxy port in PaymentsConfig
-     *
-     * @param proxyPort
-     *
-     * @return Returns updated PaymentsConfig object
-     */
-    PaymentsConfig withProxyPort(int proxyPort);
-
-    /**
-     *  This methods sets proxy username in PaymentsConfig
-     *
-     * @param proxyUsername
-     *
-     * @return Returns updated PaymentsConfig object
-     */
-    PaymentsConfig withProxyUsername(String proxyUsername);
-
-    /**
-     * Identifies region associated with Login And Pay with Amazon API operations.
-     *                  {@link com.amazon.payments.lpa.types.Region Region}.
-     *
-     * @param region
-     *
-     * @return Returns updated PaymentsConfig object
-     *
-     */
-    PaymentsConfig withRegion(Region region);
-
-    /**
-     *  If true, sets environment to SANDBOX mode.
-     *  {@link com.amazon.payments.lpa.types.Environment Environment}.
-     *
-     * @param isSandbox
-     *
-     * @return Returns updated PaymentsConfig object
-     */
-    PaymentsConfig withSandboxMode(boolean isSandbox);
-
-    /**
-     * Sets SecretKey in PaymentsConfig
-     * @param secretAccessKey
-     * @return Returns updated PaymentsConfig object
-     */
-    PaymentsConfig withSecretKey(String secretAccessKey);
-
-    /**
-     * Your merchantId/sellerId is a unique identifier supplied by
-     * Amazon when you first created your account. This ID can be found
-     * in the Amazon Seller Central account.
-     *
-     * @param sellerId
-     *
-     * @return Returns updated PaymentsConfig object
-     */
-    PaymentsConfig withSellerId(String sellerId);
-
-    /**
-     * Sets autoRetryOnThrottle in PaymentsConfig
-     * If set to true, client will retry on service exceptions that are either 500 internal server
-     * errors, 503 service unavailable errors, service throttling errors.
-     *
-     * @return Returns updated PaymentsConfig object
-     */
-    PaymentsConfig withUseAutoRetryOnThrottle(boolean useAutoRetryOnThrottle);
-    
 }

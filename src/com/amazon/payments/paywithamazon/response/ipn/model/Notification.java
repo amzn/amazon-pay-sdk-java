@@ -1,8 +1,10 @@
 package com.amazon.payments.paywithamazon.response.ipn.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import java.util.Map;
 
-
+@XmlAccessorType(XmlAccessType.FIELD)
 /**
  * Abstract implementation of the notification interface encapsulates 
  * the common properties of all notifications
@@ -14,12 +16,12 @@ public abstract class Notification {
      */
     private NotificationMetaData notificationMetadata;
     private IPNMessageMetaData messageMetadata;
-    
+
     /**
      * Notification in JSON representation
      */
     private String notificationAsJSON;
-    
+
     /**
      * Notification values stored in Map
      */
@@ -30,13 +32,13 @@ public abstract class Notification {
      */
     private NotificationType notificationType;
 
-    
+
     /** To make JaxB happy
      *  Should not be use anywhere else
      */
     public Notification() {
     }
-    
+
     /**
      * Create a new typed notification instance
      * @param type Notification type
@@ -44,17 +46,17 @@ public abstract class Notification {
     protected Notification(NotificationType type ) {
         this.notificationType = type;
     }
-    
+
     /*
      * Indicates what type of notification is implementing this interface
     */
     public NotificationType getNotificationType() {
         return notificationType;
     }
-    
+
     /**
      * Returns the metadata associated with the notification
-     * 
+     *
      * @return notificationMetadata
      */
     public NotificationMetaData getNotificationMetadata() {
@@ -63,42 +65,42 @@ public abstract class Notification {
 
     /**
      * Setter method for notificationMetaData
-     * @param metadata 
+     * @param metadata
      */
     public void setNotificationMetadata(NotificationMetaData metadata) {
         notificationMetadata = metadata;
-    }  
-    
+    }
+
 
     /**
      * Setter method for notification JSON
-     * @param json 
+     * @param json
      */
     public void setJSON(String json) {
         notificationAsJSON = json;
     }
-    
+
     /**
      * Returns the notification in JSON format
-     * 
+     *
      * @return notificationAsJSON
      */
     public String toJSON() {
         return notificationAsJSON;
     }
-    
+
     /**
      * Setter for notificationMap
-     * 
-     * @param map 
+     *
+     * @param map
      */
     public void setMap( Map<String,String> map ) {
         notificationAsMap = map;
     }
-    
+
     /**
      * Returns the notification values as a Map datastructure
-     * 
+     *
      * @return notificationAsMap
      */
     public Map<String,String> toMap() {
@@ -107,8 +109,8 @@ public abstract class Notification {
 
     /**
      * Setter for IPN MessageMetadata
-     * 
-     * @param ipnMessageMetaData 
+     *
+     * @param ipnMessageMetaData
      */
     public void setMessageMetaData(IPNMessageMetaData ipnMessageMetaData) {
         messageMetadata = ipnMessageMetaData;
@@ -116,7 +118,7 @@ public abstract class Notification {
 
     /**
      * Returns the notification message metadata 
-     * 
+     *
      * @return messageMetadata
      */
     public IPNMessageMetaData getMessageMetadata() {
@@ -125,14 +127,14 @@ public abstract class Notification {
 
     /**
      * Returns the string representation of Notification
-     * @return 
+     * @return
      */
     @Override
     public String toString() {
-        return "Notification{" + "notificationMetadata=" + notificationMetadata + ", messageMetadata=" 
-                + messageMetadata + ", notificationAsJSON=" + notificationAsJSON + ", notificationAsMap=" 
+        return "Notification{" + "notificationMetadata=" + notificationMetadata + ", messageMetadata="
+                + messageMetadata + ", notificationAsJSON=" + notificationAsJSON + ", notificationAsMap="
                 + notificationAsMap + ", notificationType=" + notificationType + '}';
     }
-  
-    
+
+
 }

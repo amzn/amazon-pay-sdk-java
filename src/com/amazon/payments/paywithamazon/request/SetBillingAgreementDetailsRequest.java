@@ -3,15 +3,15 @@ package com.amazon.payments.paywithamazon.request;
 import java.io.Serializable;
 
 /**
- * Container for the parameters to the {@link com.amazon.payments.lpa.Client#setBillingAgreementDetails(SetBillingAgreementDetailsRequest) SetBillingAgreementDetails operation}.
- * For more information documentation, see  
- * <a href="https://payments.amazon.com/documentation/"> API Reference</a>
+ * Container for the parameters to the SetBillingAgreementDetails operation.
+ * For more information documentation, see
+ * https://payments.amazon.com/documentation/
  */
 public class SetBillingAgreementDetailsRequest implements Serializable{
-    
+
     //required parameters
     private String amazonBillingAgreementId;
-    
+
     //optional parameters
     private String platformId;
     private String sellerNote;
@@ -19,16 +19,16 @@ public class SetBillingAgreementDetailsRequest implements Serializable{
     private String storeName;
     private String customInformation;
     private String mwsAuthToken;
-        
+
     /**
-     * 
+     *
      * @param amazonBillingAgreementId The billing agreement identifier. 
      * This value is retrieved from the Amazon Button, AddressBook, or Wallet widgets.
      */
     public SetBillingAgreementDetailsRequest(String amazonBillingAgreementId) {
         this.amazonBillingAgreementId = amazonBillingAgreementId;
     }
-    
+
     /**
      * Sets MWSAuthToken. This is applicable for third-party solution providers only
      * @param mwsAuthToken
@@ -49,7 +49,7 @@ public class SetBillingAgreementDetailsRequest implements Serializable{
         this.platformId = platformId;
         return this;
     }
-   
+
     /**
      * Sets description of the billing agreement that is displayed in emails to the buyer.
      * @param sellerNote
@@ -58,7 +58,7 @@ public class SetBillingAgreementDetailsRequest implements Serializable{
         this.sellerNote = sellerNote;
         return this;
     }
-    
+
     /**
      * Sets the merchant-specified identifier of this billing agreement.
      * @param sellerBillingAgreementId
@@ -67,7 +67,7 @@ public class SetBillingAgreementDetailsRequest implements Serializable{
         this.sellerBillingAgreementId = sellerBillingAgreementId;
         return this;
     }
-    
+
     /**
      * Sets identifier of the store from which the order was placed. 
      * This overrides the default value in Seller Central under Settings > Account Settings.
@@ -77,7 +77,7 @@ public class SetBillingAgreementDetailsRequest implements Serializable{
         this.storeName = storeName;
         return this;
     }
-    
+
     /**
      * Sets any additional information that you wish to include with this billing agreement.
      * @param customInformation
@@ -88,7 +88,7 @@ public class SetBillingAgreementDetailsRequest implements Serializable{
     }
 
     /**
-     * 
+     *
      * @return amazonBillingAgreementId
      */
     public String getAmazonBillingAgreementId() {
@@ -96,7 +96,7 @@ public class SetBillingAgreementDetailsRequest implements Serializable{
     }
 
     /**
-     * 
+     *
      * @return platformId
      */
     public String getPlatformId() {
@@ -104,7 +104,7 @@ public class SetBillingAgreementDetailsRequest implements Serializable{
     }
 
     /**
-     * 
+     *
      * @return sellerNote
      */
     public String getSellerNote() {
@@ -112,7 +112,7 @@ public class SetBillingAgreementDetailsRequest implements Serializable{
     }
 
     /**
-     * 
+     *
      * @return sellerBillingAgreementId
      */
     public String getSellerBillingAgreementId() {
@@ -120,7 +120,7 @@ public class SetBillingAgreementDetailsRequest implements Serializable{
     }
 
     /**
-     * 
+     *
      * @return storeName
      */
     public String getStoreName() {
@@ -128,7 +128,7 @@ public class SetBillingAgreementDetailsRequest implements Serializable{
     }
 
     /**
-     * 
+     *
      * @return customInformation
      */
     public String getCustomInformation() {
@@ -136,7 +136,7 @@ public class SetBillingAgreementDetailsRequest implements Serializable{
     }
 
     /**
-     * 
+     *
      * @return mwsAuthToken
      */
     public String getMwsAuthToken() {
@@ -153,10 +153,10 @@ public class SetBillingAgreementDetailsRequest implements Serializable{
      */
     @Override
     public String toString() {
-        return "SetBillingAgreementDetailsRequest{" + "amazonBillingAgreementId=" + amazonBillingAgreementId + ", platformId=" 
-                + platformId + ", sellerNote=" + sellerNote + ", sellerBillingAgreementId=" + sellerBillingAgreementId + ", storeName=" 
+        return "SetBillingAgreementDetailsRequest{" + "amazonBillingAgreementId=" + amazonBillingAgreementId + ", platformId="
+                + platformId + ", sellerNote=" + sellerNote + ", sellerBillingAgreementId=" + sellerBillingAgreementId + ", storeName="
                 + storeName + ", customInformation=" + customInformation + ", mwsAuthToken=" + mwsAuthToken + '}';
     }
-    
-    
+
+
 }

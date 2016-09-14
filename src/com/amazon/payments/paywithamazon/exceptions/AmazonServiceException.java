@@ -15,60 +15,60 @@ import java.io.Serializable;
  * why it occurred.
  */
 public class AmazonServiceException extends Exception implements Serializable {
-    
+
     private String message;
     private int statusCode;
     private String errorCode;
     private String errorType;
     private String requestId;
     private String rawResponse;
-    
+
     private static final long serialVersionUID = 1L;
 
     /**
      * Constructs AmazonServiceException using error code, error type, error message 
      * from errorResponse and raw paymentsResponse
-     * 
+     *
      * @param errorResponse
      *                  An ErrorResponse object
-     * @param response 
+     * @param response
      *                  Specify raw response received from Login and Pay with Amazon API
      */
     public AmazonServiceException(ErrorResponse errorResponse , ResponseData response) {
         super(response.toXML());
-        
+
         this.rawResponse = response.toXML();
         this.statusCode = response.getStatusCode();
-        
+
         if(errorResponse != null && errorResponse.getError() != null) {
             this.requestId = errorResponse.getRequestId();
-            if(!errorResponse.getError().isEmpty()) { 
+            if(!errorResponse.getError().isEmpty()) {
                 Error error = errorResponse.getError().get(0);
                 this.message = error.getMessage();
                 this.errorCode = error.getCode();
                 this.errorType = error.getType();
             }
 
-        } 
+        }
     }
-    
+
     /**
      * Constructs AmazonServiceException using error message and underlying exception cause
-     * 
+     *
      * @param message
      *              A message describing the error
-     * @param exception 
+     * @param exception
      *              Underlying exception cause
      */
     public AmazonServiceException(String message , Exception exception) {
         super(message , exception);
         this.message = message;
     }
-    
+
     /**
      * Constructs AmazonServiceException using given message 
-     * 
-     * @param message 
+     *
+     * @param message
      *          A message describing the error
      */
     public AmazonServiceException(String message) {
@@ -78,7 +78,7 @@ public class AmazonServiceException extends Exception implements Serializable {
     /**
      * The HTTP status code that was returned with this service
      *         exception.
-     * 
+     *
      * @return The HTTP status code that was returned with this service
      *         exception.
      */
@@ -88,7 +88,7 @@ public class AmazonServiceException extends Exception implements Serializable {
 
     /**
      * An error code that identifies the type of error that occurred.
-     * 
+     *
      * @return An error code that identifies the type of error that occurred.
      */
     public String getErrorCode() {
@@ -109,17 +109,17 @@ public class AmazonServiceException extends Exception implements Serializable {
     /**
      * The requestID that uniquely identifies the service request
      * the caller made.
-     * 
+     *
      * @return The requestID that uniquely identifies the service request
      * the caller made.
      */
     public String getRequestId() {
         return requestId;
     }
-    
+
     /**
      * A message code that describes the error condition in a human-readable form.
-     * 
+     *
      * @return A message code that describes the error condition in a human-readable form.
      */
     public String getErrorMessage() {
@@ -135,20 +135,20 @@ public class AmazonServiceException extends Exception implements Serializable {
     public String getResponseXml() {
         return rawResponse;
     }
-    
+
 
     /**
      * The String representation of exception details 
-     * 
+     *
      * @return Returns AmazonServiceException exception details as String
      */
     @Override
     public String toString() {
         return getErrorMessage()
-            + " (Status Code: " + getStatusCode()
-            + "; Error Code: " + getErrorCode()
-            + "; Request ID: " + getRequestId() 
-            + "; Raw Response XML: " + getResponseXml() +")";
+                + " (Status Code: " + getStatusCode()
+                + "; Error Code: " + getErrorCode()
+                + "; Request ID: " + getRequestId()
+                + "; Raw Response XML: " + getResponseXml() +")";
     }
 
 }

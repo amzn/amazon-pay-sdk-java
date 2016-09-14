@@ -68,10 +68,6 @@ public interface Client {
      * @return The response from the Authorize service API, as
      *         returned by Amazon Payments
      *
-     * @throws AmazonClientException
-     *             If any internal errors are encountered inside the client while
-     *             attempting to make the request or handle the response.  For example
-     *             if a network connection is not available.
      * @throws AmazonServiceException
      *             If an error response is returned by Amazon Payments indicating
      *             either a problem with the data in the request, or a server side issue.
@@ -95,10 +91,6 @@ public interface Client {
      * @return The response from the AuthorizeOnBillingAgreement service API, as
      *         returned by Amazon Payments
      *
-     * @throws AmazonClientException
-     *             If any internal errors are encountered inside the client while
-     *             attempting to make the request or handle the response.  For example
-     *             if a network connection is not available.
      * @throws AmazonServiceException
      *             If an error response is returned by Amazon Payments indicating
      *             either a problem with the data in the request, or a server side issue.
@@ -114,17 +106,13 @@ public interface Client {
      * Documentation: https://payments.amazon.com/documentation/apireference/201751630#201751990
      * </p>
      *
-     * @param cancelOrderReferenceRequest Container for the necessary
+     * @param request Container for the necessary
      *           parameters to execute the CancelOrderReference service API on
      *           Amazon Payments.
      *
      * @return The response from the CancelOrderReference service API, as
      *         returned by Amazon Payments
      *
-     * @throws AmazonClientException
-     *             If any internal errors are encountered inside the client while
-     *             attempting to make the request or handle the response.  For example
-     *             if a network connection is not available.
      * @throws AmazonServiceException
      *             If an error response is returned by Amazon Payments indicating
      *             either a problem with the data in the request, or a server side issue.
@@ -140,17 +128,13 @@ public interface Client {
      * Documentation: https://payments.amazon.com/documentation/apireference/201751630#201752040
      * </p>
      *
-     * @param captureRequest Container for the necessary
+     * @param request Container for the necessary
      *           parameters to execute the Capture service API on
      *           Amazon Payments.
      *
      * @return The response from the Capture service API, as
      *         returned by Amazon Payments
      *
-     * @throws AmazonClientException
-     *             If any internal errors are encountered inside the client while
-     *             attempting to make the request or handle the response.  For example
-     *             if a network connection is not available.
      * @throws AmazonServiceException
      *             If an error response is returned by Amazon Payments indicating
      *             either a problem with the data in the request, or a server side issue.
@@ -161,18 +145,9 @@ public interface Client {
      * This method combines multiple API calls to perform
      * a complete transaction with minimum requirements.
      *
-     * @param amazonReferenceId
-     *             Amazon generated identifier for the transaction. Accepts OrderReferenceId or AmazonBillingAgreementId
-     *
-     * @param amount
-     *             Amount to be charged
-     *
-     * @param authorizationReferenceId
-     *             The identifier for this authorization transaction that you specify.
-     *             This identifier must be unique for all your authorization transactions.
-     *
-     * @param mwsAuthToken
-     *             Optional, specify this value only if you are marketplace or third-party solution provider
+     * @param chargeRequest Container for the necessary
+     *                parameters to execute the Charge request service API on
+     *                Amazon Payments
      *
      * @return GetAuthorizationDetailsResponseData
      *              Returns the authorization details of the transaction
@@ -188,17 +163,13 @@ public interface Client {
      * Documentation: https://payments.amazon.com/documentation/apireference/201751630#201752070
      * </p>
      *
-     * @param closeAuthorizationRequest Container for the necessary
+     * @param request Container for the necessary
      *           parameters to execute the CloseAuthorization service API on
      *           Amazon Payments.
      *
      * @return The response from the CloseAuthorization service API, as
      *         returned by Amazon Payments
      *
-     * @throws AmazonClientException
-     *             If any internal errors are encountered inside the client while
-     *             attempting to make the request or handle the response.  For example
-     *             if a network connection is not available.
      * @throws AmazonServiceException
      *             If an error response is returned by Amazon Payments indicating
      *             either a problem with the data in the request, or a server side issue.
@@ -221,10 +192,6 @@ public interface Client {
      * @return The response from the CloseBillingAgreement service API, as
      *         returned by Amazon Payments
      *
-     * @throws AmazonClientException
-     *             If any internal errors are encountered inside the client while
-     *             attempting to make the request or handle the response.  For example
-     *             if a network connection is not available.
      * @throws AmazonServiceException
      *             If an error response is returned by Amazon Payments indicating
      *             either a problem with the data in the request, or a server side issue.
@@ -247,10 +214,6 @@ public interface Client {
      * @return The response from the CloseOrderReference service API, as
      *         returned by Amazon Payments
      *
-     * @throws AmazonClientException
-     *             If any internal errors are encountered inside the client while
-     *             attempting to make the request or handle the response.  For example
-     *             if a network connection is not available.
      * @throws AmazonServiceException
      *             If an error response is returned by Amazon Payments indicating
      *             either a problem with the data in the request, or a server side issue.
@@ -273,10 +236,6 @@ public interface Client {
      * @return The response from the ConfirmBillingAgreement service API, as
      *         returned by Amazon Payments
      *
-     * @throws AmazonClientException
-     *             If any internal errors are encountered inside the client while
-     *             attempting to make the request or handle the response.  For example
-     *             if a network connection is not available.
      * @throws AmazonServiceException
      *             If an error response is returned by Amazon Payments indicating
      *             either a problem with the data in the request, or a server side issue.
@@ -292,17 +251,13 @@ public interface Client {
      * Documentation; https://payments.amazon.com/documentation/apireference/201751630#201751980
      * </p>
      *
-     * @param confirmOrderReferenceRequest Container for the necessary
+     * @param request Container for the necessary
      *           parameters to execute the ConfirmOrderReference service API on
      *           Amazon Payments.
      *
      * @return The response from the ConfirmOrderReference service API, as
      *         returned by Amazon Payments
      *
-     * @throws AmazonClientException
-     *             If any internal errors are encountered inside the client while
-     *             attempting to make the request or handle the response.  For example
-     *             if a network connection is not available.
      * @throws AmazonServiceException
      *             If an error response is returned by Amazon Payments indicating
      *             either a problem with the data in the request, or a server side issue.
@@ -318,17 +273,13 @@ public interface Client {
      * Documentation: https://payments.amazon.com/documentation/apireference/201751630#201752030
      * </p>
      *
-     * @param getAuthorizationDetailsRequest Container for the necessary
+     * @param request Container for the necessary
      *           parameters to execute the GetAuthorizationDetails service API on
      *           Amazon Payments.
      *
      * @return The response from the GetAuthorizationDetails service API, as
      *         returned by Amazon Payments
      *
-     * @throws AmazonClientException
-     *             If any internal errors are encountered inside the client while
-     *             attempting to make the request or handle the response.  For example
-     *             if a network connection is not available.
      * @throws AmazonServiceException
      *             If an error response is returned by Amazon Payments indicating
      *             either a problem with the data in the request, or a server side issue.
@@ -349,10 +300,6 @@ public interface Client {
      * @return The response from the GetBillingAgreementDetails service API, as
      *         returned by Amazon Payments
      *
-     * @throws AmazonClientException
-     *             If any internal errors are encountered inside the client while
-     *             attempting to make the request or handle the response.  For example
-     *             if a network connection is not available.
      * @throws AmazonServiceException
      *             If an error response is returned by Amazon Payments indicating
      *             either a problem with the data in the request, or a server side issue.
@@ -368,17 +315,13 @@ public interface Client {
      * Documentation: https://payments.amazon.com/documentation/apireference/201751630#201752060
      * </p>
      *
-     * @param getCaptureDetailsRequest Container for the necessary
+     * @param request Container for the necessary
      *           parameters to execute the GetCaptureDetails service API on
      *           Amazon Payments.
      *
      * @return The response from the GetCaptureDetails service API, as
      *         returned by Amazon Payments
      *
-     * @throws AmazonClientException
-     *             If any internal errors are encountered inside the client while
-     *             attempting to make the request or handle the response.  For example
-     *             if a network connection is not available.
      * @throws AmazonServiceException
      *             If an error response is returned by Amazon Payments indicating
      *             either a problem with the data in the request, or a server side issue.
@@ -399,10 +342,6 @@ public interface Client {
      * @return The response from the GetOrderReferenceDetails service API, as
      *         returned by Amazon Payments
      *
-     * @throws AmazonClientException
-     *             If any internal errors are encountered inside the client while
-     *             attempting to make the request or handle the response.  For example
-     *             if a network connection is not available.
      * @throws AmazonServiceException
      *             If an error response is returned by Amazon Payments indicating
      *             either a problem with the data in the request, or a server side issue.
@@ -421,10 +360,6 @@ public interface Client {
      * @return The response from the GetProviderCreditDetails service API, as
      *         returned by Amazon Payments
      *
-     * @throws AmazonClientException
-     *             If any internal errors are encountered inside the client while
-     *             attempting to make the request or handle the response.  For example
-     *             if a network connection is not available.
      * @throws AmazonServiceException
      *             If an error response is returned by Amazon Payments indicating
      *             either a problem with the data in the request, or a server side issue.
@@ -443,10 +378,6 @@ public interface Client {
      * @return The response from the GetProviderCreditReversalDetails service API, as
      *         returned by Amazon Payments
      *
-     * @throws AmazonClientException
-     *             If any internal errors are encountered inside the client while
-     *             attempting to make the request or handle the response.  For example
-     *             if a network connection is not available.
      * @throws AmazonServiceException
      *             If an error response is returned by Amazon Payments indicating
      *             either a problem with the data in the request, or a server side issue.
@@ -468,10 +399,6 @@ public interface Client {
      * @return The response from the GetRefundDetails service API, as
      *         returned by Amazon Payments
      *
-     * @throws AmazonClientException
-     *             If any internal errors are encountered inside the client while
-     *             attempting to make the request or handle the response.  For example
-     *             if a network connection is not available.
      * @throws AmazonServiceException
      *             If an error response is returned by Amazon Payments indicating
      *             either a problem with the data in the request, or a server side issue.
@@ -488,10 +415,6 @@ public interface Client {
      * @param clientId Your client id is located in your Seller Central account.
      * @return User The response from the service API, as returned by Amazon Payments
      *
-     * @throws AmazonClientException
-     *             If any internal errors are encountered inside the client while
-     *             attempting to make the request or handle the response.  For example
-     *             if a network connection is not available.
      * @throws AmazonServiceException
      *             If an error response is returned by Amazon Payments indicating
      *             either a problem with the data in the request, or a server side issue.
@@ -513,10 +436,6 @@ public interface Client {
      * @return The response from the Refund service API, as
      *         returned by Amazon Payments
      *
-     * @throws AmazonClientException
-     *             If any internal errors are encountered inside the client while
-     *             attempting to make the request or handle the response.  For example
-     *             if a network connection is not available.
      * @throws AmazonServiceException
      *             If an error response is returned by Amazon Payments indicating
      *             either a problem with the data in the request, or a server side issue.
@@ -535,10 +454,6 @@ public interface Client {
      * @return The response from the ReverseProviderCredit service API, as
      *         returned by Amazon Payments
      *
-     * @throws AmazonClientException
-     *             If any internal errors are encountered inside the client while
-     *             attempting to make the request or handle the response.  For example
-     *             if a network connection is not available.
      * @throws AmazonServiceException
      *             If an error response is returned by Amazon Payments indicating
      *             either a problem with the data in the request, or a server side issue.
@@ -559,10 +474,6 @@ public interface Client {
      * @return The response from the SetBillingAgreementDetails service API, as
      *         returned by Amazon Payments
      *
-     * @throws AmazonClientException
-     *             If any internal errors are encountered inside the client while
-     *             attempting to make the request or handle the response.  For example
-     *             if a network connection is not available.
      * @throws AmazonServiceException
      *             If an error response is returned by Amazon Payments indicating
      *             either a problem with the data in the request, or a server side issue.
@@ -584,10 +495,6 @@ public interface Client {
      * @return The response from the SetOrderReferenceDetails service API, as
      *         returned by Amazon Payments
      *
-     * @throws AmazonClientException
-     *             If any internal errors are encountered inside the client while
-     *             attempting to make the request or handle the response.  For example
-     *             if a network connection is not available.
      * @throws AmazonServiceException
      *             If an error response is returned by Amazon Payments indicating
      *             either a problem with the data in the request, or a server side issue.
@@ -610,14 +517,10 @@ public interface Client {
      * @return The response from the ValidateBillingAgreement service API, as
      *         returned by Amazon Payments
      *
-     * @throws AmazonClientException
-     *             If any internal errors are encountered inside the client while
-     *             attempting to make the request or handle the response.  For example
-     *             if a network connection is not available.
      * @throws AmazonServiceException
      *             If an error response is returned by Amazon Payments indicating
      *             either a problem with the data in the request, or a server side issue.
      */
     ValidateBillingAgreementResponseData validateBillingAgreement(ValidateBillingAgreementRequest validateBillingAgreementRequest) throws AmazonServiceException;
-    
+
 }

@@ -9,7 +9,7 @@ public final class IPNMessageMetaData {
     private final String notificationReferenceId;
     private final String sellerId;
     private final String version;
-    
+
     public IPNMessageMetaData(Map<String,String> messageMetaDataMap) {
         releaseEnvironment = messageMetaDataMap.get("ReleaseEnvironment");
         timeStamp = messageMetaDataMap.get("Timestamp");
@@ -21,7 +21,7 @@ public final class IPNMessageMetaData {
 
     /**
      * Returns the environment LIVE or SANDBOX
-     * 
+     *
      * @return Returns the environment LIVE or SANDBOX
      */
     public String getReleaseEnvironment() {
@@ -30,7 +30,7 @@ public final class IPNMessageMetaData {
 
     /**
      * Returns the timeStamp of IPN Message
-     * 
+     *
      * @return Returns the timeStamp of IPN Message
      */
     public String getTimeStamp() {
@@ -39,7 +39,7 @@ public final class IPNMessageMetaData {
 
     /**
      * Returns the notification referenceId specified in IPN message 
-     * 
+     *
      * @return Returns the notification referenceId specified in IPN message 
      */
     public String getNotificationReferenceId() {
@@ -48,7 +48,7 @@ public final class IPNMessageMetaData {
 
     /**
      * Returns the sellerId specified in IPN Message
-     * 
+     *
      * @return Returns the sellerId specified in IPN Message
      */
     public String getSellerId() {
@@ -57,7 +57,7 @@ public final class IPNMessageMetaData {
 
     /**
      * Returns the version specified in IPN message
-     * 
+     *
      * @return Returns the version specified in IPN message
      */
     public String getVersion() {
@@ -66,12 +66,12 @@ public final class IPNMessageMetaData {
 
     /**
      * String representation of IPN Message Metadata 
-     * 
+     *
      */
     @Override
     public String toString() {
-        return "IPNMessageMetaData{" + "releaseEnvironment=" + releaseEnvironment + ", timeStamp=" 
-                + timeStamp + ", notificationReferenceId=" + notificationReferenceId + ", sellerId=" 
+        return "IPNMessageMetaData{" + "releaseEnvironment=" + releaseEnvironment + ", timeStamp="
+                + timeStamp + ", notificationReferenceId=" + notificationReferenceId + ", sellerId="
                 + sellerId + ", version=" + version + '}';
     }
 

@@ -4,17 +4,17 @@ import com.amazon.payments.paywithamazon.types.CurrencyCode;
 import java.io.Serializable;
 
 /**
- * Container for the parameters to the {@link com.amazon.payments.lpa.Client#setOrderReferenceDetails(SetOrderReferenceDetailsRequest) SetOrderReferenceDetails operation}.
- * For more information documentation, see  
- * <a href="https://payments.amazon.com/documentation/"> API Reference</a>
+ * Container for the parameters to the SetOrderReferenceDetails operation.
+ * For more information documentation, see
+ * https://payments.amazon.com/documentation/
  */
 public class SetOrderReferenceDetailsRequest implements Serializable{
-    
+
     //required parameters
     private String amazonOrderReferenceId;
     private String orderAmount;
     private CurrencyCode orderCurrencyCode;
-    
+
     //optional parameters
     private String platformId;
     private String sellerNote;
@@ -24,12 +24,12 @@ public class SetOrderReferenceDetailsRequest implements Serializable{
     private String mwsAuthToken;
 
     /**
-     * 
-     * @param amazonOrderReferenceId 
+     *
+     * @param amazonOrderReferenceId
      *              This value is retrieved from the Amazon Button widget 
      *              after the buyer has successfully authenticated with Amazon.
-     * 
-     * @param orderAmount 
+     *
+     * @param orderAmount
      *              Specifies the total amount of the order represented by this order reference.
      */
     public SetOrderReferenceDetailsRequest(String amazonOrderReferenceId, String orderAmount) {
@@ -39,75 +39,75 @@ public class SetOrderReferenceDetailsRequest implements Serializable{
 
     /**
      * Overrides the Client's currency code with specified currency code in SetOrderReferenceDetailsRequest
-     * 
-     * @param currencyCode 
+     *
+     * @param currencyCode
      *              A three-digit currency code, formatted based on the ISO 4217 standard. 
      */
     public SetOrderReferenceDetailsRequest setOrderCurrencyCode(CurrencyCode currencyCode) {
         this.orderCurrencyCode = currencyCode;
         return this;
     }
-    
+
     /**
      * Represents the SellerId of the Solution Provider that developed the platform. 
      * This value should only be provided by Solution Providers. It should not be 
      * provided by merchants creating their own custom integration. 
-     * 
+     *
      * @param platformId
      */
     public SetOrderReferenceDetailsRequest setPlatformId(String platformId) {
         this.platformId = platformId;
         return this;
     }
-    
+
     /**
      * Represents a description of the order that is displayed in emails to the buyer.
-     * 
+     *
      * @param sellerNote
      */
     public SetOrderReferenceDetailsRequest setSellerNote(String sellerNote) {
         this.sellerNote = sellerNote;
         return this;
     }
-    
+
     /**
      * The merchant-specified identifier of this order. This is displayed to the 
      * buyer in their emails and transaction history on the Amazon Payments website.
-     * 
+     *
      * @param sellerOrderId
      */
     public SetOrderReferenceDetailsRequest setSellerOrderId(String sellerOrderId) {
         this.sellerOrderId = sellerOrderId;
         return this;
     }
-    
+
     /**
      * The identifier of the store from which the order was placed. This overrides 
      * the default value in Seller Central under Settings > Account Settings. It is
      * displayed to the buyer in their emails and transaction history on the 
      * Amazon Payments website.
-     * 
+     *
      * @param storeName
      */
     public SetOrderReferenceDetailsRequest setStoreName(String storeName) {
         this.storeName = storeName;
         return this;
     }
-    
+
     /**
      * Any additional information that you want to include with this order reference.
-     * 
+     *
      * @param customInformation
      */
     public SetOrderReferenceDetailsRequest setCustomInformation(String customInformation) {
         this.customInformation = customInformation;
         return this;
     }
-    
+
     /**
      * Applicable only for third-party solution providers or marketplaces. It should not be 
      * provided by merchants creating their own custom integration. 
-     * 
+     *
      * @param mwsAuthToken
      */
     public SetOrderReferenceDetailsRequest setMWSAuthToken(String mwsAuthToken) {
@@ -116,7 +116,7 @@ public class SetOrderReferenceDetailsRequest implements Serializable{
     }
 
     /**
-     * 
+     *
      * @return AmazonOrderReferenceId
      */
     public String getAmazonOrderReferenceId() {
@@ -124,7 +124,7 @@ public class SetOrderReferenceDetailsRequest implements Serializable{
     }
 
     /**
-     * 
+     *
      * @return OrderAmount
      */
     public String getOrderAmount() {
@@ -132,7 +132,7 @@ public class SetOrderReferenceDetailsRequest implements Serializable{
     }
 
     /**
-     * 
+     *
      * @return OrderCurrencyCode
      */
     public CurrencyCode getOrderCurrencyCode() {
@@ -140,7 +140,7 @@ public class SetOrderReferenceDetailsRequest implements Serializable{
     }
 
     /**
-     * 
+     *
      * @return PlatformId
      */
     public String getPlatformId() {
@@ -148,7 +148,7 @@ public class SetOrderReferenceDetailsRequest implements Serializable{
     }
 
     /**
-     * 
+     *
      * @return SellerNote
      */
     public String getSellerNote() {
@@ -156,7 +156,7 @@ public class SetOrderReferenceDetailsRequest implements Serializable{
     }
 
     /**
-     * 
+     *
      * @return SellerOrderId
      */
     public String getSellerOrderId() {
@@ -164,7 +164,7 @@ public class SetOrderReferenceDetailsRequest implements Serializable{
     }
 
     /**
-     * 
+     *
      * @return StoreName
      */
     public String getStoreName() {
@@ -172,7 +172,7 @@ public class SetOrderReferenceDetailsRequest implements Serializable{
     }
 
     /**
-     * 
+     *
      * @return CustomInformation
      */
     public String getCustomInformation() {
@@ -180,7 +180,7 @@ public class SetOrderReferenceDetailsRequest implements Serializable{
     }
 
     /**
-     * 
+     *
      * @return MWSAuthToken
      */
     public String getMwsAuthToken() {
@@ -197,11 +197,11 @@ public class SetOrderReferenceDetailsRequest implements Serializable{
      */
     @Override
     public String toString() {
-        return "SetOrderReferenceDetailsRequest{" + "amazonOrderReferenceId=" + amazonOrderReferenceId + ", orderAmount=" + orderAmount 
-                + ", orderCurrencyCode=" + orderCurrencyCode + ", platformId=" + platformId + ", sellerNote=" + sellerNote + ", sellerOrderId=" 
+        return "SetOrderReferenceDetailsRequest{" + "amazonOrderReferenceId=" + amazonOrderReferenceId + ", orderAmount=" + orderAmount
+                + ", orderCurrencyCode=" + orderCurrencyCode + ", platformId=" + platformId + ", sellerNote=" + sellerNote + ", sellerOrderId="
                 + sellerOrderId + ", storeName=" + storeName + ", customInformation=" + customInformation + ", mwsAuthToken=" + mwsAuthToken + '}';
     }
 
-    
-    
+
+
 }

@@ -3,23 +3,23 @@ package com.amazon.payments.paywithamazon.request;
 import java.io.Serializable;
 
 /**
- * Container for the parameters to the {@link com.amazon.payments.lpa.Client#getRefundDetails(GetRefundDetailsRequest) GetRefundDetails operation}.
- * For more information documentation, see  
- * <a href="https://payments.amazon.com/documentation/"> API Reference</a>
+ * Container for the parameters to the GetRefundDetails operation.
+ * For more information documentation, see
+ * https://payments.amazon.com/documentation/
  */
 public class GetRefundDetailsRequest implements Serializable{
-        
+
     private String amazonRefundId;
-    private String mwsAuthToken;  
-    
+    private String mwsAuthToken;
+
     /**
-     * 
+     *
      * @param amazonRefundId The Amazon-generated identifier for this refund transaction.
      */
     public GetRefundDetailsRequest(String amazonRefundId) {
         this.amazonRefundId = amazonRefundId;
     }
-    
+
     /**
      * Set the value of mwsAuthToken
      *
@@ -31,7 +31,7 @@ public class GetRefundDetailsRequest implements Serializable{
     }
 
     /**
-     * 
+     *
      * @return amazonRefundId
      */
     public String getAmazonRefundId() {
@@ -39,7 +39,7 @@ public class GetRefundDetailsRequest implements Serializable{
     }
 
     /**
-     * 
+     *
      * @return mwsAuthToken
      */
     public String getMwsAuthToken() {
@@ -60,5 +60,5 @@ public class GetRefundDetailsRequest implements Serializable{
     }
 
 
-    
+
 }

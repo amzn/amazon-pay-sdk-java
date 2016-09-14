@@ -3,20 +3,20 @@ package com.amazon.payments.paywithamazon.request;
 import java.io.Serializable;
 
 /**
- * Container for the parameters to the {@link com.amazon.payments.lpa.Client#validateBillingAgreement(ValidateBillingAgreementRequest) ValidateBillingAgreement operation}.
- * For more information documentation, see  
- * <a href="https://payments.amazon.com/documentation/"> API Reference</a>
+ * Container for the parameters to the ValidateBillingAgreement operation.
+ * For more information documentation, see
+ * https://payments.amazon.com/documentation/
  */
 public class ValidateBillingAgreementRequest implements Serializable{
-   
+
     //required parameters
     private String amazonBillingAgreementId;
-    
+
     //optional parameters
     private String mwsAuthToken;
-    
+
     /**
-     * 
+     *
      * @param amazonBillingAgreementId The billing agreement identifier. 
      * This value is retrieved from the Amazon Button, AddressBook, or Wallet widgets.
      */
@@ -25,7 +25,7 @@ public class ValidateBillingAgreementRequest implements Serializable{
     }
 
     /**
-     * 
+     *
      * @param mwsAuthToken
      */
     public ValidateBillingAgreementRequest setMWSAuthToken(String mwsAuthToken) {
@@ -34,7 +34,7 @@ public class ValidateBillingAgreementRequest implements Serializable{
     }
 
     /**
-     * 
+     *
      * @return AmazonBillingAgreementId
      */
     public String getAmazonBillingAgreementId() {
@@ -42,7 +42,7 @@ public class ValidateBillingAgreementRequest implements Serializable{
     }
 
     /**
-     * 
+     *
      * @return MWSAuthToken
      */
     public String getMwsAuthToken() {
@@ -62,5 +62,5 @@ public class ValidateBillingAgreementRequest implements Serializable{
         return "ValidateBillingAgreementRequest{" + "amazonBillingAgreementId=" + amazonBillingAgreementId + ", mwsAuthToken=" + mwsAuthToken + '}';
     }
 
-    
+
 }

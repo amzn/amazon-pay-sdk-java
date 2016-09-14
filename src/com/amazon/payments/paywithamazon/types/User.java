@@ -1,14 +1,14 @@
 package com.amazon.payments.paywithamazon.types;
 
 /**
-* Represents user information as returned by the service.
-*/
+ * Represents user information as returned by the service.
+ */
 public final class User {
-    
+
     private String name;
     private String email;
     private String user_id;
-    
+
     public String getName() {
         return name;
     }
