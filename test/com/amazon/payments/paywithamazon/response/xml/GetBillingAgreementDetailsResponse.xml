@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GetBillingAgreementDetailsResponse xmlns="http://mws.amazonservices.com/schema/OffAmazonPayments/2013-01-01">
+   <GetBillingAgreementDetailsResult>
+      <BillingAgreementDetails>
+         <AmazonBillingAgreementId>C01-3925266-2250830</AmazonBillingAgreementId>
+         <BillingAgreementStatus>
+            <State>Draft</State>
+         </BillingAgreementStatus>
+         <Destination>
+            <DestinationType>Physical</DestinationType>
+            <PhysicalDestination>
+               <StateOrRegion>BC</StateOrRegion>
+               <Phone>9999999999</Phone>
+               <City>Vancouver</City>
+               <CountryCode>CA</CountryCode>
+               <PostalCode>V6C 3B5</PostalCode>
+               <Name>TEST_NAME</Name>
+               <AddressLine1>999 Canada Place 140</AddressLine1>
+            </PhysicalDestination>
+         </Destination>
+         <BillingAgreementConsent>false</BillingAgreementConsent>
+         <Constraints>
+            <Constraint>
+               <ConstraintID>BuyerConsentNotSet</ConstraintID>
+               <Description>The buyer has not given consent for this billing agreement.</Description>
+            </Constraint>
+         </Constraints>
+         <SellerBillingAgreementAttributes />
+         <Buyer>
+            <Name>Test Buyer</Name>
+            <Email>testbuyer2@amazon.com</Email>
+         </Buyer>
+         <ReleaseEnvironment>Sandbox</ReleaseEnvironment>
+         <CreationTimestamp>2015-11-02T17:36:30.173Z</CreationTimestamp>
+         <BillingAgreementLimits>
+            <TimePeriodStartDate>2015-11-01T00:00:00Z</TimePeriodStartDate>
+            <CurrentRemainingBalance>
+               <CurrencyCode>USD</CurrencyCode>
+               <Amount>500.00</Amount>
+            </CurrentRemainingBalance>
+            <AmountLimitPerTimePeriod>
+               <CurrencyCode>USD</CurrencyCode>
+               <Amount>500</Amount>
+            </AmountLimitPerTimePeriod>
+            <TimePeriodEndDate>2015-12-01T00:00:00Z</TimePeriodEndDate>
+         </BillingAgreementLimits>
+      </BillingAgreementDetails>
+   </GetBillingAgreementDetailsResult>
+   <ResponseMetadata>
+      <RequestId>d69e8d60-3682-43d7-bf5e-e2ef64dc685e</RequestId>
+   </ResponseMetadata>
+</GetBillingAgreementDetailsResponse>

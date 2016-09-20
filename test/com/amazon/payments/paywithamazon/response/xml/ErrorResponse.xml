@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ErrorResponse xmlns="http://mws.amazonservices.com/schema/OffAmazonPayments/2013-01-01">
+   <Error>
+      <Type>Sender</Type>
+      <Code>OrderReferenceNotModifiable</Code>
+      <Message>OrderReference S01-5695290-1354077 is not in draft state and cannot be modified with the request submitted by you.</Message>
+   </Error>
+   <RequestId>6d4699b8-1238-4c09-b539-176e2c2f5462</RequestId>
+</ErrorResponse>

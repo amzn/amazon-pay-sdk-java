@@ -1,0 +1,22 @@
+# Eclipse artifacts, including WTP generated manifests
+.classpath
+.project
+.settings/
+.springBeans
+MANIFEST.MF
+bin/
+
+# Maven target folder
+target/
+*.log
+
+# visual studio
+/nbproject/private/
+*.suo
+
+.Rproj.user
+/eclipse-bin/
+.idea/
+.gitignore
+PayWithAmazon.iml
+offamazonpayments.iml

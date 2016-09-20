@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RefundResponse xmlns="http://mws.amazonservices.com/schema/OffAmazonPayments/2013-01-01">
+   <RefundResult>
+      <RefundDetails>
+         <RefundReferenceId>testRefundId1354077</RefundReferenceId>
+         <RefundType>SellerInitiated</RefundType>
+         <SellerRefundNote>testing</SellerRefundNote>
+         <CreationTimestamp>2015-11-02T21:18:17.751Z</CreationTimestamp>
+         <SoftDescriptor>AMZ*test</SoftDescriptor>
+         <RefundStatus>
+            <LastUpdateTimestamp>2015-11-02T21:18:17.751Z</LastUpdateTimestamp>
+            <State>Pending</State>
+         </RefundStatus>
+         <FeeRefunded>
+            <CurrencyCode>USD</CurrencyCode>
+            <Amount>0.00</Amount>
+         </FeeRefunded>
+         <RefundAmount>
+            <CurrencyCode>USD</CurrencyCode>
+            <Amount>0.50</Amount>
+         </RefundAmount>
+         <AmazonRefundId>S01-5695290-1354077-R072290</AmazonRefundId>
+      </RefundDetails>
+   </RefundResult>
+   <ResponseMetadata>
+      <RequestId>2be495ee-0a86-4357-a6a5-5f0af88398d9</RequestId>
+   </ResponseMetadata>
+</RefundResponse>
