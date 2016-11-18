@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SetOrderReferenceDetailsResponse xmlns="http://mws.amazonservices.com/schema/OffAmazonPayments/2013-01-01">
+    <SetOrderReferenceDetailsResult>
+        <OrderReferenceDetails>
+            <OrderReferenceStatus>
+                <State>Draft</State>
+            </OrderReferenceStatus>
+            <Destination>
+                <DestinationType>Physical</DestinationType>
+                <PhysicalDestination>*** Removed ***</PhysicalDestination>
+            </Destination>
+            <ExpirationTimestamp>2016-04-27T20:43:45.183Z</ExpirationTimestamp>
+            <PlatformId>ANDRCTOTP9</PlatformId>
+            <SellerOrderAttributes>
+                <StoreName>myTestStore</StoreName>
+                <CustomInformation>myCustomInformation</CustomInformation>
+                <SellerOrderId>test1234</SellerOrderId>
+            </SellerOrderAttributes>
+            <OrderTotal>
+                <CurrencyCode>USD</CurrencyCode>
+                <Amount>500.00</Amount>
+            </OrderTotal>
+            <ReleaseEnvironment>Sandbox</ReleaseEnvironment>
+            <SellerNote>*** Removed ***</SellerNote>
+            <AmazonOrderReferenceId>S01-9821095-0000200</AmazonOrderReferenceId>
+            <CreationTimestamp>2015-10-30T20:43:45.183Z</CreationTimestamp>
+        </OrderReferenceDetails>
+    </SetOrderReferenceDetailsResult>
+    <ResponseMetadata>
+        <RequestId>eab0140b-e59c-4875-859b-f5012944ba</RequestId>
+    </ResponseMetadata>
+</SetOrderReferenceDetailsResponse>

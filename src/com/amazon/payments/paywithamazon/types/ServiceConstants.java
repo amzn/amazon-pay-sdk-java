@@ -118,7 +118,7 @@ public class ServiceConstants {
     public static final String CLOSE_BILLING_AGREEMENT_DETAILS = "CloseBillingAgreement";
 
     public static final String AMAZON_PAYMENTS_API_VERSION = "2013-01-01";
-    public static final String APPLICATION_LIBRARY_VERSION ="2.0.0";
+    public static final String APPLICATION_LIBRARY_VERSION ="2.1.0";
 
     public static final int FIRST_RETRY_WAIT_TIME = 1;
     public static final int SECOND_RETRY_WAIT_TIME = 4;

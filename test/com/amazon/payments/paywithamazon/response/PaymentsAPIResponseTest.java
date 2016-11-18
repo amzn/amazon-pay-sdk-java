@@ -1,45 +1,52 @@
 package com.amazon.payments.paywithamazon.response;
 
-import com.amazon.payments.paywithamazon.response.parser.RefundResponseData;
+import com.amazon.payments.paywithamazon.response.model.CaptureDetails;
+import com.amazon.payments.paywithamazon.response.model.AuthorizationDetails;
+import com.amazon.payments.paywithamazon.response.model.RefundDetails;
+import com.amazon.payments.paywithamazon.response.model.OrderReferenceDetails;
+import com.amazon.payments.paywithamazon.response.model.Environment;
+import com.amazon.payments.paywithamazon.response.model.RefundType;
+import com.amazon.payments.paywithamazon.response.model.ErrorResponse;
 import com.amazon.payments.paywithamazon.response.parser.AuthorizeOnBillingAgreementResponseData;
-import com.amazon.payments.paywithamazon.response.parser.CloseOrderReferenceResponseData;
-import com.amazon.payments.paywithamazon.response.parser.GetBillingAgreementDetailsResponseData;
-import com.amazon.payments.paywithamazon.response.parser.ConfirmOrderReferenceResponseData;
-import com.amazon.payments.paywithamazon.response.parser.ValidateBillingAgreementResponseData;
-import com.amazon.payments.paywithamazon.response.parser.CloseBillingAgreementResponseData;
-import com.amazon.payments.paywithamazon.response.parser.GetAuthorizationDetailsResponseData;
-import com.amazon.payments.paywithamazon.response.parser.SetBillingAgreementDetailsResponseData;
-import com.amazon.payments.paywithamazon.response.parser.ConfirmBillingAgreementResponseData;
-import com.amazon.payments.paywithamazon.response.parser.Parser;
-import com.amazon.payments.paywithamazon.response.parser.ReverseProviderCreditResponseData;
-import com.amazon.payments.paywithamazon.response.parser.SetOrderReferenceDetailsResponseData;
-import com.amazon.payments.paywithamazon.response.parser.GetOrderReferenceDetailsResponseData;
-import com.amazon.payments.paywithamazon.response.parser.GetProviderCreditReversalDetailsResponseData;
-import com.amazon.payments.paywithamazon.response.parser.CloseAuthorizationResponseData;
-import com.amazon.payments.paywithamazon.response.parser.GetCaptureDetailsResponseData;
-import com.amazon.payments.paywithamazon.response.parser.AuthorizeResponseData;
-import com.amazon.payments.paywithamazon.response.parser.GetRefundDetailsResponseData;
-import com.amazon.payments.paywithamazon.response.parser.GetProviderCreditDetailsResponseData;
 import com.amazon.payments.paywithamazon.response.parser.CancelOrderReferenceResponseData;
 import com.amazon.payments.paywithamazon.response.parser.CaptureResponseData;
+import com.amazon.payments.paywithamazon.response.parser.GetPaymentDetails;
+import com.amazon.payments.paywithamazon.response.parser.AuthorizeResponseData;
+import com.amazon.payments.paywithamazon.response.parser.CloseOrderReferenceResponseData;
+import com.amazon.payments.paywithamazon.response.parser.GetAuthorizationDetailsResponseData;
+import com.amazon.payments.paywithamazon.response.parser.GetProviderCreditDetailsResponseData;
+import com.amazon.payments.paywithamazon.response.parser.GetBillingAgreementDetailsResponseData;
+import com.amazon.payments.paywithamazon.response.parser.GetCaptureDetailsResponseData;
+import com.amazon.payments.paywithamazon.response.parser.SetOrderReferenceDetailsResponseData;
+import com.amazon.payments.paywithamazon.response.parser.Parser;
+import com.amazon.payments.paywithamazon.response.parser.GetOrderReferenceDetailsResponseData;
+import com.amazon.payments.paywithamazon.response.parser.CloseAuthorizationResponseData;
+import com.amazon.payments.paywithamazon.response.parser.ReverseProviderCreditResponseData;
+import com.amazon.payments.paywithamazon.response.parser.ConfirmOrderReferenceResponseData;
+import com.amazon.payments.paywithamazon.response.parser.GetProviderCreditReversalDetailsResponseData;
+import com.amazon.payments.paywithamazon.response.parser.SetBillingAgreementDetailsResponseData;
+import com.amazon.payments.paywithamazon.response.parser.CloseBillingAgreementResponseData;
+import com.amazon.payments.paywithamazon.response.parser.RefundResponseData;
+import com.amazon.payments.paywithamazon.response.parser.ConfirmBillingAgreementResponseData;
+import com.amazon.payments.paywithamazon.response.parser.GetRefundDetailsResponseData;
+import com.amazon.payments.paywithamazon.response.parser.ValidateBillingAgreementResponseData;
 import com.amazon.payments.paywithamazon.exceptions.AmazonClientException;
 import com.amazon.payments.paywithamazon.exceptions.AmazonServiceException;
-import com.amazon.payments.paywithamazon.response.model.ErrorResponse;
 import com.amazon.payments.paywithamazon.response.parser.ResponseData;
-import com.amazon.payments.paywithamazon.response.model.RefundType;
-import com.amazon.payments.paywithamazon.response.model.Environment;
-import java.io.BufferedReader;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
+import java.io.Reader;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -82,6 +89,54 @@ public class PaymentsAPIResponseTest {
         Assert.assertEquals(res.getDetails().getDestination().getPhysicalDestination().getStateOrRegion(), "NY");
 
         Assert.assertEquals(res.toXML() , rawResponse);
+    }
+
+    @Test
+    public void testSanitizedData() throws Exception{
+        String rawResponse = loadTestFile("SanitizedData.xml");
+        ResponseData response = new ResponseData(200, rawResponse);
+        SetOrderReferenceDetailsResponseData res = Parser.setOrderReferenceDetails(response);
+
+        Assert.assertEquals(res.getDetails().getAmazonOrderReferenceId() , "S01-9821095-0000200");
+        Assert.assertEquals(res.getDetails().getOrderReferenceStatus().getState() , "Draft");
+        Assert.assertEquals(res.getDetails().getDestination().getDestinationType() , "Physical");
+        Assert.assertEquals(res.getDetails().getDestination().getPhysicalDestination().getCountryCode() , null);
+        Assert.assertEquals(res.getDetails().getDestination().getPhysicalDestination().getStateOrRegion() , null);
+        Assert.assertEquals(res.getDetails().getDestination().getPhysicalDestination().getCity() , null);
+        Assert.assertEquals(res.getDetails().getDestination().getPhysicalDestination().getPostalCode() , null);
+        Assert.assertEquals(res.getDetails().getSellerNote() , "*** Removed ***");
+    }
+
+    @Test
+    public void testGetPaymentDetails() throws Exception{
+        GetPaymentDetails testGetAllResponseDetails = new GetPaymentDetails();
+        String rawResponse = loadTestFile("GetOrderReferenceDetailsResponse.xml");
+        ResponseData orderReferenceDetailsResponse = new ResponseData(200, rawResponse);
+        OrderReferenceDetails parsedOrderResponse = Parser.getOrderReferenceDetails(orderReferenceDetailsResponse).getDetails();
+
+        String rawAuthResponse = loadTestFile("GetAuthorizationDetailsResponse.xml");
+        ResponseData authorizeDetailsResponse = new ResponseData(200, rawAuthResponse);
+        AuthorizationDetails parsedAuthorizeResponse = Parser.getAuthorizationDetailsData(authorizeDetailsResponse).getDetails();
+
+        String rawCaptureResponse = loadTestFile("GetCaptureDetailsResponse.xml");
+        ResponseData captureDetailsResponse = new ResponseData(200, rawCaptureResponse);
+        CaptureDetails parsedCaptureResponse = Parser.getCaptureDetailsData(captureDetailsResponse).getDetails();
+
+        String rawRefundResponse = loadTestFile("GetRefundDetails.xml");
+        ResponseData refundDetailsResponse = new ResponseData(200, rawRefundResponse);
+        RefundDetails parsedRefundResponse = Parser.getRefundDetailsData(refundDetailsResponse).getDetails();
+
+        testGetAllResponseDetails.putOrderReferenceDetails("P01-1234567-1234567", parsedOrderResponse);
+        Assert.assertEquals(testGetAllResponseDetails.getOrderReferenceDetails(), parsedOrderResponse);
+
+        testGetAllResponseDetails.putAuthorizationDetails("S01-9821095-1837200-A041953",parsedAuthorizeResponse);
+        Assert.assertEquals(testGetAllResponseDetails.getAuthorizationDetails().get("S01-9821095-1837200-A041953"), parsedAuthorizeResponse);
+
+        testGetAllResponseDetails.putCaptureDetails("S01-9821095-1837200-C041953", parsedCaptureResponse);
+        Assert.assertEquals(testGetAllResponseDetails.getCaptureDetails().get("S01-9821095-1837200-C041953"), parsedCaptureResponse);
+
+        testGetAllResponseDetails.putRefundDetails("S01-5695290-1354077-R072290", parsedRefundResponse);
+        Assert.assertEquals(testGetAllResponseDetails.getRefundDetails().get("S01-5695290-1354077-R072290"), parsedRefundResponse);
     }
 
     @Test
@@ -551,7 +606,7 @@ public class PaymentsAPIResponseTest {
         ResponseData response = new ResponseData(404, rawResponse);
         try {
             Parser.marshalXML(ErrorResponse.class , response);
-          //  Assert.fail();
+            Assert.fail();
         } catch(AmazonServiceException e) {
             Assert.assertEquals(e.getResponseXml(), rawResponse);
             Assert.assertEquals(e.getStatusCode() , 404);
@@ -562,8 +617,4 @@ public class PaymentsAPIResponseTest {
 
         }
     }
-
-
-
-
 }
