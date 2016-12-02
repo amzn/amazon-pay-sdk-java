@@ -59,6 +59,14 @@ public class ObjectFactory {
         return new ResponseMetadata();
     }
 
+     /**
+     * Create an instance of {@link CreateOrderReferenceForIdResponse }
+     *
+     */
+    public CreateOrderReferenceForIdResponse createOrderReferenceForIdResponse() {
+        return new CreateOrderReferenceForIdResponse();
+    }
+    
     /**
      * Create an instance of {@link ErrorResponse }
      * 
