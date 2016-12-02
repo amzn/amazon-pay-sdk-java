@@ -284,8 +284,8 @@ public class HttpRequestClient {
         parameters.put("Version", CLIENT_VERSION);
         parameters.put("SignatureVersion", config.getSignatureVersion());
         parameters.put("Timestamp", getFormattedTimestamp());
-        parameters.put("AWSAccessKeyId",  this.awsAccessKeyId);
-        parameters.put("Signature", signParameters(parameters, this.awsSecretAccessKey));
+        parameters.put("AWSAccessKeyId",  awsAccessKeyId);
+        parameters.put("Signature", signParameters(parameters, awsSecretAccessKey));
         for (Map.Entry<String, String> entry : parameters.entrySet()) {
             method.addParameter(entry.getKey(), entry.getValue());
         }
