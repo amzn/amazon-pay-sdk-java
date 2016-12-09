@@ -28,6 +28,7 @@ import com.amazon.payments.paywithamazon.request.CloseBillingAgreementRequest;
 import com.amazon.payments.paywithamazon.request.CloseOrderReferenceRequest;
 import com.amazon.payments.paywithamazon.request.ConfirmBillingAgreementRequest;
 import com.amazon.payments.paywithamazon.request.ConfirmOrderReferenceRequest;
+import com.amazon.payments.paywithamazon.request.CreateOrderReferenceForIdRequest;
 import com.amazon.payments.paywithamazon.request.GetAuthorizationDetailsRequest;
 import com.amazon.payments.paywithamazon.request.GetBillingAgreementDetailsRequest;
 import com.amazon.payments.paywithamazon.request.GetCaptureDetailsRequest;
@@ -41,50 +42,52 @@ import com.amazon.payments.paywithamazon.request.ReverseProviderCreditRequest;
 import com.amazon.payments.paywithamazon.request.SetBillingAgreementDetailsRequest;
 import com.amazon.payments.paywithamazon.request.SetOrderReferenceDetailsRequest;
 import com.amazon.payments.paywithamazon.request.ValidateBillingAgreementRequest;
-import com.amazon.payments.paywithamazon.response.model.CaptureDetails;
 import com.amazon.payments.paywithamazon.response.model.AuthorizationDetails;
-import com.amazon.payments.paywithamazon.response.model.RefundDetails;
-import com.amazon.payments.paywithamazon.response.model.OrderReferenceDetails;
-import com.amazon.payments.paywithamazon.response.model.Environment;
 import com.amazon.payments.paywithamazon.response.model.BillingAgreementDetails;
+import com.amazon.payments.paywithamazon.response.model.CaptureDetails;
+import com.amazon.payments.paywithamazon.response.model.Environment;
+import com.amazon.payments.paywithamazon.response.model.OrderReferenceDetails;
+import com.amazon.payments.paywithamazon.response.model.RefundDetails;
 import com.amazon.payments.paywithamazon.response.parser.AuthorizeOnBillingAgreementResponseData;
+import com.amazon.payments.paywithamazon.response.parser.AuthorizeResponseData;
 import com.amazon.payments.paywithamazon.response.parser.CancelOrderReferenceResponseData;
 import com.amazon.payments.paywithamazon.response.parser.CaptureResponseData;
-import com.amazon.payments.paywithamazon.response.parser.GetPaymentDetails;
-import com.amazon.payments.paywithamazon.response.parser.AuthorizeResponseData;
+import com.amazon.payments.paywithamazon.response.parser.CloseAuthorizationResponseData;
+import com.amazon.payments.paywithamazon.response.parser.CloseBillingAgreementResponseData;
 import com.amazon.payments.paywithamazon.response.parser.CloseOrderReferenceResponseData;
+import com.amazon.payments.paywithamazon.response.parser.CreateOrderReferenceForIdResponseData;
+import com.amazon.payments.paywithamazon.response.parser.ConfirmBillingAgreementResponseData;
+import com.amazon.payments.paywithamazon.response.parser.ConfirmOrderReferenceResponseData;
 import com.amazon.payments.paywithamazon.response.parser.GetAuthorizationDetailsResponseData;
-import com.amazon.payments.paywithamazon.response.parser.GetProviderCreditDetailsResponseData;
 import com.amazon.payments.paywithamazon.response.parser.GetBillingAgreementDetailsResponseData;
 import com.amazon.payments.paywithamazon.response.parser.GetCaptureDetailsResponseData;
-import com.amazon.payments.paywithamazon.response.parser.SetOrderReferenceDetailsResponseData;
-import com.amazon.payments.paywithamazon.response.parser.Parser;
 import com.amazon.payments.paywithamazon.response.parser.GetOrderReferenceDetailsResponseData;
-import com.amazon.payments.paywithamazon.response.parser.CloseAuthorizationResponseData;
-import com.amazon.payments.paywithamazon.response.parser.ReverseProviderCreditResponseData;
-import com.amazon.payments.paywithamazon.response.parser.ConfirmOrderReferenceResponseData;
+import com.amazon.payments.paywithamazon.response.parser.GetPaymentDetails;
+import com.amazon.payments.paywithamazon.response.parser.GetProviderCreditDetailsResponseData;
 import com.amazon.payments.paywithamazon.response.parser.GetProviderCreditReversalDetailsResponseData;
-import com.amazon.payments.paywithamazon.response.parser.SetBillingAgreementDetailsResponseData;
-import com.amazon.payments.paywithamazon.response.parser.CloseBillingAgreementResponseData;
-import com.amazon.payments.paywithamazon.response.parser.RefundResponseData;
-import com.amazon.payments.paywithamazon.response.parser.ConfirmBillingAgreementResponseData;
 import com.amazon.payments.paywithamazon.response.parser.GetRefundDetailsResponseData;
-import com.amazon.payments.paywithamazon.response.parser.ValidateBillingAgreementResponseData;
+import com.amazon.payments.paywithamazon.response.parser.GetServiceStatusResponseData;
+import com.amazon.payments.paywithamazon.response.parser.Parser;
+import com.amazon.payments.paywithamazon.response.parser.RefundResponseData;
 import com.amazon.payments.paywithamazon.response.parser.ResponseData;
+import com.amazon.payments.paywithamazon.response.parser.ReverseProviderCreditResponseData;
+import com.amazon.payments.paywithamazon.response.parser.SetBillingAgreementDetailsResponseData;
+import com.amazon.payments.paywithamazon.response.parser.SetOrderReferenceDetailsResponseData;
+import com.amazon.payments.paywithamazon.response.parser.ValidateBillingAgreementResponseData;
 import com.amazon.payments.paywithamazon.types.AmazonReferenceIdType;
 import com.amazon.payments.paywithamazon.types.ServiceConstants;
 import com.amazon.payments.paywithamazon.types.User;
 
 import java.io.IOException;
 import java.net.URLDecoder;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
 
 
 /*
-* Client for accessing Pay with Amazon API.
-*/
+ * Client for accessing Pay with Amazon API.
+ */
 public class PaymentsClient implements Client  {
 
     private final RequestHelper helper;
@@ -95,13 +98,68 @@ public class PaymentsClient implements Client  {
      * Amazon Payments API using the specified MWS account credentials.
      *
      * @param config The client configuration includes MWS account credentials
-     *                     and control options how this client connects to Amazon Payments
+     *        and control options how this client connects to Amazon Payments
      */
     public PaymentsClient(Config config) {
         this.paymentsConfig = (PaymentsConfig)config;
         this.helper = new RequestHelper(this.paymentsConfig);
     }
 
+
+
+    /**
+     * The GetServiceStatus operation returns the operational status of the Pay with Amazon API
+     * section of Amazon Marketplace Web Service (Amazon MWS).
+     * Documentation: https://payments.amazon.com/developer/documentation/apireference/201752110
+     *
+     * @return The response from the GetServiceStatus service API, as
+     *         returned by Amazon Payments
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by Amazon Payments indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    @Override
+    public GetServiceStatusResponseData getServiceStatus()
+            throws AmazonServiceException {
+        final ResponseData rawResponse = sendRequest(helper.getPostURLGetServiceStatus());
+        return Parser.getServiceStatus(rawResponse);
+    }
+
+
+    /**
+     * The CreateOrderReferenceForId operation is used to create an Order Reference object from
+     * the object represented by the Id and IdType request parameters.
+     *
+     * Documentation: https://payments.amazon.com/developer/documentation/apireference/201751670
+     *
+     * @param createOrderReferenceForIdRequest Container for the necessary
+     *           parameters to execute the GetOrderReferenceDetails service API on
+     *           Amazon Payments.
+     *
+     * @return The response from the CreateOrderReferenceForId service API, as
+     *         returned by Amazon Payments.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by Amazon Payments indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    @Override
+    public CreateOrderReferenceForIdResponseData createOrderReferenceForId(
+            CreateOrderReferenceForIdRequest createOrderReferenceForIdRequest)
+            throws AmazonServiceException {
+        final ResponseData rawResponse = sendRequest(helper.getPostURL(
+            createOrderReferenceForIdRequest));
+        return Parser.createOrderReferenceForId(rawResponse);
+    }
 
 
     /**
@@ -132,23 +190,18 @@ public class PaymentsClient implements Client  {
 
 
     /**
+     * Invoke the getPaymentDetails convenience method which calls several API calls:
+     * GetOrderReferenceDetails, GetAuthorizationDetails, GetCaptureDetails, GetRefundDetails.
      *
-     * The getPaymentDetails operation returns details about the
-     * Order Reference object and its current state.
-     * Documentation: https://payments.amazon.com/documentation/apireference/201751630#201751970
+     * @param orderReferenceID the Order Reference of which to obtain all payment details
      *
-     * @param orderReferenceID The order reference identifier. This value is retrieved
-     *      from the Amazon Button widget after the buyer has successfully
-     *      authenticated with Amazon.
-     *
-     * @return The response from the GetPaymentDetails service API, as
-     *         returned by Amazon Payments. It contains OrderReferenceDetails,
-     *         AuthorizationDetails, CaptureDetails and RefundDetails Responses.
+     * @return The response from the four API calls packaged in an object for easy processing
      *
      * @throws AmazonServiceException
      *             If an error response is returned by Amazon Payments indicating
      *             either a problem with the data in the request, or a server side issue.
      */
+    @Override
     public GetPaymentDetails getPaymentDetails(String orderReferenceID) throws AmazonServiceException {
         GetPaymentDetails paymentDetails = new GetPaymentDetails();
 
@@ -160,25 +213,25 @@ public class PaymentsClient implements Client  {
             List<String> amazon_authorization_id = orderReferenceResponse.getIdList().getMember();
 
             for (String authorizeID : amazon_authorization_id) {
-                GetAuthorizationDetailsRequest getAuthDetailsRequest = new GetAuthorizationDetailsRequest(authorizeID);
-                AuthorizationDetails responseAuthorize = getAuthorizationDetails(getAuthDetailsRequest).getDetails();
-                paymentDetails.putAuthorizationDetails(authorizeID, responseAuthorize);
+                    GetAuthorizationDetailsRequest getAuthDetailsRequest = new GetAuthorizationDetailsRequest(authorizeID);
+                    AuthorizationDetails responseAuthorize = getAuthorizationDetails(getAuthDetailsRequest).getDetails();
+                    paymentDetails.putAuthorizationDetails(authorizeID, responseAuthorize);
 
-                List<String> amazon_capture_id = responseAuthorize.getIdList().getMember();
+                    List<String> amazon_capture_id = responseAuthorize.getIdList().getMember();
 
-                for (String captureID : amazon_capture_id) {
-                    GetCaptureDetailsRequest getCaptureDetailsRequest = new GetCaptureDetailsRequest(captureID);
-                    CaptureDetails responseCapture = getCaptureDetails(getCaptureDetailsRequest).getDetails();
-                    paymentDetails.putCaptureDetails(captureID, responseCapture);
+                    for (String captureID : amazon_capture_id) {
+                            GetCaptureDetailsRequest getCaptureDetailsRequest = new GetCaptureDetailsRequest(captureID);
+                            CaptureDetails responseCapture = getCaptureDetails(getCaptureDetailsRequest).getDetails();
+                            paymentDetails.putCaptureDetails(captureID, responseCapture);
 
-                    List<String> amazon_refund_id = responseCapture.getIdList().getMember();
+                            List<String> amazon_refund_id = responseCapture.getIdList().getMember();
 
-                    for (String refundID : amazon_refund_id) {
-                        GetRefundDetailsRequest getRefundDetailsRequest = new GetRefundDetailsRequest(refundID);
-                        RefundDetails responseRefund = getRefundDetails(getRefundDetailsRequest).getDetails();
-                        paymentDetails.putRefundDetails(refundID, responseRefund);
-                    }
-                }
+                            for (String refundID : amazon_refund_id) {
+                                    GetRefundDetailsRequest getRefundDetailsRequest = new GetRefundDetailsRequest(refundID);
+                                    RefundDetails responseRefund = getRefundDetails(getRefundDetailsRequest).getDetails();
+                                    paymentDetails.putRefundDetails(refundID, responseRefund);
+                            }
+                     }
             }
 
         } catch (Exception e) {
@@ -948,7 +1001,7 @@ public class PaymentsClient implements Client  {
         String amazonReferenceId = chargeRequest.getAmazonReferenceId();
         String mwsAuthToken = chargeRequest.getMwsAuthToken();
 
-        //call getOrderReferenceDetails
+        //call getOrderReferenceDetails 
         GetOrderReferenceDetailsRequest getOrderDetailsRequest = new GetOrderReferenceDetailsRequest(amazonReferenceId).setMWSAuthToken(mwsAuthToken);
         OrderReferenceDetails response = getOrderReferenceDetails(getOrderDetailsRequest).getDetails();
 

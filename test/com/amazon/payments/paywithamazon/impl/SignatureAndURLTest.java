@@ -21,11 +21,11 @@ import org.powermock.modules.junit4.PowerMockRunner;
 @PowerMockIgnore({"javax.crypto.*" })
 @PrepareForTest(Util.class)
 public class SignatureAndURLTest {
-
+    
     PaymentsConfig config;
     String mcokTimeStamp = "2015-01-01";
     RequestHelper helper;
-
+    
     @Before
     public void setUp() throws Exception {
         config = new PaymentsConfig().withAccessKey(TestConstants.accessKey)
@@ -38,7 +38,7 @@ public class SignatureAndURLTest {
         PowerMockito.stub(PowerMockito.method(Util.class , "getTimestamp")).toReturn(mcokTimeStamp);
     }
 
-    @Test
+    @Test 
     public void testRequestUrlAndSignature() throws Exception{
         this.helper = new RequestHelper(config);
         PowerMockito.stub(PowerMockito.method(Util.class , "getTimestamp")).toReturn(mcokTimeStamp);

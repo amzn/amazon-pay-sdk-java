@@ -42,6 +42,8 @@ import org.apache.commons.codec.binary.Base64;
 
 public class Util {
 
+    public static final String LINE_SEPARATOR = System.getProperty("line.separator");
+
     /**
      * Helper method to calculate base64 encoded signature using specified secret key
      *
@@ -69,7 +71,7 @@ public class Util {
      *
      * @param method The HTTP method (GET,POST,PUT,etc.).
      * @param url The URL
-     * @param urlParameters URL Parameters 
+     * @param urlParameters URL Parameters
      * @param headers Header key-value pairs
      * @return ResponseData
      * @throws IOException
@@ -101,7 +103,7 @@ public class Util {
         String inputLine;
         StringBuffer response = new StringBuffer();
         while ((inputLine = in.readLine()) != null) {
-            response.append(inputLine);
+            response.append(inputLine).append(LINE_SEPARATOR);
         }
         in.close();
         return new ResponseData(responseCode, response.toString());
@@ -109,12 +111,12 @@ public class Util {
 
 
     /**
-     * This method uses PaymentsConfig to set proxy settings and uses 
+     * This method uses PaymentsConfig to set proxy settings and uses
      * HttpURLConnection instance to make requests.
      *
      * @param method The HTTP method (GET,POST,PUT,etc.).
      * @param url The URL
-     * @param urlParameters URL Parameters 
+     * @param urlParameters URL Parameters
      * @param config client configuration container
      * @return ResponseData
      * @throws IOException
@@ -159,7 +161,7 @@ public class Util {
     }
 
     /**
-     * Helper method to URL encode all parameter values in a Map 
+     * Helper method to URL encode all parameter values in a Map
      * @throws java.io.UnsupportedEncodingException
      */
     public static void urlEncodeAPIParams(Map<String, String> apiParameters) throws UnsupportedEncodingException {
@@ -179,7 +181,7 @@ public class Util {
     }
 
     /**
-     * Helper method to convert specified parameter map to URL string  
+     * Helper method to convert specified parameter map to URL string
      * separated by ampersand
      *
      */

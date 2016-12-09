@@ -21,12 +21,12 @@ import org.powermock.modules.junit4.PowerMockRunner;
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(Util.class)
 public class LoginUserInfoTest {
-
+    
     private final String accessToken =  TestConstants.addressConsentToken;
     private final String clientId = TestConstants.clientId;
     private PaymentsConfig config;
     private PaymentsClient client;
-
+    
     @Before
     public void setUp() throws Exception {
         PowerMockito.spy(Util.class);
@@ -37,17 +37,17 @@ public class LoginUserInfoTest {
                 .withCurrencyCode(CurrencyCode.USD)
                 .withSandboxMode(true)
                 .withRegion(Region.US);
-
+        
         client = new PaymentsClient(config);
     }
-
-    @Test
+    
+    @Test 
     public void testGetUserInfo() throws Exception {
-
+       
         ResponseData tokenInfoResponse = new ResponseData(200 , TestConstants.tokenInfoResponse);
         String tokenInfoURL = TestConstants.tokenInfoURL + URLDecoder.decode(accessToken, "UTF-8");
         PowerMockito.doReturn(tokenInfoResponse).when(Util.class, "httpSendRequest" , "GET", tokenInfoURL , null , new HashMap<String,String>(), null);
-
+        
         ResponseData userInfoResponse = new ResponseData(200 , TestConstants.userInfoResponse);
         Map<String,String> headerValues = new HashMap<String,String>();
         headerValues.put("Authorization" , "bearer " + URLDecoder.decode(accessToken, "UTF-8"));
@@ -59,9 +59,9 @@ public class LoginUserInfoTest {
         Assert.assertEquals("testbuyer2@amazon.com", user.getEmail());
         Assert.assertEquals("Test Buyer", user.getName());
         Assert.assertEquals("amzn1.account.AF5W6J2OG52NKFJGEN52GEZ5CWFQ", user.getUserId());
-
+               
     }
-
+    
     @Test(expected=AmazonServiceException.class)
     public void testInvalidAccessToken () throws Exception{
         ResponseData userProfileErrorResponse = new ResponseData(200 , TestConstants.userProfileErrorResponse);

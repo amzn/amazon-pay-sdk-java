@@ -75,15 +75,15 @@ public class AuthorizationDetails {
     protected String softDescriptor;
     @XmlElement(name = "AddressVerificationCode")
     protected String addressVerificationCode;
-    @XmlElement(name = "softDecline")
+    @XmlElement(name = "SoftDecline")
     protected boolean softDecline;
-    
+
     public AuthorizationDetails() {
         super();
     }
 
     /**
-     * 
+     *
      * @return The Amazon-generated identifier for this authorization transaction.
      */
     public String getAmazonAuthorizationId() {
@@ -92,14 +92,14 @@ public class AuthorizationDetails {
 
     /**
      * The identifier for this authorization transaction that you specify.
-     * @return 
+     * @return
      */
     public String getAuthorizationReferenceId() {
         return authorizationReferenceId;
     }
 
     /**
-     * 
+     *
      * @return authorizationBillingAddress
      */
     public Address getAuthorizationBillingAddress() {
@@ -107,7 +107,7 @@ public class AuthorizationDetails {
     }
 
     /**
-     * 
+     *
      * @return A description for the authorization transaction that is displayed in emails to the buyer.
      */
     public String getSellerAuthorizationNote() {
@@ -115,7 +115,7 @@ public class AuthorizationDetails {
     }
 
     /**
-     * 
+     *
      * @return The amount to be authorized.
      */
     public Price getAuthorizationAmount() {
@@ -123,7 +123,7 @@ public class AuthorizationDetails {
     }
 
     /**
-     * 
+     *
      * @return The total amount that has been captured on this authorization.
      */
     public Price getCapturedAmount() {
@@ -131,7 +131,7 @@ public class AuthorizationDetails {
     }
 
     /**
-     * 
+     *
      * @return The fee that was charged by Amazon for this authorization.
      */
     public Price getAuthorizationFee() {
@@ -139,9 +139,9 @@ public class AuthorizationDetails {
     }
 
     /**
-     * 
-     * @return A list of AmazonCaptureId identifiers that have been requested 
-     * on this Authorization object. This list is empty if you have not 
+     *
+     * @return A list of AmazonCaptureId identifiers that have been requested
+     * on this Authorization object. This list is empty if you have not
      * requested any captures on this authorization.
      */
     public IdList getIdList() {
@@ -156,8 +156,8 @@ public class AuthorizationDetails {
     }
 
     /**
-     * 
-     * @return The time when the authorization expires and no further 
+     *
+     * @return The time when the authorization expires and no further
      * captures can be requested against the authorization. In ISO 8601 format.
      */
     public XMLGregorianCalendar getExpirationTimestamp() {
@@ -165,7 +165,7 @@ public class AuthorizationDetails {
     }
 
     /**
-     * 
+     *
      * @return Describes the current status of the authorization.
      */
     public Status getAuthorizationStatus() {
@@ -173,7 +173,7 @@ public class AuthorizationDetails {
     }
 
     /**
-     * 
+     *
      * @return orderItemCategories
      */
     public OrderItemCategories getOrderItemCategories() {
@@ -181,9 +181,9 @@ public class AuthorizationDetails {
     }
 
     /**
-     * 
-     * @return Indicates whether you specified a direct capture against the 
-     * order reference. The captured amount will be disbursed to your account 
+     *
+     * @return Indicates whether you specified a direct capture against the
+     * order reference. The captured amount will be disbursed to your account
      * in the next disbursement cycle.
      */
     public boolean isCaptureNow() {
@@ -191,8 +191,8 @@ public class AuthorizationDetails {
     }
 
     /**
-     * 
-     * @return The description to be shown on the buyer's payment instrument 
+     *
+     * @return The description to be shown on the buyer's payment instrument
      * statement if CaptureNow was set to true.
      */
     public String getSoftDescriptor() {
@@ -200,7 +200,7 @@ public class AuthorizationDetails {
     }
 
     /**
-     * 
+     *
      * @return addressVerificationCode
      */
     public String getAddressVerificationCode() {
@@ -208,30 +208,29 @@ public class AuthorizationDetails {
     }
 
     /**
-     * @return Indicates whether an authorization resulted in a soft decline. If true, the authorization 
-     * resulted in a soft decline and may be successful if you try again. 
+     * @return Indicates whether an authorization resulted in a soft decline. If true, the authorization
+     * resulted in a soft decline and may be successful if you try again.
      * If false, the authorization was a hard decline, and you should contact the buyer to update their
      * information.
      */
     public boolean isSoftDecline() {
         return softDecline;
     }
-    
+
     /**
      * String representation of Authorization Details
      */
     @Override
     public String toString() {
-        return "AuthorizationDetails{" + "amazonAuthorizationId=" + amazonAuthorizationId 
-                + ", authorizationReferenceId=" + authorizationReferenceId + ", authorizationBillingAddress=" 
-                + authorizationBillingAddress + ", sellerAuthorizationNote=" + sellerAuthorizationNote 
-                + ", authorizationAmount=" + authorizationAmount + ", capturedAmount=" + capturedAmount 
-                + ", authorizationFee=" + authorizationFee + ", idList=" + idList + ", creationTimestamp=" 
-                + creationTimestamp + ", expirationTimestamp=" + expirationTimestamp + ", authorizationStatus=" 
-                + authorizationStatus + ", orderItemCategories=" + orderItemCategories + ", captureNow=" 
-                + captureNow + ", softDescriptor=" + softDescriptor + ", addressVerificationCode=" 
+        return "AuthorizationDetails{" + "amazonAuthorizationId=" + amazonAuthorizationId
+                + ", authorizationReferenceId=" + authorizationReferenceId + ", authorizationBillingAddress="
+                + authorizationBillingAddress + ", sellerAuthorizationNote=" + sellerAuthorizationNote
+                + ", authorizationAmount=" + authorizationAmount + ", capturedAmount=" + capturedAmount
+                + ", authorizationFee=" + authorizationFee + ", idList=" + idList + ", creationTimestamp="
+                + creationTimestamp + ", expirationTimestamp=" + expirationTimestamp + ", authorizationStatus="
+                + authorizationStatus + ", orderItemCategories=" + orderItemCategories + ", captureNow="
+                + captureNow + ", softDescriptor=" + softDescriptor + ", addressVerificationCode="
                 + addressVerificationCode +", softDecline="  + softDecline + '}';
     }
-    
-    
+
 }

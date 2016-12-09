@@ -257,9 +257,12 @@ public class OrderReferenceDetails {
     public String getRequestPaymentAuthorization() {
         return requestPaymentAuthorization;
     }
+
+
     /**
      * String representation of OrderReferenceDetails
      */
+
     @Override
     public String toString() {
         return "OrderReferenceDetails{" + "amazonOrderReferenceId=" + amazonOrderReferenceId + ", buyer=" + buyer + ", orderTotal="
@@ -267,7 +270,7 @@ public class OrderReferenceDetails {
                 + ", billingAddress=" + billingAddress + ", releaseEnvironment=" + releaseEnvironment + ", sellerOrderAttributes="
                 + sellerOrderAttributes + ", orderReferenceStatus=" + orderReferenceStatus + ", constraints="
                 + constraints + ", creationTimestamp=" + creationTimestamp + ", expirationTimestamp=" + expirationTimestamp
-                + ", parentDetails=" + parentDetails + ", idList=" + idList + ", orderLanguage=" + orderLanguage + ", requestPaymentAuthorization=" + requestPaymentAuthorization +'}';
+                + ", parentDetails=" + parentDetails + ", idList=" + idList + ", orderLanguage=" + orderLanguage + ", requestPaymentAuthorization=" + requestPaymentAuthorization + '}';
     }
 
 

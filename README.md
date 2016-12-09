@@ -73,7 +73,7 @@ response.getDetails().getAmazonOrderReferenceId();
 // BuyerName
 response.getDetails().getBuyer().getBuyerName();
 
-Other data available are buyerEmail, buyerPhone, Destination Address
+Other data available are buyerEmail, buyerPhone, Destination Address 
 
 // For testing/debugging purposes, see all response fields using below
 response.toString();
@@ -152,7 +152,7 @@ client.closeOrderReference("AMAZON_ORDER_REFERENCE_ID");
 
 ```
 
-### Subscriptions/Recurring Payments API Flow
+### Subscriptions/Recurring Payments API Flow 
 
 ```java
 String merchantId = "YOUR_MERCHANT_ID";
@@ -238,7 +238,7 @@ client.closeBillingAgreement(request);
 ### Get Login Profile API
 ```java
 
-This API call allows you to obtain user profile information once a user has logged into your application using their Amazon credentials.
+This API call allows you to obtain user profile information once a user has logged into your application using their Amazon credentials. 
 
 // Your client id is located in your Seller Central account.
 String clientId = "YOUR_CLIENT_ID";
@@ -259,7 +259,7 @@ user.getUserId();
 
 ```java
 
-    /**
+    /** 
     * This can be placed in your java application for a method
     * that is configured to receive a "POST" IPN from Amazon.
     **/
@@ -267,18 +267,18 @@ user.getUserId();
     String body = IPN_MESSAGE_BODY
 
     Notification notification = NotificationFactory.parseNotification(headers, body);
-
+    
     //To view received notification JSON body
     notification.toJSON(); //We recommend to log this value for debugging purposes
 
     //Determine the notification type
     NotificationType type = notification.getNotificationType();
-
+	
 	//Retrieve notification object based on type
         switch (type) {
             case CaptureNotification:
                 CaptureNotification cn = (CaptureNotification)notification;
-                //To access capture details like captureId, captureAmount etc.
+                //To access capture details like captureId, captureAmount etc. 
                 cn.getCaptureDetails().getAmazonCaptureId();
                 break;
             case AuthorizationNotification:
@@ -306,7 +306,7 @@ user.getUserId();
                 break;
         }
 
-    //To access metadata
+    //To access metadata 
     notification.getNotificationMetadata();
 
     //To view original notification body

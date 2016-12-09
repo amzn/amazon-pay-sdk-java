@@ -12,23 +12,23 @@
  * express or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
-package com.amazon.payments.paywithamazon.types;
+package com.amazon.payments.paywithamazon.response.model;
 
-/**
-* Represents if identifier represents OrderReferenceId or BillingAgreementId.
-*/
-public enum AmazonReferenceIdType {
-	ORDER_REFERENCE_ID("OrderReference"),
-        BILLING_AGREEMENT_ID("BillingAgreement");
+import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlEnumValue;
+import javax.xml.bind.annotation.XmlType;
 
-    private String value;
+@XmlType(name = "Status")
+@XmlEnum
+public enum ServiceStatus {
 
-    private AmazonReferenceIdType(final String value) {
-        this.value = value;
-    }
-
-    public String value() {
-        return value;
-    }
+    @XmlEnumValue("GREEN")
+    GREEN,
+    @XmlEnumValue("GREEN_I")
+    GREEN_I,
+    @XmlEnumValue("YELLOW")
+    YELLOW,
+    @XmlEnumValue("RED")
+    RED;
 
 }

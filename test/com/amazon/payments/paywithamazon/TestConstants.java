@@ -13,7 +13,7 @@ public class TestConstants {
     public static final String accessKey = "TEST_ACCESS_KEY";
     public static final String secretKey = "TEST_SECRET_KEY";
     public static final String region = "us";
-    public static final String sandbox_mode = "true";
+    public static final String sandbox_mode = "true"; 
     public static final String timeStamp = "2015-00-00T00:00:00Z";
     public static final String urlEncoded_TimeStamp = "2015-00-00T00%3A00%3A00Z";
     public static final String platformId = "A11WKBU7ADWTAU";

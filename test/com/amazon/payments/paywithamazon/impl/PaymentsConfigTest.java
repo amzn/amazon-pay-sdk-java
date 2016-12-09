@@ -16,7 +16,7 @@ public class PaymentsConfigTest {
         PaymentsConfig config = new PaymentsConfig(new Properties());
         assertConfigValues(config);
     }
-
+    
     @Test
     public void testPaymentsConfig() {
         PaymentsConfig config = new PaymentsConfig().withAccessKey(TestConstants.accessKey)
@@ -29,7 +29,7 @@ public class PaymentsConfigTest {
                 .withApplicationVersion("1.0").withProxyUsername("test").withProxyPassword("crypto");
         assertConfigValues(config);
     }
-
+    
     @Test
     public void testPaymentsJSONConfig() throws Exception {
         String workingDir = System.getProperty("user.dir");
@@ -37,15 +37,15 @@ public class PaymentsConfigTest {
                 + "/test/com/amazon/payments/paywithamazon/impl/config.json");
         assertConfigValues(config);
     }
-
+    
     @Test
     public void testPaymentsPropertiesConfig() throws Exception {
         String workingDir = System.getProperty("user.dir");
-        PaymentsConfig config = PaymentsConfigLoaderFactory.loadConfigFromPropertiesFile(workingDir
+        PaymentsConfig config = PaymentsConfigLoaderFactory.loadConfigFromPropertiesFile(workingDir 
                 + "/test/com/amazon/payments/paywithamazon/impl/config.properties");
         assertConfigValues(config);
     }
-
+    
     private void assertConfigValues(PaymentsConfig config) {
         Assert.assertEquals(config.getAccessKey() , TestConstants.accessKey);
         Assert.assertEquals(config.getSecretKey() , TestConstants.secretKey);
@@ -62,5 +62,5 @@ public class PaymentsConfigTest {
         Assert.assertEquals(config.getProxyPassword(), "crypto");
         Assert.assertEquals(config.getSellerId(), "TEST_MERCHANT_ID");
     }
-
+    
 }

@@ -1,0 +1,49 @@
+<CreateOrderReferenceForIdResponse xmlns="http://mws.amazonservices.com/schema/OffAmazonPayments/2013-01-01">
+  <CreateOrderReferenceForIdResult>
+    <OrderReferenceDetails>
+      <OrderReferenceStatus>
+        <LastUpdateTimestamp>2016-11-28T03:23:22.159Z</LastUpdateTimestamp>
+        <State>Open</State>
+      </OrderReferenceStatus>
+      <Destination>
+        <DestinationType>Physical</DestinationType>
+        <PhysicalDestination>
+          <StateOrRegion>IL</StateOrRegion>
+          <Phone>800-000-0000</Phone>
+          <City>Chicago</City>
+          <CountryCode>US</CountryCode>
+          <PostalCode>60602</PostalCode>
+          <Name>Susie Smith</Name>
+          <AddressLine1>10 Ditka Ave</AddressLine1>
+          <AddressLine2>Suite 2500</AddressLine2>
+        </PhysicalDestination>
+      </Destination>
+      <ExpirationTimestamp>2017-05-27T03:23:21.923Z</ExpirationTimestamp>
+      <ParentDetails>
+        <Type>BillingAgreement</Type>
+        <Id>C01-5996379-1389374</Id>
+      </ParentDetails>
+      <SellerOrderAttributes>
+        <StoreName>Top of the World Store</StoreName>
+        <CustomInformation>One two three four five</CustomInformation>
+        <SellerOrderId>OR# 12345</SellerOrderId>
+      </SellerOrderAttributes>
+      <OrderTotal>
+        <CurrencyCode>USD</CurrencyCode>
+        <Amount>0.45</Amount>
+      </OrderTotal>
+      <Buyer>
+        <Name>Sandbox Guillot</Name>
+        <Email>not+a+real+email@inter.net</Email>
+      </Buyer>
+      <ReleaseEnvironment>Sandbox</ReleaseEnvironment>
+      <SellerNote>My seller note goes here</SellerNote>
+      <AmazonOrderReferenceId>S01-6910968-3348607</AmazonOrderReferenceId>
+      <CreationTimestamp>2016-11-28T03:23:21.923Z</CreationTimestamp>
+      <RequestPaymentAuthorization>false</RequestPaymentAuthorization>
+    </OrderReferenceDetails>
+  </CreateOrderReferenceForIdResult>
+  <ResponseMetadata>
+    <RequestId>4d5e0306-257e-4a13-b2ad-45b891c3de2a</RequestId>
+  </ResponseMetadata>
+</CreateOrderReferenceForIdResponse>
