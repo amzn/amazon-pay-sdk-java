@@ -143,7 +143,7 @@ CaptureRequest request = new CaptureRequest("AMAZON_AUTHORIZATION_ID" , "YOUR_UN
 request.setCaptureCurrencyCode(CurrencyCode.YOUR_CURRENCY_CODE);  //Overrides currency code set in Client
 request.setSellerCaptureNote("YOUR_CAPTURE_NOTE");
 
-CaptureResponseData response = client.Capture(request);
+CaptureResponseData response = client.capture(request);
 
 // Close the order reference once your one time
 // transaction is complete.
