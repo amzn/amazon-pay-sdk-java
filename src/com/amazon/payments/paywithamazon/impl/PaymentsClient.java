@@ -203,43 +203,69 @@ public class PaymentsClient implements Client  {
      */
     @Override
     public GetPaymentDetails getPaymentDetails(String orderReferenceID) throws AmazonServiceException {
-        GetPaymentDetails paymentDetails = new GetPaymentDetails();
-
-        GetOrderReferenceDetailsRequest getOrderReferenceDetailsRequest = new GetOrderReferenceDetailsRequest(orderReferenceID);
-        OrderReferenceDetails orderReferenceResponse = getOrderReferenceDetails(getOrderReferenceDetailsRequest).getDetails();
-
-        try {
-            paymentDetails.putOrderReferenceDetails(orderReferenceID, orderReferenceResponse);
-            List<String> amazon_authorization_id = orderReferenceResponse.getIdList().getMember();
-
-            for (String authorizeID : amazon_authorization_id) {
-                    GetAuthorizationDetailsRequest getAuthDetailsRequest = new GetAuthorizationDetailsRequest(authorizeID);
-                    AuthorizationDetails responseAuthorize = getAuthorizationDetails(getAuthDetailsRequest).getDetails();
-                    paymentDetails.putAuthorizationDetails(authorizeID, responseAuthorize);
-
-                    List<String> amazon_capture_id = responseAuthorize.getIdList().getMember();
-
-                    for (String captureID : amazon_capture_id) {
-                            GetCaptureDetailsRequest getCaptureDetailsRequest = new GetCaptureDetailsRequest(captureID);
-                            CaptureDetails responseCapture = getCaptureDetails(getCaptureDetailsRequest).getDetails();
-                            paymentDetails.putCaptureDetails(captureID, responseCapture);
-
-                            List<String> amazon_refund_id = responseCapture.getIdList().getMember();
-
-                            for (String refundID : amazon_refund_id) {
-                                    GetRefundDetailsRequest getRefundDetailsRequest = new GetRefundDetailsRequest(refundID);
-                                    RefundDetails responseRefund = getRefundDetails(getRefundDetailsRequest).getDetails();
-                                    paymentDetails.putRefundDetails(refundID, responseRefund);
-                            }
-                     }
-            }
-
-        } catch (Exception e) {
-            throw new AmazonClientException("Encountered Exception: ", e);
-        }
-        return paymentDetails;
+        return getPaymentDetails(orderReferenceID, null);
     }
 
+
+    /**
+     * Invoke the getPaymentDetails convenience method which calls several API calls:
+     * GetOrderReferenceDetails, GetAuthorizationDetails, GetCaptureDetails, GetRefundDetails.
+     *
+     * @param orderReferenceID the Order Reference of which to obtain all payment details
+     * @param The authorization token that you received when you registered for Amazon MWS.
+     *        Required For web applications and third-party developer authorizations only.
+     *
+     * @return The response from the four API calls packaged in an object for easy processing
+     *
+     * @throws AmazonServiceException
+     *             If an error response is returned by Amazon Payments indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    @Override
+    public GetPaymentDetails getPaymentDetails(
+            String orderReferenceID,
+            String MWSAuthToken)
+            throws AmazonServiceException {
+        GetPaymentDetails paymentDetails = new GetPaymentDetails();
+
+        GetOrderReferenceDetailsRequest getOrderReferenceDetailsRequest =
+                new GetOrderReferenceDetailsRequest(orderReferenceID)
+                .setMWSAuthToken(MWSAuthToken);
+        OrderReferenceDetails orderReferenceResponse = getOrderReferenceDetails(getOrderReferenceDetailsRequest).getDetails();
+
+        paymentDetails.putOrderReferenceDetails(orderReferenceID, orderReferenceResponse);
+        List<String> amazon_authorization_id = orderReferenceResponse.getIdList().getMember();
+
+        for (String authorizeID : amazon_authorization_id) {
+                GetAuthorizationDetailsRequest getAuthDetailsRequest =
+                        new GetAuthorizationDetailsRequest(authorizeID)
+                        .setMWSAuthToken(MWSAuthToken);
+                AuthorizationDetails responseAuthorize = getAuthorizationDetails(getAuthDetailsRequest).getDetails();
+                paymentDetails.putAuthorizationDetails(authorizeID, responseAuthorize);
+
+                List<String> amazon_capture_id = responseAuthorize.getIdList().getMember();
+
+                for (String captureID : amazon_capture_id) {
+                        GetCaptureDetailsRequest getCaptureDetailsRequest =
+                                new GetCaptureDetailsRequest(captureID)
+                                .setMWSAuthToken(MWSAuthToken);
+                        CaptureDetails responseCapture = getCaptureDetails(getCaptureDetailsRequest).getDetails();
+                        paymentDetails.putCaptureDetails(captureID, responseCapture);
+
+                        List<String> amazon_refund_id = responseCapture.getIdList().getMember();
+
+                        for (String refundID : amazon_refund_id) {
+                                GetRefundDetailsRequest getRefundDetailsRequest =
+                                        new GetRefundDetailsRequest(refundID)
+                                        .setMWSAuthToken(MWSAuthToken);
+                                RefundDetails responseRefund = getRefundDetails(getRefundDetailsRequest).getDetails();
+                                paymentDetails.putRefundDetails(refundID, responseRefund);
+                        }
+                 }
+        }
+
+        return paymentDetails;
+    }
 
 
     /**
@@ -904,7 +930,6 @@ public class PaymentsClient implements Client  {
 
         headerValues.put("Authorization" , "bearer " + decodedAccessToken);
         response = Util.httpSendRequest("GET" , profileEndpoint + "/user/profile" , null, headerValues);
-
         m = Util.convertJsonToObject(response.toXML() , Map.class);
         if(m.containsKey("error")) {
             throw new AmazonServiceException("Retrieving User Info Failed. "+(String)m.get("error_description"));
@@ -913,8 +938,6 @@ public class PaymentsClient implements Client  {
         User user = Util.convertJsonToObject(response.toXML() , User.class);
         return user;
     }
-
-
 
 
     /**
@@ -1074,6 +1097,18 @@ public class PaymentsClient implements Client  {
 
     private ResponseData postRequest(String httpPostRequest) throws IOException {
         return Util.httpSendRequest("POST", Util.getServiceURLEndpoint(paymentsConfig.getRegion() , paymentsConfig.getEnvironment()), httpPostRequest, null, this.helper.paymentsConfig);
+    }
+
+    /**
+     * Accessor method for PaymentsConfig configuration object
+     *
+     * @return Config client configuation object
+     *
+     * @throws AmazonServiceException
+     */
+    @Override
+    public Config getConfig() {
+        return paymentsConfig;
     }
 
 }

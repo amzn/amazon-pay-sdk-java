@@ -27,7 +27,8 @@ import javax.xml.bind.annotation.XmlType;
     "sellerOrderId",
     "storeName",
     "orderItemCategories",
-    "customInformation"
+    "customInformation",
+    "sellerId"
 })
 public class SellerOrderAttributes {
 
@@ -39,6 +40,8 @@ public class SellerOrderAttributes {
     protected OrderItemCategories orderItemCategories;
     @XmlElement(name = "CustomInformation")
     protected String customInformation;
+    @XmlElement(name = "SellerId")
+    protected String sellerId;
 
     public SellerOrderAttributes() {
         super();
@@ -46,9 +49,9 @@ public class SellerOrderAttributes {
 
 
     /**
-     * The merchant-specified identifier of this order. This is displayed to the 
+     * The merchant-specified identifier of this order. This is displayed to the
      * buyer in their emails and transaction history on the Amazon Payments website.
-     * 
+     *
      * @return sellerOrderId
      */
     public String getSellerOrderId() {
@@ -57,11 +60,11 @@ public class SellerOrderAttributes {
 
 
     /**
-     * The identifier of the store from which the order was placed. This overrides 
-     * the default value in Seller Central under Settings > Account Settings. 
-     * It is displayed to the buyer in their emails and transaction history 
+     * The identifier of the store from which the order was placed. This overrides
+     * the default value in Seller Central under Settings > Account Settings.
+     * It is displayed to the buyer in their emails and transaction history
      * on the Amazon Payments website.
-     * 
+     *
      * @return storeName
      */
     public String getStoreName() {
@@ -70,7 +73,7 @@ public class SellerOrderAttributes {
 
 
     /**
-     * 
+     *
      * @return orderItemCategories
      */
     public OrderItemCategories getOrderItemCategories() {
@@ -80,20 +83,36 @@ public class SellerOrderAttributes {
 
     /**
      * Any additional information that you want to include with this order reference.
-     * 
+     *
      * @return customInformation
      */
     public String getCustomInformation() {
         return customInformation;
     }
 
+
+    /**
+     * Your Seller ID (sometimes referred to as Merchant ID).
+     * This field is populated by some IPN calls.
+     *
+     * @return sellerId
+     */
+    public String getSellerId() {
+        return sellerId;
+    }
+
+
     /**
      * Returns string representation of SellerOrderAttributes
      */
     @Override
     public String toString() {
-        return "SellerOrderAttributes{" + "sellerOrderId=" + sellerOrderId + ", storeName=" + storeName + ", orderItemCategories=" 
-                + orderItemCategories + ", customInformation=" + customInformation + '}';
+        return "SellerOrderAttributes{"
+                + "sellerOrderId=" + sellerOrderId
+                + ", storeName=" + storeName
+                + ", sellerId=" + sellerId
+                + ", orderItemCategorie=" + orderItemCategories
+                + ", customInformation=" + customInformation + '}';
     }
 
 }

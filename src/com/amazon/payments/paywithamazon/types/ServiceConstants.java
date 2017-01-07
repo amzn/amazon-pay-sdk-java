@@ -114,7 +114,7 @@ public class ServiceConstants {
     public static final String VALIDATE_BILLING_AGREEMENT_DETAILS = "ValidateBillingAgreement";
 
     // SDK version
-    public static final String APPLICATION_LIBRARY_VERSION = "2.2.0";
+    public static final String APPLICATION_LIBRARY_VERSION = "2.2.1";
 
     // Exponential backoff wait times (seconds) for retry operations
     public static final int FIRST_RETRY_WAIT_TIME = 1;

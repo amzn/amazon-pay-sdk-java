@@ -55,5 +55,15 @@ public class ValidateBillingAgreementResult {
         return billingAgreementStatus;
     }
 
+    /**
+     * String representation of ValidateBillingAgreementResult
+     */
+    @Override
+    public String toString() {
+        return "ValidateBillingAgreementResult{"
+                + "validationResult=" + validationResult
+                + ", failureReasonCode=" + failureReasonCode
+                + ", billingAgreementStatus=" + billingAgreementStatus + "}";
+    }
 
 }

@@ -20,7 +20,6 @@ import com.amazon.payments.paywithamazon.types.AmazonReferenceIdType;
 import com.amazon.payments.paywithamazon.types.CurrencyCode;
 import java.io.Serializable;
 import java.util.List;
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * Container for the parameters to the Capture operation.
@@ -37,7 +36,7 @@ public class ChargeRequest implements Serializable {
     private String amount;
     private CurrencyCode currencyCode;
     private String transactionTimeout;
-    private boolean captureNow;
+    private Boolean captureNow;
     private String chargeOrderId;
     private String storeName;
     private String customInformation;
@@ -48,16 +47,37 @@ public class ChargeRequest implements Serializable {
     private String softDescriptor;
     private String mwsAuthToken;
 
-    private String inheritShippingAddress;
+    private Boolean inheritShippingAddress;
 
     private List<ProviderCredit> providerCredit;
 
-    public String getInheritShippingAddress() {
+    public Boolean getInheritShippingAddress() {
         return inheritShippingAddress;
     }
 
-    public void setInheritShippingAddress(String inheritShippingAddress) {
+    /**
+     * Sets the InheritShippingAddress in ChargeRequest
+     *
+     * @param  inheritShippingAddress
+     *
+     * @return ChargeRequest
+     */
+    public void setInheritShippingAddress(final Boolean inheritShippingAddress) {
         this.inheritShippingAddress = inheritShippingAddress;
+    }
+
+
+    /**
+     * Sets the InheritShippingAddress in ChargeRequest
+     * Deprecated since SDK 2.2.1
+     *
+     * @param  inheritShippingAddress
+     *
+     * @return ChargeRequest
+     */
+    @Deprecated
+    public void setInheritShippingAddress(final String inheritShippingAddress) {
+        setInheritShippingAddress(Boolean.parseBoolean(inheritShippingAddress));
     }
 
 
@@ -85,13 +105,10 @@ public class ChargeRequest implements Serializable {
      *
      * @return updated ChargeRequest
      **/
-    public ChargeRequest withAmazonReferenceId(String amazonReferenceId)
-    {
-        if (!StringUtils.isEmpty(amazonReferenceId))
-        {
-            String switchChar = amazonReferenceId;
-            switch (switchChar.charAt(0))
-            {
+    public ChargeRequest withAmazonReferenceId(final String amazonReferenceId) {
+        if ((amazonReferenceId != null) && (amazonReferenceId.length() > 0)) {
+            final String switchChar = amazonReferenceId;
+            switch (switchChar.charAt(0)) {
                 case 'P':
                 case 'S':
                     type = AmazonReferenceIdType.ORDER_REFERENCE_ID;
@@ -105,10 +122,9 @@ public class ChargeRequest implements Serializable {
                 default:
                     throw new AmazonClientException("Invalid Amazon Reference ID");
             }
-        }
-        else
-        {
-            throw new AmazonClientException("Amazon Reference ID is a required field and should be a Order Reference ID / Billing Agreement ID");
+        } else {
+            throw new AmazonClientException(
+                    "Amazon Reference ID is a required field and should be a Order Reference ID / Billing Agreement ID");
         }
 
         return this;
@@ -123,7 +139,7 @@ public class ChargeRequest implements Serializable {
      *
      * @return ChargeRequest
      */
-    public ChargeRequest withAmount(String amount){
+    public ChargeRequest withAmount(final String amount){
         this.amount = amount;
         return this;
     }
@@ -137,7 +153,7 @@ public class ChargeRequest implements Serializable {
      *
      * @return ChargeRequest
      */
-    public ChargeRequest withCurrencyCode(CurrencyCode currencyCode) {
+    public ChargeRequest withCurrencyCode(final CurrencyCode currencyCode) {
         this.currencyCode = currencyCode;
         return this;
     }
@@ -151,7 +167,7 @@ public class ChargeRequest implements Serializable {
      *
      * @return ChargeRequest
      */
-    public ChargeRequest withChargeReferenceId(String chargeReferenceId) {
+    public ChargeRequest withChargeReferenceId(final String chargeReferenceId) {
         this.chargeReferenceId = chargeReferenceId;
         return this;
     }
@@ -164,7 +180,7 @@ public class ChargeRequest implements Serializable {
      *
      * @return ChargeRequest
      */
-    public ChargeRequest withChargeNote(String chargeNote) {
+    public ChargeRequest withChargeNote(final String chargeNote) {
         this.sellerNote = chargeNote;
         return this;
     }
@@ -177,7 +193,7 @@ public class ChargeRequest implements Serializable {
      *
      * @return ChargeRequest
      */
-    public ChargeRequest withTransactionTimeout(String transactionTimeout) {
+    public ChargeRequest withTransactionTimeout(final String transactionTimeout) {
         this.transactionTimeout = transactionTimeout;
         return this;
     }
@@ -190,7 +206,7 @@ public class ChargeRequest implements Serializable {
      *
      * @return ChargeRequest
      */
-    public ChargeRequest withCaptureNow(boolean captureNow) {
+    public ChargeRequest withCaptureNow(final Boolean captureNow) {
         this.captureNow = captureNow;
         return this;
     }
@@ -203,9 +219,23 @@ public class ChargeRequest implements Serializable {
      *
      * @return ChargeRequest
      */
-    public ChargeRequest withInheritShippingAddress(String inheritShippingAddress) {
+    public ChargeRequest withInheritShippingAddress(final Boolean inheritShippingAddress) {
         this.inheritShippingAddress = inheritShippingAddress;
         return this;
+    }
+
+
+    /**
+     * Sets the InheritShippingAddress in ChargeRequest
+     * Deprecated since SDK 2.2.1
+     *
+     * @param  inheritShippingAddress
+     *
+     * @return ChargeRequest
+     */
+    @Deprecated
+    public ChargeRequest withInheritShippingAddress(final String inheritShippingAddress) {
+        return withInheritShippingAddress(Boolean.parseBoolean(inheritShippingAddress));
     }
 
 
@@ -216,7 +246,7 @@ public class ChargeRequest implements Serializable {
      *
      * @return ChargeRequest
      */
-    public ChargeRequest withChargeOrderId(String chargeOrderId) {
+    public ChargeRequest withChargeOrderId(final String chargeOrderId) {
         this.chargeOrderId = chargeOrderId;
         return this;
     }
@@ -229,7 +259,7 @@ public class ChargeRequest implements Serializable {
      *
      * @return ChargeRequest
      */
-    public ChargeRequest withStoreName(String storeName) {
+    public ChargeRequest withStoreName(final String storeName) {
         this.storeName = storeName;
         return this;
     }
@@ -242,7 +272,7 @@ public class ChargeRequest implements Serializable {
      *
      * @return ChargeRequest
      */
-    public ChargeRequest withCustomInformation(String customInformation) {
+    public ChargeRequest withCustomInformation(final String customInformation) {
         this.customInformation = customInformation;
         return this;
     }
@@ -255,7 +285,7 @@ public class ChargeRequest implements Serializable {
      *
      * @return ChargeRequest
      */
-    public ChargeRequest withPlatformId(String platformId) {
+    public ChargeRequest withPlatformId(final String platformId) {
         this.platformId = platformId;
         return this;
     }
@@ -268,7 +298,7 @@ public class ChargeRequest implements Serializable {
      *
      * @return ChargeRequest
      */
-    public ChargeRequest withSoftDescriptor(String softDescriptor) {
+    public ChargeRequest withSoftDescriptor(final String softDescriptor) {
         this.softDescriptor = softDescriptor;
         return this;
     }
@@ -281,7 +311,7 @@ public class ChargeRequest implements Serializable {
      *
      * @return ChargeRequest
      */
-    public ChargeRequest withProviderCreditDetails(List<ProviderCredit> providerCredit) {
+    public ChargeRequest withProviderCreditDetails(final List<ProviderCredit> providerCredit) {
         this.providerCredit = providerCredit;
         return this;
     }
@@ -294,7 +324,7 @@ public class ChargeRequest implements Serializable {
      *
      * @return ChargeRequest
      */
-    public ChargeRequest withMWSAuthToken(String mwsAuthToken) {
+    public ChargeRequest withMWSAuthToken(final String mwsAuthToken) {
         this.mwsAuthToken = mwsAuthToken;
         return this;
     }
@@ -323,7 +353,7 @@ public class ChargeRequest implements Serializable {
         return transactionTimeout;
     }
 
-    public boolean getCaptureNow() {
+    public Boolean getCaptureNow() {
         return captureNow;
     }
 
@@ -361,7 +391,23 @@ public class ChargeRequest implements Serializable {
 
     @Override
     public String toString() {
-        return "ChargeRequest{" + "amazonReferenceId=" + amazonReferenceId + ", type=" + type + ", chargeReferenceId=" + chargeReferenceId + ", amount=" + amount + ", currencyCode=" + currencyCode + ", transactionTimeout=" + transactionTimeout + ", captureNow=" + captureNow + ", chargeOrderId=" + chargeOrderId + ", storeName=" + storeName + ", customInformation=" + customInformation + ", platformId=" + platformId + ", sellerNote=" + sellerNote + ", softDescriptor=" + softDescriptor + ", mwsAuthToken=" + mwsAuthToken + ", inheritShippingAddress=" + inheritShippingAddress + ", providerCredit=" + providerCredit + '}';
+        return "ChargeRequest{"
+                + "amazonReferenceId=" + amazonReferenceId
+                + ", type=" + type
+                + ", chargeReferenceId=" + chargeReferenceId
+                + ", amount=" + amount
+                + ", currencyCode=" + currencyCode
+                + ", transactionTimeout=" + transactionTimeout
+                + ", captureNow=" + captureNow
+                + ", chargeOrderId=" + chargeOrderId
+                + ", storeName=" + storeName
+                + ", customInformation=" + customInformation
+                + ", platformId=" + platformId
+                + ", sellerNote=" + sellerNote
+                + ", softDescriptor=" + softDescriptor
+                + ", mwsAuthToken=" + mwsAuthToken
+                + ", inheritShippingAddress=" + inheritShippingAddress
+                + ", providerCredit=" + providerCredit + '}';
     }
 
 

@@ -1,3 +1,15 @@
+Version 2.2.1 - January 2017
+- Fix OrderReferenceNotification IPN (receiving undocumented SellerId field)
+- Fix AuthorizationNotification IPN (receiving Id instead of member inside IdList)
+- Modify logging for IPN JSON responses to add newlines for easier debugging
+- Remove dependency on Apache Commons Lang jar
+- Remove unneeded dependencies in Maven pom.xml build file
+- Add support for MWSAuthToken to CreateOrderReferenceForId
+- Add support for MWSAuthToken to GetAuthorizationDetails
+- Fix ValidateBillingAgreement responses so that you get parsed results
+- Fix inheritShippingAddress so that it is a Boolean instead of String
+  (Original String method retained with @Deprecated annotation.)
+
 Version 2.2.0 - December 2016
 - Add support for CreateOrderReferenceForId API call
 - Add support for GetServiceStatus API call
@@ -15,4 +27,4 @@ Version 2.0.0 - September 2016
 - Add getSignature helper method
 
 Version 1.2 - March 2016
-- Add support for softDecline parameter in AuthorizeResponse.
+- Add support for softDecline parameter in AuthorizeResponse

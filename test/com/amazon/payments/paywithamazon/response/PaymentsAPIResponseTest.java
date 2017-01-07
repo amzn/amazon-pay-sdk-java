@@ -9,6 +9,7 @@ import com.amazon.payments.paywithamazon.response.model.MessageList;
 import com.amazon.payments.paywithamazon.response.model.OrderReferenceDetails;
 import com.amazon.payments.paywithamazon.response.model.RefundDetails;
 import com.amazon.payments.paywithamazon.response.model.RefundType;
+import com.amazon.payments.paywithamazon.response.model.RequestStatus;
 import com.amazon.payments.paywithamazon.response.model.ServiceStatus;
 import com.amazon.payments.paywithamazon.response.model.Type;
 import com.amazon.payments.paywithamazon.response.parser.AuthorizeOnBillingAgreementResponseData;
@@ -378,19 +379,27 @@ public class PaymentsAPIResponseTest {
 
     @Test
     public void testGetProviderCreditDetailsResponse() throws Exception {
-        String rawResponse = loadTestFile("GetProviderCreditDetailsResponse.xml");
-        ResponseData response = new ResponseData(200, rawResponse);
-        GetProviderCreditDetailsResponseData res = Parser.getGetProviderCreditDetails(response);
+        testGetProviderCreditDetailsResponse(loadTestFile("GetProviderCreditDetailsResponse.xml"));
+    }
+
+    @Test
+    public void testGetProviderCreditDetailsResponseVariation() throws Exception {
+        testGetProviderCreditDetailsResponse(loadTestFile("GetProviderCreditDetailsResponse1.xml"));
+    }
+
+    public void testGetProviderCreditDetailsResponse(final String rawResponse) throws Exception {
+        final ResponseData response = new ResponseData(200, rawResponse);
+        final GetProviderCreditDetailsResponseData res = Parser.getGetProviderCreditDetails(response);
         Assert.assertEquals(res.getDetails().getAmazonProviderCreditId(), "S01-2117025-2155793-P045170");
         Assert.assertEquals(res.getDetails().getCreditAmount().getAmount(), "1.00");
         Assert.assertEquals(res.getDetails().getCreditAmount().getCurrencyCode(), "USD");
-        XMLGregorianCalendar xgc = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-10-23T00:30:42.996Z");
+        final XMLGregorianCalendar xgc = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-10-23T00:30:42.996Z");
         Assert.assertEquals(res.getDetails().getCreationTimestamp(), xgc);
         Assert.assertEquals(res.getDetails().getCreditReversalAmount().getAmount(), "1.00");
         Assert.assertEquals(res.getDetails().getCreditReversalAmount().getCurrencyCode(), "USD");
         Assert.assertEquals(res.getDetails().getCreditReversalIdList().getMember().get(0), "S01-2117025-2155793-Q068906");
         Assert.assertEquals(res.getDetails().getCreditReversalIdList().getMember().get(1), "S01-2117025-2155793-Q023847");
-        XMLGregorianCalendar xgc2 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-10-26T23:26:46.945Z");
+        final XMLGregorianCalendar xgc2 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-10-26T23:26:46.945Z");
         Assert.assertEquals(res.getDetails().getCreditStatus().getLastUpdateTimestamp(), xgc2);
         Assert.assertEquals(res.getDetails().getCreditStatus().getReasonCode(), "MaxAmountReversed");
         Assert.assertEquals(res.getDetails().getCreditStatus().getState(), "Closed");
@@ -496,8 +505,11 @@ public class PaymentsAPIResponseTest {
         String rawResponse = loadTestFile("ValidateBillingAgreementResponse.xml");
         ResponseData response = new ResponseData(200, rawResponse);
         ValidateBillingAgreementResponseData res = Parser.getValidateBillingAgreementResponse(response);
+        Assert.assertEquals(RequestStatus.SUCCESS, res.getResult().getValidationResult());
+        Assert.assertEquals("Open", res.getResult().getBillingAgreementStatus().getState());
+        XMLGregorianCalendar xgc = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-11-02T17:38:29.511Z");
+        Assert.assertEquals(xgc, res.getResult().getBillingAgreementStatus().getLastUpdatedTimestamp());
         Assert.assertEquals(res.getRequestId(), "0f48a4e0-2a7c-4036-9a8a-339e419fd53f");
-        XMLGregorianCalendar xgc2 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-11-02T17:39:58.272Z");
         Assert.assertEquals(res.toXML(), rawResponse);
     }
 

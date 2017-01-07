@@ -21,40 +21,70 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+/**
+ * This can parse two different variations of <IdList> nodes.
+ * In most cases, the individual members are instead <member>..</member> tags,
+ * but some IPN messages put them inside <Id>..</Id> tags.
+ * The class was modified to handle both cases and let the
+ * SDK client retrieve either case by a single getMember() call.
+ *
+ * Valid example 1:
+ *   <IdList>
+ *     <member>S01-9228170-9681927-C035172</member>
+ *     <member>S01-9228170-9681927-C039558</member>
+ *  </IdList>
+ *
+ * Valid example 2:
+ *   <IdList>
+ *     <Id>S01-9228170-9681927-C035172</Id>
+ *     <Id>S01-9228170-9681927-C039558</Id>
+ *  </IdList>
+ *
+ * Invalid example (cannot mix Id and member tags in same group):
+ *   <IdList>
+ *     <member>S01-9228170-9681927-C035172</member>
+ *     <Id>S01-9228170-9681927-C039558</Id>
+ *  </IdList>
+ */
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "IdList", propOrder = {
-    "member"
+    "member",
+    "id"
 })
 public class IdList {
 
-    @XmlElement(required = true)
+    @XmlElement(name = "member")
     protected List<String> member;
+    @XmlElement(name = "Id")
+    protected List<String> id;
 
     /**
      * Default constructor
-     * 
+     *
      */
     public IdList() {
         super();
     }
-
 
     public IdList(final List<String> member) {
         this.member = member;
     }
 
     public List<String> getMember() {
-        if (member == null) {
-            member = new ArrayList<String>();
+        if ((member == null) && (id == null)) {
+            return new ArrayList<String>();
         }
-        return this.member;
+        return (member != null) ? member : id;
+    }
+
+    public List<String> getId() {
+        return getMember();
     }
 
     @Override
     public String toString() {
-        return "IdList{" + "member=" + member + '}';
+        return "IdList{" + "member=" + getMember() + '}';
     }
 
- 
 }

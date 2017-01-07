@@ -48,9 +48,9 @@ public class BillingAgreementStatus {
     }
 
     /**
-     * Indicates the state that the Billing Agreement object is in. 
+     * Indicates the state that the Billing Agreement object is in.
      * For more information, see Billing Agreement States and Reason Codes.
-     * 
+     *
      * @return state
      */
     public String getState() {
@@ -58,10 +58,10 @@ public class BillingAgreementStatus {
     }
 
     /**
-     * A timestamp that indicates the time when the billing agreement state was 
-     * last updated. In ISO 8601 format. Optional if the order reference is in 
+     * A timestamp that indicates the time when the billing agreement state was
+     * last updated. In ISO 8601 format. Optional if the order reference is in
      * the Draft state.
-     * 
+     *
      * @return lastUpdatedTimestamp
      */
     public XMLGregorianCalendar getLastUpdatedTimestamp() {
@@ -69,9 +69,9 @@ public class BillingAgreementStatus {
     }
 
     /**
-     * Optional if the billing agreement is in the Draft state. 
+     * Optional if the billing agreement is in the Draft state.
      * For more information, see Billing Agreement States and Reason Codes.
-     * 
+     *
      * @return reasonCode
      */
     public String getReasonCode() {
@@ -92,11 +92,12 @@ public class BillingAgreementStatus {
      */
     @Override
     public String toString() {
-        return "BillingAgreementStatus{" + "state=" + state + ", lastUpdatedTimestamp=" 
-                + lastUpdatedTimestamp + ", reasonCode=" + reasonCode + ", reasonDescription=" 
+        return "BillingAgreementStatus{"
+                + "state=" + state
+                + ", lastUpdatedTimestamp=" + lastUpdatedTimestamp
+                + ", reasonCode=" + reasonCode
+                + ", reasonDescription="
                 + reasonDescription + '}';
     }
-    
-    
 
 }

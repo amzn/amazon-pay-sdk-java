@@ -20,7 +20,7 @@ import java.util.Map;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 /**
- * Abstract implementation of the notification interface encapsulates 
+ * Abstract implementation of the notification interface encapsulates
  * the common properties of all notifications
  */
 public abstract class Notification {
@@ -46,7 +46,6 @@ public abstract class Notification {
      */
     private NotificationType notificationType;
 
-
     /** To make JaxB happy
      *  Should not be use anywhere else
      */
@@ -57,7 +56,7 @@ public abstract class Notification {
      * Create a new typed notification instance
      * @param type Notification type
      */
-    protected Notification(NotificationType type ) {
+    protected Notification(NotificationType type) {
         this.notificationType = type;
     }
 
@@ -85,7 +84,6 @@ public abstract class Notification {
         notificationMetadata = metadata;
     }
 
-
     /**
      * Setter method for notification JSON
      * @param json
@@ -108,7 +106,7 @@ public abstract class Notification {
      *
      * @param map
      */
-    public void setMap( Map<String,String> map ) {
+    public void setMap(Map<String,String> map) {
         notificationAsMap = map;
     }
 
@@ -131,7 +129,7 @@ public abstract class Notification {
     }
 
     /**
-     * Returns the notification message metadata 
+     * Returns the notification message metadata
      *
      * @return messageMetadata
      */
@@ -145,10 +143,12 @@ public abstract class Notification {
      */
     @Override
     public String toString() {
-        return "Notification{" + "notificationMetadata=" + notificationMetadata + ", messageMetadata="
-                + messageMetadata + ", notificationAsJSON=" + notificationAsJSON + ", notificationAsMap="
-                + notificationAsMap + ", notificationType=" + notificationType + '}';
+        return "Notification{"
+                + "notificationMetadata=" + notificationMetadata
+                + ", messageMetadata=" + messageMetadata
+                + ", notificationAsJSON=" + notificationAsJSON
+                + ", notificationAsMap=" + notificationAsMap
+                + ", notificationType=" + notificationType + '}';
     }
-
 
 }

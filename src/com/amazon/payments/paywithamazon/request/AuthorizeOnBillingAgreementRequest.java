@@ -36,7 +36,7 @@ public class AuthorizeOnBillingAgreementRequest implements Serializable {
     private String softDescriptor;
     private String platformId;
     private String sellerNote;
-    private String InheritShippingAddress;
+    private Boolean inheritShippingAddress;
 
     private String sellerOrderId;
     private String storeName;
@@ -180,19 +180,31 @@ public class AuthorizeOnBillingAgreementRequest implements Serializable {
     }
 
     /**
-     * Sets InheritShippingAddress parameter
+     * Sets inheritShippingAddress parameter
      *
-     * @param InheritShippingAddress
+     * @param inheritShippingAddress
      */
-    public AuthorizeOnBillingAgreementRequest setInheritShippingAddress(final String InheritShippingAddress) {
-        this.InheritShippingAddress = InheritShippingAddress;
+    public AuthorizeOnBillingAgreementRequest setInheritShippingAddress(final Boolean inheritShippingAddress) {
+        this.inheritShippingAddress = inheritShippingAddress;
         return this;
     }
 
     /**
-     * Sets MWSAuthToken parameter in request. MWSAuthToken is required only 
-     * for third-party solution providers and marketplaces. Do not specify 
-     * this parameter for merchants creating their own custom integration. 
+     * Sets inheritShippingAddress parameter
+     * Deprecated since SDK 2.2.1
+     *
+     * @param inheritShippingAddress
+     */
+    @Deprecated
+    public AuthorizeOnBillingAgreementRequest setInheritShippingAddress(final String inheritShippingAddress) {
+        return setInheritShippingAddress(
+                Boolean.parseBoolean(inheritShippingAddress));
+    }
+
+    /**
+     * Sets MWSAuthToken parameter in request. MWSAuthToken is required only
+     * for third-party solution providers and marketplaces. Do not specify
+     * this parameter for merchants creating their own custom integration.
      *
      * @param mwsAuthToken new value of mwsAuthToken
      */
@@ -202,7 +214,7 @@ public class AuthorizeOnBillingAgreementRequest implements Serializable {
     }
 
     /**
-     * The billing agreement identifier. This value is 
+     * The billing agreement identifier. This value is
      *  retrieved from the Amazon Button, AddressBook, or
      *  Wallet widgets.
      *
@@ -213,7 +225,7 @@ public class AuthorizeOnBillingAgreementRequest implements Serializable {
     }
 
     /**
-     *The identifier for this authorization transaction that you specify. 
+     *The identifier for this authorization transaction that you specify.
      *
      * @return
      *          Returns authorizationReferenceId from request
@@ -225,7 +237,7 @@ public class AuthorizeOnBillingAgreementRequest implements Serializable {
     /**
      * Represents the amount to be authorized.
      * @return
-     *          Returns authorizationAmount from request    
+     *          Returns authorizationAmount from request
      */
     public String getAuthorizationAmount() {
         return authorizationAmount;
@@ -234,7 +246,7 @@ public class AuthorizeOnBillingAgreementRequest implements Serializable {
     /**
      * Represents the three-digit currency code.
      *
-     * @return Returns authorizationCurrencyCode from request  
+     * @return Returns authorizationCurrencyCode from request
      */
     public CurrencyCode getAuthorizationCurrencyCode() {
         return authorizationCurrencyCode;
@@ -242,14 +254,14 @@ public class AuthorizeOnBillingAgreementRequest implements Serializable {
 
     /**
      *
-     * @return Returns sellerAuthorizationNote from request  
+     * @return Returns sellerAuthorizationNote from request
      */
     public String getSellerAuthorizationNote() {
         return sellerAuthorizationNote;
     }
 
     /**
-     * The number of minutes after which the authorization will automatically be 
+     * The number of minutes after which the authorization will automatically be
      * closed and you will not be able to capture funds against the authorization.
      *
      * @return Returns transactionTimeout from request
@@ -259,9 +271,9 @@ public class AuthorizeOnBillingAgreementRequest implements Serializable {
     }
 
     /**
-     * Indicates whether to directly capture the amount specified by the 
-     * AuthorizationAmount request parameter against an order reference 
-     * (without needing to call Capture and without waiting until the order ships). 
+     * Indicates whether to directly capture the amount specified by the
+     * AuthorizationAmount request parameter against an order reference
+     * (without needing to call Capture and without waiting until the order ships).
      *
      * @return Returns captureNow status from request
      */
@@ -300,12 +312,12 @@ public class AuthorizeOnBillingAgreementRequest implements Serializable {
     }
 
     /**
-     * Returns InheritShippingAddress parameter
+     * Returns inheritShippingAddress parameter
      *
-     * @return Returns InheritShippingAddress status from request
+     * @return Returns inheritShippingAddress status from request
      */
-    public String getInheritShippingAddress() {
-        return InheritShippingAddress;
+    public Boolean getInheritShippingAddress() {
+        return inheritShippingAddress;
     }
 
     /**
@@ -354,17 +366,22 @@ public class AuthorizeOnBillingAgreementRequest implements Serializable {
      */
     @Override
     public String toString() {
-        return "AuthorizeOnBillingAgreementRequest{" + "amazonBillingAgreementId=" + amazonBillingAgreementId + ", authorizationReferenceId="
-                + authorizationReferenceId + ", authorizationAmount=" + authorizationAmount + ", authorizationCurrencyCode="
-                + authorizationCurrencyCode + ", sellerAuthorizationNote=" + sellerAuthorizationNote + ", transactionTimeout="
-                + transactionTimeout + ", captureNow=" + captureNow + ", softDescriptor=" + softDescriptor + ", platformId="
-                + platformId + ", sellerNote=" + sellerNote + ", InheritShippingAddress=" + InheritShippingAddress + ", sellerOrderId="
-                + sellerOrderId + ", storeName=" + storeName + ", customInformation=" + customInformation + ", mwsAuthToken="
-                + mwsAuthToken + '}';
+        return "AuthorizeOnBillingAgreementRequest{"
+                + "amazonBillingAgreementId=" + amazonBillingAgreementId
+                + ", authorizationReferenceId=" + authorizationReferenceId
+                + ", authorizationAmount=" + authorizationAmount
+                + ", authorizationCurrencyCode=" + authorizationCurrencyCode
+                + ", sellerAuthorizationNote=" + sellerAuthorizationNote
+                + ", transactionTimeout=" + transactionTimeout
+                + ", captureNow=" + captureNow
+                + ", softDescriptor=" + softDescriptor
+                + ", platformId=" + platformId
+                + ", sellerNote=" + sellerNote
+                + ", inheritShippingAddress=" + inheritShippingAddress
+                + ", sellerOrderId=" + sellerOrderId
+                + ", storeName=" + storeName
+                + ", customInformation=" + customInformation
+                + ", mwsAuthToken=" + mwsAuthToken + '}';
     }
-
-
-
-
 
 }

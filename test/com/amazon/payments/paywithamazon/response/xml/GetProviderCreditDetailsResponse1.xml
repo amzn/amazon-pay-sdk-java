@@ -4,8 +4,8 @@
       <ProviderCreditDetails>
          <SellerId>TEST_SELLER_ID</SellerId>
          <CreditReversalIdList>
-            <member>S01-2117025-2155793-Q068906</member>
-            <member>S01-2117025-2155793-Q023847</member>
+            <Id>S01-2117025-2155793-Q068906</Id>
+            <Id>S01-2117025-2155793-Q023847</Id>
          </CreditReversalIdList>
          <CreditReversalAmount>
             <CurrencyCode>USD</CurrencyCode>

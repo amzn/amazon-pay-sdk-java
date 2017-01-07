@@ -29,7 +29,6 @@ import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.util.Map;
 import java.util.regex.Pattern;
-import org.apache.commons.lang3.StringUtils;
 import javax.xml.bind.DatatypeConverter;
 
 /**
@@ -46,7 +45,7 @@ public class NotificationVerification {
         final String SNS_HEADER = "x-amz-sns-message-type";
         final String SNS_HEADER_TYPE_NOTIFICATION = "Notification";
 
-        if ( headers == null || !headers.containsKey(SNS_HEADER) ) {
+        if (headers == null || !headers.containsKey(SNS_HEADER)) {
             throw new AmazonClientException("Error with SNS message, missing header " + SNS_HEADER);
         }
         String messageType = headers.get(SNS_HEADER);
@@ -59,7 +58,7 @@ public class NotificationVerification {
     * Helper method to verify IPN using "Signature", "Type" and "SigningCertURL"
     */
     protected boolean verifyMessage(Notification notification) {
-        if(notification == null || notification.getNotificationMetadata()== null ||  !"Notification".equals(notification.getNotificationMetadata().getType())) {
+        if(notification == null || notification.getNotificationMetadata() == null ||  !"Notification".equals(notification.getNotificationMetadata().getType())) {
             throw new AmazonClientException("Unable to parse notification, invalid notification");
         }
 
@@ -97,15 +96,13 @@ public class NotificationVerification {
     /**
      * Helper method to verify SigningCertURL
      */
-    private void isValidSigningCertURL(URL url) throws MalformedURLException{
+    private void isValidSigningCertURL(URL url) throws MalformedURLException {
         Pattern PATTERN_SNS_KEY = Pattern.compile("^sns\\.[a-zA-Z0-9\\-]{3,}\\.amazonaws\\.com(\\.cn)?$");
         String host = url.getHost();
-        if (!"https".equals(url.getProtocol()) || !StringUtils.endsWith(url.getPath(), ".pem") || !PATTERN_SNS_KEY.matcher(host).matches()) {
+        if (!"https".equals(url.getProtocol()) || url.getPath() == null || !url.getPath().endsWith(".pem") || !PATTERN_SNS_KEY.matcher(host).matches()) {
             throw new SecurityException("Illegal SigningCertURL parameter: ");
         }
     }
-
-
 
     /*
      * Used to build the string to sign for notification messages.
@@ -126,7 +123,5 @@ public class NotificationVerification {
         stringToSign += notification.toMap().get("Type") + "\n";
         return stringToSign.getBytes();
     }
-
-
 
 }

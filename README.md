@@ -1,7 +1,14 @@
 ### Login and Pay with Amazon Java SDK
 
-Login and Pay with Amazon API Integration
+### Requirements
 
+* Login and Pay With Amazon account - [Register here](https://payments.amazon.com/signup)
+* Java 1.6 or higher *(including JCE Java Cryptography Extension)*
+* Apache Commons Logging 1.2 *(or JCL-over-SLF4J drop in replacement)*
+* Apache Commons Codec 1.10
+* Google Gson 2.2.2 or higher *(for GetUserInfo and IPN handling only)*
+
+Login and Pay with Amazon API Integration
 
 ```java
 import com.amazon.payments.paywithamazon.Client;

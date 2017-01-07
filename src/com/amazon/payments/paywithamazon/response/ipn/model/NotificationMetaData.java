@@ -18,8 +18,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import java.util.Map;
 
-
-
 @XmlAccessorType(XmlAccessType.FIELD)
 public final class NotificationMetaData {
 
@@ -43,7 +41,6 @@ public final class NotificationMetaData {
         unsubscribeUrl = notificationMap.get("UnsubscribeURL");
     }
 
-
     /**
      * The type of message. For a notification, the type is Notification.
      *
@@ -54,8 +51,8 @@ public final class NotificationMetaData {
     }
 
     /**
-     * A Universally Unique Identifier, unique for each message published. 
-     * For a message that Amazon SNS resends during a retry, the 
+     * A Universally Unique Identifier, unique for each message published.
+     * For a message that Amazon SNS resends during a retry, the
      * message ID of the original message is used.
      *
      * @return messageId
@@ -92,8 +89,8 @@ public final class NotificationMetaData {
     }
 
     /**
-     * Base64-encoded "SHA1withRSA" signature of the Message, MessageId, Type, 
-     * Timestamp, and TopicArn values. 
+     * Base64-encoded "SHA1withRSA" signature of the Message, MessageId, Type,
+     * Timestamp, and TopicArn values.
      *
      * @return signature
      */
@@ -102,7 +99,7 @@ public final class NotificationMetaData {
     }
 
     /**
-     * The URL to the certificate that was used to sign the message. 
+     * The URL to the certificate that was used to sign the message.
      *
      * @return signingCertUrl
      */
@@ -111,8 +108,8 @@ public final class NotificationMetaData {
     }
 
     /**
-     * A URL that you can use to unsubscribe the endpoint from this topic. 
-     * If you visit this URL, Amazon SNS unsubscribes the endpoint and stops 
+     * A URL that you can use to unsubscribe the endpoint from this topic.
+     * If you visit this URL, Amazon SNS unsubscribes the endpoint and stops
      * sending notifications to this endpoint.
      *
      * @return unsubscribeUrl
@@ -122,17 +119,21 @@ public final class NotificationMetaData {
     }
 
     /**
-     * Returns the string representation of NotificationMetaData 
+     * Returns the string representation of NotificationMetaData
      *
-     * @return  Returns the string representation of NotificationMetaData 
+     * @return  Returns the string representation of NotificationMetaData
      */
     @Override
     public String toString() {
-        return "NotificationMetaData{" + "type=" + type + ", messageId=" + messageId
-                + ", topicArn=" + topicArn + ", timeStamp=" + timeStamp + ", signatureVersion="
-                + signatureVersion + ", signature=" + signature + ", signingCertUrl="
-                + signingCertUrl + ", unsubscribeUrl=" + unsubscribeUrl + '}';
+        return "NotificationMetaData{"
+                + "type=" + type
+                + ", messageId=" + messageId
+                + ", topicArn=" + topicArn
+                + ", timeStamp=" + timeStamp
+                + ", signatureVersion=" + signatureVersion
+                + ", signature=" + signature
+                + ", signingCertUrl=" + signingCertUrl
+                + ", unsubscribeUrl=" + unsubscribeUrl + '}';
     }
-
 
 }

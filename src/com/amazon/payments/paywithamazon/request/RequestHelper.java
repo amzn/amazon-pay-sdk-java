@@ -442,7 +442,7 @@ public class RequestHelper {
         if (request.getCustomInformation() != null)
             parameters.put(ServiceConstants.BA_CUSTOM_INFORMATION, request.getCustomInformation());
         if (request.getInheritShippingAddress() != null)
-            parameters.put(ServiceConstants.INHERIT_SHIPPING_ADDRESS, request.getInheritShippingAddress());
+            parameters.put(ServiceConstants.INHERIT_SHIPPING_ADDRESS, Boolean.toString(request.getInheritShippingAddress()));
         if (request.getMwsAuthToken() != null)
             parameters.put(ServiceConstants.MWS_AUTH_TOKEN, request.getMwsAuthToken());
         addClientParameters(parameters);
@@ -495,6 +495,8 @@ public class RequestHelper {
             parameters.put(ServiceConstants.STORE_NAME, request.getStoreName());
         if (request.getCustomInformation() != null)
             parameters.put(ServiceConstants.CUSTOM_INFORMATION, request.getCustomInformation());
+        if (request.getMwsAuthToken() != null)
+            parameters.put(ServiceConstants.MWS_AUTH_TOKEN, request.getMwsAuthToken());
 
         addClientParameters(parameters);
         return Util.convertParameterMapToString(parameters);

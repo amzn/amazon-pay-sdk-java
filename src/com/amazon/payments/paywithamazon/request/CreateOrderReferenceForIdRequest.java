@@ -30,6 +30,7 @@ public class CreateOrderReferenceForIdRequest implements Serializable {
     private AmazonReferenceIdType idType;
 
     //optonal parameters
+    private String mwsAuthToken;
     private Boolean inheritShippingAddress;
     private Boolean confirmNow;
     private CurrencyCode orderTotalCurrencyCode;
@@ -98,6 +99,30 @@ public class CreateOrderReferenceForIdRequest implements Serializable {
     }
 
     /**
+     * Represents the authorization of a specific developer by a specific Amazon seller.
+     * Required For web applications and third-party developer authorizations only.
+     *
+     * @param mwsAuthToken
+     *        The authorization token that you received when you registered for Amazon MWS.
+     * @return CreateOrderReferenceForIdRequest
+     *         Container holding CreateOrderReferenceForId operation parameters
+     */
+    public CreateOrderReferenceForIdRequest setMWSAuthToken(final String mwsAuthToken) {
+        this.mwsAuthToken = mwsAuthToken;
+        return this;
+    }
+
+    /**
+     * Represents the authorization of a specific developer by a specific Amazon seller.
+     * Required For web applications and third-party developer authorizations only.
+     *
+     * @return MWSAuthToken
+     */
+    public String getMwsAuthToken() {
+        return mwsAuthToken;
+    }
+
+    /**
      * Specifies whether to inherit the shipping address details from
      * the object represented by the Id request parameter.
      * Default: true
@@ -108,7 +133,7 @@ public class CreateOrderReferenceForIdRequest implements Serializable {
      *         Container holding CreateOrderReferenceForId operation parameters
      */
     public CreateOrderReferenceForIdRequest setInheritShippingAddress(
-            final boolean inheritShippingAddress) {
+            final Boolean inheritShippingAddress) {
         this.inheritShippingAddress = inheritShippingAddress;
         return this;
     }
@@ -136,7 +161,7 @@ public class CreateOrderReferenceForIdRequest implements Serializable {
      *         Container holding CreateOrderReferenceForId operation parameters
      */
     public CreateOrderReferenceForIdRequest setConfirmNow(
-            final boolean confirmNow) {
+            final Boolean confirmNow) {
         this.confirmNow = confirmNow;
         return this;
     }

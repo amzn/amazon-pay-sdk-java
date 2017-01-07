@@ -366,6 +366,22 @@ public interface Client {
      * GetOrderReferenceDetails, GetAuthorizationDetails, GetCaptureDetails, GetRefundDetails.
      *
      * @param orderReferenceID the Order Reference of which to obtain all payment details
+     * @param The authorization token that you received when you registered for Amazon MWS.
+     *        Required For web applications and third-party developer authorizations only.
+     *
+     * @return The response from the four API calls packaged in an object for easy processing
+     *
+     * @throws AmazonServiceException
+     *             If an error response is returned by Amazon Payments indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    GetPaymentDetails getPaymentDetails(String orderReferenceID, String MWSAuthToken) throws AmazonServiceException;
+
+    /**
+     * Invoke the getPaymentDetails convenience method which calls several API calls:
+     * GetOrderReferenceDetails, GetAuthorizationDetails, GetCaptureDetails, GetRefundDetails.
+     *
+     * @param orderReferenceID the Order Reference of which to obtain all payment details
      *
      * @return The response from the four API calls packaged in an object for easy processing
      *
@@ -545,5 +561,14 @@ public interface Client {
      *             either a problem with the data in the request, or a server side issue.
      */
     ValidateBillingAgreementResponseData validateBillingAgreement(ValidateBillingAgreementRequest validateBillingAgreementRequest) throws AmazonServiceException;
+
+    /**
+     * Accessor method for PaymentsConfig configuration object
+     *
+     * @return Config client configuation object
+     *
+     * @throws AmazonServiceException
+     */
+    Config getConfig();
 
 }

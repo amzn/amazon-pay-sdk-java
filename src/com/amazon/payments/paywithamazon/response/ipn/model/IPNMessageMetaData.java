@@ -30,7 +30,6 @@ public final class IPNMessageMetaData {
         notificationReferenceId = messageMetaDataMap.get("NotificationReferenceId");
         sellerId = messageMetaDataMap.get("SellerId");
         version = messageMetaDataMap.get("Version");
-
     }
 
     /**
@@ -52,9 +51,9 @@ public final class IPNMessageMetaData {
     }
 
     /**
-     * Returns the notification referenceId specified in IPN message 
+     * Returns the notification referenceId specified in IPN message
      *
-     * @return Returns the notification referenceId specified in IPN message 
+     * @return Returns the notification referenceId specified in IPN message
      */
     public String getNotificationReferenceId() {
         return notificationReferenceId;
@@ -79,16 +78,17 @@ public final class IPNMessageMetaData {
     }
 
     /**
-     * String representation of IPN Message Metadata 
+     * String representation of IPN Message Metadata
      *
      */
     @Override
     public String toString() {
-        return "IPNMessageMetaData{" + "releaseEnvironment=" + releaseEnvironment + ", timeStamp="
-                + timeStamp + ", notificationReferenceId=" + notificationReferenceId + ", sellerId="
-                + sellerId + ", version=" + version + '}';
+        return "IPNMessageMetaData{"
+                + "releaseEnvironment=" + releaseEnvironment
+                + ", timeStamp=" + timeStamp
+                + ", notificationReferenceId=" + notificationReferenceId
+                + ", sellerId=" + sellerId
+                + ", version=" + version + '}';
     }
-
-
 
 }

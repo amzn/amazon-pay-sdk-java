@@ -14,6 +14,7 @@
  */
 package com.amazon.payments.paywithamazon.response.parser;
 
+import com.amazon.payments.paywithamazon.response.model.ValidateBillingAgreementResult;
 import com.amazon.payments.paywithamazon.response.model.ValidateBillingAgreementResponse;
 import java.io.Serializable;
 
@@ -21,23 +22,28 @@ import java.io.Serializable;
  * Response from ValidateBillingAgreement service API, as returned by Amazon Payments
  */
 public final class ValidateBillingAgreementResponseData extends ResponseData implements Serializable{
-    
+
     private String requestId;
-    
-    public ValidateBillingAgreementResponseData(ValidateBillingAgreementResponse validateBillingAgreementResponse , ResponseData rawResponse) {
+    private ValidateBillingAgreementResult validateBillingAgreementResult;
+
+    public ValidateBillingAgreementResponseData(ValidateBillingAgreementResponse response, ResponseData rawResponse) {
         super(rawResponse);
-        if(validateBillingAgreementResponse != null) {
-            if(validateBillingAgreementResponse.getResponseMetadata() != null) {
-                this.requestId = validateBillingAgreementResponse.getResponseMetadata().getRequestId();
+        if (response != null) {
+            if (response.getResponseMetadata() != null) {
+                this.requestId = response.getResponseMetadata().getRequestId();
+
+                if (response.getValidateBillingAgreementResult() != null) {
+                    validateBillingAgreementResult = response.getValidateBillingAgreementResult();
+                }
             }
         }
     }
 
-    
+
     /**
      * The requestID that uniquely identifies the service request
      * the caller made.
-     * 
+     *
      * @return  The requestID that uniquely identifies the service request
      * the caller made.
      */
@@ -45,14 +51,27 @@ public final class ValidateBillingAgreementResponseData extends ResponseData imp
         return requestId;
     }
 
+
+    /**
+     * Encapsulates details about a ValidateBillingAgreement object and its current state.
+     * Documentation: https://payments.amazon.com/developer/documentation/apireference/201751720
+     *
+     * @return Object containing Validation Result, Failure Reason Code, and Billing Agreement Status
+     */
+    public ValidateBillingAgreementResult getResult() {
+        return validateBillingAgreementResult;
+    }
+
+
     /**
      * Returns the string representation of ValidateBillingAgreementResponseData
-     * @return 
+     * @return
      */
     @Override
     public String toString() {
-        return "ValidateBillingAgreementResponseData{" + "requestId=" + requestId + '}';
+        return "ValidateBillingAgreementResponseData{"
+                + "requestId=" + requestId
+                + ", validateBillingAgreementResult=" + validateBillingAgreementResult.toString() + '}';
     }
-    
-    
+
 }
