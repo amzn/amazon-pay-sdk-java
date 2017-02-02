@@ -32,6 +32,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
         "sellerNote",
         "platformId",
         "destination",
+        "paymentDescriptor",
         "billingAddress",
         "releaseEnvironment",
         "sellerOrderAttributes",
@@ -58,6 +59,8 @@ public class OrderReferenceDetails {
     protected String platformId;
     @XmlElement(name = "Destination")
     protected Destination destination;
+    @XmlElement(name = "PaymentDescriptor")
+    protected  PaymentDescriptor paymentDescriptor;
     @XmlElement(name = "BillingAddress")
     protected BillingAddress billingAddress;
     @XmlElement(name = "ReleaseEnvironment", required = true)
@@ -152,6 +155,19 @@ public class OrderReferenceDetails {
      */
     public Destination getDestination() {
         return destination;
+    }
+
+    /**
+     * Represents the Payment details used by the buyer through the Wallet Widget.
+     * It returns short description of the credit card and if it is the card they want
+     * to use, place the order. If not, they change it and the short description of the
+     * new card will be displayed.
+     *
+     * @return PaymentDescriptor
+     */
+
+    public PaymentDescriptor getPaymentDescriptor() {
+        return paymentDescriptor;
     }
 
     /**
@@ -265,14 +281,24 @@ public class OrderReferenceDetails {
 
     @Override
     public String toString() {
-        return "OrderReferenceDetails{" + "amazonOrderReferenceId=" + amazonOrderReferenceId + ", buyer=" + buyer + ", orderTotal="
-                + orderTotal + ", sellerNote=" + sellerNote + ", platformId=" + platformId + ", destination=" + destination
-                + ", billingAddress=" + billingAddress + ", releaseEnvironment=" + releaseEnvironment + ", sellerOrderAttributes="
-                + sellerOrderAttributes + ", orderReferenceStatus=" + orderReferenceStatus + ", constraints="
-                + constraints + ", creationTimestamp=" + creationTimestamp + ", expirationTimestamp=" + expirationTimestamp
-                + ", parentDetails=" + parentDetails + ", idList=" + idList + ", orderLanguage=" + orderLanguage + ", requestPaymentAuthorization=" + requestPaymentAuthorization + '}';
+        return "OrderReferenceDetails{"
+                + "amazonOrderReferenceId=" + amazonOrderReferenceId
+                + ", buyer=" + buyer
+                + ", orderTotal=" + orderTotal
+                + ", sellerNote=" + sellerNote
+                + ", platformId=" + platformId
+                + ", destination=" + destination
+                + ", paymentDescriptor=" + paymentDescriptor
+                + ", billingAddress=" + billingAddress
+                + ", releaseEnvironment=" + releaseEnvironment
+                + ", sellerOrderAttributes=" + sellerOrderAttributes
+                + ", orderReferenceStatus=" + orderReferenceStatus
+                + ", constraints=" + constraints
+                + ", creationTimestamp=" + creationTimestamp
+                + ", expirationTimestamp=" + expirationTimestamp
+                + ", parentDetails=" + parentDetails
+                + ", idList=" + idList
+                + ", orderLanguage=" + orderLanguage
+                + ", requestPaymentAuthorization=" + requestPaymentAuthorization + '}';
     }
-
-
-
 }

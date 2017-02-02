@@ -1,3 +1,9 @@
+Version 2.3.0 - February 2017
+- Add PaymentDescriptor tag to GetOrderReferenceDetailsResponse API call.
+- Deprecate setAddressConsentToken() and getAddressConsentToken() in
+  GetOrderReferenceDetailsRequest.java since GetOrderDetails now supports AccessToken instead.
+- Add setAccessToken() and getAccessToken()
+
 Version 2.2.1 - January 2017
 - Fix OrderReferenceNotification IPN (receiving undocumented SellerId field)
 - Fix AuthorizationNotification IPN (receiving Id instead of member inside IdList)

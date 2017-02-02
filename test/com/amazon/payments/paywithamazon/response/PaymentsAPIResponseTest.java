@@ -95,7 +95,9 @@ public class PaymentsAPIResponseTest {
         Assert.assertEquals(res.getDetails().getDestination().getPhysicalDestination().getCity(), "New York");
         Assert.assertEquals(res.getDetails().getDestination().getPhysicalDestination().getPostalCode(), "10101-9876");
         Assert.assertEquals(res.getDetails().getDestination().getPhysicalDestination().getStateOrRegion(), "NY");
-
+        Assert.assertEquals(res.getDetails().getPaymentDescriptor().getName() , "Visa");
+        Assert.assertEquals(res.getDetails().getPaymentDescriptor().getAccountNumberTail() , "11");
+        Assert.assertEquals(res.getDetails().getPaymentDescriptor().isUseAmazonBalanceFirst() , false);
         Assert.assertEquals(res.toXML(), rawResponse);
     }
 

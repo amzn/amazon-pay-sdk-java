@@ -27,6 +27,7 @@ public class ServiceConstants {
 
     // API Request Parameters
     public static final String ADDRESS_CONSENT_TOKEN = "AddressConsentToken";
+    public static final String ACCESS_TOKEN = "AccessToken";
     public static final String AMAZON_AUTHORIZATION_ID = "AmazonAuthorizationId";
     public static final String AMAZON_AUTHORIZATION_REFERENCE_ID = "AuthorizationReferenceId";
     public static final String AMAZON_BILLING_AGREEMENT_ID = "AmazonBillingAgreementId";
@@ -114,7 +115,7 @@ public class ServiceConstants {
     public static final String VALIDATE_BILLING_AGREEMENT_DETAILS = "ValidateBillingAgreement";
 
     // SDK version
-    public static final String APPLICATION_LIBRARY_VERSION = "2.2.1";
+    public static final String APPLICATION_LIBRARY_VERSION = "2.3.0";
 
     // Exponential backoff wait times (seconds) for retry operations
     public static final int FIRST_RETRY_WAIT_TIME = 1;

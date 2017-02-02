@@ -92,7 +92,11 @@ public class RequestHelper {
         }
         if (request.getAddressConsentToken() != null) {
             parameters.put(ServiceConstants.ADDRESS_CONSENT_TOKEN, request.getAddressConsentToken());
-        } if (request.getMwsAuthToken() != null) {
+        }
+        if (request.getAccessToken() != null) {
+            parameters.put(ServiceConstants.ACCESS_TOKEN, request.getAccessToken());
+        }
+        if (request.getMwsAuthToken() != null) {
             parameters.put(ServiceConstants.MWS_AUTH_TOKEN, request.getMwsAuthToken());
         }
         addClientParameters(parameters);
@@ -107,21 +111,29 @@ public class RequestHelper {
         parameters.put(ServiceConstants.ACTION, ServiceConstants.SET_ORDER_REFERENCE_DETAILS);
         if (request.getAmazonOrderReferenceId() != null) {
             parameters.put(ServiceConstants.AMAZON_ORDER_REFERENCE_ID, request.getAmazonOrderReferenceId());
-        } if (request.getOrderAmount() != null) {
+        }
+        if (request.getOrderAmount() != null) {
             parameters.put(ServiceConstants.ORDER_AMOUNT, request.getOrderAmount());
-        } if (request.getOrderCurrencyCode() != null) {
+        }
+        if (request.getOrderCurrencyCode() != null) {
             parameters.put(ServiceConstants.ORDER_CURRENCY_CODE, request.getOrderCurrencyCode().toString());
-        } if (request.getPlatformId() != null) {
+        }
+        if (request.getPlatformId() != null) {
             parameters.put(ServiceConstants.PLATFORM_ID, request.getPlatformId());
-        } if (request.getSellerNote() != null) {
+        }
+        if (request.getSellerNote() != null) {
             parameters.put(ServiceConstants.SELLER_NOTE, request.getSellerNote());
-        } if (request.getSellerOrderId() != null) {
+        }
+        if (request.getSellerOrderId() != null) {
             parameters.put(ServiceConstants.SELLER_ORDER_ID, request.getSellerOrderId());
-        } if (request.getStoreName() != null) {
+        }
+        if (request.getStoreName() != null) {
             parameters.put(ServiceConstants.STORE_NAME, request.getStoreName());
-        } if (request.getCustomInformation() != null) {
+        }
+        if (request.getCustomInformation() != null) {
             parameters.put(ServiceConstants.CUSTOM_INFORMATION, request.getCustomInformation());
-        } if (request.getMwsAuthToken() != null) {
+        }
+        if (request.getMwsAuthToken() != null) {
             parameters.put(ServiceConstants.MWS_AUTH_TOKEN, request.getMwsAuthToken());
         }
         addClientParameters(parameters);
@@ -136,23 +148,32 @@ public class RequestHelper {
         parameters.put(ServiceConstants.ACTION, ServiceConstants.AUTHORIZE);
         if (request.getAmazonOrderReferenceId() != null) {
             parameters.put(ServiceConstants.AMAZON_ORDER_REFERENCE_ID, request.getAmazonOrderReferenceId());
-        } if (request.getAuthorizationReferenceId() != null) {
+        }
+        if (request.getAuthorizationReferenceId() != null) {
             parameters.put(ServiceConstants.AUTHORIZATION_REFERENCE_ID, request.getAuthorizationReferenceId());
-        } if (request.getAuthorizationAmount() != null) {
+        }
+        if (request.getAuthorizationAmount() != null) {
             parameters.put(ServiceConstants.AUTHORIZATION_AMOUNT, request.getAuthorizationAmount());
-        } if (request.getAuthorizationCurrencyCode() != null) {
+        }
+        if (request.getAuthorizationCurrencyCode() != null) {
             parameters.put(ServiceConstants.AUTHORIZATION_CURRENCEYCODE, request.getAuthorizationCurrencyCode().toString());
-        } if (request.getSellerAuthorizationNote() != null) {
+        }
+        if (request.getSellerAuthorizationNote() != null) {
             parameters.put(ServiceConstants.SELLER_AUTHORIZATION_NOTE, request.getSellerAuthorizationNote());
-        } if (request.getTransactionTimeout() != null) {
+        }
+        if (request.getTransactionTimeout() != null) {
             parameters.put(ServiceConstants.TRANSACTION_TIMEOUT, request.getTransactionTimeout());
-        } if (request.getCaptureNow() != null) {
+        }
+        if (request.getCaptureNow() != null) {
             parameters.put(ServiceConstants.CAPTURE_NOW, Boolean.toString(request.getCaptureNow()));
-        } if (request.getSoftDescriptor() != null) {
+        }
+        if (request.getSoftDescriptor() != null) {
             parameters.put(ServiceConstants.SOFT_DESCRIPTOR, request.getSoftDescriptor());
-        } if (request.getMwsAuthToken() != null) {
+        }
+        if (request.getMwsAuthToken() != null) {
             parameters.put(ServiceConstants.MWS_AUTH_TOKEN, request.getMwsAuthToken());
-        } if (request.getProviderCredit() != null) {
+        }
+        if (request.getProviderCredit() != null) {
             addProviderCreditToParamMap(request.getProviderCredit(), parameters);
         }
         addClientParameters(parameters);
@@ -164,7 +185,8 @@ public class RequestHelper {
         parameters.put(ServiceConstants.ACTION, ServiceConstants.GET_AUTHORIZATION_DETAILS);
         if (request.getAmazonAuthorizationId() != null) {
             parameters.put(ServiceConstants.AMAZON_AUTHORIZATION_ID, request.getAmazonAuthorizationId());
-        } if (request.getMwsAuthToken() != null) {
+        }
+        if (request.getMwsAuthToken() != null) {
             parameters.put(ServiceConstants.MWS_AUTH_TOKEN, request.getMwsAuthToken());
         }
         addClientParameters(parameters);
@@ -180,19 +202,26 @@ public class RequestHelper {
 
         if (request.getAmazonAuthorizationId() != null) {
             parameters.put( ServiceConstants.AMAZON_AUTHORIZATION_ID, request.getAmazonAuthorizationId());
-        } if (request.getCaptureReferenceId() != null) {
+        }
+        if (request.getCaptureReferenceId() != null) {
             parameters.put( ServiceConstants.CAPTURE_REFERENCE_ID, request.getCaptureReferenceId());
-        } if (request.getCaptureAmount() != null) {
+        }
+        if (request.getCaptureAmount() != null) {
             parameters.put( ServiceConstants.CAPTURE_AMOUNT, request.getCaptureAmount());
-        } if (request.getCaptureCurrencyCode() != null) {
+        }
+        if (request.getCaptureCurrencyCode() != null) {
             parameters.put( ServiceConstants.CAPTURE_CURRENCEYCODE, request.getCaptureCurrencyCode().toString());
-        } if (request.getSellerCaptureNote() != null) {
+        }
+        if (request.getSellerCaptureNote() != null) {
             parameters.put( ServiceConstants.CAPTURE_NOTE, request.getSellerCaptureNote());
-        } if (request.getSoftDescriptor() != null) {
+        }
+        if (request.getSoftDescriptor() != null) {
             parameters.put( ServiceConstants.SOFT_DESCRIPTOR, request.getSoftDescriptor());
-        } if (request.getMwsAuthToken() != null) {
+        }
+        if (request.getMwsAuthToken() != null) {
             parameters.put( ServiceConstants.MWS_AUTH_TOKEN, request.getMwsAuthToken());
-        } if (request.getProviderCredit() != null) {
+        }
+        if (request.getProviderCredit() != null) {
             addProviderCreditToParamMap(request.getProviderCredit(), parameters);
         }
         addClientParameters(parameters);
@@ -204,7 +233,8 @@ public class RequestHelper {
         parameters.put(ServiceConstants.ACTION, ServiceConstants.GET_CAPTURE_DETAILS);
         if (request.getAmazonCaptureId() != null) {
             parameters.put(ServiceConstants.AMAZON_CAPTURE_ID, request.getAmazonCaptureId());
-        } if (request.getMwsAuthToken() != null) {
+        }
+        if (request.getMwsAuthToken() != null) {
             parameters.put(ServiceConstants.MWS_AUTH_TOKEN, request.getMwsAuthToken());
         }
         addClientParameters(parameters);
@@ -216,7 +246,8 @@ public class RequestHelper {
         parameters.put(ServiceConstants.ACTION, ServiceConstants.CONFIRM_ORDER_REFERENCE);
         if (request.getAmazonOrderReferenceId() != null) {
             parameters.put(ServiceConstants.AMAZON_ORDER_REFERENCE_ID, request.getAmazonOrderReferenceId());
-        } if (request.getMwsAuthToken() != null) {
+        }
+        if (request.getMwsAuthToken() != null) {
             parameters.put(ServiceConstants.MWS_AUTH_TOKEN, request.getMwsAuthToken());
         }
         addClientParameters(parameters);
@@ -228,9 +259,11 @@ public class RequestHelper {
         parameters.put(ServiceConstants.ACTION, ServiceConstants.CANCEL_ORDER_REFERENCE);
         if (request.getAmazonOrderReferenceId() != null) {
             parameters.put(ServiceConstants.AMAZON_ORDER_REFERENCE_ID, request.getAmazonOrderReferenceId());
-        } if (request.getCancelationReason() != null) {
+        }
+        if (request.getCancelationReason() != null) {
             parameters.put(ServiceConstants.CANCELATION_REASON, request.getCancelationReason());
-        } if (request.getMwsAuthToken() != null) {
+        }
+        if (request.getMwsAuthToken() != null) {
             parameters.put(ServiceConstants.MWS_AUTH_TOKEN, request.getMwsAuthToken());
         }
         addClientParameters(parameters);
@@ -242,9 +275,11 @@ public class RequestHelper {
         parameters.put(ServiceConstants.ACTION, ServiceConstants.CLOSE_ORDER_REFERENCE);
         if (request.getAmazonOrderReferenceId() != null) {
             parameters.put(ServiceConstants.AMAZON_ORDER_REFERENCE_ID, request.getAmazonOrderReferenceId());
-        } if (request.getClosureReason() != null) {
+        }
+        if (request.getClosureReason() != null) {
             parameters.put(ServiceConstants.CLOSURE_REASON, request.getClosureReason());
-        } if (request.getMwsAuthToken() != null) {
+        }
+        if (request.getMwsAuthToken() != null) {
             parameters.put(ServiceConstants.MWS_AUTH_TOKEN, request.getMwsAuthToken());
         }
         addClientParameters(parameters);
@@ -256,9 +291,11 @@ public class RequestHelper {
         parameters.put(ServiceConstants.ACTION, ServiceConstants.CLOSE_AUTHORIZATION);
         if (request.getAmazonAuthorizationId() != null) {
             parameters.put(ServiceConstants.AMAZON_AUTHORIZATION_ID, request.getAmazonAuthorizationId());
-        } if (request.getClosureReason() != null) {
+        }
+        if (request.getClosureReason() != null) {
             parameters.put(ServiceConstants.CLOSURE_REASON, request.getClosureReason());
-        } if (request.getMwsAuthToken() != null) {
+        }
+        if (request.getMwsAuthToken() != null) {
             parameters.put(ServiceConstants.MWS_AUTH_TOKEN, request.getMwsAuthToken());
         }
         addClientParameters(parameters);
@@ -273,19 +310,26 @@ public class RequestHelper {
 
         if (request.getAmazonCaptureId() != null) {
             parameters.put(ServiceConstants.AMAZON_CAPTURE_ID, request.getAmazonCaptureId());
-        } if ( request.getRefundReferenceId() != null) {
+        }
+        if (request.getRefundReferenceId() != null) {
             parameters.put(ServiceConstants.REFUND_REFERENCE_ID, request.getRefundReferenceId());
-        } if (request.getRefundAmount() != null) {
+        }
+        if (request.getRefundAmount() != null) {
             parameters.put(ServiceConstants.REFUND_AMOUNT, request.getRefundAmount());
-        } if (request.getRefundCurrencyCode() != null) {
+        }
+        if (request.getRefundCurrencyCode() != null) {
             parameters.put(ServiceConstants.REFUND_AMOUNT_CURRENCY_CODE, request.getRefundCurrencyCode().toString());
-        } if (request.getSellerRefundNote() != null) {
+        }
+        if (request.getSellerRefundNote() != null) {
             parameters.put(ServiceConstants.SELLER_REFUND_NOTE, request.getSellerRefundNote());
-        } if (request.getSoftDescriptor() != null) {
+        }
+        if (request.getSoftDescriptor() != null) {
             parameters.put(ServiceConstants.SOFT_DESCRIPTOR, request.getSoftDescriptor());
-        } if (request.getMwsAuthToken() != null) {
+        }
+        if (request.getMwsAuthToken() != null) {
             parameters.put(ServiceConstants.MWS_AUTH_TOKEN, request.getMwsAuthToken());
-        } if (request.getProviderCredit() != null) {
+        }
+        if (request.getProviderCredit() != null) {
             addProviderCreditToParamMap(request.getProviderCredit(), parameters);
         }
         addClientParameters(parameters);
@@ -360,7 +404,7 @@ public class RequestHelper {
         if (request.getMwsAuthToken() != null)
             parameters.put(ServiceConstants.MWS_AUTH_TOKEN, request.getMwsAuthToken());
         if (request.getAddressConsentToken() != null)
-            parameters.put(ServiceConstants.ADDRESS_CONSENT_TOKEN, request.getAddressConsentToken());
+            parameters.put(ServiceConstants.ADDRESS_CONSENT_TOKEN , request.getAddressConsentToken());
         addClientParameters(parameters);
         return Util.convertParameterMapToString(parameters);
     }

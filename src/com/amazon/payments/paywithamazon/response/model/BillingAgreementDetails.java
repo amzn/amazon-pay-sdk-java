@@ -227,14 +227,22 @@ public class BillingAgreementDetails {
      */
     @Override
     public String toString() {
-        return "BillingAgreementDetails{" + "amazonBillingAgreementId=" + amazonBillingAgreementId 
-                + ", billingAgreementLimits=" + billingAgreementLimits + ", buyer=" + buyer + ", sellerNote=" 
-                + sellerNote + ", platformId=" + platformId + ", destination=" + destination + ", billingAddress=" 
-                + billingAddress + ", releaseEnvironment=" + releaseEnvironment + ", sellerBillingAgreementAttributes=" 
-                + sellerBillingAgreementAttributes + ", billingAgreementStatus=" + billingAgreementStatus 
-                + ", constraints=" + constraints + ", creationTimestamp=" + creationTimestamp 
-                + ", expirationTimestamp=" + expirationTimestamp + ", billingAgreementConsent=" 
-                + billingAgreementConsent + ", orderLanguage=" + orderLanguage + '}';
+        return "BillingAgreementDetails{"
+                + "amazonBillingAgreementId=" + amazonBillingAgreementId
+                + ", billingAgreementLimits=" + billingAgreementLimits
+                + ", buyer=" + buyer
+                + ", sellerNote=" + sellerNote
+                + ", platformId=" + platformId
+                + ", destination=" + destination
+                + ", billingAddress=" + billingAddress
+                + ", releaseEnvironment=" + releaseEnvironment
+                + ", sellerBillingAgreementAttributes=" + sellerBillingAgreementAttributes
+                + ", billingAgreementStatus=" + billingAgreementStatus
+                + ", constraints=" + constraints
+                + ", creationTimestamp=" + creationTimestamp
+                + ", expirationTimestamp=" + expirationTimestamp
+                + ", billingAgreementConsent=" + billingAgreementConsent
+                + ", orderLanguage=" + orderLanguage + '}';
     }
 
 

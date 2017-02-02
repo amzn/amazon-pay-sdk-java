@@ -122,11 +122,13 @@ public class PaymentsAPIRequestTest {
     public void testGetOrderReferenceDetailsRequest() {
          GetOrderReferenceDetailsRequest request =
                 new GetOrderReferenceDetailsRequest(TestConstants.amazonOrderReferenceId)
-                .setAddressConsentToken("123")
+                .setAddressConsentToken("Atza|IwEBIDcwh13A-nf8EuZahCu")
+                .setAccessToken("Atza|oVsmstLsCYekhCdyR1Hu6FFveZC")
                 .setMWSAuthToken(TestConstants.mwsAuthToken);
 
         Assert.assertEquals(request.getAmazonOrderReferenceId(), TestConstants.amazonOrderReferenceId);
-        Assert.assertEquals(request.getAddressConsentToken(), "123");
+        Assert.assertEquals(request.getAddressConsentToken(), "Atza|IwEBIDcwh13A-nf8EuZahCu");
+        Assert.assertEquals(request.getAccessToken(), "Atza|oVsmstLsCYekhCdyR1Hu6FFveZC");
         Assert.assertEquals(request.getMwsAuthToken(), TestConstants.mwsAuthToken);
     }
 
