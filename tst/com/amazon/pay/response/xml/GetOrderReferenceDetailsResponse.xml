@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GetOrderReferenceDetailsResponse xmlns="http://mws.amazonservices.com/schema/OffAmazonPayments/2013-01-01">"
+  <GetOrderReferenceDetailsResult>
+    <OrderReferenceDetails>
+      <AmazonOrderReferenceId>P01-1234567-1234567</AmazonOrderReferenceId>
+      <CreationTimestamp>2012-11-05T20:21:19Z</CreationTimestamp>
+      <ExpirationTimestamp>2013-05-07T23:21:19Z</ExpirationTimestamp>
+      <OrderReferenceStatus>
+        <State>Draft</State>
+      </OrderReferenceStatus>
+      <Destination>
+        <DestinationType>Physical</DestinationType>
+        <PhysicalDestination>
+          <City>New York</City>
+          <StateOrRegion>NY</StateOrRegion>
+          <PostalCode>10101-9876</PostalCode>
+          <CountryCode>US</CountryCode>
+        </PhysicalDestination>
+      </Destination>
+      <PaymentDescriptor>
+        <Name>Visa</Name>
+        <AccountNumberTail>11</AccountNumberTail>
+        <UseAmazonBalanceFirst>false</UseAmazonBalanceFirst>
+      </PaymentDescriptor>
+      <ReleaseEnvironment>Live</ReleaseEnvironment>
+    </OrderReferenceDetails>
+  </GetOrderReferenceDetailsResult>
+  <ResponseMetadata>
+    <RequestId>5f20169b-7ab2-11df-bcef-d35615e2b044</RequestId>
+  </ResponseMetadata>
+</GetOrderReferenceDetailsResponse>

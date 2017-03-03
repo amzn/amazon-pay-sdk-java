@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CaptureResponse xmlns="http://mws.amazonservices.com/schema/OffAmazonPayments/2013-01-01">
+   <CaptureResult>
+      <CaptureDetails>
+         <CaptureReferenceId>testcsal</CaptureReferenceId>
+         <CaptureFee>
+            <CurrencyCode>USD</CurrencyCode>
+            <Amount>0.00</Amount>
+         </CaptureFee>
+         <AmazonCaptureId>S01-9821095-1837200-C053432</AmazonCaptureId>
+         <CreationTimestamp>2015-10-30T21:47:10.797Z</CreationTimestamp>
+         <SoftDescriptor>AMZ*testsd</SoftDescriptor>
+         <IdList />
+         <CaptureStatus>
+            <LastUpdateTimestamp>2015-10-30T21:47:10.797Z</LastUpdateTimestamp>
+            <State>Completed</State>
+         </CaptureStatus>
+         <SellerCaptureNote />
+         <RefundedAmount>
+            <CurrencyCode>USD</CurrencyCode>
+            <Amount>0</Amount>
+         </RefundedAmount>
+         <CaptureAmount>
+            <CurrencyCode>USD</CurrencyCode>
+            <Amount>1.00</Amount>
+         </CaptureAmount>
+      </CaptureDetails>
+   </CaptureResult>
+   <ResponseMetadata>
+      <RequestId>1ec2813f-3d33-4b3a-a198-a25cd608310d</RequestId>
+   </ResponseMetadata>
+</CaptureResponse>

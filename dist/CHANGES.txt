@@ -1,0 +1,36 @@
+Version 2.3.0 - February 2017
+- Add PaymentDescriptor tag to GetOrderReferenceDetailsResponse API call.
+- Deprecate setAddressConsentToken() and getAddressConsentToken() in
+  GetOrderReferenceDetailsRequest.java since GetOrderDetails now supports AccessToken instead.
+- Add setAccessToken() and getAccessToken()
+
+Version 2.2.1 - January 2017
+- Fix OrderReferenceNotification IPN (receiving undocumented SellerId field)
+- Fix AuthorizationNotification IPN (receiving Id instead of member inside IdList)
+- Modify logging for IPN JSON responses to add newlines for easier debugging
+- Remove dependency on Apache Commons Lang jar
+- Remove unneeded dependencies in Maven pom.xml build file
+- Add support for MWSAuthToken to CreateOrderReferenceForId
+- Add support for MWSAuthToken to GetAuthorizationDetails
+- Fix ValidateBillingAgreement responses so that you get parsed results
+- Fix inheritShippingAddress so that it is a Boolean instead of String
+  (Original String method retained with @Deprecated annotation.)
+
+Version 2.2.0 - December 2016
+- Add support for CreateOrderReferenceForId API call
+- Add support for GetServiceStatus API call
+- Fix logging of XML responses so it preserves newline characters
+- Fix Client interface so that getPaymentDetails can be called
+- Fix GetAuthorizationDetails so that it properly pulls in SoftDecline value
+
+Version 2.1.0 - October 2016
+- Add getPaymentDetails convenience method (grabs order, auth, capture, and refund details)
+
+Version 2.0.0 - September 2016
+- Rewrite of the 1.x SDK with much easier to use calling convention
+- Add support for Java loggers (commons logging, log4j, etc.)
+- Add charge convenience method (creates ORO, performs auth and capture)
+- Add getSignature helper method
+
+Version 1.2 - March 2016
+- Add support for softDecline parameter in AuthorizeResponse

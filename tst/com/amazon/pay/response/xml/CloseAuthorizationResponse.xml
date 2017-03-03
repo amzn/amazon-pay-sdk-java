@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CloseAuthorizationResponse xmlns="http://mws.amazonservices.com/schema/OffAmazonPayments/2013-01-01">
+   <CloseAuthorizationResult />
+   <ResponseMetadata>
+      <RequestId>3e130e5b-41ae-41fd-b307-dbbf45663d79</RequestId>
+   </ResponseMetadata>
+</CloseAuthorizationResponse>
