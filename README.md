@@ -13,8 +13,8 @@ Amazon Pay API Integration
 ```java
 import com.amazon.pay.Client;
 import com.amazon.pay.Config;
-import com.amazon.pay.impl.PaymentsClient;
-import com.amazon.pay.impl.PaymentsConfig;
+import com.amazon.pay.impl.PayClient;
+import com.amazon.pay.impl.PayConfig;
 ```
 
  Your Amazon Pay keys are
@@ -25,7 +25,7 @@ String merchantId = "YOUR_MERCHANT_ID";
 String accessKey = "YOUR_ACCESS_KEY";
 String secretKey = "YOUR_SECRET_Key";
 
-Config config = new PaymentsConfig()
+Config config = new PayConfig()
                 .withSellerId(merchantId)
                 .withAccessKey(accessKey)
                 .withSecretKey(secretKey)
@@ -42,7 +42,7 @@ Config config = new PaymentsConfig()
 //Default environment is what is set in config file. For testing in Sandbox mode, use
 //config.withSandboxMode(true);
 
-Client client = new PaymentsClient(config);
+Client client = new PayClient(config);
 
 ```
 
