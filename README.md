@@ -166,7 +166,7 @@ String merchantId = "YOUR_MERCHANT_ID";
 String accessKey = "YOUR_ACCESS_KEY";
 String secretKey = "YOUR_SECRET_KEY";
 
-Config config = new PaymentsConfig()
+Config config = new PayConfig()
                 .withSellerId(merchantId)
                 .withAccessKey(accessKey)
                 .withSecretKey(secretKey);
@@ -175,7 +175,7 @@ Default currencyCode is what is set in config file. To override this, use config
 Default region is what is set in config file. For override this, use config.withRegion(Region.YOUR_REGION);
 Default environment is what is set in config file. For testing in Sandbox mode, use config.withSandboxMode(true);
 
-Client client = new PaymentsClient(config);
+Client client = new PayClient(config);
 
 // These values are grabbed from the Amazon Pay
 // Address and Wallet widgets
