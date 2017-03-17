@@ -1,3 +1,9 @@
+Version 3.0.0 - March 2017
+- Pay with Amazon has become Amazon Pay.
+We've changed our name, but you can still rely on us as a trusted and familiar payment solution. It's simpler, modern and    universal?enabling us to create more connected experiences across diverse settings and devices.
+https://pages.payments.amazon.com/Amazon_Pay_Rebrand_Landing_Page_US.html
+- User-Agent header modified to adhere to standards
+
 Version 2.3.0 - February 2017
 - Add PaymentDescriptor tag to GetOrderReferenceDetailsResponse API call.
 - Deprecate setAddressConsentToken() and getAddressConsentToken() in
