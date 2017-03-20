@@ -2,7 +2,7 @@
 
 ### Requirements
 
-* Amazon Pay - [Register here](https://payments.amazon.com/signup)
+* Amazon Pay - [Register here](https://pay.amazon.com/signup)
 * Java 1.6 or higher *(including JCE Java Cryptography Extension)*
 * Apache Commons Logging 1.2 *(or JCL-over-SLF4J drop in replacement)*
 * Apache Commons Codec 1.10
@@ -159,7 +159,7 @@ client.closeOrderReference("AMAZON_ORDER_REFERENCE_ID");
 
 ```
 
-### Subscriptions/Recurring Payments API Flow 
+### Subscriptions/Recurring Payments API Flow
 
 ```java
 String merchantId = "YOUR_MERCHANT_ID";
@@ -327,10 +327,10 @@ user.getUserId();
 Below are the steps to turn on the logging feature for your project.
 
 - Select a logging framework to use for your project.
-- Set the Logger instance 'log' in PaymentsLogUtil to the value of the logging framework.
+- Set the Logger instance 'log' in PayLogUtil to the value of the logging framework.
 
 ```java
-    private static Logger log = Logger.getLogger(PaymentsLogUtil.class);
+    private static Logger log = Logger.getLogger(PayLogUtil.class);
 ```
 - logMessage is called from 3 different places
     * NotificationFactory.java that logs Headers and Notification Body

@@ -153,7 +153,7 @@ public class NotificationFactory {
                         // XML parsing/unmarshalling issues, consider uncommenting the next line:
                         // unmarshaller.setEventHandler(new javax.xml.bind.helpers.DefaultValidationEventHandler());
 
-                        XMLInputFactory xmlInputFactory = XMLInputFactory.newFactory();
+                        XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
                         xmlInputFactory.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, false);
                         xmlInputFactory.setProperty(XMLInputFactory.SUPPORT_DTD, false);
                         XMLStreamReader xmlStreamReader = xmlInputFactory.createXMLStreamReader(reader);

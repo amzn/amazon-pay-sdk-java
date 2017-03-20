@@ -143,7 +143,7 @@ public class Util {
 
             userAgent.append("Java/" + JAVA_VERSION + "; " + OS_NAME + "/" + OS_VERSION + ")");
             headerMap.put("User-Agent", userAgent.toString());
-            
+
             if (config.getProxyHost() != null) {
                 Properties systemSettings = System.getProperties();
                 systemSettings.put("proxySet", "true");
