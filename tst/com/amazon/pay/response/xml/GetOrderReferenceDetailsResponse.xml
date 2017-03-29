@@ -20,6 +20,7 @@
       <PaymentDescriptor>
         <Name>Visa</Name>
         <AccountNumberTail>11</AccountNumberTail>
+        <FullDescriptor>Amazon Pay (Visa **11)</FullDescriptor>
         <UseAmazonBalanceFirst>false</UseAmazonBalanceFirst>
       </PaymentDescriptor>
       <ReleaseEnvironment>Live</ReleaseEnvironment>

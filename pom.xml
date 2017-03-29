@@ -4,7 +4,7 @@
     <groupId>com.amazon.pay</groupId>
     <artifactId>amazon-pay</artifactId>
     <packaging>jar</packaging>
-    <version>3.0.1</version>
+    <version>3.0.2</version>
     <dependencies>
         <dependency>
             <groupId>com.sun.xml.bind</groupId>

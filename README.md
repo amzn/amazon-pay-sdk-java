@@ -398,7 +398,6 @@ log.info("Buyer = " + response.getDetails().getBuyer());
 
 PaymentDescriptor paymentDescriptor = response.getDetails().getPaymentDescriptor();
 if (paymentDescriptor != null) {
-        log.info("Instrument Name = " + paymentDescriptor.getName());
-        log.info("Instrument Tail = " + paymentDescriptor.getAccountNumberTail());
+        log.info("Full Descriptor = " + paymentDescriptor.getFullDescriptor());
         log.info("Use Amazon Balance First = " + paymentDescriptor.isUseAmazonBalanceFirst());
 }

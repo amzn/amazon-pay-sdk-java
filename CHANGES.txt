@@ -1,3 +1,7 @@
+Version 3.0.2 - March 2017
+- Add a new element "FullDescriptor" in PaymentDescriptor object in GetOrderReferenceDetailsResponse API call.
+- Deprecate "AccountNumberTail" and "Name" elements in the favor of "FullDescriptor" element.
+
 Version 3.0.1 - March 2017
 - Updated XMLInputFactory.newFactory() to XMLInputFactory.newInstance() to support both IBM JDK and Oracle JDK.
 - Updated README file as per the changes listed - https://github.com/amzn/amazon-pay-sdk-java/pull/13

@@ -95,9 +95,34 @@ public class PaymentsAPIResponseTest {
         Assert.assertEquals(res.getDetails().getDestination().getPhysicalDestination().getCity(), "New York");
         Assert.assertEquals(res.getDetails().getDestination().getPhysicalDestination().getPostalCode(), "10101-9876");
         Assert.assertEquals(res.getDetails().getDestination().getPhysicalDestination().getStateOrRegion(), "NY");
+        Assert.assertNotNull(res.getDetails().getPaymentDescriptor());
         Assert.assertEquals(res.getDetails().getPaymentDescriptor().getName() , "Visa");
         Assert.assertEquals(res.getDetails().getPaymentDescriptor().getAccountNumberTail() , "11");
+        Assert.assertEquals(res.getDetails().getPaymentDescriptor().getFullDescriptor() , "Amazon Pay (Visa **11)");
         Assert.assertEquals(res.getDetails().getPaymentDescriptor().isUseAmazonBalanceFirst() , false);
+        Assert.assertNotEquals(res.getDetails().getPaymentDescriptor().isUseAmazonBalanceFirst(), true);
+        Assert.assertEquals(res.toXML(), rawResponse);
+    }
+
+    @Test
+    public void testPaymentDescriptor() throws Exception {
+        String rawResponse = loadTestFile("TestPaymentDescriptor.xml");
+        ResponseData response = new ResponseData(200, rawResponse);
+        GetOrderReferenceDetailsResponseData res = Parser.getOrderReferenceDetails(response);
+        Assert.assertNull(res.getDetails().getPaymentDescriptor().getName());
+        Assert.assertNull(res.getDetails().getPaymentDescriptor().getAccountNumberTail());
+        Assert.assertEquals(res.getDetails().getPaymentDescriptor().getFullDescriptor() , "Amazon Pay (Visa **11)");
+        Assert.assertEquals(res.getDetails().getPaymentDescriptor().isUseAmazonBalanceFirst(), true);
+        Assert.assertNotNull(res.getDetails().getPaymentDescriptor());
+        Assert.assertEquals(res.toXML(), rawResponse);
+    }
+
+    @Test
+    public void testNoPaymentDescriptor() throws Exception {
+        String rawResponse = loadTestFile("GetOROwithoutPaymentDescriptor.xml");
+        ResponseData response = new ResponseData(200, rawResponse);
+        GetOrderReferenceDetailsResponseData res = Parser.getOrderReferenceDetails(response);
+        Assert.assertNull(res.getDetails().getPaymentDescriptor());
         Assert.assertEquals(res.toXML(), rawResponse);
     }
 

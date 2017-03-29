@@ -24,14 +24,19 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "PaymentDescriptor", propOrder = {
         "name",
         "accountNumberTail",
+        "fullDescriptor",
         "useAmazonBalanceFirst"
 })
 
 public class PaymentDescriptor {
+    @Deprecated
     @XmlElement(name = "Name")
     protected String name;
+    @Deprecated
     @XmlElement(name = "AccountNumberTail")
     protected String accountNumberTail;
+    @XmlElement(name = "FullDescriptor")
+    protected String fullDescriptor;
     @XmlElement(name = "UseAmazonBalanceFirst")
     protected Boolean useAmazonBalanceFirst;
 
@@ -42,6 +47,7 @@ public class PaymentDescriptor {
     /**
      * @return The name or type of card.
      */
+    @Deprecated
     public String getName() {
         return name;
     }
@@ -49,8 +55,16 @@ public class PaymentDescriptor {
     /**
      * @return The account number tail.
      */
+    @Deprecated
     public String getAccountNumberTail() {
         return accountNumberTail;
+    }
+
+    /**
+     * @return The name or type of card and account number tail.
+     */
+    public String getFullDescriptor() {
+        return fullDescriptor;
     }
 
     /**
@@ -66,6 +80,7 @@ public class PaymentDescriptor {
         return "PaymentDescriptor{"
                 + "name=" + name
                 + ", accountNumberTail=" + accountNumberTail
+                + ", fullDescriptor=" + fullDescriptor
                 + ", useAmazonBalanceFirst=" + useAmazonBalanceFirst + '}';
     }
 }
