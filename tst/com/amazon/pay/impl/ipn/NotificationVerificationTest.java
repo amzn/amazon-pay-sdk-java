@@ -59,7 +59,7 @@ public class NotificationVerificationTest {
     public void testBadHeaderIPN() {
         Map<String,String> badHeader = new HashMap<String,String>();
         badHeader.put("x-amz-sns-message-type" , "Otherr");
-        NotificationFactory.parseNotification(null, sampleNotification);
+        NotificationFactory.parseNotification(badHeader, sampleNotification);
         Assert.fail();
     }
     
