@@ -14,18 +14,18 @@ import org.powermock.modules.junit4.PowerMockRunner;
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(value = { NotificationVerification.class})
 public class NotificationVerificationTest {
-         
+
     private Map<String,String> ipnHeader = new HashMap<String,String>();
     private String sampleNotification;
-        
+
     @Before
     public void setUp() throws Exception {
-        ipnHeader.put("x-amz-sns-message-type" , "Notification");
+        ipnHeader.put("x-amz-sns-message-type", "Notification");
         sampleNotification = new NotificationFactoryTest().loadTestFile("AuthorizeNotification.json");
     }
-    
+
     /**
-     * Empty payload and empty header 
+     * Empty payload and empty header
      */
     @Test(expected=AmazonClientException.class)
     public void testNullHeaderPayloadIPN() {
@@ -42,7 +42,7 @@ public class NotificationVerificationTest {
         NotificationFactory.parseNotification(emptyheader, sampleNotification);
         Assert.fail();
     }
-    
+
     /**
      * Null header
      */
@@ -51,18 +51,18 @@ public class NotificationVerificationTest {
         NotificationFactory.parseNotification(null, sampleNotification);
         Assert.fail();
     }
-    
+
     /**
      * Incorrect header
      */
     @Test(expected=AmazonClientException.class)
     public void testBadHeaderIPN() {
         Map<String,String> badHeader = new HashMap<String,String>();
-        badHeader.put("x-amz-sns-message-type" , "Otherr");
-        NotificationFactory.parseNotification(null, sampleNotification);
+        badHeader.put("x-amz-sns-message-type", "Otherr");
+        NotificationFactory.parseNotification(badHeader, sampleNotification);
         Assert.fail();
     }
-    
+
     /**
      * Null Payload
      */
@@ -71,7 +71,7 @@ public class NotificationVerificationTest {
         Notification notification = NotificationFactory.parseNotification(ipnHeader, null);
         Assert.fail();
     }
-    
+
     /**
      * Empty Payload
      */

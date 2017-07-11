@@ -36,7 +36,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "creationTimestamp",
     "captureStatus",
     "softDescriptor",
-    "providerCreditSummaryList"
+    "providerCreditSummaryList",
+    "convertedAmount",
+    "conversionRate"
 })
 public class CaptureDetails {
 
@@ -63,6 +65,10 @@ public class CaptureDetails {
     protected String softDescriptor;
     @XmlElement(name = "ProviderCreditSummaryList")
     protected ProviderCreditSummaryList providerCreditSummaryList;
+    @XmlElement(name = "ConvertedAmount")
+    protected Price convertedAmount;
+    @XmlElement(name = "ConversionRate")
+    protected String conversionRate;
 
     public CaptureDetails() {
         super();
@@ -70,7 +76,7 @@ public class CaptureDetails {
 
     /**
      * The Amazon-generated identifier for this capture.
-     * 
+     *
      * @return amazonCaptureId
      */
     public String getAmazonCaptureId() {
@@ -79,7 +85,7 @@ public class CaptureDetails {
 
     /**
      * The identifier for this capture that you specify.
-     * 
+     *
      * @return captureReferenceId
      */
     public String getCaptureReferenceId() {
@@ -88,7 +94,7 @@ public class CaptureDetails {
 
     /**
      * A description for the capture that is displayed in emails to the buyer.
-     * 
+     *
      * @return sellerCaptureNote
      */
     public String getSellerCaptureNote() {
@@ -97,7 +103,7 @@ public class CaptureDetails {
 
     /**
      * The amount to be captured. Type: Price
-     * 
+     *
      * @return captureAmount
      */
     public Price getCaptureAmount() {
@@ -106,7 +112,7 @@ public class CaptureDetails {
 
     /**
      * The total amount that has been refunded on this capture.
-     * 
+     *
      * @return refundedAmount
      */
     public Price getRefundedAmount() {
@@ -115,7 +121,7 @@ public class CaptureDetails {
 
     /**
      * The fee that was charged by Amazon for this capture.
-     * 
+     *
      * @return captureFee
      */
     public Price getCaptureFee() {
@@ -123,18 +129,18 @@ public class CaptureDetails {
     }
 
     /**
-     * A list of AmazonRefundId identifiers that have been requested on this Capture object. 
+     * A list of AmazonRefundId identifiers that have been requested on this Capture object.
      * This list is empty if you have not requested any refunds on this capture.
-     * 
+     *
      * @return idList
      */
     public IdList getIdList() {
         return idList;
     }
-    
+
     /**
      * The time at which the capture was created. In ISO 8601 format.
-     * 
+     *
      * @return creationTimestamp
      */
     public XMLGregorianCalendar getCreationTimestamp() {
@@ -142,10 +148,10 @@ public class CaptureDetails {
     }
 
     /**
-     * Represents the current status of the capture. For more information 
-     * about the State and ReasonCode response elements, see Capture States 
+     * Represents the current status of the capture. For more information
+     * about the State and ReasonCode response elements, see Capture States
      * and Reason Codes. Type: Status
-     * 
+     *
      * @return captureStatus
      */
     public Status getCaptureStatus() {
@@ -154,7 +160,7 @@ public class CaptureDetails {
 
     /**
      * The description to be shown on the buyer's payment instrument statement.
-     * 
+     *
      * @return softDescriptor
      */
     public String getSoftDescriptor() {
@@ -162,7 +168,7 @@ public class CaptureDetails {
     }
 
     /**
-     * 
+     *
      * @return providerCreditSummaryList
      */
     public ProviderCreditSummaryList getProviderCreditSummaryList() {
@@ -170,15 +176,41 @@ public class CaptureDetails {
     }
 
     /**
+     * The converted refund amount in the merchant’s ledger currency.
+     * @return convertedAmount
+     */
+    public Price getConvertedAmount() {
+        return convertedAmount;
+    }
+
+    /**
+     * The conversion rate: TransactionAmount / ConvertedAmount
+     * @return conversionRate
+     */
+    public String getConversionRate() {
+        return conversionRate;
+    }
+
+    /**
      * Returns the string representation of captureDetails
      */
     @Override
     public String toString() {
-        return "CaptureDetails{" + "amazonCaptureId=" + amazonCaptureId + ", captureReferenceId=" + captureReferenceId 
-                + ", sellerCaptureNote=" + sellerCaptureNote + ", captureAmount=" + captureAmount + ", refundedAmount=" 
-                + refundedAmount + ", captureFee=" + captureFee + ", idList=" + idList + ", creationTimestamp=" 
-                + creationTimestamp + ", captureStatus=" + captureStatus + ", softDescriptor=" + softDescriptor 
-                + ", providerCreditSummaryList=" + providerCreditSummaryList + '}';
+        return "CaptureDetails{"
+                + "amazonCaptureId=" + amazonCaptureId
+                + ", captureReferenceId=" + captureReferenceId
+                + ", sellerCaptureNote=" + sellerCaptureNote
+                + ", captureAmount=" + captureAmount
+                + ", refundedAmount=" + refundedAmount
+                + ", captureFee=" + captureFee
+                + ", idList=" + idList
+                + ", creationTimestamp=" + creationTimestamp
+                + ", captureStatus=" + captureStatus
+                + ", softDescriptor=" + softDescriptor
+                + ", providerCreditSummaryList=" + providerCreditSummaryList
+                + ", convertedAmount=" + convertedAmount
+                + ", conversionRate=" + conversionRate
+                + '}';
     }
 
 }

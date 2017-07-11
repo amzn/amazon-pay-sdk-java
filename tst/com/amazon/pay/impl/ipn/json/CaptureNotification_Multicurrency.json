@@ -1,0 +1,13 @@
+{
+  "Type" : "Notification",
+  "MessageId" : "2f854ae6-ac23-56a3-aeed-1b2a4d92a6bd",
+  "TopicArn" : "arn:aws:sns:eu-west-1:291180941288:A1G8446IYHA4MRAOPZVV2STP28T",
+  "Message" : "{\"ReleaseEnvironment\":\"Sandbox\",\"MarketplaceID\":\"136311\",\"Version\":\"2013-01-01\",\"NotificationType\":\"PaymentCapture\",\"SellerId\":\"AOPZVV2STP28T\",\"NotificationReferenceId\":\"a76a9c94-446d-45d8-9591-38d50e5a9cc5\",\"Timestamp\":\"2017-06-27T22:42:57.792Z\",\"NotificationData\":\"<?xml version=\\\"1.0\\\" encoding=\\\"UTF-8\\\"?><CaptureNotification xmlns=\\\"https://mws.amazonservices.com/ipn/OffAmazonPayments/2013-01-01\\\">\\n    <CaptureDetails>\\n        <AmazonCaptureId>S02-6112897-1842302-C042768<\\/AmazonCaptureId>\\n        <CaptureReferenceId>KWUFWoFZ0WiZRrMKJ0g<\\/CaptureReferenceId>\\n        <CaptureAmount>\\n            <Amount>19.95<\\/Amount>\\n            <CurrencyCode>GBP<\\/CurrencyCode>\\n        <\\/CaptureAmount>\\n        <ConvertedAmount>\\n            <Amount>21.84<\\/Amount>\\n            <CurrencyCode>EUR<\\/CurrencyCode>\\n        <\\/ConvertedAmount>\\n        <ConversionRate>0.913362644<\\/ConversionRate>\\n        <RefundedAmount>\\n            <Amount>0.0<\\/Amount>\\n            <CurrencyCode>GBP<\\/CurrencyCode>\\n        <\\/RefundedAmount>\\n        <CaptureFee>\\n            <Amount>0.0<\\/Amount>\\n            <CurrencyCode>GBP<\\/CurrencyCode>\\n        <\\/CaptureFee>\\n        <IdList/>\\n        <CreationTimestamp>2017-06-27T22:42:56.430Z<\\/CreationTimestamp>\\n        <CaptureStatus>\\n            <State>Completed<\\/State>\\n            <LastUpdateTimestamp>2017-06-27T22:42:56.430Z<\\/LastUpdateTimestamp>\\n        <\\/CaptureStatus>\\n        <SoftDescriptor>AMZ*Matt's Test Stor<\\/SoftDescriptor>\\n    <\\/CaptureDetails>\\n<\\/CaptureNotification>\"}",
+  "Timestamp" : "2017-06-27T22:42:57.804Z",
+  "SignatureVersion" : "1",
+  "Signature" : "QR3/alTofMribKUmvatxEu5eQV8DiXBaEfqUaZBqZjMVeGWEMO9tNbdNi+vdjDqw33k6chbO8LH3I26OZlyVMjuJ7DmyBsqOgrNNyH5yUEleb5eV3XjUQHnb5J7xK4BtMkUuqVPqbOnJXeMP6jBlz282P6fufvigeZMWRVh+n+yqSxBlUJwX0yT4Oc+ja+v4nQTz9MsGPanyWNvsGcMWrEa1I7MmRZTFfHnyeU0jleScQq0UQxjuoIP4EbSt3cNEO17kNchMzenyQ5mkrK1gm/S6osUi0WaejluvYIr0uhd4e4ZeN8fGLBQFLhFpR+5ILbhMPvqaU+Fr0TLHLQN4rA==",
+  "SigningCertURL" : "https://sns.eu-west-1.amazonaws.com/SimpleNotificationService-b95095beb82e8f6a046b3aafc7f4149a.pem",
+  "UnsubscribeURL" : "https://sns.eu-west-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:eu-west-1:291180941288:A1G8446IYHA4MRAOPZVV2STP28T:79cfe329-d6b9-4c9b-b439-daa28b5830f0"
+}
+
+

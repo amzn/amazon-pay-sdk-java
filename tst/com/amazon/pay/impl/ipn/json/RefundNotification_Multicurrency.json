@@ -1,0 +1,12 @@
+{
+  "Type" : "Notification",
+  "MessageId" : "17bf00c4-8bf8-5f70-9f25-51097f9450e5",
+  "TopicArn" : "arn:aws:sns:eu-west-1:291180941288:A1G8446IYHA4MRAOPZVV2STP28T",
+  "Message" : "{\"ReleaseEnvironment\":\"Sandbox\",\"MarketplaceID\":\"136311\",\"Version\":\"2013-01-01\",\"NotificationType\":\"PaymentRefund\",\"SellerId\":\"AOPZVV2STP28T\",\"NotificationReferenceId\":\"f021fa22-bc5f-48d6-a5fa-91e1272eec51\",\"Timestamp\":\"2017-06-28T18:15:08.001Z\",\"NotificationData\":\"<?xml version=\\\"1.0\\\" encoding=\\\"UTF-8\\\"?><RefundNotification xmlns=\\\"https://mws.amazonservices.com/ipn/OffAmazonPayments/2013-01-01\\\">\\n    <RefundDetails>\\n        <AmazonRefundId>S02-8274313-3487267-R019346<\\/AmazonRefundId>\\n        <RefundReferenceId>aed9ba8bee564c8cb943bd6481633ad1<\\/RefundReferenceId>\\n        <RefundType>SellerInitiated<\\/RefundType>\\n        <RefundAmount>\\n            <Amount>0.33<\\/Amount>\\n            <CurrencyCode>NOK<\\/CurrencyCode>\\n        <\\/RefundAmount>\\n        <ConvertedAmount>\\n            <Amount>0.03<\\/Amount>\\n            <CurrencyCode>EUR<\\/CurrencyCode>\\n        <\\/ConvertedAmount>\\n        <ConversionRate>9.9248293483<\\/ConversionRate>\\n        <FeeRefunded>\\n            <Amount>0.0<\\/Amount>\\n            <CurrencyCode>NOK<\\/CurrencyCode>\\n        <\\/FeeRefunded>\\n        <CreationTimestamp>2017-06-28T18:14:34.752Z<\\/CreationTimestamp>\\n        <RefundStatus>\\n            <State>Completed<\\/State>\\n            <LastUpdateTimestamp>2017-06-28T18:15:07.659Z<\\/LastUpdateTimestamp>\\n        <\\/RefundStatus>\\n        <SoftDescriptor>AMZ*Matt's Test Stor<\\/SoftDescriptor>\\n    <\\/RefundDetails>\\n<\\/RefundNotification>\"}",
+  "Timestamp" : "2017-06-28T18:15:08.017Z",
+  "SignatureVersion" : "1",
+  "Signature" : "g5A11wLPC1S6ydxXdY/63ntcLwrxi6vZ01KqPUidvOX213eU8JVRGnX0jMa2HpkHVJO8tUyv6vsrzZbFvwSc8prORI7pc8fEVjl2pXYJOl71H/UsOB1Q6pcq7tteWanqWZth6zOGzmZ0j8k12qPZ7/vl9WbSpvmhda4PxT0kANVAjqT9RKo9dDTFXia7Fb+F5fShl9Jc2mTWaKOYB3rUd8YDVH6rDWZYpVcT3yOpC7U2eJyl1wpDSnaML+mrZYe+GWtFqfBBP+MpGjSsCcdfiDS6KtEN8zUuqsMxP4ktL/MRlvEXMLWVQty5/ic8994TS+DaePXEK+x7iJKZmF69Iw==",
+  "SigningCertURL" : "https://sns.eu-west-1.amazonaws.com/SimpleNotificationService-b95095beb82e8f6a046b3aafc7f4149a.pem",
+  "UnsubscribeURL" : "https://sns.eu-west-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:eu-west-1:291180941288:A1G8446IYHA4MRAOPZVV2STP28T:79cfe329-d6b9-4c9b-b439-daa28b5830f0"
+}
+

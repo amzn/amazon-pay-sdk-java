@@ -1,3 +1,10 @@
+Version 3.1.0 - July 2017
+- EventType enum from BillingAgreementNotification IPN metadata now available.
+- Fix BillingAgreementStatus class to handle mis-named "lastUpdate" attribute from IPNs.
+- Modified IPN XML parsing so that extra jaxb jar files no longer required.
+- Add AMAZON_A_Z_CANCEL enum to RefundType.
+- Multicurrency attributes [ConvertedAmount, ConversionRate] now available on GetCaptureDetails and GetRefundDetails responses (and IPN's) when allowed and applicable. Initially only supported for select UK and European merchants.
+
 Version 3.0.2 - March 2017
 - Add a new element "FullDescriptor" in PaymentDescriptor object in GetOrderReferenceDetailsResponse API call.
 - Deprecate "AccountNumberTail" and "Name" elements in the favor of "FullDescriptor" element.

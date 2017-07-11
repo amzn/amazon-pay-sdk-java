@@ -18,7 +18,9 @@ import com.amazon.pay.response.model.Environment;
 import com.amazon.pay.response.parser.ResponseData;
 import com.amazon.pay.types.Region;
 import com.amazon.pay.types.ServiceConstants;
+
 import com.google.gson.Gson;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -30,7 +32,12 @@ import java.net.URLEncoder;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Properties;
+import java.util.TimeZone;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
@@ -38,6 +45,8 @@ import com.sun.org.apache.xpath.internal.SourceTree;
 import org.apache.commons.codec.binary.Base64;
 
 public class Util {
+
+    private static PayLogUtil payLogUtil = new PayLogUtil();
 
     public static final String LINE_SEPARATOR = System.getProperty("line.separator");
     public static final String JAVA_VERSION = System.getProperty("java.version");
@@ -76,7 +85,10 @@ public class Util {
      * @return ResponseData
      * @throws IOException
      */
-    public static ResponseData httpSendRequest(String method, String url, String urlParameters, Map<String,String> headers) throws IOException{
+    public static ResponseData httpSendRequest(String method, String url, String urlParameters, Map<String,String> headers) throws IOException {
+
+        payLogUtil.logMessage("Request:\nURL=" + url + "\nPOST Data=" + urlParameters);
+
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         if (headers != null && !headers.isEmpty()) {
@@ -86,7 +98,7 @@ public class Util {
         }
         con.setDoOutput(true);
         con.setRequestMethod(method);
-        if(urlParameters != null) {
+        if (urlParameters != null) {
             DataOutputStream wr = new DataOutputStream(con.getOutputStream());
             wr.writeBytes(urlParameters);
             wr.flush();
@@ -121,11 +133,11 @@ public class Util {
      * @return ResponseData
      * @throws IOException
      */
-    public static ResponseData httpSendRequest(String method, String url, String urlParameters, Map<String,String> headers , PayConfig config) throws IOException  {
+    public static ResponseData httpSendRequest(String method, String url, String urlParameters, Map<String,String> headers, PayConfig config) throws IOException {
 
         Map<String,String> headerMap = new HashMap<String,String>();
 
-        if(config!= null) {
+        if (config != null) {
 
             final String applicationName = config.getApplicationName();
             final String applicationVersion = config.getApplicationVersion();
@@ -220,14 +232,14 @@ public class Util {
      * Helper method to get Service URL endpoint including service version name
      * Ex: 
      */
-    public static String getServiceURLEndpoint(Region region , Environment environment) {
-        return ServiceConstants.mwsEndpointMappings.get(region) + "/" + getServiceVersionName(environment);
+    public static String getServiceURLEndpoint(Region region, Environment environment) {
+        return ServiceConstants.mwsEndpointMappings.get(region) + getServiceVersionName(environment);
     }
 
 
     public static String getServiceVersionName(Environment environment) {
         String mwsServiceAPIVersionName;
-        if(environment == Environment.SANDBOX) {
+        if (environment == Environment.SANDBOX) {
             mwsServiceAPIVersionName = "/" + "OffAmazonPayments_Sandbox" + "/" + ServiceConstants.AMAZON_PAY_API_VERSION;
         }
         else {

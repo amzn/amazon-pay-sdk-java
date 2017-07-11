@@ -27,7 +27,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "BillingAgreementStatus", propOrder = {
     "state",
-    "lastUpdatedTimestamp",
+    "lastUpdatedTimestamp", // used in real-time responses
+    "lastUpdateTimestamp",  // used in IPN responses, probably due to an error in IPN code
     "reasonCode",
     "reasonDescription"
 })
@@ -35,11 +36,18 @@ public class BillingAgreementStatus {
 
     @XmlElement(name = "State")
     protected String state;
+
     @XmlElement(name = "LastUpdatedTimestamp")
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar lastUpdatedTimestamp;
+
+    @XmlElement(name = "LastUpdateTimestamp")
+    @XmlSchemaType(name = "dateTime")
+    protected XMLGregorianCalendar lastUpdateTimestamp;
+
     @XmlElement(name = "ReasonCode")
     protected String reasonCode;
+
     @XmlElement(name = "ReasonDescription")
     protected String reasonDescription;
 
@@ -65,7 +73,10 @@ public class BillingAgreementStatus {
      * @return lastUpdatedTimestamp
      */
     public XMLGregorianCalendar getLastUpdatedTimestamp() {
-        return lastUpdatedTimestamp;
+        if (lastUpdateTimestamp != null)
+            return lastUpdateTimestamp;
+        else
+            return lastUpdatedTimestamp;
     }
 
     /**
@@ -80,24 +91,24 @@ public class BillingAgreementStatus {
 
     /**
      * An optional description of the billing agreement status.
-     * 
+     *
      * @return reasonDescription
      */
     public String getReasonDescription() {
         return reasonDescription;
     }
 
-    /** 
+    /**
      * Returns the string representation of BillingAgreementStatus
      */
     @Override
     public String toString() {
         return "BillingAgreementStatus{"
                 + "state=" + state
-                + ", lastUpdatedTimestamp=" + lastUpdatedTimestamp
+                + ", lastUpdatedTimestamp=" + getLastUpdatedTimestamp()
                 + ", reasonCode=" + reasonCode
-                + ", reasonDescription="
-                + reasonDescription + '}';
+                + ", reasonDescription=" + reasonDescription
+                + '}';
     }
 
 }

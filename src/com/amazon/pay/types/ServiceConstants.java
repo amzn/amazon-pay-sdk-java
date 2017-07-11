@@ -115,7 +115,7 @@ public class ServiceConstants {
     public static final String VALIDATE_BILLING_AGREEMENT_DETAILS = "ValidateBillingAgreement";
 
     // SDK version
-    public static final String APPLICATION_LIBRARY_VERSION = "3.0.2";
+    public static final String APPLICATION_LIBRARY_VERSION = "3.1.0";
     public static final String GITHUB_SDK_NAME = "amazon-pay-sdk-java";
 
     // Exponential backoff wait times (milliseconds) for retry operations

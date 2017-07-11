@@ -35,7 +35,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "creationTimestamp",
     "refundStatus",
     "softDescriptor",
-    "providerCreditReversalSummaryList"
+    "providerCreditReversalSummaryList",
+    "convertedAmount",
+    "conversionRate"
 })
 public class RefundDetails {
 
@@ -60,10 +62,15 @@ public class RefundDetails {
     protected String softDescriptor;
     @XmlElement(name = "ProviderCreditReversalSummaryList")
     protected ProviderCreditReversalSummaryList providerCreditReversalSummaryList;
+    @XmlElement(name = "ConvertedAmount")
+    protected Price convertedAmount;
+    @XmlElement(name = "ConversionRate")
+    protected String conversionRate;
+
 
     /**
      * Default constructor
-     * 
+     *
      */
     public RefundDetails() {
         super();
@@ -72,7 +79,7 @@ public class RefundDetails {
 
     /**
      * The Amazon-generated identifier for this refund transaction.
-     * 
+     *
      * @return amazonRefundId
      */
     public String getAmazonRefundId() {
@@ -82,7 +89,7 @@ public class RefundDetails {
 
     /**
      * The identifier for this refund transaction that you specify.
-     * 
+     *
      * @return refundReferenceId
      */
     public String getRefundReferenceId() {
@@ -91,7 +98,7 @@ public class RefundDetails {
 
     /**
      * A description for the refund that is displayed in emails to the buyer.
-     * 
+     *
      * @return sellerRefundNote
      */
     public String getSellerRefundNote() {
@@ -100,16 +107,16 @@ public class RefundDetails {
 
     /**
      * Indicates the refund type.
-     * 
+     *
      * @return refundType
      */
     public RefundType getRefundType() {
         return refundType;
     }
-    
+
     /**
      * The amount requested for the refund. Type: Price
-     * 
+     *
      * @return refundAmount
      */
     public Price getRefundAmount() {
@@ -118,7 +125,7 @@ public class RefundDetails {
 
     /**
      * The capture fee that has been refunded. Type: Price
-     * 
+     *
      * @return feeRefunded
      */
     public Price getFeeRefunded() {
@@ -127,7 +134,7 @@ public class RefundDetails {
 
     /**
      * The time at which the refund was created. In ISO 8601 format.
-     * 
+     *
      * @return creationTimestamp
      */
     public XMLGregorianCalendar getCreationTimestamp() {
@@ -136,7 +143,7 @@ public class RefundDetails {
 
     /**
      * Represents the status of the refund request.
-     * 
+     *
      * @return refundStatus
      */
     public Status getRefundStatus() {
@@ -145,7 +152,7 @@ public class RefundDetails {
 
     /**
      * The description to be shown on the buyer's payment instrument statement.
-     * 
+     *
      * @return softDescriptor
      */
     public String getSoftDescriptor() {
@@ -153,7 +160,7 @@ public class RefundDetails {
     }
 
     /**
-     * 
+     *
      * @return providerCreditReversalSummaryList
      */
     public ProviderCreditReversalSummaryList getProviderCreditReversalSummaryList() {
@@ -161,16 +168,40 @@ public class RefundDetails {
     }
 
     /**
+     * The converted refund amount in the merchant’s ledger currency.
+     * @return convertedAmount
+     */
+    public Price getConvertedAmount() {
+        return convertedAmount;
+    }
+
+    /**
+     * The conversion rate: TransactionAmount / ConvertedAmount
+     * @return conversionRate
+     */
+    public String getConversionRate() {
+        return conversionRate;
+    }
+
+    /**
      * String representation of refundDetails
      */
     @Override
     public String toString() {
-        return "RefundDetails{" + "amazonRefundId=" + amazonRefundId + ", refundReferenceId=" 
-                + refundReferenceId + ", sellerRefundNote=" + sellerRefundNote + ", refundType=" + refundType 
-                + ", refundAmount=" + refundAmount + ", feeRefunded=" + feeRefunded + ", creationTimestamp=" 
-                + creationTimestamp + ", refundStatus=" + refundStatus + ", softDescriptor=" + softDescriptor 
-                + ", providerCreditReversalSummaryList=" + providerCreditReversalSummaryList + '}';
+        return "RefundDetails{"
+                + "amazonRefundId=" + amazonRefundId
+                + ", refundReferenceId=" + refundReferenceId
+                + ", sellerRefundNote=" + sellerRefundNote
+                + ", refundType=" + refundType
+                + ", refundAmount=" + refundAmount
+                + ", feeRefunded=" + feeRefunded
+                + ", creationTimestamp=" + creationTimestamp
+                + ", refundStatus=" + refundStatus
+                + ", softDescriptor=" + softDescriptor
+                + ", providerCreditReversalSummaryList=" + providerCreditReversalSummaryList
+                + ", convertedAmount=" + convertedAmount
+                + ", conversionRate=" + conversionRate
+                + '}';
     }
 
-    
 }

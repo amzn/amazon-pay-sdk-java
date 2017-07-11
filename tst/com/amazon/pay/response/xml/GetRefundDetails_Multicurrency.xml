@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GetRefundDetailsResponse xmlns="http://mws.amazonservices.com/schema/OffAmazonPayments/2013-01-01">
+  <GetRefundDetailsResult>
+    <RefundDetails>
+      <ConvertedAmount>
+        <CurrencyCode>EUR</CurrencyCode>
+        <Amount>0.03</Amount>
+      </ConvertedAmount>
+      <SellerRefundNote/>
+      <RefundStatus>
+        <LastUpdateTimestamp>2017-06-28T18:15:07.659Z</LastUpdateTimestamp>
+        <State>Completed</State>
+      </RefundStatus>
+      <SoftDescriptor>AMZ*Matt's Test Stor</SoftDescriptor>
+      <ConversionRate>9.9248293483</ConversionRate>
+      <RefundReferenceId>aed9ba8bee564c8cb943bd6481633ad1</RefundReferenceId>
+      <RefundType>SellerInitiated</RefundType>
+      <CreationTimestamp>2017-06-28T18:14:34.752Z</CreationTimestamp>
+      <FeeRefunded>
+        <CurrencyCode>EUR</CurrencyCode>
+        <Amount>0.00</Amount>
+      </FeeRefunded>
+      <RefundAmount>
+        <CurrencyCode>NOK</CurrencyCode>
+        <Amount>0.33</Amount>
+      </RefundAmount>
+      <AmazonRefundId>S02-8274313-3487267-R019346</AmazonRefundId>
+    </RefundDetails>
+  </GetRefundDetailsResult>
+  <ResponseMetadata>
+    <RequestId>3b14705b-0a11-4b05-98d3-eb62c9bf1d22</RequestId>
+  </ResponseMetadata>
+</GetRefundDetailsResponse>

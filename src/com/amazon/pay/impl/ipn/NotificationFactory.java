@@ -27,6 +27,8 @@ import com.amazon.pay.response.ipn.model.ProviderCreditNotification;
 import com.amazon.pay.response.ipn.model.ProviderCreditReversalNotification;
 import com.amazon.pay.response.ipn.model.RefundNotification;
 import com.amazon.pay.response.ipn.model.SolutionProviderMerchantNotification;
+import com.amazon.pay.response.parser.AmazonValidationEventHandler;
+
 import com.google.gson.Gson;
 
 import java.io.StringReader;
@@ -63,7 +65,7 @@ public class NotificationFactory {
      */
     public static Notification parseNotification(Map<String,String> headers, final String body) throws AmazonClientException{
 
-        NotificationVerification verifier = new NotificationVerification();
+        final NotificationVerification verifier = new NotificationVerification();
 
         //verify notification header values
         verifier.verifyHeaders(headers);
@@ -76,7 +78,7 @@ public class NotificationFactory {
         }
 
         //parse notification
-        Notification notification = NotificationFactory.getNotification(body);
+        final Notification notification = NotificationFactory.getNotification(body);
 
         //log notification body contents to the console.
         try {
@@ -106,19 +108,19 @@ public class NotificationFactory {
 
 
     private static Notification getNotification(String payLoad)  {
-        com.amazon.pay.response.ipn.model.Notification notifData = null;
+        Notification notifData = null;
         if (payLoad == null || payLoad.isEmpty()) {
             throw new AmazonClientException("Aborting, empty payload");
         }
-        String notificationDataAsJSON = payLoad;
-        Map<String,String> notificationDataAsMap = new Gson().fromJson(payLoad, Map.class);
+        final String notificationDataAsJSON = payLoad;
+        final Map<String,String> notificationDataAsMap = new Gson().fromJson(payLoad, Map.class);
 
-        String message = notificationDataAsMap.get("Message");
+        final String message = notificationDataAsMap.get("Message");
         Map<String,String> messageDataMap = null;
         if (message != null) {
             messageDataMap = new Gson().fromJson(message, Map.class);
             if (messageDataMap != null) {
-                String notificationType = messageDataMap.get("NotificationType");
+                final String notificationType = messageDataMap.get("NotificationType");
                 JAXBContext jaxbContext = null;
                 try {
                     if ("OrderReferenceNotification".equalsIgnoreCase(notificationType)) {
@@ -143,20 +145,16 @@ public class NotificationFactory {
 
                     // Modify namespace declaration so it is ignored
                     if (jaxbContext != null) {
-                        String notificationData = messageDataMap.get("NotificationData");
-                        //ignore the namespace only for marshalling purpose
-                        notificationData = notificationData.replaceAll("xmlns(?:.*?)?=\"https://mws.amazonservices.com/ipn/OffAmazonPayments/2013-01-01\"", "");
-                        StringReader reader = new StringReader(notificationData.trim());
-                        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+                        final String notificationData = messageDataMap.get("NotificationData").replaceAll(
+                                "xmlns(?:.*?)?=\"https://mws.amazonservices.com/ipn/OffAmazonPayments/2013-01-01\"", "");
+                        final StringReader reader = new StringReader(notificationData.trim());
+                        final Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+			unmarshaller.setEventHandler(new AmazonValidationEventHandler());
 
-                        // If you need to do some deep dive troubleshooting to trace hard to find
-                        // XML parsing/unmarshalling issues, consider uncommenting the next line:
-                        // unmarshaller.setEventHandler(new javax.xml.bind.helpers.DefaultValidationEventHandler());
-
-                        XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
+                        final XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
                         xmlInputFactory.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, false);
                         xmlInputFactory.setProperty(XMLInputFactory.SUPPORT_DTD, false);
-                        XMLStreamReader xmlStreamReader = xmlInputFactory.createXMLStreamReader(reader);
+                        final XMLStreamReader xmlStreamReader = xmlInputFactory.createXMLStreamReader(reader);
                         notifData = (Notification) unmarshaller.unmarshal(xmlStreamReader);
                         notifData.setNotificationMetadata(new NotificationMetaData(notificationDataAsMap));
                         notifData.setMessageMetaData(new IPNMessageMetaData(messageDataMap));

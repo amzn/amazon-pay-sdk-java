@@ -24,9 +24,10 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ipn", propOrder = {
         "authorizationDetails"
-}, namespace="https://mws.amazonservices.com/ipn/OffAmazonPayments/2013-01-01")
-@XmlRootElement(name="AuthorizationNotification")
-public class AuthorizationNotification  extends Notification {
+})
+@XmlRootElement(name = "AuthorizationNotification")
+
+public class AuthorizationNotification extends Notification {
 
     /**
      * Authorization details field.
@@ -65,9 +66,8 @@ public class AuthorizationNotification  extends Notification {
      */
     @Override
     public String toString() {
-        return "AuthorizationNotification{" + "authorizationDetails=" + authorizationDetails.toString() + '}';
+        return "AuthorizationNotification{"
+                + "authorizationDetails=" + authorizationDetails.toString() + '}';
     }
-
-
 
 }

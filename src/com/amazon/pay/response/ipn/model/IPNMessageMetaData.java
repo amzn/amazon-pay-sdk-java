@@ -23,6 +23,8 @@ public final class IPNMessageMetaData {
     private final String notificationReferenceId;
     private final String sellerId;
     private final String version;
+    private final String notificationType;
+    private final EventType eventType;
 
     public IPNMessageMetaData(Map<String,String> messageMetaDataMap) {
         releaseEnvironment = messageMetaDataMap.get("ReleaseEnvironment");
@@ -30,6 +32,14 @@ public final class IPNMessageMetaData {
         notificationReferenceId = messageMetaDataMap.get("NotificationReferenceId");
         sellerId = messageMetaDataMap.get("SellerId");
         version = messageMetaDataMap.get("Version");
+        notificationType = messageMetaDataMap.get("NotificationType");
+
+        final String eventTypeString = messageMetaDataMap.get("EventType");
+        if (eventTypeString != null) {
+            eventType = EventType.valueOf(eventTypeString);
+        } else {
+            eventType = null;
+        }
     }
 
     /**
@@ -78,6 +88,24 @@ public final class IPNMessageMetaData {
     }
 
     /**
+     * Returns the Notification Type string specified in IPN message
+     *
+     * @return Returns the NotificationType specified in IPN message
+     */
+    public String getNotificationType() {
+        return notificationType;
+    }
+
+    /**
+     * Returns the Event Type string specified in IPN message
+     *
+     * @return Returns the EventType specified in IPN message
+     */
+    public EventType getEventType() {
+        return eventType;
+    }
+
+    /**
      * String representation of IPN Message Metadata
      *
      */
@@ -88,7 +116,10 @@ public final class IPNMessageMetaData {
                 + ", timeStamp=" + timeStamp
                 + ", notificationReferenceId=" + notificationReferenceId
                 + ", sellerId=" + sellerId
-                + ", version=" + version + '}';
+                + ", version=" + version
+                + ", notificationType=" + notificationType
+                + ", eventType=" + eventType
+                + '}';
     }
 
 }

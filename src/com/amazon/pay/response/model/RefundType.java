@@ -26,6 +26,8 @@ public enum RefundType {
     AMAZON_A_Z_REFUND("AmazonA-ZRefund"),
     @XmlEnumValue("AmazonA-ZGuarantee")
     AMAZON_A_Z_GUARANTEE("AmazonA-ZGuarantee"),
+    @XmlEnumValue("AmazonA-ZCancel")
+    AMAZON_A_Z_CANCEL("AmazonA-ZCancel"),
     @XmlEnumValue("SellerInitiated")
     SELLER_INITIATED("SellerInitiated"),
     @XmlEnumValue("Chargeback")

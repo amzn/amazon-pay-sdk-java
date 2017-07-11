@@ -60,18 +60,18 @@ import org.junit.Test;
 
 public class PaymentsAPIResponseTest {
 
-        private String loadTestFile(String fileName) throws UnsupportedEncodingException, IOException {
-        InputStream is = new FileInputStream(System.getProperty("user.dir") +"/tst/com/amazon/pay/response/xml/" + fileName);
+    private String loadTestFile(String fileName) throws UnsupportedEncodingException, IOException {
+        final InputStream is = new FileInputStream(System.getProperty("user.dir") +"/tst/com/amazon/pay/response/xml/" + fileName);
         if (is != null) {
-            Writer writer = new StringWriter();
+            final Writer writer = new StringWriter();
 
-            char[] buffer = new char[1024];
+            final char[] buffer = new char[1024];
             try {
-                Reader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+                final Reader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
                 int n;
                 while ((n = reader.read(buffer)) != -1) {
-                writer.write(buffer, 0, n);
-             }
+                    writer.write(buffer, 0, n);
+                }
             } finally {
                 is.close();
             }
@@ -83,9 +83,9 @@ public class PaymentsAPIResponseTest {
 
     @Test
     public void testGetOrderReferenceDetailsResponse() throws Exception {
-        String rawResponse = loadTestFile("GetOrderReferenceDetailsResponse.xml");
-        ResponseData response = new ResponseData(200, rawResponse);
-        GetOrderReferenceDetailsResponseData res = Parser.getOrderReferenceDetails(response);
+        final String rawResponse = loadTestFile("GetOrderReferenceDetailsResponse.xml");
+        final ResponseData response = new ResponseData(200, rawResponse);
+        final GetOrderReferenceDetailsResponseData res = Parser.getOrderReferenceDetails(response);
         Assert.assertEquals(res.getDetails().getAmazonOrderReferenceId(), "P01-1234567-1234567");
         Assert.assertEquals(res.getDetails().getOrderReferenceStatus().getState(), "Draft");
         Assert.assertEquals(res.getDetails().getDestination().getDestinationType(), "Physical");
@@ -106,9 +106,9 @@ public class PaymentsAPIResponseTest {
 
     @Test
     public void testPaymentDescriptor() throws Exception {
-        String rawResponse = loadTestFile("TestPaymentDescriptor.xml");
-        ResponseData response = new ResponseData(200, rawResponse);
-        GetOrderReferenceDetailsResponseData res = Parser.getOrderReferenceDetails(response);
+        final String rawResponse = loadTestFile("TestPaymentDescriptor.xml");
+        final ResponseData response = new ResponseData(200, rawResponse);
+        final GetOrderReferenceDetailsResponseData res = Parser.getOrderReferenceDetails(response);
         Assert.assertNull(res.getDetails().getPaymentDescriptor().getName());
         Assert.assertNull(res.getDetails().getPaymentDescriptor().getAccountNumberTail());
         Assert.assertEquals(res.getDetails().getPaymentDescriptor().getFullDescriptor() , "Amazon Pay (Visa **11)");
@@ -119,18 +119,18 @@ public class PaymentsAPIResponseTest {
 
     @Test
     public void testNoPaymentDescriptor() throws Exception {
-        String rawResponse = loadTestFile("GetOROwithoutPaymentDescriptor.xml");
-        ResponseData response = new ResponseData(200, rawResponse);
-        GetOrderReferenceDetailsResponseData res = Parser.getOrderReferenceDetails(response);
+        final String rawResponse = loadTestFile("GetOROwithoutPaymentDescriptor.xml");
+        final ResponseData response = new ResponseData(200, rawResponse);
+        final GetOrderReferenceDetailsResponseData res = Parser.getOrderReferenceDetails(response);
         Assert.assertNull(res.getDetails().getPaymentDescriptor());
         Assert.assertEquals(res.toXML(), rawResponse);
     }
 
     @Test
     public void testSanitizedData() throws Exception {
-        String rawResponse = loadTestFile("SanitizedData.xml");
-        ResponseData response = new ResponseData(200, rawResponse);
-        SetOrderReferenceDetailsResponseData res = Parser.setOrderReferenceDetails(response);
+        final String rawResponse = loadTestFile("SanitizedData.xml");
+        final ResponseData response = new ResponseData(200, rawResponse);
+        final SetOrderReferenceDetailsResponseData res = Parser.setOrderReferenceDetails(response);
 
         Assert.assertEquals(res.getDetails().getAmazonOrderReferenceId(), "S01-9821095-0000200");
         Assert.assertEquals(res.getDetails().getOrderReferenceStatus().getState(), "Draft");
@@ -144,22 +144,22 @@ public class PaymentsAPIResponseTest {
 
     @Test
     public void testGetPaymentDetails() throws Exception {
-        GetPaymentDetails testGetAllResponseDetails = new GetPaymentDetails();
-        String rawResponse = loadTestFile("GetOrderReferenceDetailsResponse.xml");
-        ResponseData orderReferenceDetailsResponse = new ResponseData(200, rawResponse);
-        OrderReferenceDetails parsedOrderResponse = Parser.getOrderReferenceDetails(orderReferenceDetailsResponse).getDetails();
+        final GetPaymentDetails testGetAllResponseDetails = new GetPaymentDetails();
+        final String rawResponse = loadTestFile("GetOrderReferenceDetailsResponse.xml");
+        final ResponseData orderReferenceDetailsResponse = new ResponseData(200, rawResponse);
+        final OrderReferenceDetails parsedOrderResponse = Parser.getOrderReferenceDetails(orderReferenceDetailsResponse).getDetails();
 
-        String rawAuthResponse = loadTestFile("GetAuthorizationDetailsResponse.xml");
-        ResponseData authorizeDetailsResponse = new ResponseData(200, rawAuthResponse);
-        AuthorizationDetails parsedAuthorizeResponse = Parser.getAuthorizationDetailsData(authorizeDetailsResponse).getDetails();
+        final String rawAuthResponse = loadTestFile("GetAuthorizationDetailsResponse.xml");
+        final ResponseData authorizeDetailsResponse = new ResponseData(200, rawAuthResponse);
+        final AuthorizationDetails parsedAuthorizeResponse = Parser.getAuthorizationDetailsData(authorizeDetailsResponse).getDetails();
 
-        String rawCaptureResponse = loadTestFile("GetCaptureDetailsResponse.xml");
-        ResponseData captureDetailsResponse = new ResponseData(200, rawCaptureResponse);
-        CaptureDetails parsedCaptureResponse = Parser.getCaptureDetailsData(captureDetailsResponse).getDetails();
+        final String rawCaptureResponse = loadTestFile("GetCaptureDetailsResponse.xml");
+        final ResponseData captureDetailsResponse = new ResponseData(200, rawCaptureResponse);
+        final CaptureDetails parsedCaptureResponse = Parser.getCaptureDetailsData(captureDetailsResponse).getDetails();
 
-        String rawRefundResponse = loadTestFile("GetRefundDetails.xml");
-        ResponseData refundDetailsResponse = new ResponseData(200, rawRefundResponse);
-        RefundDetails parsedRefundResponse = Parser.getRefundDetailsData(refundDetailsResponse).getDetails();
+        final String rawRefundResponse = loadTestFile("GetRefundDetails.xml");
+        final ResponseData refundDetailsResponse = new ResponseData(200, rawRefundResponse);
+        final RefundDetails parsedRefundResponse = Parser.getRefundDetailsData(refundDetailsResponse).getDetails();
 
         testGetAllResponseDetails.putOrderReferenceDetails("P01-1234567-1234567", parsedOrderResponse);
         Assert.assertEquals(testGetAllResponseDetails.getOrderReferenceDetails(), parsedOrderResponse);
@@ -176,9 +176,9 @@ public class PaymentsAPIResponseTest {
 
     @Test
     public void testSetOrderReferenceDetailsResponse() throws Exception {
-        String rawResponse = loadTestFile("SetOrderReferenceDetailsResponse.xml");
-        ResponseData response = new ResponseData(200, rawResponse);
-        SetOrderReferenceDetailsResponseData res = Parser.setOrderReferenceDetails(response);
+        final String rawResponse = loadTestFile("SetOrderReferenceDetailsResponse.xml");
+        final ResponseData response = new ResponseData(200, rawResponse);
+        final SetOrderReferenceDetailsResponseData res = Parser.setOrderReferenceDetails(response);
 
         Assert.assertEquals(res.getDetails().getAmazonOrderReferenceId(), "S01-9821095-0000200");
         Assert.assertEquals(res.getDetails().getOrderReferenceStatus().getState(), "Draft");
@@ -188,7 +188,7 @@ public class PaymentsAPIResponseTest {
         Assert.assertEquals(res.getDetails().getDestination().getPhysicalDestination().getCity(), "Vancouver");
         Assert.assertEquals(res.getDetails().getDestination().getPhysicalDestination().getPostalCode(), "V6C 3B5");
         Assert.assertEquals(res.getDetails().getDestination().getPhysicalDestination().getStateOrRegion(), "BC");
-        XMLGregorianCalendar xgc = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-10-30T20:43:45.183Z");
+        final XMLGregorianCalendar xgc = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-10-30T20:43:45.183Z");
         Assert.assertEquals(res.getDetails().getCreationTimestamp(), xgc);
         Assert.assertEquals(res.getDetails().getSellerNote(), "testing");
         Assert.assertEquals(res.getDetails().getOrderTotal().getAmount(), "500.00");
@@ -198,7 +198,7 @@ public class PaymentsAPIResponseTest {
         Assert.assertEquals(res.getDetails().getSellerOrderAttributes().getCustomInformation(), "myCustomInformation");
 
         Assert.assertEquals(res.getDetails().getPlatformId(), "ANDRCTOTP9");
-        XMLGregorianCalendar xgc2 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2016-04-27T20:43:45.183Z");
+        final XMLGregorianCalendar xgc2 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2016-04-27T20:43:45.183Z");
         Assert.assertEquals(res.getDetails().getExpirationTimestamp(), xgc2);
         Assert.assertEquals(res.getDetails().getOrderLanguage(), null);
         Assert.assertEquals(res.getDetails().getParentDetails(), null);
@@ -211,27 +211,27 @@ public class PaymentsAPIResponseTest {
 
     @Test
     public void testConfirmOrderResponse() throws Exception {
-        String rawResponse = loadTestFile("ConfirmOrderReferenceResponse.xml");
-        ResponseData response = new ResponseData(200, rawResponse);
-        ConfirmOrderReferenceResponseData res = Parser.confirmOrderReference(response);
+        final String rawResponse = loadTestFile("ConfirmOrderReferenceResponse.xml");
+        final ResponseData response = new ResponseData(200, rawResponse);
+        final ConfirmOrderReferenceResponseData res = Parser.confirmOrderReference(response);
         Assert.assertEquals(res.getRequestId(), "f1f52572-a347-4f7a-a630-be066f3ba827");
         Assert.assertEquals(res.toXML(), rawResponse);
     }
 
     @Test
     public void testAuthorizeResponse() throws Exception {
-        String rawResponse = loadTestFile("AuthorizeResponse.xml");
-        ResponseData response = new ResponseData(200, rawResponse);
-        AuthorizeResponseData res = Parser.getAuthorizeData(response);
+        final String rawResponse = loadTestFile("AuthorizeResponse.xml");
+        final ResponseData response = new ResponseData(200, rawResponse);
+        final AuthorizeResponseData res = Parser.getAuthorizeData(response);
         Assert.assertEquals(res.getDetails().getAmazonAuthorizationId(), "S01-9821095-1837200-A041953");
         Assert.assertEquals(res.getDetails().getSoftDescriptor(), "AMZ*testikiki");
         Assert.assertEquals(res.getDetails().getCapturedAmount().getAmount(), "0");
         Assert.assertEquals(res.getDetails().getCapturedAmount().getCurrencyCode(), "USD");
         Assert.assertEquals(res.getDetails().getAuthorizationAmount().getCurrencyCode(), "USD");
         Assert.assertEquals(res.getDetails().getAuthorizationAmount().getAmount(), "1.00");
-        XMLGregorianCalendar xgc = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-10-30T21:02:38.508Z");
+        final XMLGregorianCalendar xgc = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-10-30T21:02:38.508Z");
         Assert.assertEquals(res.getDetails().getCreationTimestamp(), xgc);
-        XMLGregorianCalendar xgc1 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-11-29T21:02:38.508Z");
+        final XMLGregorianCalendar xgc1 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-11-29T21:02:38.508Z");
         Assert.assertEquals(res.getDetails().getExpirationTimestamp(), xgc1);
         Assert.assertEquals(res.getDetails().getAuthorizationStatus().getState(), "Closed");
         Assert.assertEquals(res.getDetails().getAuthorizationStatus().getReasonCode(), "MaxCapturesProcessed");
@@ -240,7 +240,7 @@ public class PaymentsAPIResponseTest {
         Assert.assertEquals(res.getDetails().getAuthorizationFee().getCurrencyCode(), "USD");
         Assert.assertEquals(res.getDetails().isCaptureNow(), true);
         Assert.assertEquals(res.getDetails().getIdList().getMember().get(0), "S01-9821095-1837200-C041953");
-        XMLGregorianCalendar xgc2 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-10-30T21:02:38.508Z");
+        final XMLGregorianCalendar xgc2 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-10-30T21:02:38.508Z");
         Assert.assertEquals(res.getDetails().getAuthorizationStatus().getLastUpdateTimestamp(), xgc2);
         Assert.assertEquals(res.getDetails().getAuthorizationReferenceId(), "asdcdsd5iiiii");
         Assert.assertEquals(res.getDetails().getSellerAuthorizationNote(), "testing");
@@ -253,18 +253,18 @@ public class PaymentsAPIResponseTest {
 
     @Test
     public void testAuthorizationDetailsResponse() throws Exception {
-        String rawResponse = loadTestFile("GetAuthorizationDetailsResponse.xml");
-        ResponseData response = new ResponseData(200, rawResponse);
-        GetAuthorizationDetailsResponseData res = Parser.getAuthorizationDetailsData(response);
+        final String rawResponse = loadTestFile("GetAuthorizationDetailsResponse.xml");
+        final ResponseData response = new ResponseData(200, rawResponse);
+        final GetAuthorizationDetailsResponseData res = Parser.getAuthorizationDetailsData(response);
         Assert.assertEquals(res.getDetails().getAmazonAuthorizationId(), "S01-9821095-1837200-A041953");
         Assert.assertEquals(res.getDetails().getSoftDescriptor(), "AMZ*testikiki");
         Assert.assertEquals(res.getDetails().getCapturedAmount().getAmount(), "1.00");
         Assert.assertEquals(res.getDetails().getCapturedAmount().getCurrencyCode(), "USD");
         Assert.assertEquals(res.getDetails().getAuthorizationAmount().getCurrencyCode(), "USD");
         Assert.assertEquals(res.getDetails().getAuthorizationAmount().getAmount(), "1.00");
-        XMLGregorianCalendar xgc = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-10-30T21:02:38.508Z");
+        final XMLGregorianCalendar xgc = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-10-30T21:02:38.508Z");
         Assert.assertEquals(res.getDetails().getCreationTimestamp(), xgc);
-        XMLGregorianCalendar xgc1 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-11-29T21:02:38.508Z");
+        final XMLGregorianCalendar xgc1 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-11-29T21:02:38.508Z");
         Assert.assertEquals(res.getDetails().getExpirationTimestamp(), xgc1);
         Assert.assertEquals(res.getDetails().getAuthorizationStatus().getState(), "Closed");
         Assert.assertEquals(res.getDetails().getAuthorizationStatus().getReasonCode(), "MaxCapturesProcessed");
@@ -273,7 +273,7 @@ public class PaymentsAPIResponseTest {
         Assert.assertEquals(res.getDetails().getAuthorizationFee().getCurrencyCode(), "USD");
         Assert.assertEquals(res.getDetails().isCaptureNow(), true);
         Assert.assertEquals(res.getDetails().getIdList().getMember().get(0), "S01-9821095-1837200-C041953");
-        XMLGregorianCalendar xgc2 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-10-30T21:02:38.508Z");
+        final XMLGregorianCalendar xgc2 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-10-30T21:02:38.508Z");
         Assert.assertEquals(res.getDetails().getAuthorizationStatus().getLastUpdateTimestamp(), xgc2);
         Assert.assertEquals(res.getDetails().getAuthorizationReferenceId(), "asdcdsd5iiiii");
         Assert.assertEquals(res.getDetails().getSellerAuthorizationNote(), "testing");
@@ -284,9 +284,9 @@ public class PaymentsAPIResponseTest {
 
     @Test
     public void testCaptureResponse() throws Exception {
-        String rawResponse = loadTestFile("CaptureResponse.xml");
-        ResponseData response = new ResponseData(200, rawResponse);
-        CaptureResponseData res = Parser.getCapture(response);
+        final String rawResponse = loadTestFile("CaptureResponse.xml");
+        final ResponseData response = new ResponseData(200, rawResponse);
+        final CaptureResponseData res = Parser.getCapture(response);
         Assert.assertEquals(res.getDetails().getAmazonCaptureId(), "S01-9821095-1837200-C053432");
         Assert.assertEquals(res.getDetails().getCaptureAmount().getAmount(), "1.00");
         Assert.assertEquals(res.getDetails().getCaptureAmount().getCurrencyCode(), "USD");
@@ -298,9 +298,9 @@ public class PaymentsAPIResponseTest {
         Assert.assertEquals(res.getDetails().getCaptureStatus().getState(), "Completed");
         Assert.assertEquals(res.getDetails().getRefundedAmount().getAmount(), "0");
         Assert.assertEquals(res.getDetails().getRefundedAmount().getCurrencyCode(), "USD");
-        XMLGregorianCalendar xgc = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-10-30T21:47:10.797Z");
+        final XMLGregorianCalendar xgc = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-10-30T21:47:10.797Z");
         Assert.assertEquals(res.getDetails().getCreationTimestamp(), xgc);
-        XMLGregorianCalendar xgc2 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-10-30T21:47:10.797Z");
+        final XMLGregorianCalendar xgc2 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-10-30T21:47:10.797Z");
         Assert.assertEquals(res.getDetails().getCaptureStatus().getLastUpdateTimestamp(), xgc2);
         Assert.assertEquals(res.getRequestId(), "1ec2813f-3d33-4b3a-a198-a25cd608310d");
         Assert.assertEquals(res.toXML(), rawResponse);
@@ -308,13 +308,13 @@ public class PaymentsAPIResponseTest {
 
     @Test
     public void testCaptureDetailsResponse() throws Exception {
-        String rawResponse = loadTestFile("GetCaptureDetailsResponse.xml");
-        ResponseData response = new ResponseData(200, rawResponse);
-        GetCaptureDetailsResponseData res = Parser.getCaptureDetailsData(response);
+        final String rawResponse = loadTestFile("GetCaptureDetailsResponse.xml");
+        final ResponseData response = new ResponseData(200, rawResponse);
+        final GetCaptureDetailsResponseData res = Parser.getCaptureDetailsData(response);
         Assert.assertEquals(res.getDetails().getAmazonCaptureId(), "S01-9821095-1837200-C041953");
         Assert.assertEquals(res.getDetails().getCaptureAmount().getAmount(), "1.00");
-        Assert.assertEquals(res.getDetails().getCaptureReferenceId(), "asdcdsd5iiiii");
         Assert.assertEquals(res.getDetails().getCaptureAmount().getCurrencyCode(), "USD");
+        Assert.assertEquals(res.getDetails().getCaptureReferenceId(), "asdcdsd5iiiii");
         Assert.assertEquals(res.getDetails().getCaptureFee().getAmount(), "0.00");
         Assert.assertEquals(res.getDetails().getCaptureFee().getCurrencyCode(), "USD");
         Assert.assertEquals(res.getDetails().getSoftDescriptor(), "AMZ*testikiki");
@@ -323,46 +323,77 @@ public class PaymentsAPIResponseTest {
         Assert.assertEquals(res.getDetails().getCaptureStatus().getState(), "Completed");
         Assert.assertEquals(res.getDetails().getRefundedAmount().getAmount(), "0");
         Assert.assertEquals(res.getDetails().getRefundedAmount().getCurrencyCode(), "USD");
-        XMLGregorianCalendar xgc = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-10-30T21:02:38.608Z");
+        final XMLGregorianCalendar xgc = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-10-30T21:02:38.608Z");
         Assert.assertEquals(res.getDetails().getCreationTimestamp(), xgc);
-        XMLGregorianCalendar xgc2 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-10-30T21:02:38.608Z");
+        final XMLGregorianCalendar xgc2 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-10-30T21:02:38.608Z");
         Assert.assertEquals(res.getDetails().getCaptureStatus().getLastUpdateTimestamp(), xgc2);
         Assert.assertEquals(res.getRequestId(), "21acf393-d625-497e-b2c0-d1dc0b0d2bb6");
         Assert.assertEquals(res.toXML(), rawResponse);
     }
 
+    @Test
+    public void testCaptureDetailsResponseMulticurrency() throws Exception {
+        final String rawResponse = loadTestFile("GetCaptureDetailsResponse_Multicurrency.xml");
+        final ResponseData response = new ResponseData(200, rawResponse);
+        final GetCaptureDetailsResponseData res = Parser.getCaptureDetailsData(response);
+        Assert.assertEquals(res.getDetails().getAmazonCaptureId(), "S02-7423235-4925359-C052508");
+        Assert.assertEquals(res.getDetails().getCaptureAmount().getAmount(), "0.99");
+        Assert.assertEquals(res.getDetails().getCaptureAmount().getCurrencyCode(), "CHF");
+        Assert.assertEquals(res.getDetails().getCaptureReferenceId(), "7a087b12a3cb4d0ba3cb4230aa953de4");
+        Assert.assertEquals(res.getDetails().getCaptureFee().getAmount(), "0.00");
+        Assert.assertEquals(res.getDetails().getCaptureFee().getCurrencyCode(), "EUR");
+        Assert.assertEquals(res.getDetails().getSoftDescriptor(), "AMZ*Matt's Test Stor");
+        Assert.assertEquals(res.getDetails().getIdList().getMember(), new ArrayList());
+        Assert.assertEquals(res.getDetails().getSellerCaptureNote(), "");
+        Assert.assertEquals(res.getDetails().getCaptureStatus().getState(), "Completed");
+        Assert.assertEquals(res.getDetails().getRefundedAmount().getAmount(), "0");
+        Assert.assertEquals(res.getDetails().getRefundedAmount().getCurrencyCode(), "CHF");
+        final XMLGregorianCalendar xgc = DatatypeFactory.newInstance().newXMLGregorianCalendar("2017-06-27T22:07:18.931Z");
+        Assert.assertEquals(res.getDetails().getCreationTimestamp(), xgc);
+        final XMLGregorianCalendar xgc2 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2017-06-27T22:07:18.999Z");
+        Assert.assertEquals(res.getDetails().getCaptureStatus().getLastUpdateTimestamp(), xgc2);
+        Assert.assertEquals(res.getRequestId(), "a17ee562-9a97-4b22-8487-20e8e7230639");
+
+        // The three new multi-currency specific fields
+        Assert.assertEquals(res.getDetails().getConvertedAmount().getAmount(), "0.88");
+        Assert.assertEquals(res.getDetails().getConvertedAmount().getCurrencyCode(), "EUR");
+        Assert.assertEquals(res.getDetails().getConversionRate(), "1.1297854087");
+
+        Assert.assertEquals(res.toXML(), rawResponse);
+    }
+
    @Test
     public void testCancelOrderReferenceResponse() throws Exception {
-        String rawResponse = loadTestFile("CancelOrderReferenceResponse.xml");
-        ResponseData response = new ResponseData(200, rawResponse);
-        CancelOrderReferenceResponseData res = Parser.getCancelOrderReference(response);
+        final String rawResponse = loadTestFile("CancelOrderReferenceResponse.xml");
+        final ResponseData response = new ResponseData(200, rawResponse);
+        final CancelOrderReferenceResponseData res = Parser.getCancelOrderReference(response);
         Assert.assertEquals(res.getRequestId(), "0714c2dd-c3fa-45af-afc7-b48055cfd7bf");
         Assert.assertEquals(res.toXML(), rawResponse);
     }
 
    @Test
     public void testCloseOrderReferenceResponse() throws Exception {
-        String rawResponse = loadTestFile("CloseOrderReferenceResponse.xml");
-        ResponseData response = new ResponseData(200, rawResponse);
-        CloseOrderReferenceResponseData res = Parser.getCloseOrderReference(response);
+        final String rawResponse = loadTestFile("CloseOrderReferenceResponse.xml");
+        final ResponseData response = new ResponseData(200, rawResponse);
+        final CloseOrderReferenceResponseData res = Parser.getCloseOrderReference(response);
         Assert.assertEquals(res.getRequestId(), "5f20169b-7ab2-11df-bcef-d35615e2b044");
         Assert.assertEquals(res.toXML(), rawResponse);
     }
 
    @Test
     public void testCloseAuthorizationResponse() throws Exception {
-        String rawResponse = loadTestFile("CloseAuthorizationResponse.xml");
-        ResponseData response = new ResponseData(200, rawResponse);
-        CloseAuthorizationResponseData res = Parser.closeAuthorizationResponse(response);
+        final String rawResponse = loadTestFile("CloseAuthorizationResponse.xml");
+        final ResponseData response = new ResponseData(200, rawResponse);
+        final CloseAuthorizationResponseData res = Parser.closeAuthorizationResponse(response);
         Assert.assertEquals(res.getRequestId(), "3e130e5b-41ae-41fd-b307-dbbf45663d79");
         Assert.assertEquals(res.toXML(), rawResponse);
     }
 
     @Test
     public void testReverseProviderCreditResponse() throws Exception {
-        String rawResponse = loadTestFile("ReverseProviderCreditResponse.xml");
-        ResponseData response = new ResponseData(200, rawResponse);
-        ReverseProviderCreditResponseData res = Parser.getReverseProviderCreditResponseData(response);
+        final String rawResponse = loadTestFile("ReverseProviderCreditResponse.xml");
+        final ResponseData response = new ResponseData(200, rawResponse);
+        final ReverseProviderCreditResponseData res = Parser.getReverseProviderCreditResponseData(response);
 
         Assert.assertEquals(res.getDetails().getAmazonProviderCreditReversalId(), "S01-0458164-4040121-Q021623");
         Assert.assertEquals(res.getDetails().getCreditReversalAmount().getAmount(), "0.50");
@@ -372,10 +403,10 @@ public class PaymentsAPIResponseTest {
         Assert.assertEquals(res.getDetails().getProviderId(), "TEST_PROVIDER_ID");
         Assert.assertEquals(res.getDetails().getSellerId(), "TEST_SELLER_ID");
         Assert.assertEquals(res.getDetails().getCreditReversalStatus().getState(), "Completed");
-        XMLGregorianCalendar xgc1 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-11-03T19:21:09.762Z");
+        final XMLGregorianCalendar xgc1 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-11-03T19:21:09.762Z");
         Assert.assertEquals(res.getDetails().getCreditReversalStatus().getLastUpdateTimestamp(), xgc1);
 
-        XMLGregorianCalendar xgc = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-11-03T19:21:09.638Z");
+        final XMLGregorianCalendar xgc = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-11-03T19:21:09.638Z");
         Assert.assertEquals(res.getDetails().getCreationTimestamp(), xgc);
 
         Assert.assertEquals(res.getRequestId(), "a7e0af53-ee4e-4557-a190-265cae27407d");
@@ -384,9 +415,9 @@ public class PaymentsAPIResponseTest {
 
     @Test
     public void testGetProviderCreditReversalDetailsResponse() throws Exception {
-        String rawResponse = loadTestFile("GetProviderCreditReversalDetailsResponse.xml");
-        ResponseData response = new ResponseData(200, rawResponse);
-        GetProviderCreditReversalDetailsResponseData res = Parser.getProviderCreditReversalDetails(response);
+        final String rawResponse = loadTestFile("GetProviderCreditReversalDetailsResponse.xml");
+        final ResponseData response = new ResponseData(200, rawResponse);
+        final GetProviderCreditReversalDetailsResponseData res = Parser.getProviderCreditReversalDetails(response);
         Assert.assertEquals(res.getDetails().getAmazonProviderCreditReversalId(), "S01-2117025-2155793-P045170");
         Assert.assertEquals(res.getDetails().getCreditReversalAmount().getAmount(), "1.00");
         Assert.assertEquals(res.getDetails().getCreditReversalAmount().getCurrencyCode(), "USD");
@@ -397,7 +428,7 @@ public class PaymentsAPIResponseTest {
         Assert.assertEquals(res.getDetails().getCreditReversalStatus().getState(), "Closed");
         Assert.assertEquals(res.getDetails().getCreditReversalStatus().getReasonCode(), "MaxAmountReversed");
 
-        XMLGregorianCalendar xgc = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-10-23T00:30:42.996Z");
+        final XMLGregorianCalendar xgc = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-10-23T00:30:42.996Z");
         Assert.assertEquals(res.getDetails().getCreationTimestamp(), xgc);
 
         Assert.assertEquals(res.getRequestId(), "10a7736b-bb9b-447c-9be1-4f5e76166e48");
@@ -441,9 +472,9 @@ public class PaymentsAPIResponseTest {
 
     @Test
     public void testGetBillingAgreementDetailsResponse() throws Exception {
-        String rawResponse = loadTestFile("GetBillingAgreementDetailsResponse.xml");
-        ResponseData response = new ResponseData(200, rawResponse);
-        GetBillingAgreementDetailsResponseData res = Parser.getBillingAgreementDetailsData(response);
+        final String rawResponse = loadTestFile("GetBillingAgreementDetailsResponse.xml");
+        final ResponseData response = new ResponseData(200, rawResponse);
+        final GetBillingAgreementDetailsResponseData res = Parser.getBillingAgreementDetailsData(response);
         Assert.assertEquals(res.getDetails().getAmazonBillingAgreementId(), "C01-3925266-2250830");
         Assert.assertEquals(res.getDetails().getBillingAgreementStatus().getLastUpdatedTimestamp(), null);
         Assert.assertEquals(res.getDetails().getBillingAgreementStatus().getState(), "Draft");
@@ -463,15 +494,15 @@ public class PaymentsAPIResponseTest {
         Assert.assertEquals(res.getDetails().getBuyer().getName(), "Test Buyer");
         Assert.assertEquals(res.getDetails().getBuyer().getEmail(), "testbuyer2@amazon.com");
         Assert.assertEquals(res.getDetails().getReleaseEnvironment().SANDBOX, Environment.SANDBOX);
-        XMLGregorianCalendar xgc3 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-11-02T17:36:30.173Z");
+        final XMLGregorianCalendar xgc3 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-11-02T17:36:30.173Z");
         Assert.assertEquals(res.getDetails().getCreationTimestamp(), xgc3);
         Assert.assertEquals(res.getDetails().getBillingAgreementLimits().getAmountLimitPerTimePeriod().getAmount(), "500");
         Assert.assertEquals(res.getDetails().getBillingAgreementLimits().getAmountLimitPerTimePeriod().getCurrencyCode(), "USD");
         Assert.assertEquals(res.getDetails().getBillingAgreementLimits().getCurrentRemainingBalance().getAmount(), "500.00");
         Assert.assertEquals(res.getDetails().getBillingAgreementLimits().getCurrentRemainingBalance().getCurrencyCode(), "USD");
-        XMLGregorianCalendar xgc2 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-12-01T00:00:00Z");
+        final XMLGregorianCalendar xgc2 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-12-01T00:00:00Z");
         Assert.assertEquals(res.getDetails().getBillingAgreementLimits().getTimePeriodEndDate(), xgc2);
-        XMLGregorianCalendar xgc4 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-11-01T00:00:00Z");
+        final XMLGregorianCalendar xgc4 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-11-01T00:00:00Z");
         Assert.assertEquals(res.getDetails().getBillingAgreementLimits().getTimePeriodStartDate(), xgc4);
         Assert.assertEquals(res.getDetails().getOrderLanguage(), null);
         Assert.assertEquals(res.getDetails().isBillingAgreementConsent(), false);
@@ -489,9 +520,9 @@ public class PaymentsAPIResponseTest {
 
     @Test
     public void testSetBillingAgreementDetailsResponse() throws Exception {
-        String rawResponse = loadTestFile("SetBillingAgreementDetailsResponse.xml");
-        ResponseData response = new ResponseData(200, rawResponse);
-        SetBillingAgreementDetailsResponseData res = Parser.getSetBillingAgreementDetailsResponse(response);
+        final String rawResponse = loadTestFile("SetBillingAgreementDetailsResponse.xml");
+        final ResponseData response = new ResponseData(200, rawResponse);
+        final SetBillingAgreementDetailsResponseData res = Parser.getSetBillingAgreementDetailsResponse(response);
         Assert.assertEquals(res.getDetails().getAmazonBillingAgreementId(), "C01-3925266-2250830");
         Assert.assertEquals(res.getDetails().getBillingAgreementStatus().getLastUpdatedTimestamp(), null);
         Assert.assertEquals(res.getDetails().getBillingAgreementStatus().getState(), "Draft");
@@ -504,15 +535,15 @@ public class PaymentsAPIResponseTest {
         Assert.assertEquals(res.getDetails().getConstraints().getConstraint().get(0).getConstraintID(), "BuyerConsentNotSet");
         Assert.assertEquals(res.getDetails().getConstraints().getConstraint().get(0).getDescription(), "The buyer has not given consent for this billing agreement.");
         Assert.assertEquals(res.getDetails().getReleaseEnvironment().SANDBOX, Environment.SANDBOX);
-        XMLGregorianCalendar xgc3 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-11-02T17:36:30.173Z");
+        final XMLGregorianCalendar xgc3 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-11-02T17:36:30.173Z");
         Assert.assertEquals(res.getDetails().getCreationTimestamp(), xgc3);
         Assert.assertEquals(res.getDetails().getBillingAgreementLimits().getAmountLimitPerTimePeriod().getAmount(), "500");
         Assert.assertEquals(res.getDetails().getBillingAgreementLimits().getAmountLimitPerTimePeriod().getCurrencyCode(), "USD");
         Assert.assertEquals(res.getDetails().getBillingAgreementLimits().getCurrentRemainingBalance().getAmount(), "500.00");
         Assert.assertEquals(res.getDetails().getBillingAgreementLimits().getCurrentRemainingBalance().getCurrencyCode(), "USD");
-        XMLGregorianCalendar xgc2 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-12-01T00:00:00Z");
+        final XMLGregorianCalendar xgc2 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-12-01T00:00:00Z");
         Assert.assertEquals(res.getDetails().getBillingAgreementLimits().getTimePeriodEndDate(), xgc2);
-        XMLGregorianCalendar xgc4 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-11-01T00:00:00Z");
+        final XMLGregorianCalendar xgc4 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-11-01T00:00:00Z");
         Assert.assertEquals(res.getDetails().getBillingAgreementLimits().getTimePeriodStartDate(), xgc4);
         Assert.assertEquals(res.getRequestId(), "a01ae213-296b-4c33-bb92-0c4ad4192787");
         Assert.assertEquals(res.toXML(), rawResponse);
@@ -520,21 +551,21 @@ public class PaymentsAPIResponseTest {
 
     @Test
     public void testConfirmBillingAgreementDetailsResponse() throws Exception {
-        String rawResponse = loadTestFile("ConfirmBillingAgreementResponse.xml");
-        ResponseData response = new ResponseData(200, rawResponse);
-        ConfirmBillingAgreementResponseData res = Parser.confirmBillingAgreementResponse(response);
+        final String rawResponse = loadTestFile("ConfirmBillingAgreementResponse.xml");
+        final ResponseData response = new ResponseData(200, rawResponse);
+        final ConfirmBillingAgreementResponseData res = Parser.confirmBillingAgreementResponse(response);
         Assert.assertEquals(res.getRequestId(), "3d1db999-b790-47bb-87d3-9c673c38a1ed");
         Assert.assertEquals(res.toXML(), rawResponse);
     }
 
     @Test
     public void testValidateBillingAgreementResponse() throws Exception {
-        String rawResponse = loadTestFile("ValidateBillingAgreementResponse.xml");
-        ResponseData response = new ResponseData(200, rawResponse);
-        ValidateBillingAgreementResponseData res = Parser.getValidateBillingAgreementResponse(response);
+        final String rawResponse = loadTestFile("ValidateBillingAgreementResponse.xml");
+        final ResponseData response = new ResponseData(200, rawResponse);
+        final ValidateBillingAgreementResponseData res = Parser.getValidateBillingAgreementResponse(response);
         Assert.assertEquals(RequestStatus.SUCCESS, res.getResult().getValidationResult());
         Assert.assertEquals("Open", res.getResult().getBillingAgreementStatus().getState());
-        XMLGregorianCalendar xgc = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-11-02T17:38:29.511Z");
+        final XMLGregorianCalendar xgc = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-11-02T17:38:29.511Z");
         Assert.assertEquals(xgc, res.getResult().getBillingAgreementStatus().getLastUpdatedTimestamp());
         Assert.assertEquals(res.getRequestId(), "0f48a4e0-2a7c-4036-9a8a-339e419fd53f");
         Assert.assertEquals(res.toXML(), rawResponse);
@@ -542,18 +573,18 @@ public class PaymentsAPIResponseTest {
 
     @Test
     public void testAuthorizeOnBillingAgreementResponse() throws Exception {
-        String rawResponse = loadTestFile("AuthorizeOnBillingAgreementResponse.xml");
-        ResponseData response = new ResponseData(200, rawResponse);
-        AuthorizeOnBillingAgreementResponseData res = Parser.getAuthorizeOnBillingAgreement(response);
+        final String rawResponse = loadTestFile("AuthorizeOnBillingAgreementResponse.xml");
+        final ResponseData response = new ResponseData(200, rawResponse);
+        final AuthorizeOnBillingAgreementResponseData res = Parser.getAuthorizeOnBillingAgreement(response);
         Assert.assertEquals(res.getDetails().getAuthorizationAmount().getAmount(), "1.00");
         Assert.assertEquals(res.getDetails().getAuthorizationAmount().getCurrencyCode(), "USD");
         Assert.assertEquals(res.getDetails().getCapturedAmount().getAmount(), "0");
         Assert.assertEquals(res.getDetails().getCapturedAmount().getCurrencyCode(), "USD");
         Assert.assertEquals(res.getDetails().getSoftDescriptor(), "AMZ*AMZN*test");
-        XMLGregorianCalendar xgc = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-12-02T17:39:58.272Z");
+        final XMLGregorianCalendar xgc = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-12-02T17:39:58.272Z");
         Assert.assertEquals(res.getDetails().getExpirationTimestamp(), xgc);
         Assert.assertEquals(res.getDetails().getIdList().getMember().get(0), "S01-7347515-9699585-C012416");
-        XMLGregorianCalendar xgc2 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-11-02T17:39:58.272Z");
+        final XMLGregorianCalendar xgc2 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-11-02T17:39:58.272Z");
         Assert.assertEquals(res.getDetails().getAuthorizationStatus().getLastUpdateTimestamp(), xgc2);
         Assert.assertEquals(res.getDetails().getAuthorizationStatus().getState(), "Closed");
         Assert.assertEquals(res.getDetails().getAuthorizationStatus().getReasonCode(), "MaxCapturesProcessed");
@@ -561,7 +592,7 @@ public class PaymentsAPIResponseTest {
         Assert.assertEquals(res.getDetails().getAuthorizationFee().getAmount(), "0.00");
         Assert.assertEquals(res.getDetails().getAuthorizationFee().getCurrencyCode(), "USD");
         Assert.assertEquals(res.getDetails().isCaptureNow(), true);
-        XMLGregorianCalendar xgc3 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-12-02T17:39:58.272Z");
+        final XMLGregorianCalendar xgc3 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-12-02T17:39:58.272Z");
         Assert.assertEquals(res.getDetails().getExpirationTimestamp(), xgc3);
         Assert.assertEquals(res.getDetails().getSellerAuthorizationNote(), "testing");
         Assert.assertEquals(res.getDetails().getAmazonAuthorizationId(), "S01-7347515-9699585-A012416");
@@ -572,18 +603,18 @@ public class PaymentsAPIResponseTest {
 
     @Test
     public void testCloseBillingAgreementResponse() throws Exception {
-        String rawResponse = loadTestFile("CloseBillingAgreementResponse.xml");
-        ResponseData response = new ResponseData(200, rawResponse);
-        CloseBillingAgreementResponseData res = Parser.closeBillingAgreementResponse(response);
+        final String rawResponse = loadTestFile("CloseBillingAgreementResponse.xml");
+        final ResponseData response = new ResponseData(200, rawResponse);
+        final CloseBillingAgreementResponseData res = Parser.closeBillingAgreementResponse(response);
         Assert.assertEquals(res.getRequestId(), "7541230f-e349-4180-a4ac-ba9f2cf6ac79");
         Assert.assertEquals(res.toXML(), rawResponse);
     }
 
     @Test
     public void testRefundResponse() throws Exception {
-        String rawResponse = loadTestFile("RefundResponse.xml");
-        ResponseData response = new ResponseData(200, rawResponse);
-        RefundResponseData res = Parser.getRefundData(response);
+        final String rawResponse = loadTestFile("RefundResponse.xml");
+        final ResponseData response = new ResponseData(200, rawResponse);
+        final RefundResponseData res = Parser.getRefundData(response);
         Assert.assertEquals(res.getDetails().getRefundReferenceId(), "testRefundId1354077");
         Assert.assertEquals(res.getDetails().getAmazonRefundId(), "S01-5695290-1354077-R072290");
         Assert.assertEquals(res.getDetails().getRefundType().SELLER_INITIATED, RefundType.SELLER_INITIATED);
@@ -592,7 +623,7 @@ public class PaymentsAPIResponseTest {
         Assert.assertEquals(res.getDetails().getRefundStatus().getState(), "Pending");
         Assert.assertEquals(res.getDetails().getRefundStatus().getReasonCode(), null);
         Assert.assertEquals(res.getDetails().getRefundStatus().getReasonDescription(), null);
-        XMLGregorianCalendar xgc = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-11-02T21:18:17.751Z");
+        final XMLGregorianCalendar xgc = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-11-02T21:18:17.751Z");
         Assert.assertEquals(res.getDetails().getRefundStatus().getLastUpdateTimestamp(), xgc);
         Assert.assertEquals(res.getDetails().getSoftDescriptor(), "AMZ*test");
         Assert.assertEquals(res.getDetails().getSellerRefundNote(), "testing");
@@ -605,24 +636,57 @@ public class PaymentsAPIResponseTest {
 
     @Test
     public void testGetRefundDetailsResponse() throws Exception {
-        String rawResponse = loadTestFile("GetRefundDetails.xml");
-        ResponseData response = new ResponseData(200, rawResponse);
-        GetRefundDetailsResponseData res = Parser.getRefundDetailsData(response);
+        final String rawResponse = loadTestFile("GetRefundDetails.xml");
+        final ResponseData response = new ResponseData(200, rawResponse);
+        final GetRefundDetailsResponseData res = Parser.getRefundDetailsData(response);
         Assert.assertEquals(res.getDetails().getRefundReferenceId(), "testRefundId1354077");
         Assert.assertEquals(res.getDetails().getAmazonRefundId(), "S01-5695290-1354077-R072290");
         Assert.assertEquals(res.getDetails().getRefundType().SELLER_INITIATED, RefundType.SELLER_INITIATED);
+        Assert.assertEquals(res.getDetails().getRefundAmount().getAmount(), "0.50");
+        Assert.assertEquals(res.getDetails().getRefundAmount().getCurrencyCode(), "USD");
         Assert.assertEquals(res.getDetails().getFeeRefunded().getAmount(), "0.00");
         Assert.assertEquals(res.getDetails().getFeeRefunded().getCurrencyCode(), "USD");
         Assert.assertEquals(res.getDetails().getRefundStatus().getState(), "Completed");
         Assert.assertEquals(res.getDetails().getRefundStatus().getReasonCode(), null);
         Assert.assertEquals(res.getDetails().getRefundStatus().getReasonDescription(), null);
-        XMLGregorianCalendar xgc = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-11-02T21:18:48.932Z");
+        final XMLGregorianCalendar xgc = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-11-02T21:18:48.932Z");
         Assert.assertEquals(res.getDetails().getRefundStatus().getLastUpdateTimestamp(), xgc);
-        XMLGregorianCalendar xgc2 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-11-02T21:18:17.751Z");
+        final XMLGregorianCalendar xgc2 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-11-02T21:18:17.751Z");
         Assert.assertEquals(res.getDetails().getCreationTimestamp(), xgc2);
         Assert.assertEquals(res.getDetails().getProviderCreditReversalSummaryList(), null);
 
         Assert.assertEquals(res.getRequestId(), "98cdadd5-8b44-4757-8e4f-351f39af7fcf");
+        Assert.assertEquals(res.toXML(), rawResponse);
+    }
+
+    @Test
+    public void testGetRefundDetailsResponseMulticurrency() throws Exception {
+        final String rawResponse = loadTestFile("GetRefundDetails_Multicurrency.xml");
+        final ResponseData response = new ResponseData(200, rawResponse);
+        final GetRefundDetailsResponseData res = Parser.getRefundDetailsData(response);
+        Assert.assertEquals(res.getDetails().getRefundReferenceId(), "aed9ba8bee564c8cb943bd6481633ad1");
+        Assert.assertEquals(res.getDetails().getAmazonRefundId(), "S02-8274313-3487267-R019346");
+        Assert.assertEquals(res.getDetails().getRefundType().SELLER_INITIATED, RefundType.SELLER_INITIATED);
+        Assert.assertEquals(res.getDetails().getRefundAmount().getAmount(), "0.33");
+        Assert.assertEquals(res.getDetails().getRefundAmount().getCurrencyCode(), "NOK");
+        Assert.assertEquals(res.getDetails().getFeeRefunded().getAmount(), "0.00");
+        Assert.assertEquals(res.getDetails().getFeeRefunded().getCurrencyCode(), "EUR");
+        Assert.assertEquals(res.getDetails().getRefundStatus().getState(), "Completed");
+        Assert.assertEquals(res.getDetails().getRefundStatus().getReasonCode(), null);
+        Assert.assertEquals(res.getDetails().getRefundStatus().getReasonDescription(), null);
+        final XMLGregorianCalendar xgc = DatatypeFactory.newInstance().newXMLGregorianCalendar("2017-06-28T18:15:07.659Z");
+        Assert.assertEquals(res.getDetails().getRefundStatus().getLastUpdateTimestamp(), xgc);
+        final XMLGregorianCalendar xgc2 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2017-06-28T18:14:34.752Z");
+        Assert.assertEquals(res.getDetails().getCreationTimestamp(), xgc2);
+        Assert.assertEquals(res.getDetails().getProviderCreditReversalSummaryList(), null);
+	Assert.assertEquals(res.getDetails().getSoftDescriptor(), "AMZ*Matt's Test Stor");
+
+        // The three new multi-currency specific fields
+        Assert.assertEquals(res.getDetails().getConvertedAmount().getAmount(), "0.03");
+        Assert.assertEquals(res.getDetails().getConvertedAmount().getCurrencyCode(), "EUR");
+        Assert.assertEquals(res.getDetails().getConversionRate(), "9.9248293483");
+
+        Assert.assertEquals(res.getRequestId(), "3b14705b-0a11-4b05-98d3-eb62c9bf1d22");
         Assert.assertEquals(res.toXML(), rawResponse);
     }
 
@@ -713,7 +777,7 @@ public class PaymentsAPIResponseTest {
 
 
     @Test
-    // This test purposes causes an Exception by trying tp parse results of a
+    // This test purposefully causes an Exception by trying to parse results of a
     // GetAuthorizationDetails API call with the RefundDetails parser.
     // It's essentially just confirming we end up in the catch block.
     // I'm adding this comment in case you turn on the special event handler
@@ -723,10 +787,10 @@ public class PaymentsAPIResponseTest {
     // Expected elements are <{http://mws.amazonservices.com/schema/OffAmazonPayments/2013-01-01}GetRefundDetailsResponse>,
     // <{http://mws.amazonservices.com/schema/OffAmazonPayments/2013-01-01}GetRefundDetailsResult>,<{http://mws.amazonservices.com/schema/OffAmazonPayments/2013-01-01}ResponseMetadata>
     public void testJAXBExceptionResponse() throws Exception {
-        String rawResponse = loadTestFile("GetAuthorizationDetailsResponse.xml");
-        ResponseData response = new ResponseData(200, rawResponse);
+        final String rawResponse = loadTestFile("GetAuthorizationDetailsResponse.xml");
+        final ResponseData response = new ResponseData(200, rawResponse);
         try {
-            GetRefundDetailsResponseData res = Parser.getRefundDetailsData(response);
+            final GetRefundDetailsResponseData res = Parser.getRefundDetailsData(response);
             Assert.fail();
         } catch (AmazonClientException e) {
             Assert.assertEquals(e.getResponseXml(), rawResponse);
@@ -737,8 +801,8 @@ public class PaymentsAPIResponseTest {
     @Test
     public void testErrorResponse() throws Exception {
 
-        String rawResponse = loadTestFile("ErrorResponse.xml");
-        ResponseData response = new ResponseData(404, rawResponse);
+        final String rawResponse = loadTestFile("ErrorResponse.xml");
+        final ResponseData response = new ResponseData(404, rawResponse);
         try {
             Parser.marshalXML(ErrorResponse.class, response);
             Assert.fail();
@@ -753,3 +817,4 @@ public class PaymentsAPIResponseTest {
         }
     }
 }
+

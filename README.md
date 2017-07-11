@@ -154,7 +154,7 @@ CaptureResponseData response = client.capture(request);
 
 // Close the order reference once your one time
 // transaction is complete.
-client.closeOrderReference("AMAZON_ORDER_REFERENCE_ID");
+client.closeOrderReference(new CloseOrderReferenceRequest("AMAZON_ORDER_REFERENCE_ID"));
 
 
 ```

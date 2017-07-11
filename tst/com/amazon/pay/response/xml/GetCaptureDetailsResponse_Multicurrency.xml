@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GetCaptureDetailsResponse xmlns="http://mws.amazonservices.com/schema/OffAmazonPayments/2013-01-01">
+  <GetCaptureDetailsResult>
+    <CaptureDetails>
+      <ConvertedAmount>
+        <CurrencyCode>EUR</CurrencyCode>
+        <Amount>0.88</Amount>
+      </ConvertedAmount>
+      <CaptureReferenceId>7a087b12a3cb4d0ba3cb4230aa953de4</CaptureReferenceId>
+      <CaptureFee>
+        <CurrencyCode>EUR</CurrencyCode>
+        <Amount>0.00</Amount>
+      </CaptureFee>
+      <SoftDescriptor>AMZ*Matt's Test Stor</SoftDescriptor>
+      <IdList/>
+      <ConversionRate>1.1297854087</ConversionRate>
+      <CaptureAmount>
+        <CurrencyCode>CHF</CurrencyCode>
+        <Amount>0.99</Amount>
+      </CaptureAmount>
+      <AmazonCaptureId>S02-7423235-4925359-C052508</AmazonCaptureId>
+      <CreationTimestamp>2017-06-27T22:07:18.931Z</CreationTimestamp>
+      <CaptureStatus>
+        <LastUpdateTimestamp>2017-06-27T22:07:18.999Z</LastUpdateTimestamp>
+        <State>Completed</State>
+      </CaptureStatus>
+      <SellerCaptureNote/>
+      <RefundedAmount>
+        <CurrencyCode>CHF</CurrencyCode>
+        <Amount>0</Amount>
+      </RefundedAmount>
+    </CaptureDetails>
+  </GetCaptureDetailsResult>
+  <ResponseMetadata>
+    <RequestId>a17ee562-9a97-4b22-8487-20e8e7230639</RequestId>
+  </ResponseMetadata>
+</GetCaptureDetailsResponse>

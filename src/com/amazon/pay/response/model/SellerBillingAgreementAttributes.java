@@ -26,7 +26,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "SellerBillingAgreementAttributes", propOrder = {
     "sellerBillingAgreementId",
     "storeName",
-    "customInformation"
+    "customInformation",
+    "sellerId"
 })
 public class SellerBillingAgreementAttributes {
 
@@ -36,6 +37,8 @@ public class SellerBillingAgreementAttributes {
     protected String storeName;
     @XmlElement(name = "CustomInformation")
     protected String customInformation;
+    @XmlElement(name = "SellerId")
+    protected String sellerId;
 
     public SellerBillingAgreementAttributes() {
         super();
@@ -43,7 +46,7 @@ public class SellerBillingAgreementAttributes {
 
     /**
      * The merchant-specified identifier of this billing agreement.
-     * 
+     *
      * @return sellerBillingAgreementId
      */
     public String getSellerBillingAgreementId() {
@@ -52,10 +55,10 @@ public class SellerBillingAgreementAttributes {
 
 
     /**
-     * The identifier of the store from which the order was placed. This 
+     * The identifier of the store from which the order was placed. This
      * overrides the default value in Seller Central under Settings > Account Settings.
      * It is displayed to the buyer in their emails and transaction history on the Amazon Pay website.
-     * 
+     *
      * @return storeName
      */
     public String getStoreName() {
@@ -65,22 +68,35 @@ public class SellerBillingAgreementAttributes {
 
     /**
      * Any additional information that you wish to include with this billing agreement.
-     * 
+     *
      * @return customInformation
      */
     public String getCustomInformation() {
         return customInformation;
     }
 
+
+    /**
+     * The merchant's SellerId specified in IPN Message
+     *
+     * @return sellerId
+     */
+    public String getSellerId() {
+        return sellerId;
+    }
+
+
     /**
      * Returns the string representation of SellerBillingAgreementAttributes
      */
     @Override
     public String toString() {
-        return "SellerBillingAgreementAttributes{" + "sellerBillingAgreementId=" + sellerBillingAgreementId + ", storeName=" + storeName + ", customInformation=" + customInformation + '}';
+        return "SellerBillingAgreementAttributes{"
+                + "sellerBillingAgreementId=" + sellerBillingAgreementId
+                + ", storeName=" + storeName
+                + ", customInformation=" + customInformation
+                + ", sellerId=" + sellerId
+                + '}';
     }
 
-
- 
- 
 }
