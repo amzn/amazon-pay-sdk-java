@@ -906,36 +906,40 @@ public class PayClient implements Client  {
     @Override
     public User getUserInfo(String accessToken , String clientId) throws AmazonServiceException, IOException {
 
-        String decodedAccessToken = URLDecoder.decode(accessToken,"UTF-8");
+        final String decodedAccessToken = URLDecoder.decode(accessToken, "UTF-8");
         String profileEndpoint;
 
-        if(payConfig.getEnvironment() == Environment.SANDBOX) {
-            profileEndpoint = ServiceConstants.profileEndpointSandboxMappings.get(payConfig.getRegion());
+        if (payConfig.getOverrideProfileURL() != null) {
+            profileEndpoint = payConfig.getOverrideProfileURL();
         } else {
-            profileEndpoint = ServiceConstants.profileEndpointMappings.get(payConfig.getRegion());
+            if (payConfig.getEnvironment() == Environment.SANDBOX) {
+                profileEndpoint = ServiceConstants.profileEndpointSandboxMappings.get(payConfig.getRegion());
+            } else {
+                profileEndpoint = ServiceConstants.profileEndpointMappings.get(payConfig.getRegion());
+            }
         }
 
         Map<String,String> headerValues = new HashMap<String, String>();
-        ResponseData response = Util.httpSendRequest("GET" , profileEndpoint + "/auth/o2/tokeninfo?access_token=" + decodedAccessToken , null , headerValues, null);
+        ResponseData response = Util.httpSendRequest("GET" , profileEndpoint + "/auth/o2/tokeninfo?access_token=" + decodedAccessToken, null, headerValues, null);
 
-        Map m = Util.convertJsonToObject(response.toXML() , Map.class);
-        if(m.containsKey("error")) {
+        Map m = Util.convertJsonToObject(response.toXML(), Map.class);
+        if (m.containsKey("error")) {
             throw new AmazonServiceException("Retrieving User Info Failed. "+(String)m.get("error_description"));
         }
 
-        if ( clientId == null || !clientId.equals(m.get("aud"))) {
+        if (clientId == null || !clientId.equals(m.get("aud"))) {
             //the access token does not belong to us
             throw new AmazonClientException("Access token does not belong to clientId: " + clientId);
         }
 
-        headerValues.put("Authorization" , "bearer " + decodedAccessToken);
-        response = Util.httpSendRequest("GET" , profileEndpoint + "/user/profile" , null, headerValues);
+        headerValues.put("Authorization", "bearer " + decodedAccessToken);
+        response = Util.httpSendRequest("GET" , profileEndpoint + "/user/profile", null, headerValues);
         m = Util.convertJsonToObject(response.toXML() , Map.class);
-        if(m.containsKey("error")) {
-            throw new AmazonServiceException("Retrieving User Info Failed. "+(String)m.get("error_description"));
+        if (m.containsKey("error")) {
+            throw new AmazonServiceException("Retrieving User Info Failed. " + (String)m.get("error_description"));
         }
 
-        User user = Util.convertJsonToObject(response.toXML() , User.class);
+        final User user = Util.convertJsonToObject(response.toXML() , User.class);
         return user;
     }
 
@@ -1096,7 +1100,7 @@ public class PayClient implements Client  {
     }
 
     private ResponseData postRequest(String httpPostRequest) throws IOException {
-        return Util.httpSendRequest("POST", Util.getServiceURLEndpoint(payConfig.getRegion() , payConfig.getEnvironment()), httpPostRequest, null, this.helper.payConfig);
+        return Util.httpSendRequest("POST", Util.getServiceURLEndpoint(payConfig), httpPostRequest, null, this.helper.payConfig);
     }
 
     /**

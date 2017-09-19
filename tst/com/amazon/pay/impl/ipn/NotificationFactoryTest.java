@@ -6,12 +6,16 @@ import com.amazon.pay.exceptions.AmazonClientException;
 import com.amazon.pay.response.ipn.model.AuthorizationNotification;
 import com.amazon.pay.response.ipn.model.BillingAgreementNotification;
 import com.amazon.pay.response.ipn.model.CaptureNotification;
+import com.amazon.pay.response.ipn.model.ChargebackNotification;
 import com.amazon.pay.response.ipn.model.EventType;
+import com.amazon.pay.response.ipn.model.IPNMessageMetaData;
 import com.amazon.pay.response.ipn.model.Notification;
+import com.amazon.pay.response.ipn.model.NotificationMetaData;
 import com.amazon.pay.response.ipn.model.NotificationType;
 import com.amazon.pay.response.ipn.model.OrderReferenceNotification;
 import com.amazon.pay.response.ipn.model.ProviderCreditReversalNotification;
 import com.amazon.pay.response.ipn.model.SolutionProviderMerchantNotification;
+import com.amazon.pay.response.model.ChargebackDetails;
 import com.amazon.pay.response.model.RefundType;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -347,6 +351,87 @@ public class NotificationFactoryTest {
         Assert.assertEquals(rn.getRefundDetails().getConversionRate(), "9.9248293483");
     }
 
+    /**
+     * Test Chargeback Notification for Unauthorized Transaction reason
+     */
+    @Test
+    public void testChargebackUnauthorizedIPN() throws IOException, DatatypeConfigurationException {
+        final String notificationPayload = loadTestFile("ChargebackNotification_Unauthorized.json");
+        final Notification notification = NotificationFactory.parseNotification(ipnHeader, notificationPayload);
+        final NotificationType type = notification.getNotificationType();
+        Assert.assertEquals(type, NotificationType.ChargebackNotification);
+
+        final NotificationMetaData nm = notification.getNotificationMetadata();
+        Assert.assertEquals(nm.getType(), "Notification");
+        Assert.assertEquals(nm.getMessageId(), "22ed5c15-c3c8-5e74-aceb-0e350c4a2620");
+        Assert.assertEquals(nm.getTopicArn(), "arn:aws:sns:us-east-1:598607868003:A35A4JO734ER04A08593053M41F7TQ7YR7W");
+        Assert.assertEquals(nm.getTimeStamp(), "2017-08-30T14:35:46.358Z");
+        Assert.assertEquals(nm.getSignatureVersion(), "1");
+        Assert.assertEquals(nm.getSignature(), "K/5+GqaPsk9UDcVNlxgj7Lw6EkJJOKhIejfJ4z0ZbdsCAuTSFPWlU5Msq7MkdWtO2bwmvyJGmEJDsb/Z3xBPBpQExI7/76aPMWIX2zRaoef1rFbZYTis808p/G7ih5Mmn5nSNw8+LKSxfPSiGULItQGOtBVf/7MohYP5IjK68oJwuXp7qXM5y7zXJntABDWdsdj2TrzYRozUsLpUb44HcfKNtW4sivZvJ6LUa04Y0h0DDIY5BVjmlTGeFcvjQ9yimK41zLEnnrPmSLBls0B4MJRrpTkpgiQzYqRmL5T3c04BHs/+tiXB8YlrHgLw0GgrS0weIcEbEPjwk4CB0JkwEw==");
+        Assert.assertEquals(nm.getSigningCertUrl(), "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-433026a4050d206028891664da859041.pem");
+        Assert.assertEquals(nm.getUnsubscribeUrl(), "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:598607868003:A35A4JO734ER04A08593053M41F7TQ7YR7W:413d945a-6cc4-4c6f-a45a-c5c0918b03b9");
+
+        final IPNMessageMetaData mm = notification.getMessageMetadata();
+        Assert.assertEquals(mm.getReleaseEnvironment(), "Live");
+        Assert.assertEquals(mm.getMarketplaceId(), "165570");
+        Assert.assertEquals(mm.getVersion(), "2013-01-01");
+        Assert.assertEquals(mm.getNotificationReferenceId(), "73658979-2175-4306-a305-9fbdf442423e");
+        Assert.assertEquals(mm.getSellerId(), "A08593053M41F7TQ7YR7W");
+        Assert.assertEquals(mm.getTimeStamp(), "2017-08-30T14:35:46.278Z");
+
+        final ChargebackNotification cn = (ChargebackNotification)notification;
+        final ChargebackDetails cd = cn.getChargebackDetails();
+        Assert.assertEquals(cd.getAmazonChargebackId(), "C9KORZRXQ655G");
+        Assert.assertEquals(cd.getAmazonOrderReferenceId(), "P01-7128087-7259534");
+        Assert.assertEquals(cd.getAmazonCaptureReferenceId(), "CaptureReference6282176");
+        final XMLGregorianCalendar xgc = DatatypeFactory.newInstance().newXMLGregorianCalendar("2017-08-23T12:20:56.061Z");
+        Assert.assertEquals(cd.getCreationTimestamp(), xgc);
+        Assert.assertEquals(cd.getChargebackAmount().getAmount(), "100.0");
+        Assert.assertEquals(cd.getChargebackAmount().getCurrencyCode(), "USD");
+        Assert.assertEquals(cd.getChargebackState(), "RECEIVED");
+        Assert.assertEquals(cd.getChargebackReason(), "Unauthorized Transaction Chargeback");
+    }
+
+    /**
+     * Test Chargeback Notification for Generic Service reason
+     */
+    @Test
+    public void testChargebackServiceIPN() throws IOException, DatatypeConfigurationException {
+        final String notificationPayload = loadTestFile("ChargebackNotification_Service.json");
+        final Notification notification = NotificationFactory.parseNotification(ipnHeader, notificationPayload);
+        final NotificationType type = notification.getNotificationType();
+        Assert.assertEquals(type, NotificationType.ChargebackNotification);
+
+        final NotificationMetaData nm = notification.getNotificationMetadata();
+        Assert.assertEquals(nm.getType(), "Notification");
+        Assert.assertEquals(nm.getMessageId(), "83d848c9-7376-56f8-b5a7-1ae9be88a82a");
+        Assert.assertEquals(nm.getTopicArn(), "arn:aws:sns:us-east-1:598607868003:A35A4JO734ER04A08593053M41F7TQ7YR7W");
+        Assert.assertEquals(nm.getTimeStamp(), "2017-08-30T14:29:18.908Z");
+        Assert.assertEquals(nm.getSignatureVersion(), "1");
+        Assert.assertEquals(nm.getSignature(), "XOYWtZKrjKXws8V2Ulx4GMUoMa3e10dok4cHlz6vs/BwFiQkC6KqhP0KIaOzIMu3V1WK7+0Kp7wC6F5MuxnumdcDIFFrL/hCLHHeDRWKzogcTCXjstNjoA0tWqsN0OHmIiP0VWTtXYswRL2+FFMd5q2JBkmlAONv/cbOcsWR++2Aa6K2Nf2VWxjW3iykJmnmruAtGctM68xjBv2Q6F3uBaHLKgsD02er+sU5rUWXYSr0qzHMx5AK+lrHuTbvZ7scHGWWGRufAmmq94D8wXXiWlL3h8TK5Abes5upfJiAaG6NikppD+wzBQ0NhDczJhmodCh+aVIcA8NAol/hOclX9A==");
+        Assert.assertEquals(nm.getSigningCertUrl(), "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-433026a4050d206028891664da859041.pem");
+        Assert.assertEquals(nm.getUnsubscribeUrl(), "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:598607868003:A35A4JO734ER04A08593053M41F7TQ7YR7W:413d945a-6cc4-4c6f-a45a-c5c0918b03b9");
+
+        final IPNMessageMetaData mm = notification.getMessageMetadata();
+        Assert.assertEquals(mm.getReleaseEnvironment(), "Live");
+        Assert.assertEquals(mm.getMarketplaceId(), "165570");
+        Assert.assertEquals(mm.getVersion(), "2013-01-01");
+        Assert.assertEquals(mm.getNotificationReferenceId(), "9bc8ec61-da88-4b63-b201-dc7afeaae764");
+        Assert.assertEquals(mm.getSellerId(), "A08593053M41F7TQ7YR7W");
+        Assert.assertEquals(mm.getTimeStamp(), "2017-08-30T14:29:18.833Z");
+
+        final ChargebackNotification cn = (ChargebackNotification)notification;
+        final ChargebackDetails cd = cn.getChargebackDetails();
+        Assert.assertEquals(cd.getAmazonChargebackId(), "C9KORZRXQ655G");
+        Assert.assertEquals(cd.getAmazonOrderReferenceId(), "P01-7128087-7259534");
+        Assert.assertEquals(cd.getAmazonCaptureReferenceId(), "CaptureReference6282176");
+        final XMLGregorianCalendar xgc = DatatypeFactory.newInstance().newXMLGregorianCalendar("2017-08-23T12:20:56.061Z");
+        Assert.assertEquals(cd.getCreationTimestamp(), xgc);
+        Assert.assertEquals(cd.getChargebackAmount().getAmount(), "100.0");
+        Assert.assertEquals(cd.getChargebackAmount().getCurrencyCode(), "USD");
+        Assert.assertEquals(cd.getChargebackState(), "RECEIVED");
+        Assert.assertEquals(cd.getChargebackReason(), "Generic Service Chargeback");
+    }
 
     /**
      * Helper method to test notification values

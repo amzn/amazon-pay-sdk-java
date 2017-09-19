@@ -24,6 +24,7 @@ public final class IPNMessageMetaData {
     private final String sellerId;
     private final String version;
     private final String notificationType;
+    private final String marketplaceId;
     private final EventType eventType;
 
     public IPNMessageMetaData(Map<String,String> messageMetaDataMap) {
@@ -33,6 +34,7 @@ public final class IPNMessageMetaData {
         sellerId = messageMetaDataMap.get("SellerId");
         version = messageMetaDataMap.get("Version");
         notificationType = messageMetaDataMap.get("NotificationType");
+        marketplaceId = messageMetaDataMap.get("MarketplaceID");
 
         final String eventTypeString = messageMetaDataMap.get("EventType");
         if (eventTypeString != null) {
@@ -106,6 +108,16 @@ public final class IPNMessageMetaData {
     }
 
     /**
+     * Returns the Marketplace ID string specified in IPN message
+     * Not all IPNs return this attribute
+     *
+     * @return Returns the Marketplace ID specified in IPN message
+     */
+    public String getMarketplaceId() {
+        return marketplaceId;
+    }
+
+    /**
      * String representation of IPN Message Metadata
      *
      */
@@ -119,6 +131,7 @@ public final class IPNMessageMetaData {
                 + ", version=" + version
                 + ", notificationType=" + notificationType
                 + ", eventType=" + eventType
+                + ", marketplaceId=" + marketplaceId
                 + '}';
     }
 

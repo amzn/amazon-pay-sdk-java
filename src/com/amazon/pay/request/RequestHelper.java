@@ -61,15 +61,20 @@ public class RequestHelper {
     private String constructSignature(Map<String, String> params) {
         String signature = null;
         try {
-            String domainName = ServiceConstants.mwsEndpointMappings.get(payConfig.getRegion());
-            String postHeader = "POST\n" + domainName.replace("https://", "")  + "\n" + Util.getServiceVersionName(payConfig.getEnvironment()) + "\n";
-            Map<String, String> sortedParams = new TreeMap<String, String>();
+            String domainName;
+            if (payConfig.getOverrideServiceURL() != null) {
+                domainName = payConfig.getOverrideServiceURL();
+            } else {
+                domainName = ServiceConstants.mwsEndpointMappings.get(payConfig.getRegion());
+            }
+            final String postHeader = "POST\n" + domainName.replace("https://", "")  + "\n" + Util.getServiceVersionName(payConfig.getEnvironment()) + "\n";
+            final Map<String, String> sortedParams = new TreeMap<String, String>();
             sortedParams.putAll(params);
 
-           /* Log all the client parameters */
+            /* Log all the client parameters */
             payUtil.logMessage("Client Parameters: " + sortedParams.toString());
 
-            String stringToSign = postHeader + Util.convertParameterMapToString(sortedParams);
+            final String stringToSign = postHeader + Util.convertParameterMapToString(sortedParams);
             signature = Util.urlEncode(Util.getSignature(stringToSign, payConfig.getSecretKey()));
         } catch (UnsupportedEncodingException ex) {
             throw new AmazonClientException("Encountered UnsupportedEncodingException:", ex);

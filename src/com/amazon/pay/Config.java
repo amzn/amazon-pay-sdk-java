@@ -209,5 +209,36 @@ public interface Config {
      */
     void setUseAutoRetryOnThrottle(boolean useAutoRetryOnThrottle);
 
+    /**
+     * Returns overridden MWS Service URL in PayConfig
+     *
+     * @return overrideServiceURL
+     */
+    String getOverrideServiceURL();
+
+    /**
+     * Sets MWS Service URL override in PayConfig
+     * This should only be used if you need to programmatically override the default MWS service endpoint
+     * provided by the SDK's mwsEndpointMappingsMap in com.amazon.pay.types.ServiceConstants.
+     *
+     * @param overrideServiceURL
+     */
+    void setOverrideServiceURL(String overrideServiceURL);
+
+    /**
+     * Returns overridden LWA Profile URL in PayConfig
+     *
+     * @return overrideProfileURL
+     */
+    String getOverrideProfileURL();
+
+    /**
+     * Sets LWA Profile URL override in PayConfig
+     * This should only be used if you need to programmatically override the default LWA profile endpoint
+     * provided by the SDK's profileEndpointMappingsMap in com.amazon.pay.types.ServiceConstants.
+     *
+     * @param overrideProfileURL
+     */
+    void setOverrideProfileURL(String overrideProfileURL);
 
 }

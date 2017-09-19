@@ -19,6 +19,7 @@ import com.amazon.pay.impl.PayLogUtil;
 import com.amazon.pay.response.ipn.model.AuthorizationNotification;
 import com.amazon.pay.response.ipn.model.BillingAgreementNotification;
 import com.amazon.pay.response.ipn.model.CaptureNotification;
+import com.amazon.pay.response.ipn.model.ChargebackNotification;
 import com.amazon.pay.response.ipn.model.IPNMessageMetaData;
 import com.amazon.pay.response.ipn.model.Notification;
 import com.amazon.pay.response.ipn.model.NotificationMetaData;
@@ -63,7 +64,7 @@ public class NotificationFactory {
      * @throws AmazonClientException
      *
      */
-    public static Notification parseNotification(Map<String,String> headers, final String body) throws AmazonClientException{
+    public static Notification parseNotification(Map<String,String> headers, final String body) throws AmazonClientException {
 
         final NotificationVerification verifier = new NotificationVerification();
 
@@ -120,52 +121,57 @@ public class NotificationFactory {
         if (message != null) {
             messageDataMap = new Gson().fromJson(message, Map.class);
             if (messageDataMap != null) {
-                final String notificationType = messageDataMap.get("NotificationType");
-                JAXBContext jaxbContext = null;
-                try {
-                    if ("OrderReferenceNotification".equalsIgnoreCase(notificationType)) {
-                        jaxbContext = JAXBContext.newInstance(OrderReferenceNotification.class);
-                    } else if ("PaymentAuthorize".equalsIgnoreCase(notificationType)) {
-                        jaxbContext = JAXBContext.newInstance(AuthorizationNotification.class);
-                    } else if ("PaymentCapture".equalsIgnoreCase(notificationType)) {
-                        jaxbContext = JAXBContext.newInstance(CaptureNotification.class);
-                    } else if ("PaymentRefund".equalsIgnoreCase(notificationType)) {
-                        jaxbContext = JAXBContext.newInstance(RefundNotification.class);
-                    } else if ("BillingAgreementNotification".equalsIgnoreCase(notificationType)) {
-                        jaxbContext = JAXBContext.newInstance(BillingAgreementNotification.class);
-                    } else if ("ProviderCredit".equalsIgnoreCase(notificationType)) {
-                        jaxbContext = JAXBContext.newInstance(ProviderCreditNotification.class);
-                    }  else if ("ProviderCreditReversal".equalsIgnoreCase(notificationType)) {
-                        jaxbContext = JAXBContext.newInstance(ProviderCreditReversalNotification.class);
-                    }  else if ("SolutionProviderEvent".equalsIgnoreCase(notificationType)) {
-                        jaxbContext = JAXBContext.newInstance(SolutionProviderMerchantNotification.class);
-                    }  else {
-                        throw new AmazonClientException("Unknown notification type: "+ notificationType);
+                final String notificationTypeWithSpaces = messageDataMap.get("NotificationType");
+                if (notificationTypeWithSpaces != null) {
+                    final String notificationType = notificationTypeWithSpaces.replaceAll(" ", "");
+                    JAXBContext jaxbContext = null;
+                    try {
+                        if ("OrderReferenceNotification".equalsIgnoreCase(notificationType)) {
+                            jaxbContext = JAXBContext.newInstance(OrderReferenceNotification.class);
+                        } else if ("PaymentAuthorize".equalsIgnoreCase(notificationType)) {
+                            jaxbContext = JAXBContext.newInstance(AuthorizationNotification.class);
+                        } else if ("PaymentCapture".equalsIgnoreCase(notificationType)) {
+                            jaxbContext = JAXBContext.newInstance(CaptureNotification.class);
+                        } else if ("PaymentRefund".equalsIgnoreCase(notificationType)) {
+                            jaxbContext = JAXBContext.newInstance(RefundNotification.class);
+                        } else if ("BillingAgreementNotification".equalsIgnoreCase(notificationType)) {
+                            jaxbContext = JAXBContext.newInstance(BillingAgreementNotification.class);
+                        } else if ("ProviderCredit".equalsIgnoreCase(notificationType)) {
+                            jaxbContext = JAXBContext.newInstance(ProviderCreditNotification.class);
+                        }  else if ("ProviderCreditReversal".equalsIgnoreCase(notificationType)) {
+                            jaxbContext = JAXBContext.newInstance(ProviderCreditReversalNotification.class);
+                        }  else if ("SolutionProviderEvent".equalsIgnoreCase(notificationType)) {
+                            jaxbContext = JAXBContext.newInstance(SolutionProviderMerchantNotification.class);
+                        }  else if ("ChargebackDetailedNotification".equalsIgnoreCase(notificationType)) {
+                            jaxbContext = JAXBContext.newInstance(ChargebackNotification.class);
+                        }  else {
+                            throw new AmazonClientException("Unknown notification type: "+ notificationType);
+                        }
+
+                        // Modify namespace declaration so it is ignored
+                        if (jaxbContext != null) {
+                            final String notificationData = messageDataMap.get("NotificationData").replaceAll(
+                                    "xmlns(?:.*?)?=\"https://mws.amazonservices.com/ipn/OffAmazonPayments/2013-01-01\"", "");
+                            final StringReader reader = new StringReader(notificationData.trim());
+                            final Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+                            unmarshaller.setEventHandler(new AmazonValidationEventHandler());
+
+                            final XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
+                            xmlInputFactory.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, false);
+                            xmlInputFactory.setProperty(XMLInputFactory.SUPPORT_DTD, false);
+                            final XMLStreamReader xmlStreamReader = xmlInputFactory.createXMLStreamReader(reader);
+                            notifData = (Notification) unmarshaller.unmarshal(xmlStreamReader);
+                            notifData.setNotificationMetadata(new NotificationMetaData(notificationDataAsMap));
+                            notifData.setMessageMetaData(new IPNMessageMetaData(messageDataMap));
+                            notifData.setJSON(notificationDataAsJSON);
+                            notifData.setMap(notificationDataAsMap);
+                        }
+
+                    } catch (JAXBException e) {
+                        throw new AmazonClientException("Failed marshalling notification: " + notificationDataAsJSON, e);
+                    } catch (XMLStreamException e) {
+                        throw new AmazonClientException("Failed marshalling notification: " + notificationDataAsJSON, e);
                     }
-
-                    // Modify namespace declaration so it is ignored
-                    if (jaxbContext != null) {
-                        final String notificationData = messageDataMap.get("NotificationData").replaceAll(
-                                "xmlns(?:.*?)?=\"https://mws.amazonservices.com/ipn/OffAmazonPayments/2013-01-01\"", "");
-                        final StringReader reader = new StringReader(notificationData.trim());
-                        final Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-			unmarshaller.setEventHandler(new AmazonValidationEventHandler());
-
-                        final XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
-                        xmlInputFactory.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, false);
-                        xmlInputFactory.setProperty(XMLInputFactory.SUPPORT_DTD, false);
-                        final XMLStreamReader xmlStreamReader = xmlInputFactory.createXMLStreamReader(reader);
-                        notifData = (Notification) unmarshaller.unmarshal(xmlStreamReader);
-                        notifData.setNotificationMetadata(new NotificationMetaData(notificationDataAsMap));
-                        notifData.setMessageMetaData(new IPNMessageMetaData(messageDataMap));
-                        notifData.setJSON(notificationDataAsJSON);
-                        notifData.setMap(notificationDataAsMap);
-                    }
-
-                } catch (JAXBException e) {
-                    throw new AmazonClientException("Failed marshalling notification: " + notificationDataAsJSON, e);
-                } catch (XMLStreamException e) {
-                    throw new AmazonClientException("Failed marshalling notification: " + notificationDataAsJSON, e);
                 }
             }
         }

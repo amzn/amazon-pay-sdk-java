@@ -17,8 +17,10 @@ package com.amazon.pay.types;
 /*
  * This enum class represents region codes for
  * United States(US), United Kingdom(UK), Germany(DE) and Japan(JP)
+ *
+ * DEVO Regions are for Amazon use only (integration test pipeline).
  */
 
 public enum Region {
-	DE, UK, US, JP;
+    DE, UK, US, JP;
 }

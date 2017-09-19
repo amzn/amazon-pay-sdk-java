@@ -38,6 +38,8 @@ public class PayConfig implements Config  {
     private String proxyUsername;
     private String proxyPassword;
     private boolean useAutoRetryOnThrottle;
+    private String overrideServiceURL;
+    private String overrideProfileURL;
 
     /**
      * Constructor for PayConfig - container that stores all configuration parameters for client
@@ -234,7 +236,7 @@ public class PayConfig implements Config  {
      * @return Returns updated PayConfig object
      */
     public PayConfig withSandboxMode(boolean isSandbox) {
-        if(isSandbox)
+        if (isSandbox)
             this.environment = Environment.SANDBOX;
         else
             this.environment = Environment.LIVE;
@@ -520,13 +522,89 @@ public class PayConfig implements Config  {
     }
 
 
+    /**
+     * Returns overridden MWS Service URL in PayConfig
+     *
+     * @return overrideServiceURL
+     */
+    @Override
+    public String getOverrideServiceURL() {
+        return overrideServiceURL;
+    }
+
+
+    /**
+     * Sets MWS Service URL override in PayConfig
+     * This should only be used if you need to programmatically override the default MWS service endpoint
+     * provided by the SDK's mwsEndpointMappingsMap in com.amazon.pay.types.ServiceConstants.
+     *
+     * @param overrideServiceURL
+     */
+    @Override
+    public void setOverrideServiceURL(String overrideServiceURL) {
+        this.overrideServiceURL = overrideServiceURL;
+    }
+
+
+    /**
+     * Sets MWS Service URL override in PayConfig
+     * This should only be used if you need to programmatically override the default MWS service endpoint
+     * provided by the SDK's mwsEndpointMappingsMap in com.amazon.pay.types.ServiceConstants.
+     *
+     * @param overrideServiceURL
+     * @return PayConfig
+     */
+    public PayConfig withOverrideServiceURL(String overrideServiceURL) {
+        this.overrideServiceURL = overrideServiceURL;
+        return this;
+    }
+
+
+    /**
+     * Returns overridden LWA Profile URL in PayConfig
+     *
+     * @return overrideProfileURL
+     */
+    @Override
+    public String getOverrideProfileURL() {
+        return overrideProfileURL;
+    }
+
+
+    /**
+     * Sets LWA Profile URL override in PayConfig
+     * This should only be used if you need to programmatically override the default LWA profile endpoint
+     * provided by the SDK's profileEndpointMappingsMap in com.amazon.pay.types.ServiceConstants.
+     *
+     * @param overrideProfileURL
+     */
+    @Override
+    public void setOverrideProfileURL(String overrideProfileURL) {
+        this.overrideProfileURL = overrideProfileURL;
+    }
+
+
+    /**
+     * Sets LWA Profile URL override in PayConfig
+     * This should only be used if you need to programmatically override the default LWA profile endpoint
+     * provided by the SDK's profileEndpointMappingsMap in com.amazon.pay.types.ServiceConstants.
+     *
+     * @param overrideProfileURL
+     * @return PayConfig
+     */
+    public PayConfig withOverrideProfileURL(String overrideProfileURL) {
+        this.overrideProfileURL = overrideProfileURL;
+        return this;
+    }
+
+
     private PayConfig loadConfigurationFromProperties(Properties prop) {
         if (prop == null || prop.isEmpty())
             throw new IllegalArgumentException("Properties are empty, Need required propeties to proceed configuring amazon Pay client");
 
         Enumeration enumeration = prop.propertyNames();
 
-        while(enumeration.hasMoreElements()) {
+        while (enumeration.hasMoreElements()) {
             String property = (String) enumeration.nextElement();
             try {
                 switch (Key.valueOf(property.toUpperCase())) {
@@ -557,7 +635,7 @@ public class PayConfig implements Config  {
                         break;
                     case PROXY_PORT:
                         String proxyPortProperty = prop.getProperty(property);
-                        if(proxyPortProperty != null && !proxyPortProperty.isEmpty())
+                        if (proxyPortProperty != null && !proxyPortProperty.isEmpty())
                             this.setProxyPort(Integer.parseInt(proxyPortProperty));
                         break;
                     case PROXY_USERNAME:
@@ -579,6 +657,14 @@ public class PayConfig implements Config  {
                     case AUTO_RETRY_ON_THROTTLE:
                         String useAutoRetyOnThrottle = prop.getProperty(property);
                         this.setUseAutoRetryOnThrottle(Boolean.valueOf(useAutoRetyOnThrottle));
+                        break;
+                    case OVERRIDE_SERVICE_URL:
+                        String overrideServiceURL = prop.getProperty(property);
+                        this.setOverrideServiceURL(overrideServiceURL);
+                        break;
+                    case OVERRIDE_PROFILE_URL:
+                        String overrideProfileURL = prop.getProperty(property);
+                        this.setOverrideProfileURL(overrideProfileURL);
                         break;
                     default:
                         throw new AmazonClientException(("Client error, unable to set client configuration property [Key: "
@@ -602,15 +688,15 @@ public class PayConfig implements Config  {
     private boolean checkIfRequriedPropertiesExist() {
         if (this.accessKey == null)
             generateException(Key.ACCESS_KEY);
-        else if(this.secretKey == null)
+        else if (this.secretKey == null)
             generateException(Key.SECRET_KEY);
-        else if(this.merchantId == null)
+        else if (this.merchantId == null)
             generateException(Key.MERCHANT_ID);
-        else if(this.environment == null)
+        else if (this.environment == null)
             generateException(Key.ENVIRONMENT);
-        else if(this.region == null)
+        else if (this.region == null)
             generateException(Key.REGION);
-        else if(this.currencyCode == null)
+        else if (this.currencyCode == null)
             generateException(Key.CURRENCY_CODE);
         return true;
 
@@ -630,11 +716,23 @@ public class PayConfig implements Config  {
      */
     @Override
     public String toString() {
-        return "PayConfig{" + "accessKeyId=" + accessKey + ", secretAccessKey=" + secretKey + ", "
-                + "sellerId=" + merchantId + ", region=" + region + ", environment=" + environment + ", currencyCode=" +
-                currencyCode + ", applicationName=" + applicationName + ", applicationVersion=" + applicationVersion + ", "
-                + "proxyHost=" + proxyHost + ", proxyPort=" + proxyPort + ", proxyUsername=" + proxyUsername + ", proxyPassword=" +
-                proxyPassword + ", useAutoRetryOnThrottle=" + useAutoRetryOnThrottle + '}';
+        return "PayConfig{" +
+                "accessKeyId=" + accessKey +
+                ", secretAccessKey=" + secretKey +
+                ", sellerId=" + merchantId +
+                ", region=" + region +
+                ", environment=" + environment +
+                ", currencyCode=" + currencyCode +
+                ", applicationName=" + applicationName +
+                ", applicationVersion=" + applicationVersion +
+                ", proxyHost=" + proxyHost +
+                ", proxyPort=" + proxyPort +
+                ", proxyUsername=" + proxyUsername +
+                ", proxyPassword=" + proxyPassword +
+                ", useAutoRetryOnThrottle=" + useAutoRetryOnThrottle +
+                ", overrideServiceURL=" + overrideServiceURL +
+                ", overrideProfileURL=" + overrideProfileURL +
+                "}";
     }
 
 

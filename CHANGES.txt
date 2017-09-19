@@ -1,3 +1,6 @@
+Version 3.2.0 - September 2017
+- Add support for new Chargeback IPNs
+
 Version 3.1.0 - July 2017
 - EventType enum from BillingAgreementNotification IPN metadata now available.
 - Fix BillingAgreementStatus class to handle mis-named "lastUpdate" attribute from IPNs.

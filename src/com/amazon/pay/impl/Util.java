@@ -14,6 +14,7 @@
  */
 package com.amazon.pay.impl;
 
+import com.amazon.pay.Config;
 import com.amazon.pay.response.model.Environment;
 import com.amazon.pay.response.parser.ResponseData;
 import com.amazon.pay.types.Region;
@@ -164,12 +165,12 @@ public class Util {
                 if (config.getProxyUsername() != null && config.getProxyPassword() != null) {
                     String password = config.getProxyUsername() + ":" + config.getProxyPassword();
                     byte[] encodedPassword = Base64.encodeBase64(password.getBytes());
-                        if (encodedPassword != null) {
-                            headerMap.put("Proxy-Authorization", new String(encodedPassword));
-                        }
+                    if (encodedPassword != null) {
+                        headerMap.put("Proxy-Authorization", new String(encodedPassword));
                     }
                 }
             }
+        }
 
         ResponseData response = Util.httpSendRequest(method, url, urlParameters, headerMap);
         return response;
@@ -230,10 +231,25 @@ public class Util {
 
     /**
      * Helper method to get Service URL endpoint including service version name
-     * Ex: 
+     * @deprecated This method does not handle Service URL overrides.
+     *             Please use getServiceURLEndpoint(Config config) method instead.
      */
+    @Deprecated
     public static String getServiceURLEndpoint(Region region, Environment environment) {
         return ServiceConstants.mwsEndpointMappings.get(region) + getServiceVersionName(environment);
+    }
+
+    /**
+     * Helper method to get Service URL endpoint including service version name
+     */
+    public static String getServiceURLEndpoint(Config config) {
+        if (config.getOverrideServiceURL() != null) {
+            return config.getOverrideServiceURL()
+                    + getServiceVersionName(config.getEnvironment());
+        } else {
+            return ServiceConstants.mwsEndpointMappings.get(config.getRegion())
+                    + getServiceVersionName(config.getEnvironment());
+        }
     }
 
 

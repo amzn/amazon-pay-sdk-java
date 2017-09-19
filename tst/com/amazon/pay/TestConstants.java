@@ -1,3 +1,17 @@
+/**
+ * Copyright 2016-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License").
+ * You may not use this file except in compliance with the License.
+ * A copy of the License is located at
+ *
+ *  http://aws.amazon.com/apache2.0
+ *
+ * or in the "license" file accompanying this file. This file is distributed
+ * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
 
 package com.amazon.pay;
 
@@ -13,7 +27,7 @@ public class TestConstants {
     public static final String accessKey = "TEST_ACCESS_KEY";
     public static final String secretKey = "TEST_SECRET_KEY";
     public static final String region = "us";
-    public static final String sandbox_mode = "true"; 
+    public static final String sandbox_mode = "true";
     public static final String timeStamp = "2015-00-00T00:00:00Z";
     public static final String urlEncoded_TimeStamp = "2015-00-00T00%3A00%3A00Z";
     public static final String platformId = "A11WKBU7ADWTAU";
@@ -34,4 +48,6 @@ public class TestConstants {
     public static final String authorizationReferenceId = "TEST_AUTHORIZATION_REFERENCE_ID";
     public static final String userProfileURL = "https://api.sandbox.amazon.com/user/profile";
     public static final String tokenInfoURL = "https://api.sandbox.amazon.com/auth/o2/tokeninfo?access_token=";
+    public static final String OVERRIDE_SERVICE_URL = "https://override.service.test";
+    public static final String OVERRIDE_PROFILE_URL = "https://override.profile.test";
 }
