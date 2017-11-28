@@ -36,6 +36,7 @@ public class SetOrderReferenceDetailsRequest implements Serializable{
     private String storeName;
     private String customInformation;
     private String mwsAuthToken;
+    private Boolean requestPaymentAuthorization;
 
     /**
      *
@@ -199,6 +200,26 @@ public class SetOrderReferenceDetailsRequest implements Serializable{
      */
     public String getMwsAuthToken() {
         return mwsAuthToken;
+    }
+
+    /**
+     *Check if payment authorization has been requested or not
+     *
+     * @return requestPaymentAuthorization
+     */
+    public Boolean getRequestPaymentAuthorization() {
+        return requestPaymentAuthorization;
+    }
+
+    /**
+     * Specifies if the merchants want their buyers to go through multi-factor authentication
+     *
+     * @param requestPaymentAuthorization flag exposed to merchants using which merchants
+     *                                    can enforce their buyers to through multi-factor authentication
+     */
+    public SetOrderReferenceDetailsRequest setRequestPaymentAuthorization(Boolean requestPaymentAuthorization) {
+        this.requestPaymentAuthorization = requestPaymentAuthorization;
+        return this;
     }
 
     /**

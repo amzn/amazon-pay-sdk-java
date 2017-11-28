@@ -16,18 +16,22 @@ package com.amazon.pay.request;
 
 import com.amazon.pay.exceptions.AmazonClientException;
 import com.amazon.pay.impl.PayConfig;
-import com.amazon.pay.types.ServiceConstants;
-import com.amazon.pay.impl.Util;
 import com.amazon.pay.impl.PayLogUtil;
+import com.amazon.pay.impl.Util;
 import com.amazon.pay.response.model.Price;
 import com.amazon.pay.response.model.ProviderCredit;
+import com.amazon.pay.types.OrderReferenceStatus;
+import com.amazon.pay.types.ServiceConstants;
 
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
+
 
 public class RequestHelper {
 
@@ -140,6 +144,9 @@ public class RequestHelper {
         }
         if (request.getMwsAuthToken() != null) {
             parameters.put(ServiceConstants.MWS_AUTH_TOKEN, request.getMwsAuthToken());
+        }
+        if (request.getRequestPaymentAuthorization() != null) {
+            parameters.put(ServiceConstants.REQUEST_PAYMENT_AUTHORIZATION, Boolean.toString(request.getRequestPaymentAuthorization()));
         }
         addClientParameters(parameters);
         return Util.convertParameterMapToString(parameters);
@@ -554,6 +561,105 @@ public class RequestHelper {
     public String getPostURLGetServiceStatus() {
         final Map<String,String> parameters = new TreeMap<String,String>();
         parameters.put(ServiceConstants.ACTION, ServiceConstants.GET_SERVICE_STATUS);
+        addClientParameters(parameters);
+        return Util.convertParameterMapToString(parameters);
+    }
+
+    public String getPaymentDomain(String region) {
+        String paymentDomain = "NA_USD";
+
+        if (region.equals("DE")) {
+            paymentDomain = "EU_EUR";
+        } else if (region.equals("UK")) {
+            paymentDomain = "EU_GBP";
+        } else if (region.equals("JP")) {
+            paymentDomain = "FE_JPY";
+        }
+        return paymentDomain;
+    }
+
+    public String getPostURL(ListOrderReferenceRequest request){
+        final Map<String,String> parameters = new TreeMap<String,String>();
+        parameters.put(ServiceConstants.ACTION, ServiceConstants.LIST_ORDER_REFERENCE);
+        parameters.put(ServiceConstants.PAYMENT_DOMAIN, getPaymentDomain(payConfig.getRegion().toString()));
+
+        if (request.getStartTime() != null)
+            parameters.put(ServiceConstants.START_TIME, request.getStartTime().toString());
+        if (request.getEndTime() != null)
+            parameters.put(ServiceConstants.END_TIME, request.getEndTime().toString());
+        if (request.getQueryId() != null)
+            parameters.put(ServiceConstants.QUERY_ID, request.getQueryId());
+        if (request.getQueryIdType() != null)
+            parameters.put(ServiceConstants.QUERY_ID_TYPE, request.getQueryIdType());
+        if (request.getSortOrder() != null)
+            parameters.put(ServiceConstants.SORT_ORDER, request.getSortOrder().toString());
+        if (request.getPageSize() != null)
+            parameters.put(ServiceConstants.PAGE_SIZE, request.getPageSize().toString());
+        if (request.getOrderReferenceStatusListFilter() != null){
+            EnumSet<OrderReferenceStatus> filters = request.getOrderReferenceStatusListFilter();
+            int count = 1;
+            for (OrderReferenceStatus filter: filters){
+                parameters.put(ServiceConstants.ORDER_REFERENCE_STATUS_LIST_FILTER + "." + count, filter.toString());
+                count++;
+            }
+        }
+        if (request.getMwsAuthToken() != null)
+            parameters.put(ServiceConstants.MWS_AUTH_TOKEN, request.getMwsAuthToken());
+
+        addClientParameters(parameters);
+        return Util.convertParameterMapToString(parameters);
+    }
+
+    public String getPostURL(ListOrderReferenceByNextTokenRequest request){
+        final Map<String,String> parameters = new TreeMap<String,String>();
+        parameters.put(ServiceConstants.ACTION, ServiceConstants.LIST_ORDER_REFERENCE_BY_NEXT_TOKEN);
+
+        if (request.getNextPageToken() != null)
+            parameters.put(ServiceConstants.NEXT_PAGE_TOKEN, request.getNextPageToken());
+        if (request.getMwsAuthToken() != null)
+            parameters.put(ServiceConstants.MWS_AUTH_TOKEN, request.getMwsAuthToken());
+
+        addClientParameters(parameters);
+        return Util.convertParameterMapToString(parameters);
+    }
+
+    public String getPostURL(SetOrderAttributesRequest request){
+        final Map<String,String> parameters = new TreeMap<String,String>();
+        parameters.put(ServiceConstants.ACTION, ServiceConstants.SET_ORDER_ATTRIBUTES);
+
+        if (request.getAmazonOrderReferenceId() != null)
+            parameters.put(ServiceConstants.AMAZON_ORDER_REFERENCE_ID, request.getAmazonOrderReferenceId());
+        if (request.getAmount() != null)
+            parameters.put(ServiceConstants.ORDER_ATTRIBUTES_AMOUNT, request.getAmount());
+        if (request.getCurrencyCode() != null)
+            parameters.put(ServiceConstants.ORDER_ATTRIBUTES_CURRENCY_CODE, request.getCurrencyCode().toString());
+        if (request.getSellerNote() != null)
+            parameters.put(ServiceConstants.ORDER_ATTRIBUTES_SELLER_NOTE, request.getSellerNote());
+        if (request.getRequestPaymentAuthorization() != null)
+            parameters.put(ServiceConstants.ORDER_ATTRIBUTES_REQUEST_PAYMENT_AUTHORIZATION, Boolean.toString(request.getRequestPaymentAuthorization()));
+        if (request.getSellerOrderId() != null)
+            parameters.put(ServiceConstants.ORDER_ATTRIBUTES_SELLER_ORDER_ID, request.getSellerOrderId());
+        if (request.getStoreName() != null)
+            parameters.put(ServiceConstants.ORDER_ATTRIBUTES_STORE_NAME, request.getStoreName());
+        if (request.getPlatformId() != null)
+            parameters.put(ServiceConstants.ORDER_ATTRIBUTES_PLATFORM_ID, request.getPlatformId());
+        if (request.getCustomInformation() != null)
+            parameters.put(ServiceConstants.ORDER_ATTRIBUTES_CUSTOM_INFORMATION, request.getCustomInformation());
+        if (request.getPaymentServiceProviderId() != null)
+            parameters.put(ServiceConstants.ORDER_ATTRIBUTES_PAYMENT_SERVICE_PROVIDER_ID, request.getPaymentServiceProviderId());
+        if (request.getPaymentServiceProviderOrderId() != null)
+            parameters.put(ServiceConstants.ORDER_ATTRIBUTES_PAYMENT_SERVICE_PROVIDER_ORDER_ID, request.getPaymentServiceProviderOrderId());
+        if (request.getOrderItemCategories() != null){
+            Set<String> orderItemCategories = request.getOrderItemCategories();
+            int count = 1;
+            for (String orderItemCategory: orderItemCategories){
+                parameters.put(ServiceConstants.ORDER_ATTRIBUTES_ORDER_ITEM_CATEGORIES + "." + count, orderItemCategory);
+                count++;
+            }
+        }
+        if (request.getMwsAuthToken() != null)
+            parameters.put(ServiceConstants.MWS_AUTH_TOKEN, request.getMwsAuthToken());
+
         addClientParameters(parameters);
         return Util.convertParameterMapToString(parameters);
     }

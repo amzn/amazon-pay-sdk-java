@@ -43,7 +43,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
         "parentDetails",
         "idList",
         "orderLanguage",
-        "requestPaymentAuthorization"
+        "requestPaymentAuthorization",
+        "paymentServiceProviderAttributes"
 })
 public class OrderReferenceDetails {
 
@@ -84,9 +85,9 @@ public class OrderReferenceDetails {
     @XmlElement(name = "OrderLanguage")
     protected String orderLanguage;
     @XmlElement(name = "RequestPaymentAuthorization")
-    protected String requestPaymentAuthorization;
-
-
+    protected Boolean requestPaymentAuthorization;
+    @XmlElement(name = "PaymentServiceProviderAttributes")
+    protected PaymentServiceProviderAttributes paymentServiceProviderAttributes;
 
     public OrderReferenceDetails() {
         super();
@@ -270,10 +271,17 @@ public class OrderReferenceDetails {
      *
      * @return requestPaymentAuthorization
      */
-    public String getRequestPaymentAuthorization() {
+    public Boolean getRequestPaymentAuthorization() {
         return requestPaymentAuthorization;
     }
 
+    /**
+     *
+     * @return paymentServiceProviderAttributes
+     */
+    public PaymentServiceProviderAttributes getPaymentServiceProviderAttributes() {
+        return paymentServiceProviderAttributes;
+    }
 
     /**
      * String representation of OrderReferenceDetails
@@ -299,6 +307,7 @@ public class OrderReferenceDetails {
                 + ", parentDetails=" + parentDetails
                 + ", idList=" + idList
                 + ", orderLanguage=" + orderLanguage
-                + ", requestPaymentAuthorization=" + requestPaymentAuthorization + '}';
+                + ", requestPaymentAuthorization=" + requestPaymentAuthorization
+                + ", paymentServiceProviderAttributes=" + paymentServiceProviderAttributes + '}';
     }
 }

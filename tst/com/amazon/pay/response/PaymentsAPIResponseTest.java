@@ -37,6 +37,9 @@ import com.amazon.pay.response.parser.RefundResponseData;
 import com.amazon.pay.response.parser.SetBillingAgreementDetailsResponseData;
 import com.amazon.pay.response.parser.SetOrderReferenceDetailsResponseData;
 import com.amazon.pay.response.parser.ValidateBillingAgreementResponseData;
+import com.amazon.pay.response.parser.ListOrderReferenceResponseData;
+import com.amazon.pay.response.parser.ListOrderReferenceByNextTokenResponseData;
+import com.amazon.pay.response.parser.SetOrderAttributesResponseData;
 import com.amazon.pay.exceptions.AmazonClientException;
 import com.amazon.pay.exceptions.AmazonServiceException;
 import com.amazon.pay.response.parser.ResponseData;
@@ -50,6 +53,7 @@ import java.io.Reader;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
+import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.datatype.DatatypeFactory;
@@ -84,7 +88,7 @@ public class PaymentsAPIResponseTest {
     @Test
     public void testGetOrderReferenceDetailsResponse() throws Exception {
         final String rawResponse = loadTestFile("GetOrderReferenceDetailsResponse.xml");
-        final ResponseData response = new ResponseData(200, rawResponse);
+        final ResponseData response = new ResponseData(HttpURLConnection.HTTP_OK, rawResponse);
         final GetOrderReferenceDetailsResponseData res = Parser.getOrderReferenceDetails(response);
         Assert.assertEquals(res.getDetails().getAmazonOrderReferenceId(), "P01-1234567-1234567");
         Assert.assertEquals(res.getDetails().getOrderReferenceStatus().getState(), "Draft");
@@ -107,7 +111,7 @@ public class PaymentsAPIResponseTest {
     @Test
     public void testPaymentDescriptor() throws Exception {
         final String rawResponse = loadTestFile("TestPaymentDescriptor.xml");
-        final ResponseData response = new ResponseData(200, rawResponse);
+        final ResponseData response = new ResponseData(HttpURLConnection.HTTP_OK, rawResponse);
         final GetOrderReferenceDetailsResponseData res = Parser.getOrderReferenceDetails(response);
         Assert.assertNull(res.getDetails().getPaymentDescriptor().getName());
         Assert.assertNull(res.getDetails().getPaymentDescriptor().getAccountNumberTail());
@@ -120,7 +124,7 @@ public class PaymentsAPIResponseTest {
     @Test
     public void testNoPaymentDescriptor() throws Exception {
         final String rawResponse = loadTestFile("GetOROwithoutPaymentDescriptor.xml");
-        final ResponseData response = new ResponseData(200, rawResponse);
+        final ResponseData response = new ResponseData(HttpURLConnection.HTTP_OK, rawResponse);
         final GetOrderReferenceDetailsResponseData res = Parser.getOrderReferenceDetails(response);
         Assert.assertNull(res.getDetails().getPaymentDescriptor());
         Assert.assertEquals(res.toXML(), rawResponse);
@@ -129,7 +133,7 @@ public class PaymentsAPIResponseTest {
     @Test
     public void testSanitizedData() throws Exception {
         final String rawResponse = loadTestFile("SanitizedData.xml");
-        final ResponseData response = new ResponseData(200, rawResponse);
+        final ResponseData response = new ResponseData(HttpURLConnection.HTTP_OK, rawResponse);
         final SetOrderReferenceDetailsResponseData res = Parser.setOrderReferenceDetails(response);
 
         Assert.assertEquals(res.getDetails().getAmazonOrderReferenceId(), "S01-9821095-0000200");
@@ -146,19 +150,19 @@ public class PaymentsAPIResponseTest {
     public void testGetPaymentDetails() throws Exception {
         final GetPaymentDetails testGetAllResponseDetails = new GetPaymentDetails();
         final String rawResponse = loadTestFile("GetOrderReferenceDetailsResponse.xml");
-        final ResponseData orderReferenceDetailsResponse = new ResponseData(200, rawResponse);
+        final ResponseData orderReferenceDetailsResponse = new ResponseData(HttpURLConnection.HTTP_OK, rawResponse);
         final OrderReferenceDetails parsedOrderResponse = Parser.getOrderReferenceDetails(orderReferenceDetailsResponse).getDetails();
 
         final String rawAuthResponse = loadTestFile("GetAuthorizationDetailsResponse.xml");
-        final ResponseData authorizeDetailsResponse = new ResponseData(200, rawAuthResponse);
+        final ResponseData authorizeDetailsResponse = new ResponseData(HttpURLConnection.HTTP_OK, rawAuthResponse);
         final AuthorizationDetails parsedAuthorizeResponse = Parser.getAuthorizationDetailsData(authorizeDetailsResponse).getDetails();
 
         final String rawCaptureResponse = loadTestFile("GetCaptureDetailsResponse.xml");
-        final ResponseData captureDetailsResponse = new ResponseData(200, rawCaptureResponse);
+        final ResponseData captureDetailsResponse = new ResponseData(HttpURLConnection.HTTP_OK, rawCaptureResponse);
         final CaptureDetails parsedCaptureResponse = Parser.getCaptureDetailsData(captureDetailsResponse).getDetails();
 
         final String rawRefundResponse = loadTestFile("GetRefundDetails.xml");
-        final ResponseData refundDetailsResponse = new ResponseData(200, rawRefundResponse);
+        final ResponseData refundDetailsResponse = new ResponseData(HttpURLConnection.HTTP_OK, rawRefundResponse);
         final RefundDetails parsedRefundResponse = Parser.getRefundDetailsData(refundDetailsResponse).getDetails();
 
         testGetAllResponseDetails.putOrderReferenceDetails("P01-1234567-1234567", parsedOrderResponse);
@@ -177,7 +181,7 @@ public class PaymentsAPIResponseTest {
     @Test
     public void testSetOrderReferenceDetailsResponse() throws Exception {
         final String rawResponse = loadTestFile("SetOrderReferenceDetailsResponse.xml");
-        final ResponseData response = new ResponseData(200, rawResponse);
+        final ResponseData response = new ResponseData(HttpURLConnection.HTTP_OK, rawResponse);
         final SetOrderReferenceDetailsResponseData res = Parser.setOrderReferenceDetails(response);
 
         Assert.assertEquals(res.getDetails().getAmazonOrderReferenceId(), "S01-9821095-0000200");
@@ -196,6 +200,7 @@ public class PaymentsAPIResponseTest {
         Assert.assertEquals(res.getDetails().getSellerOrderAttributes().getSellerOrderId(), "test1234");
         Assert.assertEquals(res.getDetails().getSellerOrderAttributes().getStoreName(), "myTestStore");
         Assert.assertEquals(res.getDetails().getSellerOrderAttributes().getCustomInformation(), "myCustomInformation");
+        Assert.assertEquals(res.getDetails().getRequestPaymentAuthorization(), false);
 
         Assert.assertEquals(res.getDetails().getPlatformId(), "ANDRCTOTP9");
         final XMLGregorianCalendar xgc2 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2016-04-27T20:43:45.183Z");
@@ -212,7 +217,7 @@ public class PaymentsAPIResponseTest {
     @Test
     public void testConfirmOrderResponse() throws Exception {
         final String rawResponse = loadTestFile("ConfirmOrderReferenceResponse.xml");
-        final ResponseData response = new ResponseData(200, rawResponse);
+        final ResponseData response = new ResponseData(HttpURLConnection.HTTP_OK, rawResponse);
         final ConfirmOrderReferenceResponseData res = Parser.confirmOrderReference(response);
         Assert.assertEquals(res.getRequestId(), "f1f52572-a347-4f7a-a630-be066f3ba827");
         Assert.assertEquals(res.toXML(), rawResponse);
@@ -221,7 +226,7 @@ public class PaymentsAPIResponseTest {
     @Test
     public void testAuthorizeResponse() throws Exception {
         final String rawResponse = loadTestFile("AuthorizeResponse.xml");
-        final ResponseData response = new ResponseData(200, rawResponse);
+        final ResponseData response = new ResponseData(HttpURLConnection.HTTP_OK, rawResponse);
         final AuthorizeResponseData res = Parser.getAuthorizeData(response);
         Assert.assertEquals(res.getDetails().getAmazonAuthorizationId(), "S01-9821095-1837200-A041953");
         Assert.assertEquals(res.getDetails().getSoftDescriptor(), "AMZ*testikiki");
@@ -254,7 +259,7 @@ public class PaymentsAPIResponseTest {
     @Test
     public void testAuthorizationDetailsResponse() throws Exception {
         final String rawResponse = loadTestFile("GetAuthorizationDetailsResponse.xml");
-        final ResponseData response = new ResponseData(200, rawResponse);
+        final ResponseData response = new ResponseData(HttpURLConnection.HTTP_OK, rawResponse);
         final GetAuthorizationDetailsResponseData res = Parser.getAuthorizationDetailsData(response);
         Assert.assertEquals(res.getDetails().getAmazonAuthorizationId(), "S01-9821095-1837200-A041953");
         Assert.assertEquals(res.getDetails().getSoftDescriptor(), "AMZ*testikiki");
@@ -285,7 +290,7 @@ public class PaymentsAPIResponseTest {
     @Test
     public void testCaptureResponse() throws Exception {
         final String rawResponse = loadTestFile("CaptureResponse.xml");
-        final ResponseData response = new ResponseData(200, rawResponse);
+        final ResponseData response = new ResponseData(HttpURLConnection.HTTP_OK, rawResponse);
         final CaptureResponseData res = Parser.getCapture(response);
         Assert.assertEquals(res.getDetails().getAmazonCaptureId(), "S01-9821095-1837200-C053432");
         Assert.assertEquals(res.getDetails().getCaptureAmount().getAmount(), "1.00");
@@ -309,7 +314,7 @@ public class PaymentsAPIResponseTest {
     @Test
     public void testCaptureDetailsResponse() throws Exception {
         final String rawResponse = loadTestFile("GetCaptureDetailsResponse.xml");
-        final ResponseData response = new ResponseData(200, rawResponse);
+        final ResponseData response = new ResponseData(HttpURLConnection.HTTP_OK, rawResponse);
         final GetCaptureDetailsResponseData res = Parser.getCaptureDetailsData(response);
         Assert.assertEquals(res.getDetails().getAmazonCaptureId(), "S01-9821095-1837200-C041953");
         Assert.assertEquals(res.getDetails().getCaptureAmount().getAmount(), "1.00");
@@ -334,7 +339,7 @@ public class PaymentsAPIResponseTest {
     @Test
     public void testCaptureDetailsResponseMulticurrency() throws Exception {
         final String rawResponse = loadTestFile("GetCaptureDetailsResponse_Multicurrency.xml");
-        final ResponseData response = new ResponseData(200, rawResponse);
+        final ResponseData response = new ResponseData(HttpURLConnection.HTTP_OK, rawResponse);
         final GetCaptureDetailsResponseData res = Parser.getCaptureDetailsData(response);
         Assert.assertEquals(res.getDetails().getAmazonCaptureId(), "S02-7423235-4925359-C052508");
         Assert.assertEquals(res.getDetails().getCaptureAmount().getAmount(), "0.99");
@@ -365,7 +370,7 @@ public class PaymentsAPIResponseTest {
    @Test
     public void testCancelOrderReferenceResponse() throws Exception {
         final String rawResponse = loadTestFile("CancelOrderReferenceResponse.xml");
-        final ResponseData response = new ResponseData(200, rawResponse);
+        final ResponseData response = new ResponseData(HttpURLConnection.HTTP_OK, rawResponse);
         final CancelOrderReferenceResponseData res = Parser.getCancelOrderReference(response);
         Assert.assertEquals(res.getRequestId(), "0714c2dd-c3fa-45af-afc7-b48055cfd7bf");
         Assert.assertEquals(res.toXML(), rawResponse);
@@ -374,7 +379,7 @@ public class PaymentsAPIResponseTest {
    @Test
     public void testCloseOrderReferenceResponse() throws Exception {
         final String rawResponse = loadTestFile("CloseOrderReferenceResponse.xml");
-        final ResponseData response = new ResponseData(200, rawResponse);
+        final ResponseData response = new ResponseData(HttpURLConnection.HTTP_OK, rawResponse);
         final CloseOrderReferenceResponseData res = Parser.getCloseOrderReference(response);
         Assert.assertEquals(res.getRequestId(), "5f20169b-7ab2-11df-bcef-d35615e2b044");
         Assert.assertEquals(res.toXML(), rawResponse);
@@ -383,7 +388,7 @@ public class PaymentsAPIResponseTest {
    @Test
     public void testCloseAuthorizationResponse() throws Exception {
         final String rawResponse = loadTestFile("CloseAuthorizationResponse.xml");
-        final ResponseData response = new ResponseData(200, rawResponse);
+        final ResponseData response = new ResponseData(HttpURLConnection.HTTP_OK, rawResponse);
         final CloseAuthorizationResponseData res = Parser.closeAuthorizationResponse(response);
         Assert.assertEquals(res.getRequestId(), "3e130e5b-41ae-41fd-b307-dbbf45663d79");
         Assert.assertEquals(res.toXML(), rawResponse);
@@ -392,7 +397,7 @@ public class PaymentsAPIResponseTest {
     @Test
     public void testReverseProviderCreditResponse() throws Exception {
         final String rawResponse = loadTestFile("ReverseProviderCreditResponse.xml");
-        final ResponseData response = new ResponseData(200, rawResponse);
+        final ResponseData response = new ResponseData(HttpURLConnection.HTTP_OK, rawResponse);
         final ReverseProviderCreditResponseData res = Parser.getReverseProviderCreditResponseData(response);
 
         Assert.assertEquals(res.getDetails().getAmazonProviderCreditReversalId(), "S01-0458164-4040121-Q021623");
@@ -416,7 +421,7 @@ public class PaymentsAPIResponseTest {
     @Test
     public void testGetProviderCreditReversalDetailsResponse() throws Exception {
         final String rawResponse = loadTestFile("GetProviderCreditReversalDetailsResponse.xml");
-        final ResponseData response = new ResponseData(200, rawResponse);
+        final ResponseData response = new ResponseData(HttpURLConnection.HTTP_OK, rawResponse);
         final GetProviderCreditReversalDetailsResponseData res = Parser.getProviderCreditReversalDetails(response);
         Assert.assertEquals(res.getDetails().getAmazonProviderCreditReversalId(), "S01-2117025-2155793-P045170");
         Assert.assertEquals(res.getDetails().getCreditReversalAmount().getAmount(), "1.00");
@@ -446,7 +451,7 @@ public class PaymentsAPIResponseTest {
     }
 
     public void testGetProviderCreditDetailsResponse(final String rawResponse) throws Exception {
-        final ResponseData response = new ResponseData(200, rawResponse);
+        final ResponseData response = new ResponseData(HttpURLConnection.HTTP_OK, rawResponse);
         final GetProviderCreditDetailsResponseData res = Parser.getGetProviderCreditDetails(response);
         Assert.assertEquals(res.getDetails().getAmazonProviderCreditId(), "S01-2117025-2155793-P045170");
         Assert.assertEquals(res.getDetails().getCreditAmount().getAmount(), "1.00");
@@ -473,7 +478,7 @@ public class PaymentsAPIResponseTest {
     @Test
     public void testGetBillingAgreementDetailsResponse() throws Exception {
         final String rawResponse = loadTestFile("GetBillingAgreementDetailsResponse.xml");
-        final ResponseData response = new ResponseData(200, rawResponse);
+        final ResponseData response = new ResponseData(HttpURLConnection.HTTP_OK, rawResponse);
         final GetBillingAgreementDetailsResponseData res = Parser.getBillingAgreementDetailsData(response);
         Assert.assertEquals(res.getDetails().getAmazonBillingAgreementId(), "C01-3925266-2250830");
         Assert.assertEquals(res.getDetails().getBillingAgreementStatus().getLastUpdatedTimestamp(), null);
@@ -521,7 +526,7 @@ public class PaymentsAPIResponseTest {
     @Test
     public void testSetBillingAgreementDetailsResponse() throws Exception {
         final String rawResponse = loadTestFile("SetBillingAgreementDetailsResponse.xml");
-        final ResponseData response = new ResponseData(200, rawResponse);
+        final ResponseData response = new ResponseData(HttpURLConnection.HTTP_OK, rawResponse);
         final SetBillingAgreementDetailsResponseData res = Parser.getSetBillingAgreementDetailsResponse(response);
         Assert.assertEquals(res.getDetails().getAmazonBillingAgreementId(), "C01-3925266-2250830");
         Assert.assertEquals(res.getDetails().getBillingAgreementStatus().getLastUpdatedTimestamp(), null);
@@ -552,7 +557,7 @@ public class PaymentsAPIResponseTest {
     @Test
     public void testConfirmBillingAgreementDetailsResponse() throws Exception {
         final String rawResponse = loadTestFile("ConfirmBillingAgreementResponse.xml");
-        final ResponseData response = new ResponseData(200, rawResponse);
+        final ResponseData response = new ResponseData(HttpURLConnection.HTTP_OK, rawResponse);
         final ConfirmBillingAgreementResponseData res = Parser.confirmBillingAgreementResponse(response);
         Assert.assertEquals(res.getRequestId(), "3d1db999-b790-47bb-87d3-9c673c38a1ed");
         Assert.assertEquals(res.toXML(), rawResponse);
@@ -561,7 +566,7 @@ public class PaymentsAPIResponseTest {
     @Test
     public void testValidateBillingAgreementResponse() throws Exception {
         final String rawResponse = loadTestFile("ValidateBillingAgreementResponse.xml");
-        final ResponseData response = new ResponseData(200, rawResponse);
+        final ResponseData response = new ResponseData(HttpURLConnection.HTTP_OK, rawResponse);
         final ValidateBillingAgreementResponseData res = Parser.getValidateBillingAgreementResponse(response);
         Assert.assertEquals(RequestStatus.SUCCESS, res.getResult().getValidationResult());
         Assert.assertEquals("Open", res.getResult().getBillingAgreementStatus().getState());
@@ -574,7 +579,7 @@ public class PaymentsAPIResponseTest {
     @Test
     public void testAuthorizeOnBillingAgreementResponse() throws Exception {
         final String rawResponse = loadTestFile("AuthorizeOnBillingAgreementResponse.xml");
-        final ResponseData response = new ResponseData(200, rawResponse);
+        final ResponseData response = new ResponseData(HttpURLConnection.HTTP_OK, rawResponse);
         final AuthorizeOnBillingAgreementResponseData res = Parser.getAuthorizeOnBillingAgreement(response);
         Assert.assertEquals(res.getDetails().getAuthorizationAmount().getAmount(), "1.00");
         Assert.assertEquals(res.getDetails().getAuthorizationAmount().getCurrencyCode(), "USD");
@@ -604,7 +609,7 @@ public class PaymentsAPIResponseTest {
     @Test
     public void testCloseBillingAgreementResponse() throws Exception {
         final String rawResponse = loadTestFile("CloseBillingAgreementResponse.xml");
-        final ResponseData response = new ResponseData(200, rawResponse);
+        final ResponseData response = new ResponseData(HttpURLConnection.HTTP_OK, rawResponse);
         final CloseBillingAgreementResponseData res = Parser.closeBillingAgreementResponse(response);
         Assert.assertEquals(res.getRequestId(), "7541230f-e349-4180-a4ac-ba9f2cf6ac79");
         Assert.assertEquals(res.toXML(), rawResponse);
@@ -613,7 +618,7 @@ public class PaymentsAPIResponseTest {
     @Test
     public void testRefundResponse() throws Exception {
         final String rawResponse = loadTestFile("RefundResponse.xml");
-        final ResponseData response = new ResponseData(200, rawResponse);
+        final ResponseData response = new ResponseData(HttpURLConnection.HTTP_OK, rawResponse);
         final RefundResponseData res = Parser.getRefundData(response);
         Assert.assertEquals(res.getDetails().getRefundReferenceId(), "testRefundId1354077");
         Assert.assertEquals(res.getDetails().getAmazonRefundId(), "S01-5695290-1354077-R072290");
@@ -637,7 +642,7 @@ public class PaymentsAPIResponseTest {
     @Test
     public void testGetRefundDetailsResponse() throws Exception {
         final String rawResponse = loadTestFile("GetRefundDetails.xml");
-        final ResponseData response = new ResponseData(200, rawResponse);
+        final ResponseData response = new ResponseData(HttpURLConnection.HTTP_OK, rawResponse);
         final GetRefundDetailsResponseData res = Parser.getRefundDetailsData(response);
         Assert.assertEquals(res.getDetails().getRefundReferenceId(), "testRefundId1354077");
         Assert.assertEquals(res.getDetails().getAmazonRefundId(), "S01-5695290-1354077-R072290");
@@ -662,7 +667,7 @@ public class PaymentsAPIResponseTest {
     @Test
     public void testGetRefundDetailsResponseMulticurrency() throws Exception {
         final String rawResponse = loadTestFile("GetRefundDetails_Multicurrency.xml");
-        final ResponseData response = new ResponseData(200, rawResponse);
+        final ResponseData response = new ResponseData(HttpURLConnection.HTTP_OK, rawResponse);
         final GetRefundDetailsResponseData res = Parser.getRefundDetailsData(response);
         Assert.assertEquals(res.getDetails().getRefundReferenceId(), "aed9ba8bee564c8cb943bd6481633ad1");
         Assert.assertEquals(res.getDetails().getAmazonRefundId(), "S02-8274313-3487267-R019346");
@@ -693,7 +698,7 @@ public class PaymentsAPIResponseTest {
     @Test
     public void testGetServiceStatusGreenI() throws Exception {
         final String rawResponse = loadTestFile("GetServiceStatusResponseGreenI.xml");
-        final ResponseData response = new ResponseData(200, rawResponse);
+        final ResponseData response = new ResponseData(HttpURLConnection.HTTP_OK, rawResponse);
         final GetServiceStatusResponseData res = Parser.getServiceStatus(response);
 
         Assert.assertEquals(res.getStatus(), ServiceStatus.GREEN_I);
@@ -718,7 +723,7 @@ public class PaymentsAPIResponseTest {
     @Test
     public void testGetServiceStatusGreen() throws Exception {
         final String rawResponse = loadTestFile("GetServiceStatusResponseGreen.xml");
-        final ResponseData response = new ResponseData(200, rawResponse);
+        final ResponseData response = new ResponseData(HttpURLConnection.HTTP_OK, rawResponse);
         final GetServiceStatusResponseData res = Parser.getServiceStatus(response);
 
         Assert.assertEquals(res.getStatus(), ServiceStatus.GREEN);
@@ -735,7 +740,7 @@ public class PaymentsAPIResponseTest {
     @Test
     public void testCreateOrderReferenceForIdResponse() throws Exception {
         final String rawResponse = loadTestFile("CreateOrderReferenceForIdResponse.xml");
-        final ResponseData response = new ResponseData(200, rawResponse);
+        final ResponseData response = new ResponseData(HttpURLConnection.HTTP_OK, rawResponse);
         final CreateOrderReferenceForIdResponseData res = Parser.createOrderReferenceForId(response);
 
         Assert.assertEquals(res.getRequestId(), "4d5e0306-257e-4a13-b2ad-45b891c3de2a");
@@ -767,7 +772,7 @@ public class PaymentsAPIResponseTest {
                 DatatypeFactory.newInstance().newXMLGregorianCalendar("2016-11-28T03:23:21.923Z");
         Assert.assertEquals(res.getDetails().getCreationTimestamp(), creationTimestamp);
         Assert.assertEquals(res.getDetails().getSellerNote(), "My seller note goes here");
-        Assert.assertEquals(res.getDetails().getRequestPaymentAuthorization(), "false");
+        Assert.assertEquals(res.getDetails().getRequestPaymentAuthorization(), false);
         Assert.assertEquals(res.getDetails().getBuyer().getName(), "Sandbox Guillot");
         Assert.assertEquals(res.getDetails().getBuyer().getEmail(), "not+a+real+email@inter.net");
 
@@ -788,13 +793,13 @@ public class PaymentsAPIResponseTest {
     // <{http://mws.amazonservices.com/schema/OffAmazonPayments/2013-01-01}GetRefundDetailsResult>,<{http://mws.amazonservices.com/schema/OffAmazonPayments/2013-01-01}ResponseMetadata>
     public void testJAXBExceptionResponse() throws Exception {
         final String rawResponse = loadTestFile("GetAuthorizationDetailsResponse.xml");
-        final ResponseData response = new ResponseData(200, rawResponse);
+        final ResponseData response = new ResponseData(HttpURLConnection.HTTP_OK, rawResponse);
         try {
             final GetRefundDetailsResponseData res = Parser.getRefundDetailsData(response);
             Assert.fail();
         } catch (AmazonClientException e) {
             Assert.assertEquals(e.getResponseXml(), rawResponse);
-            Assert.assertEquals(e.getStatusCode(), 200);
+            Assert.assertEquals(e.getStatusCode(), HttpURLConnection.HTTP_OK);
         }
     }
 
@@ -802,19 +807,65 @@ public class PaymentsAPIResponseTest {
     public void testErrorResponse() throws Exception {
 
         final String rawResponse = loadTestFile("ErrorResponse.xml");
-        final ResponseData response = new ResponseData(404, rawResponse);
+        final ResponseData response = new ResponseData(HttpURLConnection.HTTP_NOT_FOUND, rawResponse);
         try {
             Parser.marshalXML(ErrorResponse.class, response);
             Assert.fail();
         } catch (AmazonServiceException e) {
             Assert.assertEquals(e.getResponseXml(), rawResponse);
-            Assert.assertEquals(e.getStatusCode(), 404);
+            Assert.assertEquals(e.getStatusCode(), HttpURLConnection.HTTP_NOT_FOUND);
             Assert.assertEquals(e.getErrorCode(), "OrderReferenceNotModifiable");
             Assert.assertEquals(e.getErrorType(), "Sender");
             Assert.assertEquals(e.getRequestId(), "6d4699b8-1238-4c09-b539-176e2c2f5462");
             Assert.assertEquals(e.getErrorMessage(), "OrderReference S01-5695290-1354077 is not in draft state and cannot be modified with the request submitted by you.");
 
         }
+    }
+
+    @Test
+    public void testListOrderReferenceResponse() throws Exception {
+        final String rawResponse = loadTestFile("ListOrderReferenceResponse.xml");
+        final ResponseData response = new ResponseData(HttpURLConnection.HTTP_OK, rawResponse);
+        final ListOrderReferenceResponseData res = Parser.listOrderReference(response);
+
+        Assert.assertEquals(res.getRequestId(), "87bceae8-d043-41c9-b34c-87fc5a3f1f99");
+        Assert.assertEquals(res.getOrderReferences().size(), 3);
+        Assert.assertEquals(res.getNextPageToken(), "1eUc0QkJMVnJpcGgrbDNHclpIUT09IiwibWFya2V0cGxhY2VJZCI6IkEzQlhCMFlOM1hIMTdIIn0=");
+    }
+
+    @Test
+    public void testListOrderReferenceByNextTokenResponse() throws Exception {
+        final String rawResponse = loadTestFile("ListOrderReferenceByNextTokenResponse.xml");
+        final ResponseData response = new ResponseData(HttpURLConnection.HTTP_OK, rawResponse);
+        final ListOrderReferenceByNextTokenResponseData res = Parser.listOrderReferenceByNextToken(response);
+
+        Assert.assertEquals(res.getRequestId(), "cd3c24d6-c1cf-4656-9774-52c99529f26d");
+        Assert.assertEquals(res.getOrderReferences().size(), 7);
+        Assert.assertEquals(res.getNextPageToken(), "bm1eUc0QkJMVnJpcGgrbDNHclpIUT09IiwibWFya2V0cGxhY2VJZCI6IkEzQlhCMFlOM1hIMTdIIn0=");
+    }
+
+    @Test
+    public void testSetOrderAttributesResponse() throws Exception {
+        final String rawResponse = loadTestFile("SetOrderAttributesResponse.xml");
+        final ResponseData response = new ResponseData(HttpURLConnection.HTTP_OK, rawResponse);
+        final SetOrderAttributesResponseData res = Parser.setOrderAttributes(response);
+
+        Assert.assertEquals(res.getRequestId(), "9ce3684d-0bcc-4151-9656-1e87d83199ce");
+        Assert.assertEquals(res.getOrderReferenceDetails().getAmazonOrderReferenceId(), "P01-6744909-5149370");
+        Assert.assertEquals(res.getOrderReferenceDetails().getOrderTotal().getAmount(),"0.01");
+        Assert.assertEquals(res.getOrderReferenceDetails().getOrderTotal().getCurrencyCode(), "USD");
+        Assert.assertEquals(res.getOrderReferenceDetails().getRequestPaymentAuthorization(), false);
+        Assert.assertEquals(res.getOrderReferenceDetails().getPaymentServiceProviderAttributes().getPaymentServiceProviderId(), "paymentServiceProviderId");
+        Assert.assertEquals(res.getOrderReferenceDetails().getPaymentServiceProviderAttributes().getPaymentServiceProviderOrderId(),"paymentServiceProviderOrderId");
+        Assert.assertEquals(res.getOrderReferenceDetails().getPlatformId(), "platformId");
+        Assert.assertEquals(res.getOrderReferenceDetails().getSellerOrderAttributes().getCustomInformation(),"cutomInfo");
+        Assert.assertEquals(res.getOrderReferenceDetails().getSellerOrderAttributes().getSellerOrderId(), "sellerOrderId");
+        Assert.assertEquals(res.getOrderReferenceDetails().getSellerOrderAttributes().getStoreName(),"storeName");
+        Assert.assertEquals(res.getOrderReferenceDetails().getSellerNote(), "sellerNote");
+        Assert.assertEquals(res.getOrderReferenceDetails().getReleaseEnvironment().value(), "LIVE");
+        Assert.assertEquals(res.getOrderReferenceDetails().getOrderReferenceStatus().getState(),"Draft");
+        Assert.assertEquals(res.getOrderReferenceDetails().getSellerOrderAttributes().getOrderItemCategories().getOrderItemCategory().size(),2);
+
     }
 }
 

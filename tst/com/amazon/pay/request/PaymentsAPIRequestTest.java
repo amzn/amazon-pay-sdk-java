@@ -1,15 +1,24 @@
 package com.amazon.pay.request;
 
-import com.amazon.pay.TestConstants;
 import com.amazon.pay.response.model.Price;
 import com.amazon.pay.response.model.ProviderCredit;
 import com.amazon.pay.types.AmazonReferenceIdType;
 import com.amazon.pay.types.CurrencyCode;
+import com.amazon.pay.types.OrderReferenceStatus;
+import com.amazon.pay.types.SortOrder;
+import com.amazon.pay.TestConstants;
 
-import java.util.Collections;
-import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
+
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
+
+import java.util.Collections;
+import java.util.EnumSet;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class PaymentsAPIRequestTest {
 
@@ -174,7 +183,8 @@ public class PaymentsAPIRequestTest {
                 .setStoreName("testStore")
                 .setCustomInformation("customInfo")
                 .setSellerNote("sampleText")
-                .setOrderCurrencyCode(CurrencyCode.USD);
+                .setOrderCurrencyCode(CurrencyCode.USD)
+                .setRequestPaymentAuthorization(true);
 
         Assert.assertEquals(request.getAmazonOrderReferenceId(), TestConstants.amazonOrderReferenceId);
         Assert.assertEquals(request.getOrderAmount(), "2");
@@ -185,6 +195,7 @@ public class PaymentsAPIRequestTest {
         Assert.assertEquals(request.getPlatformId(), "platformId");
         Assert.assertEquals(request.getCustomInformation(), "customInfo");
         Assert.assertEquals(request.getSellerNote(), "sampleText");
+        Assert.assertEquals(request.getRequestPaymentAuthorization(), true);
     }
 
     private AuthorizeOnBillingAgreementRequest testAuthorizeOnBillingAgreementSetup() {
@@ -408,6 +419,66 @@ public class PaymentsAPIRequestTest {
         Assert.assertEquals(request.getCustomInformation(), "Test Custom Information");
         Assert.assertEquals(request.getOrderTotalAmount(), "567.89");
         Assert.assertEquals(request.getPlatformId(), TestConstants.platformId);
+    }
+
+    @Test
+    public void testListOrderReference() throws Exception {
+        final EnumSet<OrderReferenceStatus> filter = EnumSet.of(OrderReferenceStatus.OPEN, OrderReferenceStatus.CANCELED);
+        final XMLGregorianCalendar startTime =
+                DatatypeFactory.newInstance().newXMLGregorianCalendar("2017-05-27T03:23:21.923Z");
+
+        final ListOrderReferenceRequest request =
+                new ListOrderReferenceRequest(
+                        TestConstants.queryId, TestConstants.queryIdType)
+                        .setStartTime(startTime)
+                        .setPageSize(TestConstants.pageSize)
+                        .setSortOrder(SortOrder.Ascending)
+                        .setOrderReferenceStatusListFilter(filter);
+        Assert.assertEquals(request.getStartTime(), startTime);
+        Assert.assertEquals(TestConstants.pageSize, request.getPageSize().intValue());
+        Assert.assertEquals(request.getSortOrder(), SortOrder.Ascending);
+        Assert.assertEquals(request.getQueryId(), TestConstants.queryId);
+        Assert.assertEquals(request.getQueryIdType(), TestConstants.queryIdType);
+        Assert.assertEquals(request.getOrderReferenceStatusListFilter().size(),2);
+    }
+
+    @Test
+    public void testListOrderReferenceByNextToken() {
+        final ListOrderReferenceByNextTokenRequest request = new ListOrderReferenceByNextTokenRequest(
+                TestConstants.nextPageToken);
+        Assert.assertEquals(request.getNextPageToken(), TestConstants.nextPageToken);
+    }
+
+    @Test
+    public void testSetOrderAttributes() {
+        Set<String> orderItemCategories = new HashSet<String>();
+        orderItemCategories.add("Antiques");
+        orderItemCategories.add("Apparel");
+        final SetOrderAttributesRequest request =
+                new SetOrderAttributesRequest(
+                        TestConstants.amazonOrderReferenceId, "2", CurrencyCode.USD)
+                        .setCustomInformation("customInfo")
+                        .setSellerNote("sellerNote")
+                        .setPlatformId("platformId")
+                        .setSellerOrderId("sellerOrderId")
+                        .setStoreName("storeName")
+                        .setRequestPaymentAuthorization(true)
+                        .setPaymentServiceProviderId("paymentServiceProviderId")
+                        .setPaymentServiceProviderOrderId("paymentServiceProviderOrderId")
+                        .setOrderItemCategories(orderItemCategories);
+        Assert.assertEquals(request.getAmazonOrderReferenceId(), TestConstants.amazonOrderReferenceId);
+        Assert.assertEquals(request.getAmount(), "2");
+        Assert.assertEquals(request.getCurrencyCode(), CurrencyCode.USD);
+        Assert.assertEquals(request.getCustomInformation(), "customInfo");
+        Assert.assertEquals(request.getSellerNote(), "sellerNote");
+        Assert.assertEquals(request.getPlatformId(), "platformId");
+        Assert.assertEquals(request.getSellerOrderId(),"sellerOrderId");
+        Assert.assertEquals(request.getStoreName(),"storeName");
+        Assert.assertEquals(request.getRequestPaymentAuthorization(),true);
+        Assert.assertEquals(request.getPaymentServiceProviderId(),"paymentServiceProviderId");
+        Assert.assertEquals(request.getPaymentServiceProviderOrderId(),"paymentServiceProviderOrderId");
+        Assert.assertTrue(request.getOrderItemCategories().contains("Antiques"));
+        Assert.assertTrue(request.getOrderItemCategories().contains("Apparel"));
     }
 
 }

@@ -1,0 +1,64 @@
+<ListOrderReferenceResponse xmlns="http://mws.amazonservices.com/schema/OffAmazonPayments/2013-01-01">
+    <ListOrderReferenceResult>
+        <OrderReferenceList>
+            <OrderReference>
+                <ReleaseEnvironment>Sandbox</ReleaseEnvironment>
+                <OrderReferenceStatus>
+                    <LastUpdateTimestamp>2017-09-08T19:30:48.045Z</LastUpdateTimestamp>
+                    <State>Open</State>
+                </OrderReferenceStatus>
+                <AmazonOrderReferenceId>S01-1489058-8391380</AmazonOrderReferenceId>
+                <CreationTimestamp>2017-09-08T19:30:46.898Z</CreationTimestamp>
+                <SellerOrderAttributes>
+                    <StoreName>Top of the World Store</StoreName>
+                    <CustomInformation>New custom info</CustomInformation>
+                    <SellerOrderId>OR# 12345</SellerOrderId>
+                </SellerOrderAttributes>
+                <OrderTotal>
+                    <CurrencyCode>USD</CurrencyCode>
+                    <Amount>0.45</Amount>
+                </OrderTotal>
+            </OrderReference>
+            <OrderReference>
+                <ReleaseEnvironment>Sandbox</ReleaseEnvironment>
+                <OrderReferenceStatus>
+                    <LastUpdateTimestamp>2017-09-08T19:17:35.185Z</LastUpdateTimestamp>
+                    <State>Open</State>
+                </OrderReferenceStatus>
+                <AmazonOrderReferenceId>S01-1604993-6338551</AmazonOrderReferenceId>
+                <CreationTimestamp>2017-09-08T19:17:33.658Z</CreationTimestamp>
+                <SellerOrderAttributes>
+                    <StoreName>Top of the World Store</StoreName>
+                    <CustomInformation>New custom info</CustomInformation>
+                    <SellerOrderId>OR# 12345</SellerOrderId>
+                </SellerOrderAttributes>
+                <OrderTotal>
+                    <CurrencyCode>USD</CurrencyCode>
+                    <Amount>0.45</Amount>
+                </OrderTotal>
+            </OrderReference>
+            <OrderReference>
+                <ReleaseEnvironment>Sandbox</ReleaseEnvironment>
+                <OrderReferenceStatus>
+                    <LastUpdateTimestamp>2017-09-07T20:21:41.949Z</LastUpdateTimestamp>
+                    <State>Open</State>
+                </OrderReferenceStatus>
+                <AmazonOrderReferenceId>S01-8976787-7069451</AmazonOrderReferenceId>
+                <CreationTimestamp>2017-09-07T20:21:40.502Z</CreationTimestamp>
+                <SellerOrderAttributes>
+                    <StoreName>Top of the World Store</StoreName>
+                    <CustomInformation>New custom info</CustomInformation>
+                    <SellerOrderId>OR# 12345</SellerOrderId>
+                </SellerOrderAttributes>
+                <OrderTotal>
+                    <CurrencyCode>USD</CurrencyCode>
+                    <Amount>0.45</Amount>
+                </OrderTotal>
+            </OrderReference>
+        </OrderReferenceList>
+        <NextPageToken>1eUc0QkJMVnJpcGgrbDNHclpIUT09IiwibWFya2V0cGxhY2VJZCI6IkEzQlhCMFlOM1hIMTdIIn0=</NextPageToken>
+    </ListOrderReferenceResult>
+    <ResponseMetadata>
+        <RequestId>87bceae8-d043-41c9-b34c-87fc5a3f1f99</RequestId>
+    </ResponseMetadata>
+</ListOrderReferenceResponse>

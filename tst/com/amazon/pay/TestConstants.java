@@ -50,4 +50,8 @@ public class TestConstants {
     public static final String tokenInfoURL = "https://api.sandbox.amazon.com/auth/o2/tokeninfo?access_token=";
     public static final String OVERRIDE_SERVICE_URL = "https://override.service.test";
     public static final String OVERRIDE_PROFILE_URL = "https://override.profile.test";
+    public static final String queryId = "OR-12345";
+    public static final String queryIdType = "SellerOrderId";
+    public static final int pageSize = 5;
+    public static final String nextPageToken = "1eUc0QkJMVnJpcGgrbDNHclpIUT09IiwibWFya2V0cGxhY2VJZCI6IkEzQlhCMFlOM1hIMTdIIn0=";
 }

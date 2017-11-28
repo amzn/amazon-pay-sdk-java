@@ -75,7 +75,19 @@ public class ServiceConstants {
     public static final String SELLER_REFUND_NOTE = "SellerRefundNote";
     public static final String SOFT_DESCRIPTOR = "SoftDescriptor";
     public static final String STORE_NAME = "OrderReferenceAttributes.SellerOrderAttributes.StoreName";
+    public static final String REQUEST_PAYMENT_AUTHORIZATION = "OrderReferenceAttributes.RequestPaymentAuthorization";
     public static final String TRANSACTION_TIMEOUT = "TransactionTimeout";
+    public static final String ORDER_ATTRIBUTES_AMOUNT = "OrderAttributes.OrderTotal.Amount";
+    public static final String ORDER_ATTRIBUTES_CURRENCY_CODE = "OrderAttributes.OrderTotal.CurrencyCode";
+    public static final String ORDER_ATTRIBUTES_PAYMENT_SERVICE_PROVIDER_ID = "OrderAttributes.PaymentServiceProviderAttributes.PaymentServiceProviderId";
+    public static final String ORDER_ATTRIBUTES_PAYMENT_SERVICE_PROVIDER_ORDER_ID = "OrderAttributes.PaymentServiceProviderAttributes.PaymentServiceProviderOrderId";
+    public static final String ORDER_ATTRIBUTES_PLATFORM_ID = "OrderAttributes.PlatformId";
+    public static final String ORDER_ATTRIBUTES_REQUEST_PAYMENT_AUTHORIZATION = "OrderAttributes.RequestPaymentAuthorization";
+    public static final String ORDER_ATTRIBUTES_SELLER_NOTE = "OrderAttributes.SellerNote";
+    public static final String ORDER_ATTRIBUTES_CUSTOM_INFORMATION = "OrderAttributes.SellerOrderAttributes.CustomInformation";
+    public static final String ORDER_ATTRIBUTES_ORDER_ITEM_CATEGORIES = "OrderAttributes.SellerOrderAttributes.OrderItemCategories.OrderItemCategory";
+    public static final String ORDER_ATTRIBUTES_SELLER_ORDER_ID = "OrderAttributes.SellerOrderAttributes.SellerOrderId";
+    public static final String ORDER_ATTRIBUTES_STORE_NAME = "OrderAttributes.SellerOrderAttributes.StoreName";
 
     // API Request Parameters - (Mostly) Required Parameters
     public static final String ACTION = "Action";
@@ -88,6 +100,17 @@ public class ServiceConstants {
     public static final String SIGNATUREVERSION = "SignatureVersion";
     public static final String TIMESTAMP = "Timestamp";
     public static final String VERSION = "Version";
+
+    //API Request Parameters
+    public static final String START_TIME = "CreatedTimeRange.StartTime";
+    public static final String END_TIME = "CreatedTimeRange.EndTime";
+    public static final String QUERY_ID = "QueryId";
+    public static final String QUERY_ID_TYPE = "QueryIdType";
+    public static final String PAYMENT_DOMAIN = "PaymentDomain";
+    public static final String SORT_ORDER = "SortOrder";
+    public static final String PAGE_SIZE = "PageSize";
+    public static final String ORDER_REFERENCE_STATUS_LIST_FILTER = "OrderReferenceStatusListFilter.OrderReferenceStatus";
+    public static final String NEXT_PAGE_TOKEN = "NextPageToken";
 
     // API Actions - Consider moving these to enum class in future
     public static final String AUTHORIZE = "Authorize";
@@ -113,6 +136,9 @@ public class ServiceConstants {
     public static final String SET_BILLING_AGREEMENT_DETAILS = "SetBillingAgreementDetails";
     public static final String SET_ORDER_REFERENCE_DETAILS = "SetOrderReferenceDetails";
     public static final String VALIDATE_BILLING_AGREEMENT_DETAILS = "ValidateBillingAgreement";
+    public static final String LIST_ORDER_REFERENCE = "ListOrderReference";
+    public static final String LIST_ORDER_REFERENCE_BY_NEXT_TOKEN = "ListOrderReferenceByNextToken";
+    public static final String SET_ORDER_ATTRIBUTES = "SetOrderAttributes";
 
     // SDK version
     public static final String APPLICATION_LIBRARY_VERSION = "3.2.0";

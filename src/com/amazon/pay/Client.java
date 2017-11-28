@@ -38,6 +38,9 @@ import com.amazon.pay.request.ReverseProviderCreditRequest;
 import com.amazon.pay.request.SetBillingAgreementDetailsRequest;
 import com.amazon.pay.request.SetOrderReferenceDetailsRequest;
 import com.amazon.pay.request.ValidateBillingAgreementRequest;
+import com.amazon.pay.request.ListOrderReferenceRequest;
+import com.amazon.pay.request.ListOrderReferenceByNextTokenRequest;
+import com.amazon.pay.request.SetOrderAttributesRequest;
 import com.amazon.pay.response.parser.AuthorizeOnBillingAgreementResponseData;
 import com.amazon.pay.response.parser.AuthorizeResponseData;
 import com.amazon.pay.response.parser.CancelOrderReferenceResponseData;
@@ -56,10 +59,13 @@ import com.amazon.pay.response.parser.GetPaymentDetails;
 import com.amazon.pay.response.parser.GetProviderCreditDetailsResponseData;
 import com.amazon.pay.response.parser.GetProviderCreditReversalDetailsResponseData;
 import com.amazon.pay.response.parser.GetRefundDetailsResponseData;
+import com.amazon.pay.response.parser.ListOrderReferenceResponseData;
+import com.amazon.pay.response.parser.ListOrderReferenceByNextTokenResponseData;
 import com.amazon.pay.response.parser.RefundResponseData;
 import com.amazon.pay.response.parser.ReverseProviderCreditResponseData;
 import com.amazon.pay.response.parser.GetServiceStatusResponseData;
 import com.amazon.pay.response.parser.SetBillingAgreementDetailsResponseData;
+import com.amazon.pay.response.parser.SetOrderAttributesResponseData;
 import com.amazon.pay.response.parser.SetOrderReferenceDetailsResponseData;
 import com.amazon.pay.response.parser.ValidateBillingAgreementResponseData;
 import com.amazon.pay.types.User;
@@ -570,5 +576,62 @@ public interface Client {
      * @throws AmazonServiceException
      */
     Config getConfig();
+
+    /**
+     * The ListOrderReference operation is used to list all the order reference objects from
+     * the object represented by the QueryId and QueryIdType request parameters.
+     *
+     * @param listOrderReferenceRequest Container for the necessary
+     *           parameters to execute the ListOrderReference service API on
+     *           Amazon Pay.
+     *
+     * @return The response from the ListOrderReference service API, as
+     *         returned by Amazon Pay.
+     *
+     * @throws AmazonServiceException
+     *             If an error response is returned by Amazon Pay indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    ListOrderReferenceResponseData listOrderReference(
+            ListOrderReferenceRequest listOrderReferenceRequest)
+            throws AmazonServiceException;
+
+    /**
+     * The ListOrderReferenceByNextToken operation is used to list all the order reference objects from
+     * the object represented by the next page token request parameter.
+     *
+     * @param listOrderReferenceByNextTokenRequest Container for the necessary
+     *           parameters to execute the ListOrderReferenceByNextToken service API on
+     *           Amazon Pay.
+     *
+     * @return The response from the ListOrderReferenceByNextToken service API, as
+     *         returned by Amazon Pay.
+     *
+     * @throws AmazonServiceException
+     *             If an error response is returned by Amazon Pay indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public ListOrderReferenceByNextTokenResponseData listOrderReferenceByNextToken(
+            ListOrderReferenceByNextTokenRequest listOrderReferenceByNextTokenRequest)
+            throws AmazonServiceException;
+
+    /**
+     * The SetOrderAttributes operation is used to set order attributes even after
+     * the order has been confirmed.
+     *
+     * @param  setOrderAttributesRequest Container for the necessary
+     *           parameters to execute the SetOrderAttributes service API on
+     *           Amazon Pay.
+     *
+     * @return The response from the SetOrderAttributes service API, as
+     *         returned by Amazon Pay.
+     *
+     * @throws AmazonServiceException
+     *             If an error response is returned by Amazon Pay indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public SetOrderAttributesResponseData setOrderAttributes(
+            SetOrderAttributesRequest setOrderAttributesRequest)
+            throws AmazonServiceException;
 
 }

@@ -28,7 +28,8 @@
             <ReleaseEnvironment>Sandbox</ReleaseEnvironment>      
             <SellerNote>testing</SellerNote>      
             <AmazonOrderReferenceId>S01-9821095-0000200</AmazonOrderReferenceId>      
-            <CreationTimestamp>2015-10-30T20:43:45.183Z</CreationTimestamp>    
+            <CreationTimestamp>2015-10-30T20:43:45.183Z</CreationTimestamp>
+            <RequestPaymentAuthorization>false</RequestPaymentAuthorization>
         </OrderReferenceDetails>  
     </SetOrderReferenceDetailsResult>  
     <ResponseMetadata>    

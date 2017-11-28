@@ -36,10 +36,13 @@ import com.amazon.pay.request.GetOrderReferenceDetailsRequest;
 import com.amazon.pay.request.GetProviderCreditDetailsRequest;
 import com.amazon.pay.request.GetProviderCreditReversalDetailsRequest;
 import com.amazon.pay.request.GetRefundDetailsRequest;
+import com.amazon.pay.request.ListOrderReferenceByNextTokenRequest;
+import com.amazon.pay.request.ListOrderReferenceRequest;
 import com.amazon.pay.request.RefundRequest;
 import com.amazon.pay.request.RequestHelper;
 import com.amazon.pay.request.ReverseProviderCreditRequest;
 import com.amazon.pay.request.SetBillingAgreementDetailsRequest;
+import com.amazon.pay.request.SetOrderAttributesRequest;
 import com.amazon.pay.request.SetOrderReferenceDetailsRequest;
 import com.amazon.pay.request.ValidateBillingAgreementRequest;
 import com.amazon.pay.response.model.AuthorizationDetails;
@@ -55,9 +58,9 @@ import com.amazon.pay.response.parser.CaptureResponseData;
 import com.amazon.pay.response.parser.CloseAuthorizationResponseData;
 import com.amazon.pay.response.parser.CloseBillingAgreementResponseData;
 import com.amazon.pay.response.parser.CloseOrderReferenceResponseData;
-import com.amazon.pay.response.parser.CreateOrderReferenceForIdResponseData;
 import com.amazon.pay.response.parser.ConfirmBillingAgreementResponseData;
 import com.amazon.pay.response.parser.ConfirmOrderReferenceResponseData;
+import com.amazon.pay.response.parser.CreateOrderReferenceForIdResponseData;
 import com.amazon.pay.response.parser.GetAuthorizationDetailsResponseData;
 import com.amazon.pay.response.parser.GetBillingAgreementDetailsResponseData;
 import com.amazon.pay.response.parser.GetCaptureDetailsResponseData;
@@ -67,11 +70,14 @@ import com.amazon.pay.response.parser.GetProviderCreditDetailsResponseData;
 import com.amazon.pay.response.parser.GetProviderCreditReversalDetailsResponseData;
 import com.amazon.pay.response.parser.GetRefundDetailsResponseData;
 import com.amazon.pay.response.parser.GetServiceStatusResponseData;
+import com.amazon.pay.response.parser.ListOrderReferenceByNextTokenResponseData;
+import com.amazon.pay.response.parser.ListOrderReferenceResponseData;
 import com.amazon.pay.response.parser.Parser;
 import com.amazon.pay.response.parser.RefundResponseData;
 import com.amazon.pay.response.parser.ResponseData;
 import com.amazon.pay.response.parser.ReverseProviderCreditResponseData;
 import com.amazon.pay.response.parser.SetBillingAgreementDetailsResponseData;
+import com.amazon.pay.response.parser.SetOrderAttributesResponseData;
 import com.amazon.pay.response.parser.SetOrderReferenceDetailsResponseData;
 import com.amazon.pay.response.parser.ValidateBillingAgreementResponseData;
 import com.amazon.pay.types.AmazonReferenceIdType;
@@ -1069,8 +1075,81 @@ public class PayClient implements Client  {
         return authDetails;
     }
 
+    /**
+     * The ListOrderReference operation is used to list all the order reference objects from
+     * the object represented by the QueryId and QueryIdType request parameters.
+     *
+     * @param listOrderReferenceRequest Container for the necessary
+     *           parameters to execute the ListOrderReference service API on
+     *           Amazon Pay.
+     *
+     * @return The response from the ListOrderReference service API, as
+     *         returned by Amazon Pay.
+     *
+     * @throws AmazonServiceException
+     *             If an error response is returned by Amazon Pay indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    @Override
+    public ListOrderReferenceResponseData listOrderReference(
+            ListOrderReferenceRequest listOrderReferenceRequest)
+            throws AmazonServiceException {
+        final ResponseData rawResponse = sendRequest(helper.getPostURL(
+                listOrderReferenceRequest));
+        return Parser.listOrderReference(rawResponse);
+    }
+
+    /**
+     * The ListOrderReferenceByNextToken operation is used to list all the order reference objects from
+     * the object represented by the next page token request parameter.
+     *
+     * @param listOrderReferenceByNextTokenRequest Container for the necessary
+     *           parameters to execute the ListOrderReferenceByNextToken service API on
+     *           Amazon Pay.
+     *
+     * @return The response from the ListOrderReferenceByNextToken service API, as
+     *         returned by Amazon Pay.
+     *
+     * @throws AmazonServiceException
+     *             If an error response is returned by Amazon Pay indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    @Override
+    public ListOrderReferenceByNextTokenResponseData listOrderReferenceByNextToken(
+            ListOrderReferenceByNextTokenRequest listOrderReferenceByNextTokenRequest)
+            throws AmazonServiceException {
+        final ResponseData rawResponse = sendRequest(helper.getPostURL(
+                listOrderReferenceByNextTokenRequest));
+        return Parser.listOrderReferenceByNextToken(rawResponse);
+    }
+
+    /**
+     * The SetOrderAttributes operation is used to set order attributes even after
+     * the order has been confirmed.
+     *
+     * @param  setOrderAttributesRequest Container for the necessary
+     *           parameters to execute the SetOrderAttributes service API on
+     *           Amazon Pay.
+     *
+     * @return The response from the SetOrderAttributes service API, as
+     *         returned by Amazon Pay.
+     *
+     * @throws AmazonServiceException
+     *             If an error response is returned by Amazon Pay indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    @Override
+    public SetOrderAttributesResponseData setOrderAttributes(
+            SetOrderAttributesRequest setOrderAttributesRequest)
+            throws AmazonServiceException {
+        final ResponseData rawResponse = sendRequest(helper.getPostURL(
+                setOrderAttributesRequest));
+        return Parser.setOrderAttributes(rawResponse);
+    }
+
     private ResponseData sendRequest(String httpPostRequest)  {
         ResponseData response = null;
+
         try {
             response = postRequest(httpPostRequest);
             int statusCode = response.getStatusCode();

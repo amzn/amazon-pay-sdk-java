@@ -33,11 +33,15 @@ import com.amazon.pay.response.model.GetProviderCreditReversalDetailsResponse;
 import com.amazon.pay.response.model.GetProviderCreditDetailsResponse;
 import com.amazon.pay.response.model.GetRefundDetailsResponse;
 import com.amazon.pay.response.model.GetServiceStatusResponse;
+import com.amazon.pay.response.model.ListOrderReferenceResponse;
+import com.amazon.pay.response.model.ListOrderReferenceByNextTokenResponse;
 import com.amazon.pay.response.model.RefundResponse;
 import com.amazon.pay.response.model.ReverseProviderCreditResponse;
 import com.amazon.pay.response.model.SetBillingAgreementDetailsResponse;
 import com.amazon.pay.response.model.SetOrderReferenceDetailsResponse;
 import com.amazon.pay.response.model.ValidateBillingAgreementResponse;
+import com.amazon.pay.response.model.SetOrderAttributesResponse;
+
 import com.amazon.pay.exceptions.AmazonClientException;
 import com.amazon.pay.exceptions.AmazonServiceException;
 
@@ -45,7 +49,6 @@ import java.io.StringReader;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.util.ValidationEventCollector;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
@@ -171,6 +174,21 @@ public class Parser {
         final CreateOrderReferenceForIdResponse response = marshalXML(
                 CreateOrderReferenceForIdResponse.class, rawResponse);
         return new CreateOrderReferenceForIdResponseData(response, rawResponse);
+    }
+
+    public static ListOrderReferenceResponseData listOrderReference(ResponseData rawResponse) throws AmazonServiceException {
+        final ListOrderReferenceResponse response = marshalXML(ListOrderReferenceResponse.class, rawResponse);
+        return new ListOrderReferenceResponseData(response,rawResponse);
+    }
+
+    public static ListOrderReferenceByNextTokenResponseData listOrderReferenceByNextToken(ResponseData rawResponse) throws AmazonServiceException {
+        final ListOrderReferenceByNextTokenResponse response = marshalXML(ListOrderReferenceByNextTokenResponse.class, rawResponse);
+        return new ListOrderReferenceByNextTokenResponseData(response,rawResponse);
+    }
+
+    public static SetOrderAttributesResponseData setOrderAttributes(ResponseData rawResponse) throws AmazonServiceException {
+        final SetOrderAttributesResponse response = marshalXML(SetOrderAttributesResponse.class, rawResponse);
+        return new SetOrderAttributesResponseData(response,rawResponse);
     }
 
     public static <T> T marshalXML(Class<T> clazz, ResponseData rawResponse) throws AmazonServiceException  {
