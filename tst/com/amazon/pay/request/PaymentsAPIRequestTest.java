@@ -426,15 +426,19 @@ public class PaymentsAPIRequestTest {
         final EnumSet<OrderReferenceStatus> filter = EnumSet.of(OrderReferenceStatus.OPEN, OrderReferenceStatus.CANCELED);
         final XMLGregorianCalendar startTime =
                 DatatypeFactory.newInstance().newXMLGregorianCalendar("2017-05-27T03:23:21.923Z");
+        final XMLGregorianCalendar endTime =
+                DatatypeFactory.newInstance().newXMLGregorianCalendar("2017-09-30T07:00:00Z");
 
         final ListOrderReferenceRequest request =
                 new ListOrderReferenceRequest(
                         TestConstants.queryId, TestConstants.queryIdType)
                         .setStartTime(startTime)
+                        .setEndTime(endTime)
                         .setPageSize(TestConstants.pageSize)
                         .setSortOrder(SortOrder.Ascending)
                         .setOrderReferenceStatusListFilter(filter);
         Assert.assertEquals(request.getStartTime(), startTime);
+        Assert.assertEquals(request.getEndTime(), endTime);
         Assert.assertEquals(TestConstants.pageSize, request.getPageSize().intValue());
         Assert.assertEquals(request.getSortOrder(), SortOrder.Ascending);
         Assert.assertEquals(request.getQueryId(), TestConstants.queryId);

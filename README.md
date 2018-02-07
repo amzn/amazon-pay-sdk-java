@@ -401,3 +401,40 @@ if (paymentDescriptor != null) {
         log.info("Full Descriptor = " + paymentDescriptor.getFullDescriptor());
         log.info("Use Amazon Balance First = " + paymentDescriptor.isUseAmazonBalanceFirst());
 }
+```
+
+### Retrieving orders with seller order id
+1. ListOrderReference
+This API provides a list of orders corresponding to a particular seller order id.
+
+```java
+EnumSet<OrderReferenceStatus> filter = EnumSet.of(OrderReferenceStatus.OPEN, OrderReferenceStatus.CANCELED);
+XMLGregorianCalendar startTime =
+                DatatypeFactory.newInstance().newXMLGregorianCalendar("2017-09-27T07:00:00Z");
+XMLGregorianCalendar endTime =
+                DatatypeFactory.newInstance().newXMLGregorianCalendar("2017-09-30T07:00:00Z");
+
+ListOrderReferenceRequest listOrderReferenceRequest =
+        new ListOrderReferenceRequest("YOUR_SELLER_ORDER_ID", "SellerOrderId");
+// optional parameters
+listOrderReferenceRequest.setMwsAuthToken("YOUR_MWS_AUTH_TOKEN");
+listOrderReferenceRequest.setStartTime(startTime);
+listOrderReferenceRequest.setEndTime(endTime);
+listOrderReferenceRequest.setPageSize(5);
+listOrderReferenceRequest.setOrderReferenceStatusListFilter(filter);
+listOrderReferenceRequest.setSortOrder(SortOrder.Ascending); //sort order can be ascending or descending
+
+ListOrderReferenceResponseData response = client.listOrderReference(listOrderReferenceRequest);
+String nextPageToken = response.getNextPageToken(); //to be used in the ListOrderReferenceByNextToken call
+```
+2. ListOrderReferenceByNextToken
+This API returns a list of the continued orders from the previous call (ListOrderReference) using a NextPageToken value to render the next page of data, if a page size was used to split the list of orders into multiple pages.
+
+```java
+ListOrderReferenceByNextTokenRequest listOrderReferenceByNextTokenRequest = new ListOrderReferenceByNextTokenRequest(nextPageToken); //nextPageToken is derived from the ListOrderReference response explained above
+//optional parameters
+listOrderReferenceByNextTokenRequest.setMwsAuthToken("YOUR_MWS_AUTH_TOKEN");
+
+ListOrderReferenceByNextTokenResponseData response =
+   client.listOrderReferenceByNextToken(listOrderReferenceByNextTokenRequest);
+```
