@@ -46,15 +46,14 @@ public class PayConfig implements Config  {
      *
      * Required parameters are merchantId, accessKey and secretKey.
      * Specify them using
-     * .withSellerId() & .withAccessKeyId() & .withSecretKey()
-
+     * withSellerId() and withAccessKeyId() and withSecretKey()
      * Note that default currency code is USD and default region code is US
      * You can override default values using
-     * .withRegionCode() & .withCurrencyCode()
+     * withRegionCode() and withCurrencyCode()
      *
      * Default environment is Live mode.
      * You can override default environment using
-     * .withSandboxMode(true)
+     * withSandboxMode(true)
      *
      * Optional proxy parameters allow to connect via proxy using
      * parameters like withProxyHost(), withProxyPort(), withProxyUserName(), withProxyPassword().
@@ -534,11 +533,9 @@ public class PayConfig implements Config  {
 
 
     /**
-     * Sets MWS Service URL override in PayConfig
+     * @param overrideServiceURL Sets MWS Service URL override in PayConfig
      * This should only be used if you need to programmatically override the default MWS service endpoint
      * provided by the SDK's mwsEndpointMappingsMap in com.amazon.pay.types.ServiceConstants.
-     *
-     * @param overrideServiceURL
      */
     @Override
     public void setOverrideServiceURL(String overrideServiceURL) {
@@ -547,11 +544,10 @@ public class PayConfig implements Config  {
 
 
     /**
-     * Sets MWS Service URL override in PayConfig
+     * @param overrideServiceURL Sets MWS Service URL override in PayConfig
      * This should only be used if you need to programmatically override the default MWS service endpoint
      * provided by the SDK's mwsEndpointMappingsMap in com.amazon.pay.types.ServiceConstants.
      *
-     * @param overrideServiceURL
      * @return PayConfig
      */
     public PayConfig withOverrideServiceURL(String overrideServiceURL) {
@@ -572,11 +568,9 @@ public class PayConfig implements Config  {
 
 
     /**
-     * Sets LWA Profile URL override in PayConfig
+     * @param overrideProfileURL Sets LWA Profile URL override in PayConfig
      * This should only be used if you need to programmatically override the default LWA profile endpoint
      * provided by the SDK's profileEndpointMappingsMap in com.amazon.pay.types.ServiceConstants.
-     *
-     * @param overrideProfileURL
      */
     @Override
     public void setOverrideProfileURL(String overrideProfileURL) {
@@ -585,11 +579,10 @@ public class PayConfig implements Config  {
 
 
     /**
-     * Sets LWA Profile URL override in PayConfig
+     * @param overrideProfileURL Sets LWA Profile URL override in PayConfig
      * This should only be used if you need to programmatically override the default LWA profile endpoint
      * provided by the SDK's profileEndpointMappingsMap in com.amazon.pay.types.ServiceConstants.
      *
-     * @param overrideProfileURL
      * @return PayConfig
      */
     public PayConfig withOverrideProfileURL(String overrideProfileURL) {

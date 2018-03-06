@@ -85,17 +85,16 @@ public class Error {
             }
             return this.any;
         }
-
-
     }
 
     /**
-     * String representation of error object
-     * @return 
+     * String representation of BillingAgreement Notification
+     * @return A string representation of this object.
+     *
+     * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
         return "Error{" + "type=" + type + ", code=" + code + ", message=" + message + ", detail=" + detail + '}';
     }
-    
 }

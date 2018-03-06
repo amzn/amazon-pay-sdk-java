@@ -61,7 +61,10 @@ public class NotificationFactory {
      * @param body HTTP POST body content
      * @return Instance of an Notification that matches the notification type
      *
-     * @throws AmazonClientException
+     * @throws AmazonClientException  AmazonClientException represents any internal errors that are encountered inside the client while
+     *   attempting to make the request or handle the response.  For example
+     *   if a network connection is not available. Or if for some reason even if SDK is unable
+     *   to parse the response, using this exception you can still retrieve the raw API response.
      *
      */
     public static Notification parseNotification(Map<String,String> headers, final String body) throws AmazonClientException {

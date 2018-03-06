@@ -22,31 +22,30 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * This can parse two different variations of <IdList> nodes.
- * In most cases, the individual members are instead <member>..</member> tags,
- * but some IPN messages put them inside <Id>..</Id> tags.
+ * This can parse two different variations of &lt;IdList&gt; nodes.
+ * In most cases, the individual members are instead &lt;member&gt;..&lt;/member&gt; tags,
+ * but some IPN messages put them inside &lt;Id&gt;..&lt;/Id&gt; tags.
  * The class was modified to handle both cases and let the
  * SDK client retrieve either case by a single getMember() call.
  *
  * Valid example 1:
- *   <IdList>
- *     <member>S01-9228170-9681927-C035172</member>
- *     <member>S01-9228170-9681927-C039558</member>
- *  </IdList>
+ *   &lt;IdList&gt;
+ *     &lt;member&gt;S01-9228170-9681927-C035172&lt;/member&gt;
+ *     &lt;member&gt;S01-9228170-9681927-C039558&lt;/member&gt;
+ *  &lt;/IdList&gt;
  *
  * Valid example 2:
- *   <IdList>
- *     <Id>S01-9228170-9681927-C035172</Id>
- *     <Id>S01-9228170-9681927-C039558</Id>
- *  </IdList>
+ *   &lt;IdList&gt;
+ *     &lt;Id&gt;S01-9228170-9681927-C035172&lt;/Id&gt;
+ *     &lt;Id&gt;S01-9228170-9681927-C039558&lt;/Id&gt;
+ *  &lt;/IdList&gt;
  *
  * Invalid example (cannot mix Id and member tags in same group):
- *   <IdList>
- *     <member>S01-9228170-9681927-C035172</member>
- *     <Id>S01-9228170-9681927-C039558</Id>
- *  </IdList>
+ *   &lt;IdList&gt;
+ *     &lt;member&gt;S01-9228170-9681927-C035172&lt;/member&gt;
+ *     &lt;Id&gt;S01-9228170-9681927-C039558&lt;/Id&gt;
+ *  &lt;/IdList&gt;
  */
-
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "IdList", propOrder = {
     "member",
@@ -71,6 +70,9 @@ public class IdList {
         this.member = member;
     }
 
+    /**
+     * @return the members of the List
+     */
     public List<String> getMember() {
         if ((member == null) && (id == null)) {
             return new ArrayList<String>();
@@ -78,13 +80,18 @@ public class IdList {
         return (member != null) ? member : id;
     }
 
+    /**
+     * @return the ID of the members of the List
+     */
     public List<String> getId() {
         return getMember();
     }
 
+    /**
+     * Returns the string representation of GetServiceStatusResult
+     */
     @Override
     public String toString() {
         return "IdList{" + "member=" + getMember() + '}';
     }
-
 }

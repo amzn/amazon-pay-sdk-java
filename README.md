@@ -1,3 +1,6 @@
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.amazon.pay/amazon-pay-java-sdk/badge.svg)]
+(https://maven-badges.herokuapp.com/maven-central/com.amazon.pay/amazon-pay-java-sdk)
+
 ### Amazon Pay Java SDK
 
 ### Requirements

@@ -49,6 +49,8 @@ public class CancelOrderReferenceRequest implements Serializable{
      * informational purposes only and is never displayed to the customer. 
      * The value can be retrieved in future GetOrderReferenceDetails calls.
      * Maximum: 1024 characters
+     *
+     * @return Returns a reference to this object so that methods can be chained together.
      */
     public CancelOrderReferenceRequest setCancelReason(String cancelationReason) {
         this.cancelationReason = cancelationReason;
@@ -58,7 +60,9 @@ public class CancelOrderReferenceRequest implements Serializable{
     /**
      * Applicable for third-party solution providers only. 
      *
-     * @param mwsAuthToken
+     * @param mwsAuthToken Sets MWSAuthToken
+     *
+     * @return Returns a reference to this object so that methods can be chained together.
      */
     public CancelOrderReferenceRequest setMWSAuthToken(String mwsAuthToken) {
         this.mwsAuthToken = mwsAuthToken;

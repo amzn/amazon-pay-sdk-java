@@ -58,9 +58,7 @@ public class ChargeRequest implements Serializable {
     /**
      * Sets the InheritShippingAddress in ChargeRequest
      *
-     * @param  inheritShippingAddress
-     *
-     * @return ChargeRequest
+     * @param  inheritShippingAddress Sets the value of inheritShippingAddress
      */
     public void setInheritShippingAddress(final Boolean inheritShippingAddress) {
         this.inheritShippingAddress = inheritShippingAddress;
@@ -71,9 +69,7 @@ public class ChargeRequest implements Serializable {
      * Sets the InheritShippingAddress in ChargeRequest
      * Deprecated since SDK 2.2.1
      *
-     * @param  inheritShippingAddress
-     *
-     * @return ChargeRequest
+     * @param  inheritShippingAddress Sets the value of inheritShippingAddress
      */
     @Deprecated
     public void setInheritShippingAddress(final String inheritShippingAddress) {
@@ -101,9 +97,9 @@ public class ChargeRequest implements Serializable {
     /**
      * Sets the Amazon Order Reference ID / Amazon Billing Agreement ID
      *
-     * @param amazonReferenceId
+     * @param amazonReferenceId The Amazon Order Reference ID / Amazon Billing Agreement ID
      *
-     * @return updated ChargeRequest
+     * @return Returns a reference to this object so that methods can be chained together.
      **/
     public ChargeRequest withAmazonReferenceId(final String amazonReferenceId) {
         if ((amazonReferenceId != null) && (amazonReferenceId.length() > 0)) {
@@ -137,7 +133,7 @@ public class ChargeRequest implements Serializable {
      * @param amount
      *       Specified amount for charge request
      *
-     * @return ChargeRequest
+     * @return Returns a reference to this object so that methods can be chained together.
      */
     public ChargeRequest withAmount(final String amount){
         this.amount = amount;
@@ -151,7 +147,7 @@ public class ChargeRequest implements Serializable {
      * @param currencyCode
      *       Three-digit currency code. In ISO 4217 format.
      *
-     * @return ChargeRequest
+     * @return Returns a reference to this object so that methods can be chained together.
      */
     public ChargeRequest withCurrencyCode(final CurrencyCode currencyCode) {
         this.currencyCode = currencyCode;
@@ -165,7 +161,7 @@ public class ChargeRequest implements Serializable {
      * @param  chargeReferenceId
      *       Unique referenceId
      *
-     * @return ChargeRequest
+     * @return Returns a reference to this object so that methods can be chained together.
      */
     public ChargeRequest withChargeReferenceId(final String chargeReferenceId) {
         this.chargeReferenceId = chargeReferenceId;
@@ -176,9 +172,9 @@ public class ChargeRequest implements Serializable {
     /**
      * Sets the Seller Note, Seller Authorization Note for Amazon Order Reference ID / Amazon Billing Agreement ID
      *
-     * @param  chargeNote
+     * @param  chargeNote Charge Note
      *
-     * @return ChargeRequest
+     * @return Returns a reference to this object so that methods can be chained together.
      */
     public ChargeRequest withChargeNote(final String chargeNote) {
         this.sellerNote = chargeNote;
@@ -189,9 +185,9 @@ public class ChargeRequest implements Serializable {
     /**
      * Sets the transaction timeout to ChargeRequest
      *
-     * @param  transactionTimeout
+     * @param  transactionTimeout Sets the transaction timeout to ChargeRequest
      *
-     * @return ChargeRequest
+     * @return Returns a reference to this object so that methods can be chained together.
      */
     public ChargeRequest withTransactionTimeout(final String transactionTimeout) {
         this.transactionTimeout = transactionTimeout;
@@ -202,9 +198,9 @@ public class ChargeRequest implements Serializable {
     /**
      * Sets the captureNow in ChargeRequest
      *
-     * @param  captureNow
+     * @param  captureNow Sets the captureNow in ChargeRequest
      *
-     * @return ChargeRequest
+     * @return Returns a reference to this object so that methods can be chained together.
      */
     public ChargeRequest withCaptureNow(final Boolean captureNow) {
         this.captureNow = captureNow;
@@ -215,9 +211,9 @@ public class ChargeRequest implements Serializable {
     /**
      * Sets the InheritShippingAddress in ChargeRequest
      *
-     * @param  inheritShippingAddress
+     * @param  inheritShippingAddress Sets the InheritShippingAddress in ChargeRequest
      *
-     * @return ChargeRequest
+     * @return Returns a reference to this object so that methods can be chained together.
      */
     public ChargeRequest withInheritShippingAddress(final Boolean inheritShippingAddress) {
         this.inheritShippingAddress = inheritShippingAddress;
@@ -229,9 +225,9 @@ public class ChargeRequest implements Serializable {
      * Sets the InheritShippingAddress in ChargeRequest
      * Deprecated since SDK 2.2.1
      *
-     * @param  inheritShippingAddress
+     * @param  inheritShippingAddress Sets the InheritShippingAddress in ChargeRequest
      *
-     * @return ChargeRequest
+     * @return Returns a reference to this object so that methods can be chained together.
      */
     @Deprecated
     public ChargeRequest withInheritShippingAddress(final String inheritShippingAddress) {
@@ -242,9 +238,9 @@ public class ChargeRequest implements Serializable {
     /**
      * Sets the chargeOrderId in ChargeRequest
      *
-     * @param  chargeOrderId
+     * @param  chargeOrderId Sets the chargeOrderId in ChargeRequest
      *
-     * @return ChargeRequest
+     * @return Returns a reference to this object so that methods can be chained together.
      */
     public ChargeRequest withChargeOrderId(final String chargeOrderId) {
         this.chargeOrderId = chargeOrderId;
@@ -255,9 +251,9 @@ public class ChargeRequest implements Serializable {
     /**
      * Sets the storeName in ChargeRequest
      *
-     * @param  storeName
+     * @param  storeName Sets the storeName in ChargeRequest
      *
-     * @return ChargeRequest
+     * @return Returns a reference to this object so that methods can be chained together.
      */
     public ChargeRequest withStoreName(final String storeName) {
         this.storeName = storeName;
@@ -268,9 +264,9 @@ public class ChargeRequest implements Serializable {
     /**
      * Sets the customInformation in ChargeRequest
      *
-     * @param  customInformation
+     * @param  customInformation Sets the customInformation in ChargeRequest
      *
-     * @return ChargeRequest
+     * @return Returns a reference to this object so that methods can be chained together.
      */
     public ChargeRequest withCustomInformation(final String customInformation) {
         this.customInformation = customInformation;
@@ -281,9 +277,9 @@ public class ChargeRequest implements Serializable {
     /**
      * Sets the platformId in ChargeRequest
      *
-     * @param  platformId
+     * @param  platformId Sets the platformId in ChargeRequest
      *
-     * @return ChargeRequest
+     * @return Returns a reference to this object so that methods can be chained together.
      */
     public ChargeRequest withPlatformId(final String platformId) {
         this.platformId = platformId;
@@ -294,9 +290,9 @@ public class ChargeRequest implements Serializable {
     /**
      * Sets the softDescriptor in ChargeRequest
      *
-     * @param  softDescriptor
+     * @param  softDescriptor Sets the softDescriptor in ChargeRequest
      *
-     * @return ChargeRequest
+     * @return Returns a reference to this object so that methods can be chained together.
      */
     public ChargeRequest withSoftDescriptor(final String softDescriptor) {
         this.softDescriptor = softDescriptor;
@@ -307,9 +303,9 @@ public class ChargeRequest implements Serializable {
     /**
      * Sets the providerCredit in ChargeRequest
      *
-     * @param providerCredit
+     * @param providerCredit Sets the providerCredit in ChargeRequest
      *
-     * @return ChargeRequest
+     * @return Returns a reference to this object so that methods can be chained together.
      */
     public ChargeRequest withProviderCreditDetails(final List<ProviderCredit> providerCredit) {
         this.providerCredit = providerCredit;
@@ -320,75 +316,158 @@ public class ChargeRequest implements Serializable {
     /**
      * Sets the mwsAuthToken in ChargeRequest
      *
-     * @param mwsAuthToken
+     * @param mwsAuthToken Sets the mwsAuthToken in ChargeRequest
      *
-     * @return ChargeRequest
+     * @return Returns a reference to this object so that methods can be chained together.
      */
     public ChargeRequest withMWSAuthToken(final String mwsAuthToken) {
         this.mwsAuthToken = mwsAuthToken;
         return this;
     }
 
+    /**
+     * The identifier for this Amazon Pay transaction that you specify.
+     *
+     * @return Amazon Reference Id specified in request
+     */
     public String getAmazonReferenceId() {
         return amazonReferenceId;
     }
 
+    /**
+     * The type of Amazon Pay transaction that you specify.
+     *
+     * @return Amazon Reference Id Type specified in request
+     */
     public AmazonReferenceIdType getType() {
         return type;
     }
 
+    /**
+     * The identifier for this Charge Reference ID
+     *
+     * @return Charge Reference Id specified in request
+     */
     public String getChargeReferenceId() {
         return chargeReferenceId;
     }
 
+    /**
+     * The amount for the transaction
+     *
+     * @return Amount specified in request
+     */
     public String getAmount() {
         return amount;
     }
 
+    /**
+     * The currencyCode set in the request
+     *
+     * @return currencyCode specified in request
+     */
     public CurrencyCode getCurrencyCode() {
         return currencyCode;
     }
 
+    /**
+     * The TransactionTimeOut set in the request
+     *
+     * @return TransactionTimeOut specified in request
+     */
     public String getTransactionTimeout() {
         return transactionTimeout;
     }
 
+    /**
+     * The captureNow set in the request
+     *
+     * @return captureNow specified in request
+     */
     public Boolean getCaptureNow() {
         return captureNow;
     }
 
+    /**
+     * The chargeOrderId set in the request
+     *
+     * @return chargeOrderId specified in request
+     */
     public String getChargeOrderId() {
         return chargeOrderId;
     }
 
+    /**
+     * The storeName set in the request
+     *
+     * @return storeName specified in request
+     */
     public String getStoreName() {
         return storeName;
     }
 
+    /**
+     * The customInformation set in the request
+     *
+     * @return customInformation specified in request
+     */
     public String getCustomInformation() {
         return customInformation;
     }
 
+    /**
+     * The platformId set in the request
+     *
+     * @return platformId specified in request
+     */
     public String getPlatformId() {
         return platformId;
     }
 
+    /**
+     * The sellerNote set in the request
+     *
+     * @return sellerNote specified in request
+     */
     public String getSellerNote() {
         return sellerNote;
     }
 
+    /**
+     * The SoftDescriptor set in the request
+     *
+     * @return SoftDescriptor specified in request
+     */
     public String getSoftDescriptor() {
         return softDescriptor;
     }
 
+    /**
+     * The MWSAuthToken set in the request
+     *
+     * @return MWSAuthToken specified in request
+     */
     public String getMwsAuthToken() {
         return mwsAuthToken;
     }
 
+    /**
+     * The ProviderCredit set in the request
+     *
+     * @return ProviderCredit specified in request
+     */
     public List<ProviderCredit> getProviderCredit() {
         return providerCredit;
     }
 
+    /**
+     * Returns a string representation of this object; useful for testing and
+     * debugging.
+     *
+     * @return A string representation of this object.
+     *
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString() {
         return "ChargeRequest{"

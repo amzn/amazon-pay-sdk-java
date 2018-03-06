@@ -35,9 +35,11 @@ public class GetRefundDetailsRequest implements Serializable{
     }
 
     /**
-     * Set the value of mwsAuthToken
+     * @param mwsAuthToken Sets MWSAuthToken parameter in request. MWSAuthToken is required
+     *                     only for third-party solution providers and marketplaces. Do not
+     *                     specify this parameter for merchants creating their own custom integration.
      *
-     * @param mwsAuthToken new value of mwsAuthToken
+     * @return The MWSAuthToken
      */
     public GetRefundDetailsRequest setMWSAuthToken(String mwsAuthToken) {
         this.mwsAuthToken = mwsAuthToken;

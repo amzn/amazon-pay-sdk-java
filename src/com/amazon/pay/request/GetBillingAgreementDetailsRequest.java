@@ -44,7 +44,11 @@ public class GetBillingAgreementDetailsRequest implements Serializable{
 
     /**
      *
-     * @param mwsAuthToken
+     * @param mwsAuthToken Sets MWSAuthToken parameter in request. MWSAuthToken is required
+     *                     only for third-party solution providers and marketplaces. Do not
+     *                     specify this parameter for merchants creating their own custom integration.
+     *
+     * @return The MWSAuthToken
      */
     public GetBillingAgreementDetailsRequest setMWSAuthToken(String mwsAuthToken) {
         this.mwsAuthToken = mwsAuthToken;
@@ -56,7 +60,8 @@ public class GetBillingAgreementDetailsRequest implements Serializable{
      * @param addressConsentToken
      *              The buyer address consent token. You must provide a valid 
      *              AddressConsentToken if you want to get the full shipping address before 
-     *              the billing agreement is confirmed. 
+     *              the billing agreement is confirmed.
+     * @return AddressConsentToken
      */
     public GetBillingAgreementDetailsRequest setAddressConsentToken(String addressConsentToken) {
         this.addressConsentToken = URLDecoder.decode(addressConsentToken);

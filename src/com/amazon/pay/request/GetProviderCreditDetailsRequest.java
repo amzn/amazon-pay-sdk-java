@@ -34,8 +34,9 @@ public class GetProviderCreditDetailsRequest implements Serializable{
 
     /**
      * 
-     * @param amazonProviderCreditId
-     * @param sellerId 
+     * @param amazonProviderCreditId Provide Amazon Provider Credit ID in the request
+     *
+     * @param sellerId Provide the Seller ID in the request
      */
     public GetProviderCreditDetailsRequest(String amazonProviderCreditId , String sellerId) {
         this.amazonProviderCreditId = amazonProviderCreditId;
@@ -43,9 +44,11 @@ public class GetProviderCreditDetailsRequest implements Serializable{
     }
 
     /**
-     * @param mwsAuthToken
-     * @param mwsAuthToken
-     * @return 
+     * @param mwsAuthToken Sets MWSAuthToken parameter in request. MWSAuthToken is required
+     *                     only for third-party solution providers and marketplaces. Do not
+     *                     specify this parameter for merchants creating their own custom integration.
+     *
+     * @return The MWSAuthToken
      */
     public GetProviderCreditDetailsRequest setMwsAuthToken(String mwsAuthToken) {
         this.mwsAuthToken = mwsAuthToken;

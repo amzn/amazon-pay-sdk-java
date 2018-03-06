@@ -53,9 +53,6 @@ public class CreateOrderReferenceForIdRequest implements Serializable {
      * @param idType
      *        The type of the object represented by the Id request parameter.
      *        Currently, idType must be AmazonReferenceIdType.BILLING_AGREEMENT_ID.
-     *
-     * @return CreateOrderReferenceForIdRequest
-     *         Container holding CreateOrderReferenceForId operation parameters
      */
     public CreateOrderReferenceForIdRequest (
             final String id, final AmazonReferenceIdType idType) {
@@ -71,9 +68,6 @@ public class CreateOrderReferenceForIdRequest implements Serializable {
      *        Currently, the only accepted value is a billing agreement identifier.
      *        This value is retrieved from the Amazon Button widget after the buyer
      *        has successfully authenticated with Amazon.
-     *
-     * @return CreateOrderReferenceForIdRequest
-     *         Container holding CreateOrderReferenceForId operation parameters
      */
     public CreateOrderReferenceForIdRequest (final String id) {
         this.id = id;

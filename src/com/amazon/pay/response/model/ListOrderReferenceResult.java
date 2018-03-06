@@ -25,14 +25,14 @@ import javax.xml.bind.annotation.XmlType;
  * This represents the ListOrderReferenceResult node parsed
  * from the Amazon Pay ListOrderReference API response.
  *
- *   <ListOrderReferenceResult>
- *     <OrderReferenceList>
- *         <OrderReference>
+ *   &lt;ListOrderReferenceResult&gt;
+ *     &lt;OrderReferenceList&gt;
+ *         &lt;OrderReference&gt;
  *       ...
- *         </OrderReference>
- *     </OrderReferenceList>
- *     <NextPageToken>e0306-257e-4a13-b2ad-45b891c3de2a</NextPageToken>
- *   </ListOrderReferenceResult>
+ *         &lt;/OrderReference&gt;
+ *     &lt;/OrderReferenceList&gt;
+ *     &lt;NextPageToken&gt;e0306-257e-4a13-b2ad-45b891c3de2a&lt;/NextPageToken&gt;
+ *   &lt;/ListOrderReferenceResult&gt;
  *
  */
 

@@ -65,7 +65,6 @@ public final class ValidateBillingAgreementResponseData extends ResponseData imp
 
     /**
      * Returns the string representation of ValidateBillingAgreementResponseData
-     * @return
      */
     @Override
     public String toString() {

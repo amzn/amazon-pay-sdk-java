@@ -45,6 +45,8 @@ public class AuthorizationNotification extends Notification {
     /**
      * Value constructor
      *
+     * @param authorizationDetails The Auhtorizzation details data.
+     *
      */
     public AuthorizationNotification(final AuthorizationDetails authorizationDetails) {
         super(NotificationType.AuthorizationNotification);
@@ -69,5 +71,4 @@ public class AuthorizationNotification extends Notification {
         return "AuthorizationNotification{"
                 + "authorizationDetails=" + authorizationDetails.toString() + '}';
     }
-
 }

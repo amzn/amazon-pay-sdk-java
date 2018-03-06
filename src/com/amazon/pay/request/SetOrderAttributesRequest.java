@@ -92,7 +92,9 @@ public class SetOrderAttributesRequest extends SetMWSAuthToken implements Serial
     /**
      * Specifies the total amount of the order
      *
-     * @param amount
+     * @param amount Order amount total.
+     *
+     * @return the order amount
      */
     public SetOrderAttributesRequest setAmount(String amount) {
         this.amount = amount;
@@ -113,6 +115,8 @@ public class SetOrderAttributesRequest extends SetMWSAuthToken implements Serial
      *
      * @param currencyCode
      *              A three-digit currency code, formatted based on the ISO 4217 standard.
+     *
+     * @return Curreny Code
      */
     public SetOrderAttributesRequest setCurrencyCode(CurrencyCode currencyCode) {
         this.currencyCode = currencyCode;
@@ -131,7 +135,9 @@ public class SetOrderAttributesRequest extends SetMWSAuthToken implements Serial
     /**
      * Represents a description of the order that is displayed in emails to the buyer.
      *
-     * @param sellerNote
+     * @param sellerNote Represents a description of the order that is displayed in emails to the buyer.
+     *
+     * @return Returns a reference to this object so that methods can be chained together.
      */
     public SetOrderAttributesRequest setSellerNote(String sellerNote) {
         this.sellerNote = sellerNote;
@@ -152,7 +158,11 @@ public class SetOrderAttributesRequest extends SetMWSAuthToken implements Serial
      * This value should only be provided by Solution Providers. It should not be
      * provided by merchants creating their own custom integration.
      *
-     * @param platformId
+     * @param platformId Represents the SellerId of the Solution Provider that developed the platform.
+     *                   This value should only be provided by Solution Providers. It should
+     *                   not be provided by merchants creating their own custom integration.
+     *
+     * @return Returns a reference to this object so that methods can be chained together.
      */
     public SetOrderAttributesRequest setPlatformId(String platformId) {
         this.platformId = platformId;
@@ -173,6 +183,8 @@ public class SetOrderAttributesRequest extends SetMWSAuthToken implements Serial
      *
      * @param requestPaymentAuthorization flag exposed to merchants using which merchants
      *                                    can enforce their buyers to through multi-factor authentication
+     *
+     * @return Value of the requestPaymentAuthorization
      */
     public SetOrderAttributesRequest setRequestPaymentAuthorization(Boolean requestPaymentAuthorization) {
         this.requestPaymentAuthorization = requestPaymentAuthorization;
@@ -192,7 +204,9 @@ public class SetOrderAttributesRequest extends SetMWSAuthToken implements Serial
      * The merchant-specified identifier of this order. This is displayed to the
      * buyer in their emails and transaction history on the Amazon Pay website.
      *
-     * @param sellerOrderId
+     * @param sellerOrderId merchant-specified identifier of the order.
+     *
+     * @return the Seller Order ID
      */
     public SetOrderAttributesRequest setSellerOrderId(String sellerOrderId) {
         this.sellerOrderId = sellerOrderId;
@@ -210,11 +224,13 @@ public class SetOrderAttributesRequest extends SetMWSAuthToken implements Serial
 
     /**
      * The identifier of the store from which the order was placed. This overrides
-     * the default value in Seller Central under Settings > Account Settings. It is
+     * the default value in Seller Central under Settings &gt; Account Settings. It is
      * displayed to the buyer in their emails and transaction history on the
      * Amazon Pay website.
      *
-     * @param storeName
+     * @param storeName the identifier of the store from which the order was placed.
+     *
+     * @return the Store Name
      */
     public SetOrderAttributesRequest setStoreName(String storeName) {
         this.storeName = storeName;
@@ -233,7 +249,9 @@ public class SetOrderAttributesRequest extends SetMWSAuthToken implements Serial
     /**
      * Any additional information that you want to include with this order reference.
      *
-     * @param customInformation
+     * @param customInformation Additional information that merchant wants to pass for the order.
+     *
+     * @return Custom Information
      */
     public SetOrderAttributesRequest setCustomInformation(String customInformation) {
         this.customInformation = customInformation;
@@ -252,7 +270,11 @@ public class SetOrderAttributesRequest extends SetMWSAuthToken implements Serial
     /**
      * Specifies the payment service provider id
      *
-     * @param paymentServiceProviderId
+     * @param paymentServiceProviderId  A Payment Service Provider (PSP) allows a
+     *                                  merchant to connect to multiple payment
+     *                                  methods using a single payment gateway.
+     *
+     * @return the paymentServiceProviderId
      */
     public SetOrderAttributesRequest setPaymentServiceProviderId(String paymentServiceProviderId) {
         this.paymentServiceProviderId = paymentServiceProviderId;
@@ -271,7 +293,9 @@ public class SetOrderAttributesRequest extends SetMWSAuthToken implements Serial
     /**
      * Specifies the payment service provider order id
      *
-     * @param paymentServiceProviderOrderId
+     * @param paymentServiceProviderOrderId the PSP Order ID
+     *
+     * @return  paymentServiceProviderOrderId
      */
     public SetOrderAttributesRequest setPaymentServiceProviderOrderId(String paymentServiceProviderOrderId) {
         this.paymentServiceProviderOrderId = paymentServiceProviderOrderId;
@@ -290,7 +314,11 @@ public class SetOrderAttributesRequest extends SetMWSAuthToken implements Serial
     /**
      * Specifies the order item categories
      *
-     * @param orderItemCategories
+     * @param orderItemCategories A list representing the types of goods and
+     *                            services the merchant offers for sale.
+     *                            Not typically used.  Only specific strings
+     *                            are allowed in the list.
+     * @return the orderItemCategories
      */
     public SetOrderAttributesRequest setOrderItemCategories(Set<String> orderItemCategories) {
         this.orderItemCategories = orderItemCategories;

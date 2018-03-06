@@ -24,11 +24,11 @@ import javax.xml.bind.annotation.XmlType;
  * This represents the CreateOrderReferenceForIdResult node parsed
  * from the Amazon Pay CreateOrderReferenceForId API response.
  *
- *   <CreateOrderReferenceForIdResult>
- *     <OrderReferenceDetails>
+ *   &lt;CreateOrderReferenceForIdResult&gt;
+ *     &lt;OrderReferenceDetails&gt;
  *       ...
- *     </OrderReferenceDetails>
- *   </CreateOrderReferenceForIdResult>
+ *     &lt;/OrderReferenceDetails&gt;
+ *   &lt;/CreateOrderReferenceForIdResult&gt;
  *
  */
 @XmlAccessorType(XmlAccessType.FIELD)

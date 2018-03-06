@@ -44,6 +44,8 @@ public class CloseBillingAgreementRequest implements Serializable{
     /**
      * @param closureReason
      *              Describes the reason for closing the billing agreement.
+     *
+     * @return The ClosureReason
      */
     public CloseBillingAgreementRequest setClosureReason(String closureReason) {
         this.closureReason = closureReason;
@@ -52,7 +54,11 @@ public class CloseBillingAgreementRequest implements Serializable{
 
     /**
      * Applicable for third-party solution providers only. 
-     * @param mwsAuthToken
+     * @param mwsAuthToken Sets MWSAuthToken parameter in request. MWSAuthToken is required
+     *                     only for third-party solution providers and marketplaces. Do not
+     *                     specify this parameter for merchants creating their own custom integration.
+     *
+     * @return The MWSAuthToken
      */
     public CloseBillingAgreementRequest setMWSAuthToken(String mwsAuthToken) {
         this.mwsAuthToken = mwsAuthToken;

@@ -41,13 +41,18 @@ public class OrderItemCategories {
 
     /**
      * Value constructor
-     * 
+     *
+     * @param orderItemCategory A list representing the types of goods and services
+     *                          the merchant offers for sale.  Not typically used.
+     *                          Only specific strings are allowed in the list.
      */
     public OrderItemCategories(final List<String> orderItemCategory) {
         this.orderItemCategory = orderItemCategory;
     }
 
-
+    /**
+     * @return the Order Item Category
+     */
     public List<String> getOrderItemCategory() {
         if (orderItemCategory == null) {
             orderItemCategory = new ArrayList<String>();
@@ -55,10 +60,11 @@ public class OrderItemCategories {
         return this.orderItemCategory;
     }
 
+    /**
+     * Returns the string representation of GetServiceStatusResult
+     */
     @Override
     public String toString() {
         return "OrderItemCategories{" + "orderItemCategory=" + orderItemCategory + '}';
     }
-
-
 }

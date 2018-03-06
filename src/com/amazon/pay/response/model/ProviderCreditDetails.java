@@ -63,54 +63,72 @@ public class ProviderCreditDetails {
     }
 
     /**
-     * Returns the amazonProviderCreditId
+     * @return the amazonProviderCreditId
      */
     public String getAmazonProviderCreditId() {
         return amazonProviderCreditId;
     }
 
     /**
-     * Returns the sellerId
+     * @return the sellerId
      */
     public String getSellerId() {
         return sellerId;
     }
 
     /**
-     * Returns the providerId
+     * @return the providerId
      */
     public String getProviderId() {
         return providerId;
     }
     
     /**
-     * Returns the providerSellerId 
+     * @return the providerSellerId
      * (applicable while processing ProviderCreditNotification only)
      */
     public String getProviderSellerId() {
         return providerSellerId;
     }
 
+    /**
+     * @return the Credit Reference ID
+     */
     public String getCreditReferenceId() {
         return creditReferenceId;
     }
 
+    /**
+     * @return the Credit Amount
+     */
     public Price getCreditAmount() {
         return creditAmount;
     }
 
+    /**
+     * @return the Credit Reversal Amount
+     */
     public Price getCreditReversalAmount() {
         return creditReversalAmount;
     }
 
+    /**
+     * @return the Credit Reversal ID List
+     */
     public IdList getCreditReversalIdList() {
         return creditReversalIdList;
     }
-    
+
+    /**
+     * @return the Creation Time Stamp
+     */
     public XMLGregorianCalendar getCreationTimestamp() {
         return creationTimestamp;
     }
 
+    /**
+     * @return the Credit Status
+     */
     public Status getCreditStatus() {
         return creditStatus;
     }
@@ -126,6 +144,4 @@ public class ProviderCreditDetails {
                 + ", creditReversalIdList=" + creditReversalIdList + ", creationTimestamp=" + creationTimestamp 
                 + ", creditStatus=" + creditStatus + '}';
     }
-
-
 }

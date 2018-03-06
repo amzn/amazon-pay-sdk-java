@@ -141,7 +141,7 @@ public class ServiceConstants {
     public static final String SET_ORDER_ATTRIBUTES = "SetOrderAttributes";
 
     // SDK version
-    public static final String APPLICATION_LIBRARY_VERSION = "3.3.1";
+    public static final String APPLICATION_LIBRARY_VERSION = "3.3.2";
     public static final String GITHUB_SDK_NAME = "amazon-pay-sdk-java";
 
     // Exponential backoff wait times (milliseconds) for retry operations

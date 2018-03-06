@@ -50,7 +50,9 @@ public class ListOrderReferenceRequest extends SetMWSAuthToken implements Serial
 
     /**
      * Sets the creation start time
-     * @param startTime
+     * @param startTime The creation Start Time
+     *
+     * @return the Start Time
      */
     public ListOrderReferenceRequest setStartTime (XMLGregorianCalendar startTime){
         this.startTime = startTime;
@@ -59,7 +61,9 @@ public class ListOrderReferenceRequest extends SetMWSAuthToken implements Serial
 
     /**
      * Sets the creation end time
-     * @param endTime
+     * @param endTime The creation End Time
+     *
+     * @return the End Time
      */
     public ListOrderReferenceRequest setEndTime (XMLGregorianCalendar endTime){
         this.endTime = endTime;
@@ -68,7 +72,9 @@ public class ListOrderReferenceRequest extends SetMWSAuthToken implements Serial
 
     /**
      * Sets the manner in which the order reference IDs have to be sorted (ascending,descending).
-     * @param sortOrder
+     * @param sortOrder sort order of the order reference IDs
+     *
+     * @return the Sort Order
      */
     public ListOrderReferenceRequest setSortOrder (SortOrder sortOrder){
         this.sortOrder = sortOrder;
@@ -77,7 +83,9 @@ public class ListOrderReferenceRequest extends SetMWSAuthToken implements Serial
 
     /**
      * Sets the page size for listing order reference IDs
-     * @param pageSize
+     * @param pageSize sets the page size to lists the order reference IDs
+     *
+     * @return the Page Size
      */
     public ListOrderReferenceRequest setPageSize (Integer pageSize){
         this.pageSize = pageSize;
@@ -85,8 +93,10 @@ public class ListOrderReferenceRequest extends SetMWSAuthToken implements Serial
     }
 
     /**
-     * Sets the filters to filter according to the status of an order (open, closed,canceled).
-     * @param orderReferenceStatusListFilter
+     * Sets the filters to filter according to the status of an order (open, closed, canceled).
+     * @param orderReferenceStatusListFilter sets the filter for the order status
+     *
+     * @return the OrderReference Filter
      */
     public ListOrderReferenceRequest setOrderReferenceStatusListFilter (EnumSet<OrderReferenceStatus> orderReferenceStatusListFilter){
         this.orderReferenceStatusListFilter = orderReferenceStatusListFilter;

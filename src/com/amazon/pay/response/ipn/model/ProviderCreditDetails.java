@@ -63,21 +63,21 @@ public class ProviderCreditDetails {
     }
 
     /**
-     * Returns the amazonProviderCreditId
+     * @return Returns the amazonProviderCreditId
      */
     public String getAmazonProviderCreditId() {
         return amazonProviderCreditId;
     }
 
     /**
-     * Returns the sellerId
+     * @return Returns the sellerId
      */
     public String getSellerId() {
         return sellerId;
     }
 
     /**
-     * Returns the providerSellerId 
+     * @return Returns the providerSellerId
      * (applicable while processing ProviderCreditNotification only)
      */
     public String getProviderSellerId() {
@@ -86,7 +86,6 @@ public class ProviderCreditDetails {
 
     /**
      * Returns the creditReferenceId from notification
-     * 
      * @return Returns the creditReferenceId
      */
     public String getCreditReferenceId() {
@@ -95,7 +94,6 @@ public class ProviderCreditDetails {
 
     /**
      * Returns the creditAmount from notification
-     * 
      * @return Returns the creditAmount from notification
      */
     public Price getCreditAmount() {
@@ -104,7 +102,6 @@ public class ProviderCreditDetails {
 
     /**
      * Returns the creditReversalAmount from notification
-     * 
      * @return Returns the creditReversalAmount from notification
      */
     public Price getCreditReversalAmount() {
@@ -113,7 +110,6 @@ public class ProviderCreditDetails {
 
     /**
      * Returns the creditReversalIdList from notification
-     * 
      * @return Returns the creditReversalIdList from notification
      */
     public CreditReversalIdList getCreditReversalIdList() {
@@ -121,8 +117,7 @@ public class ProviderCreditDetails {
     }
     
     /**
-     * Returns the creationTimeStamp from notification 
-     * 
+     * Returns the creationTimeStamp from notification
      * @return Returns the creationTimeStamp from notification 
      */
     public XMLGregorianCalendar getCreationTimestamp() {
@@ -130,8 +125,7 @@ public class ProviderCreditDetails {
     }
 
     /**
-     * Returns the creditStatus from notification 
-     * 
+     * Returns the creditStatus from notification
      * @return Returns the creditStatus from notification
      */
     public Status getCreditStatus() {
@@ -149,6 +143,4 @@ public class ProviderCreditDetails {
                 + ", creditReversalIdList=" + creditReversalIdList + ", creationTimestamp=" + creationTimestamp 
                 + ", creditStatus=" + creditStatus + '}';
     }
-
-
 }

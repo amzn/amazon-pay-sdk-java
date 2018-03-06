@@ -38,7 +38,7 @@ public class NotificationVerification {
 
     /**
      * Helper method to verify IPN Headers
-     * @param headers
+     * @param headers This parameter will contain IPN headers for the merchant to verify.
      */
     protected void verifyHeaders(Map<String,String> headers) {
 

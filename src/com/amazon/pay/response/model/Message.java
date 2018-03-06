@@ -24,10 +24,10 @@ import javax.xml.bind.annotation.XmlType;
  * This represents the Message node parsed from the
  * Amazon Pay GetServiceStatusResponse API response.
  *
- *       <Message>
- *         <Locale>en_US</Locale>
- *         <Text>Service is once again operating at normal capacity at 6:53 PST.</Text>
- *       </Message>
+ *       &lt;Message&gt;
+ *         &lt;Locale&gt;en_US&lt;/Locale&gt;
+ *         &lt;Text&gt;Service is once again operating at normal capacity at 6:53 PST.&lt;/Text&gt;
+ *       &lt;/Message&gt;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Messages", propOrder = {
@@ -52,6 +52,7 @@ public class Message {
 
     /**
      * Operational status message locale.
+     * @return Operational status message locale.
      */
     public String getLocale() {
         return locale;
@@ -59,6 +60,7 @@ public class Message {
 
     /**
      * Operational status message text.
+     * @return Operational status message text.
      */
     public String getText() {
         return text;
@@ -72,5 +74,4 @@ public class Message {
         return "Message{" + "locale=" + locale +
                 ", text=" + text + '}';
     }
-
 }

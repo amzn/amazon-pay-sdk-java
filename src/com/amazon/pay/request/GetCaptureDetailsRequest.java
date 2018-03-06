@@ -38,7 +38,11 @@ public class GetCaptureDetailsRequest implements Serializable{
     /**
      * Set the value of mwsAuthToken
      *
-     * @param mwsAuthToken new value of mwsAuthToken
+     * @param mwsAuthToken Sets MWSAuthToken parameter in request. MWSAuthToken is required
+     *                     only for third-party solution providers and marketplaces. Do not
+     *                     specify this parameter for merchants creating their own custom integration.
+     *
+     * @return The MWSAuthToken
      */
     public GetCaptureDetailsRequest setMWSAuthToken(String mwsAuthToken) {
         this.mwsAuthToken = mwsAuthToken;

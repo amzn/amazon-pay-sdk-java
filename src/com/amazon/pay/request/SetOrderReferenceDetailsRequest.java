@@ -56,7 +56,9 @@ public class SetOrderReferenceDetailsRequest implements Serializable{
      * Overrides the Client's currency code with specified currency code in SetOrderReferenceDetailsRequest
      *
      * @param currencyCode
-     *              A three-digit currency code, formatted based on the ISO 4217 standard. 
+     *              A three-digit currency code, formatted based on the ISO 4217 standard.
+     *
+     * @return currenyCode
      */
     public SetOrderReferenceDetailsRequest setOrderCurrencyCode(CurrencyCode currencyCode) {
         this.orderCurrencyCode = currencyCode;
@@ -68,7 +70,11 @@ public class SetOrderReferenceDetailsRequest implements Serializable{
      * This value should only be provided by Solution Providers. It should not be 
      * provided by merchants creating their own custom integration. 
      *
-     * @param platformId
+     * @param platformId Represents the SellerId of the Solution Provider that developed the platform.
+     *                   This value should only be provided by Solution Providers. It should
+     *                   not be provided by merchants creating their own custom integration.
+     *
+     * @return Returns a reference to this object so that methods can be chained together.
      */
     public SetOrderReferenceDetailsRequest setPlatformId(String platformId) {
         this.platformId = platformId;
@@ -78,7 +84,9 @@ public class SetOrderReferenceDetailsRequest implements Serializable{
     /**
      * Represents a description of the order that is displayed in emails to the buyer.
      *
-     * @param sellerNote
+     * @param sellerNote Represents a description of the order that is displayed in emails to the buyer.
+     *
+     * @return Returns a reference to this object so that methods can be chained together.
      */
     public SetOrderReferenceDetailsRequest setSellerNote(String sellerNote) {
         this.sellerNote = sellerNote;
@@ -89,7 +97,9 @@ public class SetOrderReferenceDetailsRequest implements Serializable{
      * The merchant-specified identifier of this order. This is displayed to the 
      * buyer in their emails and transaction history on the Amazon Pay website.
      *
-     * @param sellerOrderId
+     * @param sellerOrderId merchant-specified identifier of the order.
+     *
+     * @return the Seller Order ID
      */
     public SetOrderReferenceDetailsRequest setSellerOrderId(String sellerOrderId) {
         this.sellerOrderId = sellerOrderId;
@@ -98,11 +108,13 @@ public class SetOrderReferenceDetailsRequest implements Serializable{
 
     /**
      * The identifier of the store from which the order was placed. This overrides 
-     * the default value in Seller Central under Settings > Account Settings. It is
+     * the default value in Seller Central under Settings &gt; Account Settings. It is
      * displayed to the buyer in their emails and transaction history on the 
      * Amazon Pay website.
      *
-     * @param storeName
+     * @param storeName the identifier of the store from which the order was placed.
+     *
+     * @return the Store Name
      */
     public SetOrderReferenceDetailsRequest setStoreName(String storeName) {
         this.storeName = storeName;
@@ -112,7 +124,9 @@ public class SetOrderReferenceDetailsRequest implements Serializable{
     /**
      * Any additional information that you want to include with this order reference.
      *
-     * @param customInformation
+     * @param customInformation Additional information that merchant wants to pass for the order.
+     *
+     * @return Custom Information
      */
     public SetOrderReferenceDetailsRequest setCustomInformation(String customInformation) {
         this.customInformation = customInformation;
@@ -123,7 +137,10 @@ public class SetOrderReferenceDetailsRequest implements Serializable{
      * Applicable only for third-party solution providers or marketplaces. It should not be 
      * provided by merchants creating their own custom integration. 
      *
-     * @param mwsAuthToken
+     * @param mwsAuthToken Sets MWSAuthToken. Applicable for third-party
+     *                     solution providers only.
+     *
+     * @return the MWSAuthToken
      */
     public SetOrderReferenceDetailsRequest setMWSAuthToken(String mwsAuthToken) {
         this.mwsAuthToken = mwsAuthToken;
@@ -205,7 +222,7 @@ public class SetOrderReferenceDetailsRequest implements Serializable{
     /**
      *Check if payment authorization has been requested or not
      *
-     * @return requestPaymentAuthorization
+     * @return Value of the requestPaymentAuthorization
      */
     public Boolean getRequestPaymentAuthorization() {
         return requestPaymentAuthorization;
@@ -216,6 +233,8 @@ public class SetOrderReferenceDetailsRequest implements Serializable{
      *
      * @param requestPaymentAuthorization flag exposed to merchants using which merchants
      *                                    can enforce their buyers to through multi-factor authentication
+     *
+     * @return Value of the requestPaymentAuthorization
      */
     public SetOrderReferenceDetailsRequest setRequestPaymentAuthorization(Boolean requestPaymentAuthorization) {
         this.requestPaymentAuthorization = requestPaymentAuthorization;
@@ -236,7 +255,4 @@ public class SetOrderReferenceDetailsRequest implements Serializable{
                 + ", orderCurrencyCode=" + orderCurrencyCode + ", platformId=" + platformId + ", sellerNote=" + sellerNote + ", sellerOrderId="
                 + sellerOrderId + ", storeName=" + storeName + ", customInformation=" + customInformation + ", mwsAuthToken=" + mwsAuthToken + '}';
     }
-
-
-
 }

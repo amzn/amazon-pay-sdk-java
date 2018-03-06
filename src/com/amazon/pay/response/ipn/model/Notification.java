@@ -78,7 +78,7 @@ public abstract class Notification {
 
     /**
      * Setter method for notificationMetaData
-     * @param metadata
+     * @param metadata Notification Metadata
      */
     public void setNotificationMetadata(NotificationMetaData metadata) {
         notificationMetadata = metadata;
@@ -86,7 +86,7 @@ public abstract class Notification {
 
     /**
      * Setter method for notification JSON
-     * @param json
+     * @param json Notification JSON
      */
     public void setJSON(String json) {
         notificationAsJSON = json;
@@ -104,7 +104,7 @@ public abstract class Notification {
     /**
      * Setter for notificationMap
      *
-     * @param map
+     * @param map Notification converted to a map
      */
     public void setMap(Map<String,String> map) {
         notificationAsMap = map;
@@ -113,7 +113,7 @@ public abstract class Notification {
     /**
      * Returns the notification values as a Map datastructure
      *
-     * @return notificationAsMap
+     * @return notification As Map
      */
     public Map<String,String> toMap() {
         return notificationAsMap;
@@ -122,7 +122,7 @@ public abstract class Notification {
     /**
      * Setter for IPN MessageMetadata
      *
-     * @param ipnMessageMetaData
+     * @param ipnMessageMetaData The Notification Message MetaData
      */
     public void setMessageMetaData(IPNMessageMetaData ipnMessageMetaData) {
         messageMetadata = ipnMessageMetaData;
@@ -139,7 +139,9 @@ public abstract class Notification {
 
     /**
      * Returns the string representation of Notification
-     * @return
+     * @return A string representation of this object.
+     *
+     * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
@@ -150,5 +152,4 @@ public abstract class Notification {
                 + ", notificationAsMap=" + notificationAsMap
                 + ", notificationType=" + notificationType + '}';
     }
-
 }

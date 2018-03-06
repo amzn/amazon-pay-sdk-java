@@ -45,7 +45,10 @@ public class SetBillingAgreementDetailsRequest implements Serializable{
 
     /**
      * Sets MWSAuthToken. This is applicable for third-party solution providers only
-     * @param mwsAuthToken
+     * @param mwsAuthToken Sets MWSAuthToken. Applicable for third-party
+     *                     solution providers only.
+     *
+     * @return the MWSAuthToken
      */
     public SetBillingAgreementDetailsRequest setMWSAuthToken(String mwsAuthToken) {
         this.mwsAuthToken = mwsAuthToken;
@@ -57,7 +60,11 @@ public class SetBillingAgreementDetailsRequest implements Serializable{
      * This value should only be provided by Solution Providers. It should not be 
      * provided by merchants creating their own custom integration. Do not specify 
      * the SellerId of the merchant for this request parameter.
-     * @param platformId
+     * @param platformId Represents the SellerId of the Solution Provider that developed the platform.
+     *                   This value should only be provided by Solution Providers. It should
+     *                   not be provided by merchants creating their own custom integration.
+     *
+     * @return Returns a reference to this object so that methods can be chained together.
      */
     public SetBillingAgreementDetailsRequest setPlatformId(String platformId) {
         this.platformId = platformId;
@@ -66,7 +73,9 @@ public class SetBillingAgreementDetailsRequest implements Serializable{
 
     /**
      * Sets description of the billing agreement that is displayed in emails to the buyer.
-     * @param sellerNote
+     * @param sellerNote Represents a description of the order that is displayed in emails to the buyer.
+     *
+     * @return Returns a reference to this object so that methods can be chained together.
      */
     public SetBillingAgreementDetailsRequest setSellerNote(String sellerNote) {
         this.sellerNote = sellerNote;
@@ -75,7 +84,9 @@ public class SetBillingAgreementDetailsRequest implements Serializable{
 
     /**
      * Sets the merchant-specified identifier of this billing agreement.
-     * @param sellerBillingAgreementId
+     * @param sellerBillingAgreementId the merchant-specified identifier of this billing agreement.
+     *
+     * @return Seller Billing Agreement ID
      */
     public SetBillingAgreementDetailsRequest setSellerBillingAgreementId(String sellerBillingAgreementId){
         this.sellerBillingAgreementId = sellerBillingAgreementId;
@@ -84,8 +95,10 @@ public class SetBillingAgreementDetailsRequest implements Serializable{
 
     /**
      * Sets identifier of the store from which the order was placed. 
-     * This overrides the default value in Seller Central under Settings > Account Settings.
-     * @param storeName
+     * This overrides the default value in Seller Central under Settings &gt; Account Settings.
+     * @param storeName the identifier of the store from which the order was placed.
+     *
+     * @return the Store Name
      */
     public SetBillingAgreementDetailsRequest setStoreName(String storeName) {
         this.storeName = storeName;
@@ -94,7 +107,9 @@ public class SetBillingAgreementDetailsRequest implements Serializable{
 
     /**
      * Sets any additional information that you wish to include with this billing agreement.
-     * @param customInformation
+     * @param customInformation Additional information that merchant wants to pass for the order.
+     *
+     * @return Custom Information
      */
     public SetBillingAgreementDetailsRequest setCustomInformation(String customInformation) {
         this.customInformation = customInformation;
@@ -160,7 +175,6 @@ public class SetBillingAgreementDetailsRequest implements Serializable{
     /**
      * Returns a string representation of this object; useful for testing and
      * debugging.
-     *
      * @return A string representation of this object.
      *
      * @see java.lang.Object#toString()
@@ -171,6 +185,4 @@ public class SetBillingAgreementDetailsRequest implements Serializable{
                 + platformId + ", sellerNote=" + sellerNote + ", sellerBillingAgreementId=" + sellerBillingAgreementId + ", storeName="
                 + storeName + ", customInformation=" + customInformation + ", mwsAuthToken=" + mwsAuthToken + '}';
     }
-
-
 }

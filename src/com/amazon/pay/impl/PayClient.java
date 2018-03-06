@@ -908,6 +908,7 @@ public class PayClient implements Client  {
      *             If an error response is returned by Amazon Pay indicating
      *             either a problem with the data in the request, or a server side issue.
      * @throws IOException
+     *             If an IO Exception response is thrown.
      */
     @Override
     public User getUserInfo(String accessToken , String clientId) throws AmazonServiceException, IOException {
@@ -958,6 +959,8 @@ public class PayClient implements Client  {
      * @return GetAuthorizationDetailsResponseData Returns the authorization details of the transaction
      *
      * @throws AmazonServiceException
+     *             If an error response is returned by Amazon Pay indicating
+     *             either a problem with the data in the request, or a server side issue.
      */
     @Override
     public GetAuthorizationDetailsResponseData charge(final ChargeRequest chargeRequest) throws AmazonServiceException {
@@ -1188,9 +1191,11 @@ public class PayClient implements Client  {
      * @return Config client configuration object
      *
      * @throws AmazonServiceException
+     *             If an error response is returned by Amazon Pay indicating
+     *             either a problem with the data in the request, or a server side issue.
      */
     @Override
-    public Config getConfig() {
+    public Config getConfig() throws AmazonServiceException {
         return payConfig;
     }
 

@@ -168,6 +168,8 @@ public interface Client {
      *              Returns the authorization details of the transaction
      *
      * @throws AmazonServiceException
+     *              If an error response is returned by Amazon Pay indicating
+     *             either a problem with the data in the request, or a server side issue.
      */
     GetAuthorizationDetailsResponseData charge(final ChargeRequest chargeRequest) throws AmazonServiceException;
 
@@ -267,7 +269,8 @@ public interface Client {
      *             If an error response is returned by Amazon Pay indicating
      *             either a problem with the data in the request, or a server side issue.
      */
-    ConfirmOrderReferenceResponseData confirmOrderReference(ConfirmOrderReferenceRequest request) throws AmazonServiceException;
+    ConfirmOrderReferenceResponseData confirmOrderReference(
+            ConfirmOrderReferenceRequest request) throws AmazonServiceException;
 
     /**
      * The CreateOrderReferenceForId operation is used to create an Order Reference object from
@@ -375,6 +378,9 @@ public interface Client {
      *        The authorization token that you received when you registered for Amazon MWS.
      *        Required For web applications and third-party developer authorizations only.
      *
+     * @param MWSAuthToken the MWSAuthToken that you get from seller central. This allows
+     *                     an SP/external developer to make calls on behalf of the merchant.
+     *
      * @return The response from the four API calls packaged in an object for easy processing
      *
      * @throws AmazonServiceException
@@ -473,7 +479,7 @@ public interface Client {
      * @throws AmazonServiceException
      *             If an error response is returned by Amazon Pay indicating
      *             either a problem with the data in the request, or a server side issue.
-     * @throws IOException
+     * @throws IOException throws an IO exception.
      */
     User getUserInfo(String accessToken, String clientId) throws AmazonServiceException, IOException;
 
@@ -574,8 +580,10 @@ public interface Client {
      * @return Config client configuration object
      *
      * @throws AmazonServiceException
+     *             If an error response is returned by Amazon Pay indicating
+     *             either a problem with the data in the request, or a server side issue.
      */
-    Config getConfig();
+    Config getConfig() throws AmazonServiceException;
 
     /**
      * The ListOrderReference operation is used to list all the order reference objects from

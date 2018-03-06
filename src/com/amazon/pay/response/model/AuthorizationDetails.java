@@ -92,7 +92,7 @@ public class AuthorizationDetails {
 
     /**
      * The identifier for this authorization transaction that you specify.
-     * @return
+     * @return identifier for this authorization transaction that you specify.
      */
     public String getAuthorizationReferenceId() {
         return authorizationReferenceId;
@@ -232,5 +232,4 @@ public class AuthorizationDetails {
                 + captureNow + ", softDescriptor=" + softDescriptor + ", addressVerificationCode="
                 + addressVerificationCode +", softDecline="  + softDecline + '}';
     }
-
 }

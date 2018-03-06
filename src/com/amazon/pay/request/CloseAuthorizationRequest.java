@@ -46,6 +46,8 @@ public class CloseAuthorizationRequest implements Serializable{
      *
      * @param closureReason
      *                  A description for the closure that is displayed in emails to the customer.
+     *
+     * @return The closure reason
      */
     public CloseAuthorizationRequest setClosureReason(String closureReason) {
         this.closureReason = closureReason;
@@ -55,7 +57,11 @@ public class CloseAuthorizationRequest implements Serializable{
     /**
      * Applicable for third-party solution providers only. 
      *
-     * @param mwsAuthToken
+     * @param mwsAuthToken Sets MWSAuthToken parameter in request. MWSAuthToken is required
+     *                     only for third-party solution providers and marketplaces. Do not
+     *                     specify this parameter for merchants creating their own custom integration.
+     *
+     * @return MWSAuthToken
      */
     public CloseAuthorizationRequest setMWSAuthToken(String mwsAuthToken) {
         this.mwsAuthToken = mwsAuthToken;

@@ -41,7 +41,11 @@ public class ConfirmBillingAgreementRequest implements Serializable{
 
     /**
      * Applicable for third-party solution providers only 
-     * @param mwsAuthToken
+     * @param mwsAuthToken Sets MWSAuthToken parameter in request. MWSAuthToken is required
+     *                     only for third-party solution providers and marketplaces. Do not
+     *                     specify this parameter for merchants creating their own custom integration.
+     *
+     * @return The MWSAuthToken
      */
     public ConfirmBillingAgreementRequest setMWSAuthToken(String mwsAuthToken) {
         this.mwsAuthToken = mwsAuthToken;

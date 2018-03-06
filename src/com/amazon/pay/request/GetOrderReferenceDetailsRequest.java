@@ -47,6 +47,8 @@ public class GetOrderReferenceDetailsRequest implements Serializable {
      * @param addressConsentToken The buyer address consent token. This value is retrieved 
      *                            from the Amazon Button widget after the buyer has 
      *                            successfully authenticated with Amazon.
+     *
+     * @return AddressConsentToken
      */
     @Deprecated
     public GetOrderReferenceDetailsRequest setAddressConsentToken(String addressConsentToken) {
@@ -68,6 +70,8 @@ public class GetOrderReferenceDetailsRequest implements Serializable {
      * @param accessToken The buyer's access token. This value is retrieved
      *                    from the Amazon Button widget after the buyer has
      *                    successfully authenticated with Amazon.
+     *
+     * @return AccessToken
      */
     public GetOrderReferenceDetailsRequest setAccessToken(String accessToken) {
         this.accessToken = URLDecoder.decode(accessToken);
@@ -88,6 +92,8 @@ public class GetOrderReferenceDetailsRequest implements Serializable {
      * and marketplaces. Do not specify this parameter for merchants creating their own custom integration. 
      *
      * @param mwsAuthToken new value of mwsAuthToken
+     *
+     * @return The MWSAuthToken
      */
     public GetOrderReferenceDetailsRequest setMWSAuthToken(String mwsAuthToken) {
         this.mwsAuthToken = mwsAuthToken;

@@ -55,8 +55,19 @@ public class Util {
     public static final String OS_VERSION = System.getProperty("os.version");
 
     /**
-     * Helper method to calculate base64 encoded signature using specified secret key
+     * @param stringToSign parameter that contains string to sign
      *
+     * @param secretKey parameter that contains the Merchant secret key
+     *
+     * @throws InvalidKeyException This is the exception for invalid Keys
+     *         (invalid encoding, wrong length, uninitialized, etc).
+     *
+     * @throws NoSuchAlgorithmException This exception is thrown when a
+     *         particular cryptographic algorithm is requested but is not available in the environment.
+     *
+     * @throws UnsupportedEncodingException The Character Encoding is not supported.
+     *
+     * @return signatureBase64 base64 encoded signature using specified secret key
      */
     public static String getSignature(String stringToSign, String secretKey) throws IllegalStateException, InvalidKeyException, NoSuchAlgorithmException, UnsupportedEncodingException {
         Mac mac = Mac.getInstance("HmacSHA256");
@@ -84,7 +95,10 @@ public class Util {
      * @param urlParameters URL Parameters
      * @param headers Header key-value pairs
      * @return ResponseData
-     * @throws IOException
+     * @throws IOException Signals that an I/O exception
+     *         of some sort has occurred. This class is
+     *         the general class of exceptions produced
+     *         by failed or interrupted I/O operations.
      */
     public static ResponseData httpSendRequest(String method, String url, String urlParameters, Map<String,String> headers) throws IOException {
 
@@ -130,9 +144,13 @@ public class Util {
      * @param method The HTTP method (GET,POST,PUT,etc.).
      * @param url The URL
      * @param urlParameters URL Parameters
+     * @param headers HTTP POST request headers
      * @param config client configuration container
      * @return ResponseData
-     * @throws IOException
+     * @throws IOException Signals that an I/O exception
+     *         of some sort has occurred. This class is
+     *         the general class of exceptions produced
+     *         by failed or interrupted I/O operations.
      */
     public static ResponseData httpSendRequest(String method, String url, String urlParameters, Map<String,String> headers, PayConfig config) throws IOException {
 
@@ -177,9 +195,12 @@ public class Util {
     }
 
     /**
-     * Performs additional processing on top of the URLEncoder.encode function to
-     * make the string encoding conform to RFC3986
-     * @throws java.io.UnsupportedEncodingException
+     * @param str Performs additional processing on top of the URLEncoder.encode function to
+     *            make the string encoding conform to RFC3986
+     *
+     * @return An encoded string taht conforms to RFC3986
+     *
+     * @throws UnsupportedEncodingException The Character Encoding is not supported.
      */
     public static String urlEncode(String str) throws UnsupportedEncodingException {
         String val = (str == null) ? "" : str;
@@ -188,8 +209,8 @@ public class Util {
     }
 
     /**
-     * Helper method to URL encode all parameter values in a Map
-     * @throws java.io.UnsupportedEncodingException
+     * @param apiParameters Helper method to URL encode all parameter values in a Map
+     * @throws UnsupportedEncodingException The Character Encoding is not supported.
      */
     public static void urlEncodeAPIParams(Map<String, String> apiParameters) throws UnsupportedEncodingException {
         for (Map.Entry<String, String> entry : apiParameters.entrySet()) {
@@ -198,7 +219,16 @@ public class Util {
     }
 
     /**
-     * Helper method to convert JSON data to Object specified using GSON
+     * @param <T> the type of the class modeled by this {@code Class}
+     *            object.  For example, the type of {@code String.class} is {@code
+     *            Class<String>}.  Use {@code Class<?>} if the class being modeled is
+     *            unknown.
+     *
+     * @param clazz Class of T
+     *
+     * @param jsonData JSON data to be converted
+     *
+     * @return A GSON object
      *
      */
     public static <T> T convertJsonToObject(String jsonData, Class<T> clazz) {
@@ -208,9 +238,10 @@ public class Util {
     }
 
     /**
-     * Helper method to convert specified parameter map to URL string
+     * @param params Parameters to be converted to URL string
      * separated by ampersand
      *
+     * @return An URL string that is separated by ampersand
      */
     public static String convertParameterMapToString(Map<String, String> params) {
         StringBuilder parameterString = new StringBuilder();
@@ -230,7 +261,12 @@ public class Util {
     }
 
     /**
-     * Helper method to get Service URL endpoint including service version name
+     * @param region Region parameter for the service url endpoint requested.
+     *
+     * @param environment Environment parameter for the service url endpoint requested.
+     *
+     * @return The Service URL endpoint
+     *
      * @deprecated This method does not handle Service URL overrides.
      *             Please use getServiceURLEndpoint(Config config) method instead.
      */
@@ -240,7 +276,9 @@ public class Util {
     }
 
     /**
-     * Helper method to get Service URL endpoint including service version name
+     * @param config Config to get Service URL endpoint including service version name
+     *
+     * @return The Service URL endpoint
      */
     public static String getServiceURLEndpoint(Config config) {
         if (config.getOverrideServiceURL() != null) {
@@ -252,7 +290,11 @@ public class Util {
         }
     }
 
-
+    /**
+     * @param environment parameter to get Service version name
+     *
+     * @return The Service API Version Name
+     */
     public static String getServiceVersionName(Environment environment) {
         String mwsServiceAPIVersionName;
         if (environment == Environment.SANDBOX) {

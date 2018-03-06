@@ -1,3 +1,7 @@
+Version 3.3.2 - March 2018
+- Maven Central Release
+- Documentation changes to satisfy Maven central release
+
 Version 3.3.1 - January 2018
 - Fix the SDK version number in all files
 - Update unit test for ListOrderReference API

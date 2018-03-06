@@ -39,8 +39,11 @@ public class ValidateBillingAgreementRequest implements Serializable{
     }
 
     /**
+     * Sets MWSAuthToken. This is applicable for third-party solution providers only
+     * @param mwsAuthToken Sets MWSAuthToken. Applicable for third-party
+     *                     solution providers only.
      *
-     * @param mwsAuthToken
+     * @return the MWSAuthToken
      */
     public ValidateBillingAgreementRequest setMWSAuthToken(String mwsAuthToken) {
         this.mwsAuthToken = mwsAuthToken;
@@ -75,6 +78,4 @@ public class ValidateBillingAgreementRequest implements Serializable{
     public String toString() {
         return "ValidateBillingAgreementRequest{" + "amazonBillingAgreementId=" + amazonBillingAgreementId + ", mwsAuthToken=" + mwsAuthToken + '}';
     }
-
-
 }

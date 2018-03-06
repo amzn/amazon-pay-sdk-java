@@ -42,6 +42,9 @@ public class ProviderCreditReversal {
 
     /**
      * Value constructor
+     * @param creditReversalAmount The Credit Reversal Amount
+     *
+     * @param providerId The Provider ID
      * 
      */
     public ProviderCreditReversal(final String providerId, final Price creditReversalAmount) {
@@ -49,19 +52,25 @@ public class ProviderCreditReversal {
         this.creditReversalAmount = creditReversalAmount;
     }
 
+    /**
+     * @return the providerId
+     */
     public String getProviderId() {
         return providerId;
     }
 
+    /**
+     * @return the Credit Reversal Amount
+     */
     public Price getCreditReversalAmount() {
         return creditReversalAmount;
     }
 
+    /**
+     * Returns the string representation of GetServiceStatusResult
+     */
     @Override
     public String toString() {
         return "ProviderCreditReversal{" + "providerId=" + providerId + ", creditReversalAmount=" + creditReversalAmount.toString() + '}';
     }
-
-
-
 }

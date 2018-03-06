@@ -26,16 +26,16 @@ import javax.xml.bind.annotation.XmlType;
  * This represents a container for Message nodes parsed from
  * the Amazon Pay GetServiceStatusResponse API response.
  *
- *     <Messages>
- *       <Message>
- *         <Locale>en_UK</Locale>
- *         <Text>We are experiencing high latency in UK because of heavy traffic.</Text>
- *       </Message>
- *       <Message>
- *         <Locale>en_US</Locale>
- *         <Text>Service is once again operating at normal capacity at 6:53 PST.</Text>
- *       </Message>
- *     </Messages>
+ *     &lt;Messages&gt;
+ *       &lt;Message&gt;
+ *         &lt;Locale&gt;en_UK&lt;/Locale&gt;
+ *         &lt;Text&gt;We are experiencing high latency in UK because of heavy traffic.&lt;/Text&gt;
+ *       &lt;/Message&gt;
+ *       &lt;Message&gt;
+ *         &lt;Locale&gt;en_US&lt;/Locale&gt;
+ *         &lt;Text&gt;Service is once again operating at normal capacity at 6:53 PST.&lt;/Text&gt;
+ *       &lt;/Message&gt;
+ *     &lt;/Messages&gt;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
@@ -60,7 +60,7 @@ public class MessageList {
     }
 
     /**
-     * The parent element of one or more Message elements.
+     * @return parent element of one or more Message elements.
      */
     public List<Message> getMessages() {
         if (messages == null) {
@@ -76,5 +76,4 @@ public class MessageList {
     public String toString() {
         return "MessageList{" + "messages=" + messages + '}';
     }
-
 }

@@ -24,16 +24,16 @@ import javax.xml.bind.annotation.XmlType;
  * This represents the parsed response from the Amazon Pay
  * SetOrderAttributes API.
  *
- * <SetOrderAttributesResponse xmlns="http://mws.amazonservices.com/schema/OffAmazonPayments/2013-01-01">
- *   <SetOrderAttributesResult>
- *     <OrderReferenceDetails>
+ * &lt;SetOrderAttributesResponse xmlns="http://mws.amazonservices.com/schema/OffAmazonPayments/2013-01-01"&gt;
+ *   &lt;SetOrderAttributesResult&gt;
+ *     &lt;OrderReferenceDetails&gt;
  *        ....
- *     </OrderReferenceDetails>
- *   </SetOrderAttributesResult>
- *   <ResponseMetadata>
- *     <RequestId>4d5e0306-257e-4a13-b2ad-45b891c3de2a</RequestId>
- *   </ResponseMetadata>
- * </SetOrderAttributesResponse>
+ *     &lt;/OrderReferenceDetails&gt;
+ *   &lt;/SetOrderAttributesResult&gt;
+ *   &lt;ResponseMetadata&gt;
+ *     &lt;RequestId&gt;4d5e0306-257e-4a13-b2ad-45b891c3de2a&lt;/RequestId&gt;
+ *   &lt;/ResponseMetadata&gt;
+ * &lt;/SetOrderAttributesResponse&gt;
  *
  */
 @XmlAccessorType(XmlAccessType.FIELD)

@@ -61,7 +61,6 @@ public final class CaptureResponseData extends ResponseData implements Serializa
 
     /**
      * Returns the string representation of CaptureResponseData
-     * @return 
      */
     @Override
     public String toString() {

@@ -22,222 +22,159 @@ import com.amazon.pay.types.Region;
 public interface Config {
 
     /**
-     * Returns AccessKey from PayConfig
-     *
-     * @return accessKeyId
+     * @return Returns AccessKey from PayConfig
      */
     String getAccessKey();
 
     /**
-     * Returns the application name from PayConfig
-     *
-     * @return applicationName
-     *
+     * @return Returns the application name from PayConfig
      */
     String getApplicationName();
 
     /**
-     * Returns the application version set in PayConfig
-     *
-     * @return applicationVersion
-     *
+     * @return Returns the application version set in PayConfig
      */
     String getApplicationVersion();
 
     /**
-     * Returns currencyCode in PayConfig
-     *
-     * @return currencyCode
+     * @return Returns currencyCode in PayConfig
      */
     CurrencyCode getCurrencyCode();
 
     /**
-     * Returns the environment from PayConfig
-     *
-     * @return environment
+     * @return Returns the environment from PayConfig
      */
     Environment getEnvironment();
 
     /**
-     * Returns the proxy host set in the PayConfig
-     *
-     * @return proxyHost
+     * @return Returns the proxy host set in the PayConfig
      */
     String getProxyHost();
 
     /**
-     * Returns proxy password in PayConfig
-     *
-     * @return proxyPassword
+     * @return Returns proxy password in PayConfig
      */
     String getProxyPassword();
 
     /**
-     * Returns proxy port from PayConfig
-     *
-     * @return proxyPort
+     * @return Returns proxy port from PayConfig
      */
     int getProxyPort();
 
     /**
-     * Returns proxy username from PayConfig
-     *
-     * @return proxyUsername
+     * @return Returns proxy username from PayConfig
      */
     String getProxyUsername();
 
     /**
-     * Returns region code from PayConfig
-     *
-     * @see com.amazon.pay.impl.PayConfig
-     *
-     * @return region
+     * @return Returns region code from PayConfig
      */
     Region getRegion();
 
     /**
-     * Returns SecretKey from PayConfig
-     *
-     * @return secretAccessKey
-     *
+     * @return Returns SecretKey from PayConfig
      */
     String getSecretKey();
 
     /**
-     * Returns the MerchantId/SellerId from PayConfig
-     *
-     * @return sellerId
+     * @return Returns the MerchantId/SellerId from PayConfig
      */
     String getSellerId();
 
     /**
-     * Returns true if Client retries on service exceptions that are either 500 internal server
+     * @return Returns true if Client retries on service exceptions that are either 500 internal server
      * errors, 503 service unavailable errors, service throttling errors.
      */
     boolean isUseAutoRetryOnThrottle();
 
     /**
-     * Sets AccessKey in PayConfig
-     *
-     * @param accessKeyId
+     * @param accessKeyId Sets AccessKey in PayConfig
      */
     void setAccessKey(String accessKeyId);
 
     /**
-     * Sets Application Name in PayConfig
-     *
-     * @param applicationName
+     * @param applicationName Sets Application Name in PayConfig
      */
     void setApplicationName(String applicationName);
 
     /**
-     * Sets Application Version in PayConfig
-     *
-     * @param applicationVersion
+     * @param applicationVersion Sets Application Version in PayConfig
      */
     void setApplicationVersion(String applicationVersion);
 
     /**
-     * Sets currencyCode in PayConfig
-     * @param currencyCode
+     * @param currencyCode Sets currencyCode in PayConfig
      */
     void setCurrencyCode(CurrencyCode currencyCode);
 
     /**
-     *  Sets environment in PayConfig.
-     *
-     * @param environment
+     * @param environment Sets environment in PayConfig
      */
     void setEnvironment(Environment environment);
 
     /**
-     * Sets proxy host in PayConfig
-     *
-     * @param proxyHost
+     * @param proxyHost Sets proxy host in PayConfig
      */
     void setProxyHost(String proxyHost);
 
     /**
-     * Set proxy password in PayConfig
-     *
-     * @param proxyPassword
+     * @param proxyPassword Sets proxy password in PayConfig
      */
     void setProxyPassword(String proxyPassword);
 
     /**
-     * Sets proxy port in PayConfig
-     *
-     * @param proxyPort
+     * @param proxyPort Sets proxy port in PayConfig
      */
     void setProxyPort(int proxyPort);
 
     /**
-     * Sets proxy username in PayConfig
-     *
-     * @param proxyUsername
+     * @param proxyUsername Sets proxy username in PayConfig
      */
     void setProxyUsername(String proxyUsername);
 
     /**
-     * Identifies region associated with Amazon Pay API operations.
-     *
-     * @param region
-     *
+     * @param region Identifies region associated with Amazon Pay API operations.
      */
     void setRegion(Region region);
 
     /**
-     * Sets SecretKey in PayConfig
-     *
-     * @param secretAccessKey
+     * @param secretAccessKey Sets SecretKey in PayConfig
      */
     void setSecretKey(String secretAccessKey);
 
     /**
-     * Sets MerchantId/SellerId in PayConfig
-     *
-     * @param sellerId
+     * @param sellerId Sets MerchantId/SellerId in PayConfig
      */
     void setSellerId(String sellerId);
 
     /**
-     * Sets autoRetryOnThrottle in PayConfig
-     * If set to true, client will retry on service exceptions that are either 500 internal server
-     * errors, 503 service unavailable errors, service throttling errors.
-     *
-     * @param useAutoRetryOnThrottle
+     * @param useAutoRetryOnThrottle Sets autoRetryOnThrottle in PayConfig
+     *        If set to true, client will retry on service exceptions that are either 500 internal server
+     *        errors, 503 service unavailable errors, service throttling errors.
      */
     void setUseAutoRetryOnThrottle(boolean useAutoRetryOnThrottle);
 
     /**
-     * Returns overridden MWS Service URL in PayConfig
-     *
-     * @return overrideServiceURL
+     * @return overrideServiceURL Returns overridden MWS Service URL in PayConfig
      */
     String getOverrideServiceURL();
 
     /**
-     * Sets MWS Service URL override in PayConfig
+     * @param overrideServiceURL Sets MWS Service URL override in PayConfig
      * This should only be used if you need to programmatically override the default MWS service endpoint
      * provided by the SDK's mwsEndpointMappingsMap in com.amazon.pay.types.ServiceConstants.
-     *
-     * @param overrideServiceURL
      */
     void setOverrideServiceURL(String overrideServiceURL);
 
     /**
-     * Returns overridden LWA Profile URL in PayConfig
-     *
-     * @return overrideProfileURL
+     * @return overrideProfileURL Returns overridden LWA Profile URL in PayConfig
      */
     String getOverrideProfileURL();
 
     /**
-     * Sets LWA Profile URL override in PayConfig
-     * This should only be used if you need to programmatically override the default LWA profile endpoint
-     * provided by the SDK's profileEndpointMappingsMap in com.amazon.pay.types.ServiceConstants.
-     *
-     * @param overrideProfileURL
+     * @param overrideProfileURL Sets LWA Profile URL override in PayConfig
+     *        This should only be used if you need to programmatically override the default LWA profile endpoint
+     *        provided by the SDK's profileEndpointMappingsMap in com.amazon.pay.types.ServiceConstants.
      */
     void setOverrideProfileURL(String overrideProfileURL);
 

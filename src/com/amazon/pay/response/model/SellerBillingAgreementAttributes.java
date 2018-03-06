@@ -56,7 +56,7 @@ public class SellerBillingAgreementAttributes {
 
     /**
      * The identifier of the store from which the order was placed. This
-     * overrides the default value in Seller Central under Settings > Account Settings.
+     * overrides the default value in Seller Central under Settings &gt; Account Settings.
      * It is displayed to the buyer in their emails and transaction history on the Amazon Pay website.
      *
      * @return storeName

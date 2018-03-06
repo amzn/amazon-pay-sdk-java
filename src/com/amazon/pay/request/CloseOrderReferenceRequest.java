@@ -34,19 +34,16 @@ public class CloseOrderReferenceRequest implements Serializable{
     /**
      * @param amazonOrderReferenceId
      *              The ID of the order reference for which the details are being requested.
-     *
-     * @return CloseOrderReferenceRequest
      */
     public CloseOrderReferenceRequest(String amazonOrderReferenceId) {
         this.amazonOrderReferenceId = amazonOrderReferenceId;
     }
 
     /**
-     * Sets the reason for closing the order reference. This is for 
-     * informational purposes only and is never displayed to the customer. 
+     * @param closureReason Sets the reason for closing the order reference. This is for
+     *                      informational purposes only and is never displayed to the customer.
      *
-     * @param closureReason
-     *
+     * @return The ClosureReason
      */
     public CloseOrderReferenceRequest setClosureReason(String closureReason) {
         this.closureReason = closureReason;
@@ -54,10 +51,11 @@ public class CloseOrderReferenceRequest implements Serializable{
     }
 
     /**
-     * Sets MWSAuthToken parameter in request. MWSAuthToken is required only for third-party solution providers
-     * and marketplaces. Do not specify this parameter for merchants creating their own custom integration. 
+     * @param mwsAuthToken Sets MWSAuthToken parameter in request. MWSAuthToken is required
+     *                     only for third-party solution providers and marketplaces. Do not
+     *                     specify this parameter for merchants creating their own custom integration.
      *
-     * @param mwsAuthToken
+     * @return The MWSAuthToken
      */
     public CloseOrderReferenceRequest setMWSAuthToken(String mwsAuthToken) {
         this.mwsAuthToken = mwsAuthToken;

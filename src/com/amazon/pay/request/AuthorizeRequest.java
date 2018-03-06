@@ -65,6 +65,7 @@ public class AuthorizeRequest implements Serializable {
      *       Three-digit currency code. In ISO 4217 format.
      *
      * @return AuthorizeRequest
+     *           Container holding authorize operation parameters
      */
     public AuthorizeRequest setAuthorizationCurrencyCode(CurrencyCode currencyCode) {
         this.authorizationCurrencyCode = currencyCode;
@@ -75,6 +76,7 @@ public class AuthorizeRequest implements Serializable {
      * Represents currency code for Authorize request
      *
      * @return AuthorizeRequest
+     *           Container holding authorize operation parameters
      */
     public CurrencyCode getAuthorizationCurrencyCode() {
         return authorizationCurrencyCode;
@@ -87,6 +89,8 @@ public class AuthorizeRequest implements Serializable {
      * Default: false
      *
      * @param CaptureNow boolean indicating status of captureNow status
+     *
+     * @return Returns a reference to this object so that methods can be chained together.
      */
     public AuthorizeRequest setCaptureNow(boolean CaptureNow) {
         this.captureNow = CaptureNow;
@@ -96,11 +100,13 @@ public class AuthorizeRequest implements Serializable {
     /**
      * The description to be shown on the buyer's payment instrument statement
      * if CaptureNow is set to true. The soft descriptor sent to the payment
-     * processor is: “AMZ* <soft descriptor specified here>”.
-     * Default: “AMZ*<SELLER_NAME> amzn.com/pmts WA”
+     * processor is: “AMZ* &lt;soft descriptor specified here&gt;”.
+     * Default: “AMZ*&lt;SELLER_NAME&gt; amzn.com/pmts WA”
      * Maximum: 16 characters
      *
      * @param softDescriptor string for Authorize operation
+     *
+     * @return Returns a reference to this object so that methods can be chained together.
      */
     public AuthorizeRequest setSoftDescriptor(String softDescriptor) {
         this.softDescriptor = softDescriptor;
@@ -172,6 +178,8 @@ public class AuthorizeRequest implements Serializable {
      * be declined. Note: Set this value to zero for synchronous mode.
      *
      * @param TransactionTimeout maximum number of minutes allocated for the Authorize operation
+     *
+     * @return A description for the transaction
      */
     public AuthorizeRequest setTransactionTimeout(String TransactionTimeout) {
         this.transactionTimeout = TransactionTimeout;
@@ -193,8 +201,8 @@ public class AuthorizeRequest implements Serializable {
     /**
      * The description to be shown on the buyer's payment instrument statement
      * if CaptureNow is set to true. The soft descriptor sent to the payment
-     * processor is: “AMZ* <soft descriptor specified here>”.
-     * Default: “AMZ*<SELLER_NAME> amzn.com/pmts WA”
+     * processor is: “AMZ* &lt;soft descriptor specified here&gt;”.
+     * Default: “AMZ*&lt;SELLER_NAME&gt; amzn.com/pmts WA”
      * Maximum: 16 characters
      *
      * @return Soft descriptor string for Authorize operation
@@ -213,7 +221,11 @@ public class AuthorizeRequest implements Serializable {
     /**
      * Applicable for third-party solution providers only.
      *
-     * @param mwsAuthToken
+     * @param mwsAuthToken Sets MWSAuthToken parameter in request. MWSAuthToken is required
+     *                     only for third-party solution providers and marketplaces. Do not
+     *                     specify this parameter for merchants creating their own custom integration.
+     *
+     * @return The MWSAuthToken
      */
     public AuthorizeRequest setMWSAuthToken(String mwsAuthToken) {
         this.mwsAuthToken = mwsAuthToken;
@@ -234,6 +246,7 @@ public class AuthorizeRequest implements Serializable {
      *
      * @param providerCreditList associated with Authorize operation
      *
+     * @return Returns a reference to this object so that methods can be chained together.
      */
     public AuthorizeRequest setProviderCredit(List<ProviderCredit> providerCreditList) {
         this.providerCredit = providerCreditList;
@@ -256,7 +269,5 @@ public class AuthorizeRequest implements Serializable {
                 + transactionTimeout + ", captureNow=" + captureNow + ", softDescriptor=" + softDescriptor + ", mwsAuthToken="
                 + mwsAuthToken + ", providerCredit=" + providerCredit + '}';
     }
-
-
 
 }

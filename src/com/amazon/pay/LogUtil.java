@@ -18,7 +18,7 @@ package com.amazon.pay;
 public interface LogUtil {
 
     /**
-     * Method call to log messages to the logging console
+     * @param message to log messages to the logging console
      **/
     public void logMessage(String message);
 

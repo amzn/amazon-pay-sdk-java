@@ -55,13 +55,13 @@ public class BillingAgreementNotification  extends Notification {
     }
 
     /**
-     * String representation of BliingAgreement Notification
-     * @return 
+     * String representation of BillingAgreement Notification
+     * @return A string representation of this object.
+     *
+     * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
         return "BillingAgreementNotification{" + "billingAgreement=" + billingAgreement.toString() + '}';
     }
-
-
 }

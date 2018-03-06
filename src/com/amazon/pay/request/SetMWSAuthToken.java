@@ -27,11 +27,11 @@ public abstract class SetMWSAuthToken {
     }
 
     /**
-     * Represents the authorization of a specific developer by a specific Amazon seller.
-     * Required For web applications and third-party developer authorizations only.
+     *@param mwsAuthToken Sets MWSAuthToken parameter in request. MWSAuthToken is required
+     *                     only for third-party solution providers and marketplaces. Do not
+     *                     specify this parameter for merchants creating their own custom integration.
      *
-     * @param mwsAuthToken
-     *        The authorization token that you received when you registered for Amazon MWS.
+     * @return The MWSAuthToken
      */
     public SetMWSAuthToken setMwsAuthToken(String mwsAuthToken) {
         this.mwsAuthToken = mwsAuthToken;

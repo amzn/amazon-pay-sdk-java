@@ -33,9 +33,10 @@ public class GetProviderCreditReversalDetailsRequest implements Serializable{
     private String mwsAuthToken;
     
     /**
-     * 
-     * @param amazonProviderCreditReversalId
-     * @param sellerId 
+     *
+     * @param amazonProviderCreditReversalId Provide Amazon Provider Credit ID in the request
+     *
+     * @param sellerId Provide the Seller ID in the request
      */
     public GetProviderCreditReversalDetailsRequest(String amazonProviderCreditReversalId , String sellerId) {
         this.amazonProviderCreditReversalId = amazonProviderCreditReversalId;
@@ -43,8 +44,11 @@ public class GetProviderCreditReversalDetailsRequest implements Serializable{
     }
 
     /**
-     * Sets value for mwsAuthToken
-     * @param mwsAuthToken
+     * @param mwsAuthToken Sets MWSAuthToken parameter in request. MWSAuthToken is required
+     *                     only for third-party solution providers and marketplaces. Do not
+     *                     specify this parameter for merchants creating their own custom integration.
+     *
+     * @return The MWSAuthToken
      */
     public GetProviderCreditReversalDetailsRequest setMwsAuthToken(String mwsAuthToken) {
         this.mwsAuthToken = mwsAuthToken;

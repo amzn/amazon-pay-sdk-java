@@ -26,17 +26,17 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * This represents the GetServiceStatusResult node parsed
  * from the Amazon Pay GetServiceStatusResponse API response.
  *
- *   <GetServiceStatusResult>
- *     <Status>GREEN_I</Status>
- *     <Timestamp>2010-11-01T21:38:09.676Z</Timestamp>
- *     <MessageId>173964729I</MessageId>
- *     <Messages>
- *       <Message>
- *         <Locale>en_US</Locale>
- *         <Text>Service is once again operating at normal capacity at 6:53 PST.</Text>
- *       </Message>
- *     </Messages>
- *   </GetServiceStatusResult>
+ *   &lt;GetServiceStatusResult&gt;
+ *     &lt;Status&gt;GREEN_I&lt;/Status&gt;
+ *     &lt;Timestamp&gt;2010-11-01T21:38:09.676Z&lt;/Timestamp&gt;
+ *     &lt;MessageId&gt;173964729I&lt;/MessageId&gt;
+ *     &lt;Messages&gt;
+ *       &lt;Message&gt;
+ *         &lt;Locale&gt;en_US&lt;/Locale&gt;
+ *         &lt;Text&gt;Service is once again operating at normal capacity at 6:53 PST.&lt;/Text&gt;
+ *       &lt;/Message&gt;
+ *     &lt;/Messages&gt;
+ *   &lt;/GetServiceStatusResult&gt;
  *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -67,7 +67,7 @@ public class GetServiceStatusResult {
     }
 
     /**
-     * Returns service status:
+     * @return  service status:
      *   GREEN—The service is operating normally.
      *   GREEN_I—The service is operating normally.
      *       Additional information is provided.
@@ -82,21 +82,21 @@ public class GetServiceStatusResult {
     }
 
     /**
-     * Indicates the time at which the operational status was evaluated.
+     * @return the time at which the operational status was evaluated.
      */
     public XMLGregorianCalendar getTimestamp() {
         return timestamp;
     }
 
     /**
-     * An Amazon-defined message identifier.
+     * @return Amazon-defined message identifier.
      */
     public String getMessageId() {
         return messageId;
     }
 
     /**
-     * The parent element of one or more Message elements.
+     * @return parent element of one or more Message elements.
      */
     public MessageList getMessages() {
         return messages;
@@ -112,5 +112,4 @@ public class GetServiceStatusResult {
                 ", messageId=" + messageId +
                 ", messages=" + messages + '}';
     }
-
 }

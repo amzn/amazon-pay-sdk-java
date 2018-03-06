@@ -38,11 +38,13 @@ public class ReverseProviderCreditRequest implements Serializable{
     private String mwsAuthToken;
   
     /**
-     * 
-     * @param amazonProviderCreditId
-     * @param creditReversalReferenceId
-     * @param sellerId
-     * @param creditReversalAmount 
+     * @param amazonProviderCreditId Provide Amazon Provider Credit ID in the request
+     *
+     * @param sellerId Provide the Seller ID in the request
+     *
+     * @param creditReversalReferenceId Provide Credit Reversal Reference ID
+     *
+     * @param creditReversalAmount The reversal amount
      */
     public ReverseProviderCreditRequest(String amazonProviderCreditId, String creditReversalReferenceId, String sellerId, String creditReversalAmount){
         this.amazonProviderCreditId = amazonProviderCreditId;
@@ -53,7 +55,9 @@ public class ReverseProviderCreditRequest implements Serializable{
     
     /**
      * 
-     * @param currencyCode
+     * @param currencyCode Three-digit currency code. In ISO 4217 format.
+     *
+     * @return the Currency Code
      */
     public ReverseProviderCreditRequest setCreditReversalCurrencyCode(CurrencyCode currencyCode) {
         this.creditReversalAmountCurrencyCode = currencyCode;
@@ -63,7 +67,9 @@ public class ReverseProviderCreditRequest implements Serializable{
     
     /**
      * 
-     * @param creditReversalNote
+     * @param creditReversalNote Sets the credit reversal note.
+     *
+     * @return the credit reversal note.
      */
     public ReverseProviderCreditRequest setCreditReversalNote(String creditReversalNote) {
         this.creditReversalNote = creditReversalNote;
@@ -72,7 +78,10 @@ public class ReverseProviderCreditRequest implements Serializable{
     
     /**
      * 
-     * @param mwsAuthToken
+     * @param mwsAuthToken Sets MWSAuthToken. Applicable for third-party
+     *                     solution providers only.
+     *
+     * @return the MWSAuthToken
      */
     public ReverseProviderCreditRequest setMwsAuthToken(String mwsAuthToken) {
         this.mwsAuthToken = mwsAuthToken;

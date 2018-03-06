@@ -19,7 +19,7 @@ import java.io.Serializable;
 
 /**
  * For more information documentation, see
- * https://pay.amazon.com/documentation/apireference/201751630#201751940">AuthorizeOnBillingAgreement API Reference
+ * https://pay.amazon.com/documentation/apireference/201751630#201751940
  */
 public class AuthorizeOnBillingAgreementRequest implements Serializable {
 
@@ -57,7 +57,6 @@ public class AuthorizeOnBillingAgreementRequest implements Serializable {
      * @param authorizationAmount
      *                       Represents the amount to be authorized.
      *
-     * @return AuthorizeOnBillingAgreementRequest
      */
     public AuthorizeOnBillingAgreementRequest(final String amazonBillingAgreementId, final String authorizationReferenceId, final String authorizationAmount) {
         this.amazonBillingAgreementId = amazonBillingAgreementId;
@@ -66,9 +65,9 @@ public class AuthorizeOnBillingAgreementRequest implements Serializable {
     }
 
     /**
-     * Sets the three-digit currency code.
+     * @param authorizationCurrencyCode three-digit currency code
      *
-     * @param authorizationCurrencyCode
+     * @return Returns a reference to this object so that methods can be chained together.
      */
     public AuthorizeOnBillingAgreementRequest setAuthorizationCurrencyCode(final CurrencyCode authorizationCurrencyCode){
         this.authorizationCurrencyCode = authorizationCurrencyCode;
@@ -77,9 +76,9 @@ public class AuthorizeOnBillingAgreementRequest implements Serializable {
     }
 
     /**
-     * A description for the transaction that is displayed in emails to the buyer.
+     * @param sellerAuthorizationNote description for the transaction that is displayed in emails to the buyer.
      *
-     * @param sellerAuthorizationNote
+     * @return Returns a reference to this object so that methods can be chained together.
      */
     public AuthorizeOnBillingAgreementRequest setSellerAuthorizationNote(final String sellerAuthorizationNote){
         this.sellerAuthorizationNote = sellerAuthorizationNote;
@@ -87,10 +86,10 @@ public class AuthorizeOnBillingAgreementRequest implements Serializable {
     }
 
     /**
-     * The number of minutes after which the authorization will automatically be
-     * closed and you will not be able to capture funds against the authorization.
+     * @param TransactionTimeout The number of minutes after which the authorization will automatically be
+     *                           closed and you will not be able to capture funds against the authorization.
      *
-     * @param TransactionTimeout
+     * @return Returns a reference to this object so that methods can be chained together.
      */
     public AuthorizeOnBillingAgreementRequest setTransactionTimeout(final String TransactionTimeout) {
         this.transactionTimeout = TransactionTimeout;
@@ -99,11 +98,11 @@ public class AuthorizeOnBillingAgreementRequest implements Serializable {
     }
 
     /**
-     * Indicates whether to directly capture the amount specified by the
-     * AuthorizationAmount request parameter against an order reference
-     * (without needing to call Capture and without waiting until the order ships).
+     * @param CaptureNow Indicates whether to directly capture the amount specified by the
+     *                   AuthorizationAmount request parameter against an order reference
+     *                   (without needing to call Capture and without waiting until the order ships).
      *
-     * @param CaptureNow
+     * @return Returns a reference to this object so that methods can be chained together.
      */
     public AuthorizeOnBillingAgreementRequest setCaptureNow(final boolean CaptureNow) {
         this.captureNow = CaptureNow;
@@ -111,10 +110,10 @@ public class AuthorizeOnBillingAgreementRequest implements Serializable {
     }
 
     /**
-     * The description to be shown on the buyer's payment instrument statement
-     * if CaptureNow is set to true.
+     * @param softDescriptor The description to be shown on the buyer's payment instrument statement
+     *                       if CaptureNow is set to true.
      *
-     * @param softDescriptor
+     * @return Returns a reference to this object so that methods can be chained together.
      */
     public AuthorizeOnBillingAgreementRequest setSoftDescriptor(final String softDescriptor) {
         this.softDescriptor = softDescriptor;
@@ -122,9 +121,9 @@ public class AuthorizeOnBillingAgreementRequest implements Serializable {
     }
 
     /**
-     * Represents a description of the order that is displayed in emails to the buyer.
+     * @param sellerNote Represents a description of the order that is displayed in emails to the buyer.
      *
-     * @param sellerNote
+     * @return Returns a reference to this object so that methods can be chained together.
      */
     public AuthorizeOnBillingAgreementRequest setSellerNote(final String sellerNote) {
         this.sellerNote = sellerNote;
@@ -132,11 +131,11 @@ public class AuthorizeOnBillingAgreementRequest implements Serializable {
     }
 
     /**
-     * Represents the SellerId of the Solution Provider that developed the platform.
-     * This value should only be provided by Solution Providers. It should
-     * not be provided by merchants creating their own custom integration.
+     * @param platformId Represents the SellerId of the Solution Provider that developed the platform.
+     *                   This value should only be provided by Solution Providers. It should
+     *                   not be provided by merchants creating their own custom integration.
      *
-     * @param platformId
+     * @return Returns a reference to this object so that methods can be chained together.
      */
     public AuthorizeOnBillingAgreementRequest setPlatformId(final String platformId) {
         this.platformId = platformId;
@@ -144,13 +143,12 @@ public class AuthorizeOnBillingAgreementRequest implements Serializable {
     }
 
     /**
-     * The merchant-specified identifier of this order. This is displayed to the
-     * buyer in their emails and transaction history on the Amazon Pay website.
      *
-     * @param sellerOrderId
      *
-     * @return
-     *       Returns a reference to this object so that methods can be chained together.
+     * @param sellerOrderId The merchant-specified identifier of this order. This is displayed to the
+     *                      buyer in their emails and transaction history on the Amazon Pay website.
+     *
+     * @return Returns a reference to this object so that methods can be chained together.
      */
     public AuthorizeOnBillingAgreementRequest setSellerOrderId(final String sellerOrderId) {
         this.sellerOrderId = sellerOrderId;
@@ -158,10 +156,10 @@ public class AuthorizeOnBillingAgreementRequest implements Serializable {
     }
 
     /**
-     * The identifier of the store from which the order was placed.
-     * This overrides the default value in Seller Central under Settings > Account Settings.
+     * @param storeName The identifier of the store from which the order was placed.
+     * This overrides the default value in Seller Central under Settings and Account Settings.
      *
-     * @param storeName
+     * @return Returns a reference to this object so that methods can be chained together.
      */
     public AuthorizeOnBillingAgreementRequest setStoreName(final String storeName) {
         this.storeName = storeName;
@@ -169,10 +167,9 @@ public class AuthorizeOnBillingAgreementRequest implements Serializable {
     }
 
     /**
-     * Sets any additional information that you want to include with this order reference.
+     * @param customInformation Sets any additional information that you want to include with this order reference.
      *
-     * @param customInformation
-     *
+     * @return Returns a reference to this object so that methods can be chained together.
      */
     public AuthorizeOnBillingAgreementRequest setCustomInformation(final String customInformation) {
         this.customInformation = customInformation;
@@ -180,9 +177,9 @@ public class AuthorizeOnBillingAgreementRequest implements Serializable {
     }
 
     /**
-     * Sets inheritShippingAddress parameter
+     * @param inheritShippingAddress Sets inheritShippingAddress parameter
      *
-     * @param inheritShippingAddress
+     * @return Returns a reference to this object so that methods can be chained together.
      */
     public AuthorizeOnBillingAgreementRequest setInheritShippingAddress(final Boolean inheritShippingAddress) {
         this.inheritShippingAddress = inheritShippingAddress;
@@ -193,7 +190,9 @@ public class AuthorizeOnBillingAgreementRequest implements Serializable {
      * Sets inheritShippingAddress parameter
      * Deprecated since SDK 2.2.1
      *
-     * @param inheritShippingAddress
+     * @param inheritShippingAddress Sets inheritShippingAddress parameter
+     *
+     * @return Returns a reference to this object so that methods can be chained together.
      */
     @Deprecated
     public AuthorizeOnBillingAgreementRequest setInheritShippingAddress(final String inheritShippingAddress) {
@@ -202,11 +201,11 @@ public class AuthorizeOnBillingAgreementRequest implements Serializable {
     }
 
     /**
-     * Sets MWSAuthToken parameter in request. MWSAuthToken is required only
-     * for third-party solution providers and marketplaces. Do not specify
-     * this parameter for merchants creating their own custom integration.
+     * @param mwsAuthToken Sets MWSAuthToken parameter in request. MWSAuthToken is required only
+     *                     for third-party solution providers and marketplaces. Do not specify
+     *                     this parameter for merchants creating their own custom integration.
      *
-     * @param mwsAuthToken new value of mwsAuthToken
+     * @return Returns a reference to this object so that methods can be chained together.
      */
     public AuthorizeOnBillingAgreementRequest setMWSAuthToken(final String mwsAuthToken) {
         this.mwsAuthToken = mwsAuthToken;
@@ -215,8 +214,8 @@ public class AuthorizeOnBillingAgreementRequest implements Serializable {
 
     /**
      * The billing agreement identifier. This value is
-     *  retrieved from the Amazon Button, AddressBook, or
-     *  Wallet widgets.
+     * retrieved from the Amazon Button, AddressBook, or
+     * Wallet widgets.
      *
      * @return amazonBillingAgreementId
      */
@@ -227,8 +226,7 @@ public class AuthorizeOnBillingAgreementRequest implements Serializable {
     /**
      *The identifier for this authorization transaction that you specify.
      *
-     * @return
-     *          Returns authorizationReferenceId from request
+     * @return Returns authorizationReferenceId from request
      */
     public String getAuthorizationReferenceId() {
         return authorizationReferenceId;
@@ -236,8 +234,8 @@ public class AuthorizeOnBillingAgreementRequest implements Serializable {
 
     /**
      * Represents the amount to be authorized.
-     * @return
-     *          Returns authorizationAmount from request
+     *
+     * @return Returns authorizationAmount from request
      */
     public String getAuthorizationAmount() {
         return authorizationAmount;
@@ -253,6 +251,7 @@ public class AuthorizeOnBillingAgreementRequest implements Serializable {
     }
 
     /**
+     * Represents the Seller Authorization Note.
      *
      * @return Returns sellerAuthorizationNote from request
      */
@@ -321,6 +320,7 @@ public class AuthorizeOnBillingAgreementRequest implements Serializable {
     }
 
     /**
+     * Returns Seller Order Id
      *
      * @return Returns sellerOrderId status from request
      */
@@ -330,7 +330,7 @@ public class AuthorizeOnBillingAgreementRequest implements Serializable {
 
     /**
      * The identifier of the store from which the order was placed.
-     * This overrides the default value in Seller Central under Settings > Account Settings.
+     * This overrides the default value in Seller Central under Settings &gt; Account Settings.
      *
      * @return Returns storeName status from request
      */
@@ -348,6 +348,7 @@ public class AuthorizeOnBillingAgreementRequest implements Serializable {
     }
 
     /**
+     * Returns MWSAuthToken
      *
      * @return Returns mwsAuthToken status from request
      */

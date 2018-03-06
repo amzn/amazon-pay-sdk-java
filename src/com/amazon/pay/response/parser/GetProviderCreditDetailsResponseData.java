@@ -59,7 +59,6 @@ public final class GetProviderCreditDetailsResponseData  extends ResponseData im
 
     /**
      * Returns the string representation of GetProviderCreditDetailsResponseData
-     * @return 
      */
     @Override
     public String toString() {

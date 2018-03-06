@@ -25,11 +25,11 @@ import javax.xml.bind.annotation.XmlType;
  * This represents the SetOrderAttributesResult node parsed
  * from the Amazon Pay SetOrderAttributes API response.
  *
- *   <SetOrderAttributesResult>
- *     <OrderReferenceDetails>
+ *   &lt;SetOrderAttributesResult&gt;
+ *     &lt;OrderReferenceDetails&gt;
  *       ...
- *     </OrderReferenceDetails>
- *   </SetOrderAttributesResult>
+ *     &lt;/OrderReferenceDetails&gt;
+ *   &lt;/SetOrderAttributesResult&gt;
  *
  */
 
