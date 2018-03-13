@@ -1,3 +1,6 @@
+Version 3.3.4 - March 2018
+- Maven central release changes
+
 Version 3.3.3 - March 2018
 - Maven central release changes
 
