@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2016-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -22,13 +22,15 @@ import java.io.Serializable;
  * For more information documentation, see
  * https://pay.amazon.com/documentation/
  */
-public class ConfirmOrderReferenceRequest implements Serializable{
+public class ConfirmOrderReferenceRequest extends DelegateRequest<ConfirmOrderReferenceRequest> implements Serializable {
+
+    @Override
+    protected ConfirmOrderReferenceRequest getThis() {
+        return this;
+    }
 
     //required parameters
     private String amazonOrderReferenceId;
-
-    //optional parameters
-    private String mwsAuthToken;
 
     /**
      *
@@ -40,31 +42,10 @@ public class ConfirmOrderReferenceRequest implements Serializable{
 
     /**
      *
-     * @param mwsAuthToken Sets MWSAuthToken parameter in request. MWSAuthToken is required
-     *                     only for third-party solution providers and marketplaces. Do not
-     *                     specify this parameter for merchants creating their own custom integration.
-     *
-     * @return The MWSAuthToken
-     */
-    public ConfirmOrderReferenceRequest setMWSAuthToken(String mwsAuthToken) {
-        this.mwsAuthToken = mwsAuthToken;
-        return this;
-    }
-
-    /**
-     *
      * @return AmazonOrderReferenceId
      */
     public String getAmazonOrderReferenceId() {
         return amazonOrderReferenceId;
-    }
-
-    /**
-     *
-     * @return MWSAuthToken
-     */
-    public String getMwsAuthToken() {
-        return mwsAuthToken;
     }
 
     /**
@@ -77,7 +58,9 @@ public class ConfirmOrderReferenceRequest implements Serializable{
      */
     @Override
     public String toString() {
-        return "ConfirmOrderReferenceRequest{" + "amazonOrderReferenceId=" + amazonOrderReferenceId + ", mwsAuthToken=" + mwsAuthToken + '}';
+        return "ConfirmOrderReferenceRequest{"
+                + "amazonOrderReferenceId=" + amazonOrderReferenceId
+                + ", mwsAuthToken=" + getMwsAuthToken() + '}';
     }
 
 }

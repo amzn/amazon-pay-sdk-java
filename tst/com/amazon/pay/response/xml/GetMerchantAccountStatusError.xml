@@ -1,0 +1,9 @@
+<ErrorResponse xmlns="http://mws.amazonservices.com/schema/OffAmazonPayments/2013-01-01">
+  <Error>
+    <Type>Sender</Type>
+    <Code>UnauthorizedSolutionProvider</Code>
+    <Message>The Solution Provider : A2J2RH3AOT7N6C is not authorized for getting the status of provided merchant : A3URCZVLDMDI45</Message>
+  </Error>
+  <RequestId>b1c459b9-61c7-4f0b-b0b6-d6afcd314ef9</RequestId>
+</ErrorResponse>
+

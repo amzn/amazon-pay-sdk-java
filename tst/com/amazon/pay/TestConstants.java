@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2016-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -28,8 +28,8 @@ public class TestConstants {
     public static final String secretKey = "TEST_SECRET_KEY";
     public static final String region = "us";
     public static final String sandbox_mode = "true";
-    public static final String timeStamp = "2015-00-00T00:00:00Z";
-    public static final String urlEncoded_TimeStamp = "2015-00-00T00%3A00%3A00Z";
+    public static final String timeStamp = "2015-12-31T23:59:58Z";
+    public static final String urlEncoded_TimeStamp = "2015-12-31T23%3A59%3A58Z";
     public static final String platformId = "A11WKBU7ADWTAU";
     public static final String MWS_URL = "https://mws.amazonservices.com/OffAmazonPayments_Sandbox/2013-01-01";
     public static final String mwsAuthToken = "TEST_MWS_AUTH_TOKEN";
@@ -40,6 +40,7 @@ public class TestConstants {
     public static final String amazonOrderReferenceId = "AMAZON_ORDER_REFERENCE_ID";
     public static final String Endpoint500 = "https://www.example.com/";
     public static final String providerSellerId = "TEST_PROVIDER_SELLER_ID";
+    public static final String overrideSellerId = "OVERRIDE_SELLER_ID";
     public static final String providerCreditId = "TEST_PROVIDER_CREDIT";
     public static final String reversalProviderCreditId = "TEST_PROVIDER_REVERSAL_CREDIT";
     public static final String reversalProviderCreditReferenceId = "TEST_PROVIDER_REVERSAL_CREDIT_REFERENCE_ID";

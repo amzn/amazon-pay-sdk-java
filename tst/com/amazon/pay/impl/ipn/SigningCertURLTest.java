@@ -1,3 +1,17 @@
+/**
+ * Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License").
+ * You may not use this file except in compliance with the License.
+ * A copy of the License is located at
+ *
+ *  http://aws.amazon.com/apache2.0
+ *
+ * or in the "license" file accompanying this file. This file is distributed
+ * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
 package com.amazon.pay.impl.ipn;
 
 import java.lang.reflect.InvocationTargetException;
@@ -6,7 +20,7 @@ import java.net.URL;
 import org.junit.Test;
 
 public class SigningCertURLTest {
-         
+
     private static final String VALID_CERT_URL = "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-bb750dd426d95ee9390147a5624348ee.pem";
     private static final String VALID_CERT_CN_URL = "https://sns.us-east-1.amazonaws.com.cn/SimpleNotificationService-bb750dd426d95ee9390147a5624348ee.pem";
     private static final String INVALID_PROTOCOL_CERT_URL = "http://sns.us-east-1.amazonaws.com/SimpleNotificationService-bb750dd426d95ee9390147a5624348ee.pem";
@@ -14,8 +28,8 @@ public class SigningCertURLTest {
     private static final String INVALID_DOMAIN1_CERT_URL = "https://sns.us-east-1.fakecert.com/SimpleNotificationService-bb750dd426d95ee9390147a5624348ee.pem";
     private static final String INVALID_DOMAIN2_CERT_URL = "https://sni.us-east-1.amazonaws.com/SimpleNotificationService-bb750dd426d95ee9390147a5624348ee.pem";
     private static final String INVALID_DOMAIN3_CERT_URL = "https://sns.us.amazonaws.com/SimpleNotificationService-bb750dd426d95ee9390147a5624348ee.pem";
-    private static final String INVALID_DOMAIN4_CERT_URL = "https://sns.us-east-1.amazonaws.com.com/SimpleNotificationService-bb750dd426d95ee9390147a5624348ee.pem";    
-    
+    private static final String INVALID_DOMAIN4_CERT_URL = "https://sns.us-east-1.amazonaws.com.com/SimpleNotificationService-bb750dd426d95ee9390147a5624348ee.pem";
+
     /**
      * SigningCertURL parameter with invalid protocol
     */
@@ -23,7 +37,7 @@ public class SigningCertURLTest {
     public void testIllegalProtocolSigningCertURL() throws Throwable {
         testSigningCertURL(INVALID_PROTOCOL_CERT_URL);
     }
-    
+
     /**
      * SigningCertURL parameter with invalid file type
     */
@@ -31,7 +45,7 @@ public class SigningCertURLTest {
     public void testInvalidFileSigningCertURL() throws Throwable {
         testSigningCertURL(INVALID_FILE_CERT_URL);
     }
-    
+
     /**
      * SigningCertURL parameter with invalid host name
     */
@@ -40,7 +54,7 @@ public class SigningCertURLTest {
         String testURL = INVALID_DOMAIN1_CERT_URL;
         testSigningCertURL(testURL);
     }
-    
+
     /**
      * SigningCertURL parameter with invalid host name
     */
@@ -49,7 +63,7 @@ public class SigningCertURLTest {
         String testURL = INVALID_DOMAIN2_CERT_URL;
         testSigningCertURL(testURL);
     }
-    
+
     /**
      * SigningCertURL parameter with invalid host name
     */
@@ -58,7 +72,7 @@ public class SigningCertURLTest {
         String testURL = INVALID_DOMAIN3_CERT_URL;
         testSigningCertURL(testURL);
     }
-    
+
     /**
      * SigningCertURL parameter with invalid host name
     */
@@ -67,7 +81,7 @@ public class SigningCertURLTest {
         String testURL = INVALID_DOMAIN4_CERT_URL;
         testSigningCertURL(testURL);
     }
-    
+
     /**
      * SigningCertURL parameter with valid URL
     */
@@ -76,7 +90,7 @@ public class SigningCertURLTest {
         String testURL = VALID_CERT_URL;
         testSigningCertURL(testURL);
     }
-    
+
     /**
      * SigningCertURL parameter with valid CN URL
     */
@@ -85,21 +99,19 @@ public class SigningCertURLTest {
         String testURL = VALID_CERT_CN_URL;
         testSigningCertURL(testURL);
     }
-    
+
     private void testSigningCertURL(String testURL) throws Throwable {
         NotificationVerification nv = new NotificationVerification();
         Method m = nv.getClass().getDeclaredMethod("isValidSigningCertURL", URL.class);
         m.setAccessible(true);
-        try { 
-        m.invoke(nv , new URL(testURL) );
-        } catch(InvocationTargetException e) {
+        try {
+            m.invoke(nv , new URL(testURL) );
+        } catch (InvocationTargetException e) {
             Throwable targetException = e.getTargetException();
-            if(targetException instanceof SecurityException ) {
+            if (targetException instanceof SecurityException) {
                 throw targetException;
             }
         }
     }
-    
-    
 
 }

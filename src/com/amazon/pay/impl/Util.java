@@ -63,7 +63,8 @@ public class Util {
      *         (invalid encoding, wrong length, uninitialized, etc).
      *
      * @throws NoSuchAlgorithmException This exception is thrown when a
-     *         particular cryptographic algorithm is requested but is not available in the environment.
+     *         particular cryptographic algorithm is requested but is not
+     *         available in the environment.
      *
      * @throws UnsupportedEncodingException The Character Encoding is not supported.
      *

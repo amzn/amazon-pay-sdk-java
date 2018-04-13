@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2016-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -21,33 +21,23 @@ import java.io.Serializable;
  * For more information documentation, see
  * https://pay.amazon.com/documentation/
  */
-public class ValidateBillingAgreementRequest implements Serializable{
+public class ValidateBillingAgreementRequest extends DelegateRequest<ValidateBillingAgreementRequest> implements Serializable {
+
+    @Override
+    protected ValidateBillingAgreementRequest getThis() {
+        return this;
+    }
 
     //required parameters
     private String amazonBillingAgreementId;
 
-    //optional parameters
-    private String mwsAuthToken;
-
     /**
      *
-     * @param amazonBillingAgreementId The billing agreement identifier. 
+     * @param amazonBillingAgreementId The billing agreement identifier.
      * This value is retrieved from the Amazon Button, AddressBook, or Wallet widgets.
      */
     public ValidateBillingAgreementRequest(String amazonBillingAgreementId) {
         this.amazonBillingAgreementId = amazonBillingAgreementId;
-    }
-
-    /**
-     * Sets MWSAuthToken. This is applicable for third-party solution providers only
-     * @param mwsAuthToken Sets MWSAuthToken. Applicable for third-party
-     *                     solution providers only.
-     *
-     * @return the MWSAuthToken
-     */
-    public ValidateBillingAgreementRequest setMWSAuthToken(String mwsAuthToken) {
-        this.mwsAuthToken = mwsAuthToken;
-        return this;
     }
 
     /**
@@ -56,14 +46,6 @@ public class ValidateBillingAgreementRequest implements Serializable{
      */
     public String getAmazonBillingAgreementId() {
         return amazonBillingAgreementId;
-    }
-
-    /**
-     *
-     * @return MWSAuthToken
-     */
-    public String getMwsAuthToken() {
-        return mwsAuthToken;
     }
 
     /**
@@ -76,6 +58,9 @@ public class ValidateBillingAgreementRequest implements Serializable{
      */
     @Override
     public String toString() {
-        return "ValidateBillingAgreementRequest{" + "amazonBillingAgreementId=" + amazonBillingAgreementId + ", mwsAuthToken=" + mwsAuthToken + '}';
+        return "ValidateBillingAgreementRequest{"
+                + "amazonBillingAgreementId=" + amazonBillingAgreementId
+                + ", mwsAuthToken=" + getMwsAuthToken() + '}';
     }
+
 }

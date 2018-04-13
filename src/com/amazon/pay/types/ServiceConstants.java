@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2016-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -139,9 +139,10 @@ public class ServiceConstants {
     public static final String LIST_ORDER_REFERENCE = "ListOrderReference";
     public static final String LIST_ORDER_REFERENCE_BY_NEXT_TOKEN = "ListOrderReferenceByNextToken";
     public static final String SET_ORDER_ATTRIBUTES = "SetOrderAttributes";
+    public static final String GET_MERCHANT_ACCOUNT_STATUS = "GetMerchantAccountStatus";
 
     // SDK version
-    public static final String APPLICATION_LIBRARY_VERSION = "3.3.4";
+    public static final String APPLICATION_LIBRARY_VERSION = "3.4.0";
     public static final String GITHUB_SDK_NAME = "amazon-pay-sdk-java";
 
     // Exponential backoff wait times (milliseconds) for retry operations

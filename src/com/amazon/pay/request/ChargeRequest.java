@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2016-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -27,7 +27,12 @@ import java.util.List;
  * https://pay.amazon.com/documentation/
  */
 
-public class ChargeRequest implements Serializable {
+public class ChargeRequest extends DelegateRequest<ChargeRequest> implements Serializable {
+
+    @Override
+    protected ChargeRequest getThis() {
+        return this;
+    }
 
     //required parameters
     private String amazonReferenceId;
@@ -45,7 +50,6 @@ public class ChargeRequest implements Serializable {
     //optional parameters
     private String sellerNote;
     private String softDescriptor;
-    private String mwsAuthToken;
 
     private Boolean inheritShippingAddress;
 
@@ -314,18 +318,6 @@ public class ChargeRequest implements Serializable {
 
 
     /**
-     * Sets the mwsAuthToken in ChargeRequest
-     *
-     * @param mwsAuthToken Sets the mwsAuthToken in ChargeRequest
-     *
-     * @return Returns a reference to this object so that methods can be chained together.
-     */
-    public ChargeRequest withMWSAuthToken(final String mwsAuthToken) {
-        this.mwsAuthToken = mwsAuthToken;
-        return this;
-    }
-
-    /**
      * The identifier for this Amazon Pay transaction that you specify.
      *
      * @return Amazon Reference Id specified in request
@@ -443,15 +435,6 @@ public class ChargeRequest implements Serializable {
     }
 
     /**
-     * The MWSAuthToken set in the request
-     *
-     * @return MWSAuthToken specified in request
-     */
-    public String getMwsAuthToken() {
-        return mwsAuthToken;
-    }
-
-    /**
      * The ProviderCredit set in the request
      *
      * @return ProviderCredit specified in request
@@ -484,7 +467,7 @@ public class ChargeRequest implements Serializable {
                 + ", platformId=" + platformId
                 + ", sellerNote=" + sellerNote
                 + ", softDescriptor=" + softDescriptor
-                + ", mwsAuthToken=" + mwsAuthToken
+                + ", mwsAuthToken=" + getMwsAuthToken()
                 + ", inheritShippingAddress=" + inheritShippingAddress
                 + ", providerCredit=" + providerCredit + '}';
     }

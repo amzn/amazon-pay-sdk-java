@@ -1,5 +1,21 @@
+/**
+ * Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License").
+ * You may not use this file except in compliance with the License.
+ * A copy of the License is located at
+ *
+ *  http://aws.amazon.com/apache2.0
+ *
+ * or in the "license" file accompanying this file. This file is distributed
+ * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
 package com.amazon.pay.response;
 
+import com.amazon.pay.exceptions.AmazonServiceException;
+import com.amazon.pay.response.model.AccountStatus;
 import com.amazon.pay.response.model.AuthorizationDetails;
 import com.amazon.pay.response.model.CaptureDetails;
 import com.amazon.pay.response.model.Environment;
@@ -26,6 +42,7 @@ import com.amazon.pay.response.parser.GetAuthorizationDetailsResponseData;
 import com.amazon.pay.response.parser.GetBillingAgreementDetailsResponseData;
 import com.amazon.pay.response.parser.GetCaptureDetailsResponseData;
 import com.amazon.pay.response.parser.GetOrderReferenceDetailsResponseData;
+import com.amazon.pay.response.parser.GetMerchantAccountStatusResponseData;
 import com.amazon.pay.response.parser.GetPaymentDetails;
 import com.amazon.pay.response.parser.GetProviderCreditDetailsResponseData;
 import com.amazon.pay.response.parser.GetProviderCreditReversalDetailsResponseData;
@@ -818,7 +835,6 @@ public class PaymentsAPIResponseTest {
             Assert.assertEquals(e.getErrorType(), "Sender");
             Assert.assertEquals(e.getRequestId(), "6d4699b8-1238-4c09-b539-176e2c2f5462");
             Assert.assertEquals(e.getErrorMessage(), "OrderReference S01-5695290-1354077 is not in draft state and cannot be modified with the request submitted by you.");
-
         }
     }
 
@@ -865,7 +881,43 @@ public class PaymentsAPIResponseTest {
         Assert.assertEquals(res.getOrderReferenceDetails().getReleaseEnvironment().value(), "LIVE");
         Assert.assertEquals(res.getOrderReferenceDetails().getOrderReferenceStatus().getState(),"Draft");
         Assert.assertEquals(res.getOrderReferenceDetails().getSellerOrderAttributes().getOrderItemCategories().getOrderItemCategory().size(),2);
-
     }
-}
 
+    @Test
+    public void testGetMerchantAccountStatusActiveResponse() throws Exception {
+        final String rawResponse = loadTestFile("GetMerchantAccountStatusActive.xml");
+        final ResponseData response = new ResponseData(HttpURLConnection.HTTP_OK, rawResponse);
+        final GetMerchantAccountStatusResponseData res = Parser.getMerchantAccountStatus(response);
+
+        Assert.assertEquals(res.getRequestId(), "4b84390f-748b-40a3-ab07-9395e3616310");
+        Assert.assertEquals(res.getAccountStatus(), AccountStatus.ACTIVE);
+    }
+
+    @Test
+    public void testGetMerchantAccountStatusInactiveResponse() throws Exception {
+        final String rawResponse = loadTestFile("GetMerchantAccountStatusInactive.xml");
+        final ResponseData response = new ResponseData(HttpURLConnection.HTTP_OK, rawResponse);
+        final GetMerchantAccountStatusResponseData res = Parser.getMerchantAccountStatus(response);
+
+        Assert.assertEquals(res.getRequestId(), "0441027b-eaf7-443f-bd39-53075c3b8f4f");
+        Assert.assertEquals(res.getAccountStatus(), AccountStatus.INACTIVE);
+    }
+
+    @Test
+    public void testGetMerchantAccountStatusErrorResponse() throws Exception {
+        final String rawResponse = loadTestFile("GetMerchantAccountStatusError.xml");
+        final ResponseData response = new ResponseData(HttpURLConnection.HTTP_FORBIDDEN, rawResponse);
+        try {
+            Parser.marshalXML(ErrorResponse.class, response);
+            Assert.fail();
+        } catch (AmazonServiceException e) {
+            Assert.assertEquals(e.getResponseXml(), rawResponse);
+            Assert.assertEquals(e.getStatusCode(), HttpURLConnection.HTTP_FORBIDDEN);
+            Assert.assertEquals(e.getErrorCode(), "UnauthorizedSolutionProvider");
+            Assert.assertEquals(e.getErrorType(), "Sender");
+            Assert.assertEquals(e.getRequestId(), "b1c459b9-61c7-4f0b-b0b6-d6afcd314ef9");
+            Assert.assertEquals(e.getErrorMessage(), "The Solution Provider : A2J2RH3AOT7N6C is not authorized for getting the status of provided merchant : A3URCZVLDMDI45");
+        }
+    }
+
+}

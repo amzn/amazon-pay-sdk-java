@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2016-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -24,19 +24,22 @@ import java.io.Serializable;
  * https://pay.amazon.com/documentation/
  *
  */
-public class ReverseProviderCreditRequest implements Serializable{
-        
+public class ReverseProviderCreditRequest extends DelegateRequest<ReverseProviderCreditRequest> implements Serializable {
+
+    @Override
+    protected ReverseProviderCreditRequest getThis() {
+        return this;
+    }
+
     //required parameters
     private String amazonProviderCreditId;
     private String creditReversalReferenceId;
     private String creditReversalAmount;
     private CurrencyCode creditReversalAmountCurrencyCode;
-    private String sellerId;
-    
+
     //optional parameters
     private String creditReversalNote ;
-    private String mwsAuthToken;
-  
+
     /**
      * @param amazonProviderCreditId Provide Amazon Provider Credit ID in the request
      *
@@ -46,15 +49,15 @@ public class ReverseProviderCreditRequest implements Serializable{
      *
      * @param creditReversalAmount The reversal amount
      */
-    public ReverseProviderCreditRequest(String amazonProviderCreditId, String creditReversalReferenceId, String sellerId, String creditReversalAmount){
+    public ReverseProviderCreditRequest(String amazonProviderCreditId, String creditReversalReferenceId, String sellerId, String creditReversalAmount) {
         this.amazonProviderCreditId = amazonProviderCreditId;
         this.creditReversalReferenceId = creditReversalReferenceId;
         this.creditReversalAmount = creditReversalAmount;
-        this.sellerId = sellerId;
+        setSellerId(sellerId);
     }
-    
+
     /**
-     * 
+     *
      * @param currencyCode Three-digit currency code. In ISO 4217 format.
      *
      * @return the Currency Code
@@ -64,9 +67,8 @@ public class ReverseProviderCreditRequest implements Serializable{
         return this;
     }
 
-    
     /**
-     * 
+     *
      * @param creditReversalNote Sets the credit reversal note.
      *
      * @return the credit reversal note.
@@ -75,21 +77,9 @@ public class ReverseProviderCreditRequest implements Serializable{
         this.creditReversalNote = creditReversalNote;
         return this;
     }
-    
-    /**
-     * 
-     * @param mwsAuthToken Sets MWSAuthToken. Applicable for third-party
-     *                     solution providers only.
-     *
-     * @return the MWSAuthToken
-     */
-    public ReverseProviderCreditRequest setMwsAuthToken(String mwsAuthToken) {
-        this.mwsAuthToken = mwsAuthToken;
-        return this;
-    }
 
     /**
-     * 
+     *
      * @return amazonProviderCreditId
      */
     public String getAmazonProviderCreditId() {
@@ -97,7 +87,7 @@ public class ReverseProviderCreditRequest implements Serializable{
     }
 
     /**
-     * 
+     *
      * @return creditReversalReferenceId
      */
     public String getCreditReversalReferenceId() {
@@ -105,7 +95,7 @@ public class ReverseProviderCreditRequest implements Serializable{
     }
 
     /**
-     * 
+     *
      * @return creditReversalAmount
      */
     public String getCreditReversalAmount() {
@@ -113,7 +103,7 @@ public class ReverseProviderCreditRequest implements Serializable{
     }
 
     /**
-     * 
+     *
      * @return creditReversalAmountCurrencyCode
      */
     public CurrencyCode getCreditReversalAmountCurrencyCode() {
@@ -121,27 +111,11 @@ public class ReverseProviderCreditRequest implements Serializable{
     }
 
     /**
-     * 
-     * @return sellerId
-     */
-    public String getSellerId() {
-        return sellerId;
-    }
-
-    /**
-     * 
+     *
      * @return creditReversalNote
      */
     public String getCreditReversalNote() {
         return creditReversalNote;
-    }
-
-    /**
-     * 
-     * @return mwsAuthToken
-     */
-    public String getMwsAuthToken() {
-        return mwsAuthToken;
     }
 
     /**
@@ -154,11 +128,14 @@ public class ReverseProviderCreditRequest implements Serializable{
      */
     @Override
     public String toString() {
-        return "ReverseProviderCreditRequest{" + "amazonProviderCreditId=" + amazonProviderCreditId + ", creditReversalReferenceId=" 
-                + creditReversalReferenceId + ", creditReversalAmount=" + creditReversalAmount + ", creditReversalAmountCurrencyCode=" 
-                + creditReversalAmountCurrencyCode + ", sellerId=" + sellerId + ", creditReversalNote=" + creditReversalNote + ", mwsAuthToken=" 
-                + mwsAuthToken + '}';
+        return "ReverseProviderCreditRequest{"
+                + "amazonProviderCreditId=" + amazonProviderCreditId
+                + ", creditReversalReferenceId=" + creditReversalReferenceId
+                + ", creditReversalAmount=" + creditReversalAmount
+                + ", creditReversalAmountCurrencyCode=" + creditReversalAmountCurrencyCode
+                + ", sellerId=" + getSellerId()
+                + ", creditReversalNote=" + creditReversalNote
+                + ", mwsAuthToken=" + getMwsAuthToken() + '}';
     }
 
-    
 }

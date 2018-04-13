@@ -23,6 +23,18 @@ import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This represents the OrderReferenceList node parsed
+ * from the Amazon Pay ListOrderReference API response.
+ *
+ *    &lt;OrderReferenceList&gt;
+ *        &lt;OrderReference&gt;
+ *            ...
+ *        &lt;/OrderReference&gt;
+ *    &lt;/OrderReferenceList&gt;
+ *
+ */
+
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
         "orderReferences"

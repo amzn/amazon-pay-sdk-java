@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -17,36 +17,15 @@ package com.amazon.pay.request;
 import java.io.Serializable;
 
 /**
- * Container for the parameters to the GetAuthorizationDetails operation.
- *
+ * Container for the parameters to the GetMerchantAccountStatusRequest operation.
  * For more information documentation, see
  * https://pay.amazon.com/documentation/
  */
-public class GetAuthorizationDetailsRequest extends DelegateRequest<GetAuthorizationDetailsRequest> implements Serializable {
+public class GetMerchantAccountStatusRequest extends DelegateRequest<GetMerchantAccountStatusRequest> implements Serializable {
 
     @Override
-    protected GetAuthorizationDetailsRequest getThis() {
+    protected GetMerchantAccountStatusRequest getThis() {
         return this;
-    }
-
-    //required parameters
-    private String amazonAuthorizationId;
-
-    /**
-     *
-     * @param amazonAuthorizationId
-     *                         The authorization identifier that was generated
-     *                          by Amazon in the earlier call to Authorize.
-     */
-    public GetAuthorizationDetailsRequest(String amazonAuthorizationId) {
-        this.amazonAuthorizationId = amazonAuthorizationId;
-    }
-
-    /**
-     * @return AmazonAuthorizationId
-     */
-    public String getAmazonAuthorizationId() {
-        return amazonAuthorizationId;
     }
 
     /**
@@ -59,8 +38,8 @@ public class GetAuthorizationDetailsRequest extends DelegateRequest<GetAuthoriza
      */
     @Override
     public String toString() {
-        return "GetAuthorizationDetailsRequest{"
-                + "amazonAuthorizationId=" + amazonAuthorizationId
+        return "GetMerchantAccountStatusRequest{"
+                + "sellerId=" + getSellerId()
                 + ", mwsAuthToken=" + getMwsAuthToken() + '}';
     }
 
