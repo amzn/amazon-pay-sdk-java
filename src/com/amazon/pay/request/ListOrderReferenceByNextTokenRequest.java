@@ -1,5 +1,5 @@
 /**
- * Copyright 2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2017-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -19,7 +19,13 @@ import java.io.Serializable;
 /**
  * Container for the parameters to the ListOrderReferenceByNextToken operation.
  */
-public class ListOrderReferenceByNextTokenRequest extends SetMWSAuthToken implements Serializable {
+public class ListOrderReferenceByNextTokenRequest extends DelegateRequest<ListOrderReferenceByNextTokenRequest> implements Serializable {
+
+    @Override
+    protected ListOrderReferenceByNextTokenRequest getThis() {
+        return this;
+    }
+
     //required parameters
     private String nextPageToken;
 

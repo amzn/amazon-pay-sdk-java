@@ -4,7 +4,7 @@
     <groupId>com.amazon.pay</groupId>
     <artifactId>amazon-pay-java-sdk</artifactId>
     <packaging>jar</packaging>
-    <version>3.3.4</version>
+    <version>3.4.0</version>
     <dependencies>
         <dependency>
             <groupId>commons-codec</groupId>
@@ -55,14 +55,14 @@
         <version>7</version>
     </parent>
     <build>
-        <sourceDirectory>src/com/amazon/pay</sourceDirectory>
-        <testSourceDirectory>tst/com/amazon/pay</testSourceDirectory>
+	<directory>target</directory>
+        <sourceDirectory>src</sourceDirectory>
+        <testSourceDirectory>tst</testSourceDirectory>
     </build>
     <profiles>
         <profile>
             <id>release</id>
             <build>
-                <directory>target</directory>
                 <plugins>
                      <plugin>
                          <groupId>org.apache.maven.plugins</groupId>

@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2016-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -23,14 +23,18 @@ import java.io.Serializable;
  * For more information documentation, see
  * https://pay.amazon.com/documentation/
  */
-public class CreateOrderReferenceForIdRequest implements Serializable {
+public class CreateOrderReferenceForIdRequest extends DelegateRequest<CreateOrderReferenceForIdRequest> implements Serializable {
+
+    @Override
+    protected CreateOrderReferenceForIdRequest getThis() {
+        return this;
+    }
 
     //required parameters
     private String id;
     private AmazonReferenceIdType idType;
 
     //optonal parameters
-    private String mwsAuthToken;
     private Boolean inheritShippingAddress;
     private Boolean confirmNow;
     private CurrencyCode orderTotalCurrencyCode;
@@ -90,30 +94,6 @@ public class CreateOrderReferenceForIdRequest implements Serializable {
      */
     public AmazonReferenceIdType getIdType() {
         return idType;
-    }
-
-    /**
-     * Represents the authorization of a specific developer by a specific Amazon seller.
-     * Required For web applications and third-party developer authorizations only.
-     *
-     * @param mwsAuthToken
-     *        The authorization token that you received when you registered for Amazon MWS.
-     * @return CreateOrderReferenceForIdRequest
-     *         Container holding CreateOrderReferenceForId operation parameters
-     */
-    public CreateOrderReferenceForIdRequest setMWSAuthToken(final String mwsAuthToken) {
-        this.mwsAuthToken = mwsAuthToken;
-        return this;
-    }
-
-    /**
-     * Represents the authorization of a specific developer by a specific Amazon seller.
-     * Required For web applications and third-party developer authorizations only.
-     *
-     * @return MWSAuthToken
-     */
-    public String getMwsAuthToken() {
-        return mwsAuthToken;
     }
 
     /**

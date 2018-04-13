@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2016-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -23,19 +23,23 @@ import java.net.URLDecoder;
  * For more information documentation, see
  * https://pay.amazon.com/documentation/
  */
-public class GetBillingAgreementDetailsRequest implements Serializable{
+public class GetBillingAgreementDetailsRequest extends DelegateRequest<GetBillingAgreementDetailsRequest> implements Serializable {
+
+    @Override
+    protected GetBillingAgreementDetailsRequest getThis() {
+        return this;
+    }
 
     //required parameters
     private String amazonBillingAgreementId;
 
     //optional parameters
     private String addressConsentToken;
-    private String mwsAuthToken;
 
     /**
      *
      * @param amazonBillingAgreementId
-     *              The billing agreement identifier. This value is retrieved 
+     *              The billing agreement identifier. This value is retrieved
      *              from the Amazon Button, AddressBook, or Wallet widgets.
      */
     public GetBillingAgreementDetailsRequest(String amazonBillingAgreementId) {
@@ -44,22 +48,9 @@ public class GetBillingAgreementDetailsRequest implements Serializable{
 
     /**
      *
-     * @param mwsAuthToken Sets MWSAuthToken parameter in request. MWSAuthToken is required
-     *                     only for third-party solution providers and marketplaces. Do not
-     *                     specify this parameter for merchants creating their own custom integration.
-     *
-     * @return The MWSAuthToken
-     */
-    public GetBillingAgreementDetailsRequest setMWSAuthToken(String mwsAuthToken) {
-        this.mwsAuthToken = mwsAuthToken;
-        return this;
-    }
-
-    /**
-     *
      * @param addressConsentToken
-     *              The buyer address consent token. You must provide a valid 
-     *              AddressConsentToken if you want to get the full shipping address before 
+     *              The buyer address consent token. You must provide a valid
+     *              AddressConsentToken if you want to get the full shipping address before
      *              the billing agreement is confirmed.
      * @return AddressConsentToken
      */
@@ -85,14 +76,6 @@ public class GetBillingAgreementDetailsRequest implements Serializable{
     }
 
     /**
-     *
-     * @return MWSAuthToken
-     */
-    public String getMwsAuthToken() {
-        return mwsAuthToken;
-    }
-
-    /**
      * Returns a string representation of this object; useful for testing and
      * debugging.
      *
@@ -102,9 +85,10 @@ public class GetBillingAgreementDetailsRequest implements Serializable{
      */
     @Override
     public String toString() {
-        return "GetBillingAgreementDetailsRequest{" + "amazonBillingAgreementId=" + amazonBillingAgreementId + ", addressConsentToken="
-                + addressConsentToken + ", mwsAuthToken=" + mwsAuthToken + '}';
+        return "GetBillingAgreementDetailsRequest{"
+                + "amazonBillingAgreementId=" + amazonBillingAgreementId
+                + ", addressConsentToken=" + addressConsentToken
+                + ", mwsAuthToken=" + getMwsAuthToken() + '}';
     }
-
 
 }

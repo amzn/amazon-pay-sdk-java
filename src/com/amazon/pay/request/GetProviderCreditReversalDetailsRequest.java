@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2016-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -23,60 +23,33 @@ import java.io.Serializable;
  * https://pay.amazon.com/documentation/
  *
  */
-public class GetProviderCreditReversalDetailsRequest implements Serializable{
-    
+public class GetProviderCreditReversalDetailsRequest extends DelegateRequest<GetProviderCreditReversalDetailsRequest> implements Serializable {
+
+    @Override
+    protected GetProviderCreditReversalDetailsRequest getThis() {
+        return this;
+    }
+
     //required parameters
     private final String amazonProviderCreditReversalId;
-    private final String sellerId;
-    
-    //optional parameters
-    private String mwsAuthToken;
-    
+
     /**
      *
      * @param amazonProviderCreditReversalId Provide Amazon Provider Credit ID in the request
      *
      * @param sellerId Provide the Seller ID in the request
      */
-    public GetProviderCreditReversalDetailsRequest(String amazonProviderCreditReversalId , String sellerId) {
+    public GetProviderCreditReversalDetailsRequest(String amazonProviderCreditReversalId, String sellerId) {
         this.amazonProviderCreditReversalId = amazonProviderCreditReversalId;
-        this.sellerId = sellerId;
+        setSellerId(sellerId);
     }
 
     /**
-     * @param mwsAuthToken Sets MWSAuthToken parameter in request. MWSAuthToken is required
-     *                     only for third-party solution providers and marketplaces. Do not
-     *                     specify this parameter for merchants creating their own custom integration.
      *
-     * @return The MWSAuthToken
-     */
-    public GetProviderCreditReversalDetailsRequest setMwsAuthToken(String mwsAuthToken) {
-        this.mwsAuthToken = mwsAuthToken;
-        return this;
-    }
-
-    /**
-     * 
      * @return amazonProviderCreditReversalId
      */
     public String getAmazonProviderCreditReversalId() {
         return amazonProviderCreditReversalId;
-    }
-
-    /**
-     * 
-     * @return sellerId
-     */
-    public String getSellerId() {
-        return sellerId;
-    }
-
-    /**
-     * 
-     * @return mwsAuthToken
-     */
-    public String getMwsAuthToken() {
-        return mwsAuthToken;
     }
 
     /**
@@ -89,9 +62,10 @@ public class GetProviderCreditReversalDetailsRequest implements Serializable{
      */
     @Override
     public String toString() {
-        return "GetProviderCreditReversalDetailsRequest{" + "amazonProviderCreditReversalId=" + amazonProviderCreditReversalId + ", sellerId=" 
-                + sellerId + ", mwsAuthToken=" + mwsAuthToken + '}';
+        return "GetProviderCreditReversalDetailsRequest{"
+                + "amazonProviderCreditReversalId=" + amazonProviderCreditReversalId
+                + ", sellerId=" + getSellerId()
+                + ", mwsAuthToken=" + getMwsAuthToken() + '}';
     }
-            
 
 }

@@ -419,7 +419,7 @@ XMLGregorianCalendar endTime =
 ListOrderReferenceRequest listOrderReferenceRequest =
         new ListOrderReferenceRequest("YOUR_SELLER_ORDER_ID", "SellerOrderId");
 // optional parameters
-listOrderReferenceRequest.setMwsAuthToken("YOUR_MWS_AUTH_TOKEN");
+listOrderReferenceRequest.setMWSAuthToken("YOUR_MWS_AUTH_TOKEN");
 listOrderReferenceRequest.setStartTime(startTime);
 listOrderReferenceRequest.setEndTime(endTime);
 listOrderReferenceRequest.setPageSize(5);
@@ -435,8 +435,42 @@ This API returns a list of the continued orders from the previous call (ListOrde
 ```java
 ListOrderReferenceByNextTokenRequest listOrderReferenceByNextTokenRequest = new ListOrderReferenceByNextTokenRequest(nextPageToken); //nextPageToken is derived from the ListOrderReference response explained above
 //optional parameters
-listOrderReferenceByNextTokenRequest.setMwsAuthToken("YOUR_MWS_AUTH_TOKEN");
+listOrderReferenceByNextTokenRequest.setMWSAuthToken("YOUR_MWS_AUTH_TOKEN");
 
 ListOrderReferenceByNextTokenResponseData response =
    client.listOrderReferenceByNextToken(listOrderReferenceByNextTokenRequest);
+```
+
+### Get Merchant Account Status API
+The GetMerchantAccountStatus operation is used to query the status of a particular merchant account and to retrieve information if the account is active or inactive.
+
+```java
+import com.amazon.pay.response.model.AccountStatus;
+import com.amazon.pay.response.parser.GetMerchantAccountStatusResponseData;
+import com.amazon.pay.request.GetMerchantAccountStatusRequest;
+...
+
+// To check the status of your merchant account
+final GetMerchantAccountStatusResponseData response = client.getMerchantAccountStatus();
+final AccountStatus accountStatus = response.getAccountStatus();
+
+if (accountStatus.equals(AccountStatus.ACTIVE)) {
+    System.out.println("Merchant account is enabled");
+} else if (accountStatus.equals(AccountStatus.INACTIVE)) {
+    System.out.println("Merchant account is disabled");
+}
+
+// Or using MWS delegation to check on the status of another merchant account
+final GetMerchantAccountStatusRequest request = new GetMerchantAccountStatusRequest();
+request.setSellerId("REPLACE_WITH_OTHER_MERCHANT_ID");
+request.setMWSAuthToken("REPLACE_WITH_MWS_AUTH_TOKEN");
+
+final GetMerchantAccountStatusResponseData resp = client.getMerchantAccountStatus(request);
+final AccountStatus status = resp.getAccountStatus();
+
+if (status.equals(AccountStatus.ACTIVE)) {
+    System.out.println("Child merchant account is enabled");
+} else if (status.equals(AccountStatus.INACTIVE)) {
+    System.out.println("Child merchant account is disabled");
+}
 ```

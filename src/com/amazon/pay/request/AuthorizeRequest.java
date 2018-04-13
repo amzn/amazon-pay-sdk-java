@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2016-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -24,20 +24,24 @@ import java.io.Serializable;
  * For more information documentation, see
  * https://pay.amazon.com/documentation/
  */
-public class AuthorizeRequest implements Serializable {
+public class AuthorizeRequest extends DelegateRequest<AuthorizeRequest> implements Serializable {
+
+    @Override
+    protected AuthorizeRequest getThis() {
+        return this;
+    }
 
     //required parameters
     private String amazonOrderReferenceId;
     private String authorizationReferenceId;
     private String authorizationAmount;
 
-    //optonal parameters
+    //optional parameters
     private CurrencyCode authorizationCurrencyCode;
     private String sellerAuthorizationNote;
     private String transactionTimeout;
     private Boolean captureNow;
     private String softDescriptor;
-    private String mwsAuthToken;
     private List<ProviderCredit> providerCredit;
 
     /*
@@ -212,27 +216,6 @@ public class AuthorizeRequest implements Serializable {
     }
 
     /**
-     * @return mwsAuthToken
-     */
-    public String getMwsAuthToken() {
-        return mwsAuthToken;
-    }
-
-    /**
-     * Applicable for third-party solution providers only.
-     *
-     * @param mwsAuthToken Sets MWSAuthToken parameter in request. MWSAuthToken is required
-     *                     only for third-party solution providers and marketplaces. Do not
-     *                     specify this parameter for merchants creating their own custom integration.
-     *
-     * @return The MWSAuthToken
-     */
-    public AuthorizeRequest setMWSAuthToken(String mwsAuthToken) {
-        this.mwsAuthToken = mwsAuthToken;
-        return this;
-    }
-
-    /**
      * Applicable for third-party solution providers only.
      *
      * @return ProviderCredit associated with Authorize operation
@@ -263,11 +246,17 @@ public class AuthorizeRequest implements Serializable {
      */
     @Override
     public String toString() {
-        return "AuthorizeRequest{" + "amazonOrderReferenceId=" + amazonOrderReferenceId + ", authorizationReferenceId="
-                + authorizationReferenceId + ", authorizationAmount=" + authorizationAmount + ", authorizationCurrencyCode="
-                + authorizationCurrencyCode + ", sellerAuthorizationNote=" + sellerAuthorizationNote + ", transactionTimeout="
-                + transactionTimeout + ", captureNow=" + captureNow + ", softDescriptor=" + softDescriptor + ", mwsAuthToken="
-                + mwsAuthToken + ", providerCredit=" + providerCredit + '}';
+        return "AuthorizeRequest{"
+                + "amazonOrderReferenceId=" + amazonOrderReferenceId
+                + ", authorizationReferenceId=" + authorizationReferenceId
+                + ", authorizationAmount=" + authorizationAmount
+                + ", authorizationCurrencyCode=" + authorizationCurrencyCode
+                + ", sellerAuthorizationNote=" + sellerAuthorizationNote
+                + ", transactionTimeout=" + transactionTimeout
+                + ", captureNow=" + captureNow
+                + ", softDescriptor=" + softDescriptor
+                + ", mwsAuthToken=" + getMwsAuthToken()
+                + ", providerCredit=" + providerCredit + '}';
     }
 
 }

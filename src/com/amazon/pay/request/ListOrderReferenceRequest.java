@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2016-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -14,7 +14,6 @@
  */
 package com.amazon.pay.request;
 
-
 import com.amazon.pay.types.OrderReferenceStatus;
 import com.amazon.pay.types.SortOrder;
 
@@ -25,7 +24,12 @@ import javax.xml.datatype.XMLGregorianCalendar;
 /**
  * Container for the parameters to the ListOrderReference operation.
  */
-public class ListOrderReferenceRequest extends SetMWSAuthToken implements Serializable {
+public class ListOrderReferenceRequest extends DelegateRequest<ListOrderReferenceRequest> implements Serializable {
+
+    @Override
+    protected ListOrderReferenceRequest getThis() {
+        return this;
+    }
 
     // required parameters
     private String queryId;

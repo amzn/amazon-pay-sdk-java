@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2016-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -20,22 +20,26 @@ import java.io.Serializable;
  * For more information documentation, see
  * https://pay.amazon.com/documentation/
  */
-public class CancelOrderReferenceRequest implements Serializable{
+public class CancelOrderReferenceRequest extends DelegateRequest<CancelOrderReferenceRequest> implements Serializable{
+
+    @Override
+    protected CancelOrderReferenceRequest getThis() {
+        return this;
+    }
 
     //required parameters
     private final String amazonOrderReferenceId;
 
     //optional parameters
     private String cancelationReason;
-    private String mwsAuthToken;
 
     /*
     * @param amazonOrderReferenceId
-    *      The order reference identifier. This value is retrieved 
-    *      from the Amazon Button widget after the buyer has successfully 
+    *      The order reference identifier. This value is retrieved
+    *      from the Amazon Button widget after the buyer has successfully
     *      authenticated with Amazon.
-    * 
-    * @return CancelOrderReferenceeRequest 
+    *
+    * @return CancelOrderReferenceRequest
     *           Container holding authorize operation parameters
     */
     public CancelOrderReferenceRequest(String amazonOrderReferenceId) {
@@ -43,10 +47,10 @@ public class CancelOrderReferenceRequest implements Serializable{
     }
 
     /**
-     * Optional parameter 
+     * Optional parameter
      *
-     * @param cancelationReason Describes the reason for the cancelation. This is for 
-     * informational purposes only and is never displayed to the customer. 
+     * @param cancelationReason Describes the reason for the cancelation. This is for
+     * informational purposes only and is never displayed to the customer.
      * The value can be retrieved in future GetOrderReferenceDetails calls.
      * Maximum: 1024 characters
      *
@@ -58,19 +62,7 @@ public class CancelOrderReferenceRequest implements Serializable{
     }
 
     /**
-     * Applicable for third-party solution providers only. 
-     *
-     * @param mwsAuthToken Sets MWSAuthToken
-     *
-     * @return Returns a reference to this object so that methods can be chained together.
-     */
-    public CancelOrderReferenceRequest setMWSAuthToken(String mwsAuthToken) {
-        this.mwsAuthToken = mwsAuthToken;
-        return this;
-    }
-
-    /**
-     *  Represents the order reference identifier.
+     * Represents the order reference identifier.
      *
      * @return Returns AmazonOrderReferenceId from request
      */
@@ -78,25 +70,16 @@ public class CancelOrderReferenceRequest implements Serializable{
         return amazonOrderReferenceId;
     }
 
-    /*
-     * Describes the reason for the cancelation. This is for 
-     * informational purposes only and is never displayed to the customer. 
+    /**
+     * Describes the reason for the cancelation. This is for
+     * informational purposes only and is never displayed to the customer.
      * The value can be retrieved in future GetOrderReferenceDetails calls.
-     * Maximum: 1024 characters 
-    
-    * @return Returns cancelationReason from request
-    */
+     * Maximum: 1024 characters
+     *
+     * @return Returns cancelationReason from request
+     */
     public String getCancelationReason() {
         return cancelationReason;
-    }
-
-    /**
-     * Applicable for third-party solution providers only. 
-     *
-     * @return Returns mwsAuthToken from request
-     */
-    public String getMwsAuthToken() {
-        return mwsAuthToken;
     }
 
     /**
@@ -109,10 +92,10 @@ public class CancelOrderReferenceRequest implements Serializable{
      */
     @Override
     public String toString() {
-        return "CancelOrderReferenceRequest{" + "amazonOrderReferenceId=" + amazonOrderReferenceId + ", cancelationReason="
-                + cancelationReason + ", mwsAuthToken=" + mwsAuthToken + '}';
+        return "CancelOrderReferenceRequest{"
+            + "amazonOrderReferenceId=" + amazonOrderReferenceId
+            + ", cancelationReason=" + cancelationReason
+            + ", mwsAuthToken=" + getMwsAuthToken() + '}';
     }
-
-
 
 }

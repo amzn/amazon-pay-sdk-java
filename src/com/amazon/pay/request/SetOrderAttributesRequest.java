@@ -1,5 +1,5 @@
 /**
- * Copyright 2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2017-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -25,7 +25,12 @@ import java.util.Set;
  * For more information documentation, see
  * https://pay.amazon.com/documentation/
  */
-public class SetOrderAttributesRequest extends SetMWSAuthToken implements Serializable {
+public class SetOrderAttributesRequest extends DelegateRequest<SetOrderAttributesRequest> implements Serializable {
+
+    @Override
+    protected SetOrderAttributesRequest getThis() {
+        return this;
+    }
 
     //required parameters
     private String amazonOrderReferenceId;

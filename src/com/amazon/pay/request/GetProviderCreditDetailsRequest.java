@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2016-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -23,17 +23,19 @@ import java.io.Serializable;
  * https://pay.amazon.com/documentation/
  *
  */
-public class GetProviderCreditDetailsRequest implements Serializable{
-        
+public class GetProviderCreditDetailsRequest extends DelegateRequest<GetProviderCreditDetailsRequest> implements Serializable {
+
+    @Override
+    protected GetProviderCreditDetailsRequest getThis() {
+        return this;
+    }
+
     //required parameters
     private String amazonProviderCreditId;
     private String sellerId;
-    
-    //optional parameters
-    private String mwsAuthToken;
 
     /**
-     * 
+     *
      * @param amazonProviderCreditId Provide Amazon Provider Credit ID in the request
      *
      * @param sellerId Provide the Seller ID in the request
@@ -41,18 +43,6 @@ public class GetProviderCreditDetailsRequest implements Serializable{
     public GetProviderCreditDetailsRequest(String amazonProviderCreditId , String sellerId) {
         this.amazonProviderCreditId = amazonProviderCreditId;
         this.sellerId = sellerId;
-    }
-
-    /**
-     * @param mwsAuthToken Sets MWSAuthToken parameter in request. MWSAuthToken is required
-     *                     only for third-party solution providers and marketplaces. Do not
-     *                     specify this parameter for merchants creating their own custom integration.
-     *
-     * @return The MWSAuthToken
-     */
-    public GetProviderCreditDetailsRequest setMwsAuthToken(String mwsAuthToken) {
-        this.mwsAuthToken = mwsAuthToken;
-        return this;
     }
 
     /**
@@ -70,13 +60,6 @@ public class GetProviderCreditDetailsRequest implements Serializable{
     }
 
     /**
-     * @return mwsAuthToken
-     */
-    public String getMwsAuthToken() {
-        return mwsAuthToken;
-    }
-
-    /**
      * Returns a string representation of this object; useful for testing and
      * debugging.
      *
@@ -86,9 +69,10 @@ public class GetProviderCreditDetailsRequest implements Serializable{
      */
     @Override
     public String toString() {
-        return "GetProviderCreditDetailsRequest{" + "amazonProviderCreditId=" + amazonProviderCreditId + ", sellerId=" + sellerId + ", mwsAuthToken=" 
-                + mwsAuthToken + '}';
+        return "GetProviderCreditDetailsRequest{"
+                + "amazonProviderCreditId=" + amazonProviderCreditId
+                + ", sellerId=" + sellerId
+                + ", mwsAuthToken=" + getMwsAuthToken() + '}';
     }
-    
-    
+
 }

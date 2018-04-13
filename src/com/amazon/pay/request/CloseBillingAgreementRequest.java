@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2016-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -22,19 +22,23 @@ import java.io.Serializable;
  * For more information documentation, see
  * https://pay.amazon.com/documentation/
  */
-public class CloseBillingAgreementRequest implements Serializable{
+public class CloseBillingAgreementRequest extends DelegateRequest<CloseBillingAgreementRequest> implements Serializable {
+
+    @Override
+    protected CloseBillingAgreementRequest getThis() {
+        return this;
+    }
 
     //required parameters
     private String amazonBillingAgreementId;
 
     //optional parameters
     private String closureReason;
-    private String mwsAuthToken;
 
     /**
      *
      * @param amazonBillingAgreementId
-     *              The billing agreement identifier. This value is retrieved 
+     *              The billing agreement identifier. This value is retrieved
      *              from the Amazon Button, AddressBook, or Wallet widgets.
      */
     public CloseBillingAgreementRequest(String amazonBillingAgreementId) {
@@ -53,22 +57,9 @@ public class CloseBillingAgreementRequest implements Serializable{
     }
 
     /**
-     * Applicable for third-party solution providers only. 
-     * @param mwsAuthToken Sets MWSAuthToken parameter in request. MWSAuthToken is required
-     *                     only for third-party solution providers and marketplaces. Do not
-     *                     specify this parameter for merchants creating their own custom integration.
-     *
-     * @return The MWSAuthToken
-     */
-    public CloseBillingAgreementRequest setMWSAuthToken(String mwsAuthToken) {
-        this.mwsAuthToken = mwsAuthToken;
-        return this;
-    }
-
-    /**
-     * The billing agreement identifier. This value is retrieved 
+     * The billing agreement identifier. This value is retrieved
      *              from the Amazon Button, AddressBook, or Wallet widgets.
-     * @return AmazonBillingAgreementId specified in request 
+     * @return AmazonBillingAgreementId specified in request
      */
     public String getAmazonBillingAgreementId() {
         return amazonBillingAgreementId;
@@ -83,14 +74,6 @@ public class CloseBillingAgreementRequest implements Serializable{
     }
 
     /**
-     *
-     * @return MWSAuthToken specified in request
-     */
-    public String getMwsAuthToken() {
-        return mwsAuthToken;
-    }
-
-    /**
      * Returns a string representation of this object; useful for testing and
      * debugging.
      *
@@ -100,9 +83,10 @@ public class CloseBillingAgreementRequest implements Serializable{
      */
     @Override
     public String toString() {
-        return "CloseBillingAgreementRequest{" + "amazonBillingAgreementId=" + amazonBillingAgreementId + ", closureReason="
-                + closureReason + ", mwsAuthToken=" + mwsAuthToken + '}';
+        return "CloseBillingAgreementRequest{"
+                + "amazonBillingAgreementId=" + amazonBillingAgreementId
+                + ", closureReason=" + closureReason
+                + ", mwsAuthToken=" + getMwsAuthToken() + '}';
     }
-
 
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2016-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -29,6 +29,7 @@ import com.amazon.pay.response.model.GetAuthorizationDetailsResponse;
 import com.amazon.pay.response.model.GetBillingAgreementDetailsResponse;
 import com.amazon.pay.response.model.GetCaptureDetailsResponse;
 import com.amazon.pay.response.model.GetOrderReferenceDetailsResponse;
+import com.amazon.pay.response.model.GetMerchantAccountStatusResponse;
 import com.amazon.pay.response.model.GetProviderCreditReversalDetailsResponse;
 import com.amazon.pay.response.model.GetProviderCreditDetailsResponse;
 import com.amazon.pay.response.model.GetRefundDetailsResponse;
@@ -178,17 +179,22 @@ public class Parser {
 
     public static ListOrderReferenceResponseData listOrderReference(ResponseData rawResponse) throws AmazonServiceException {
         final ListOrderReferenceResponse response = marshalXML(ListOrderReferenceResponse.class, rawResponse);
-        return new ListOrderReferenceResponseData(response,rawResponse);
+        return new ListOrderReferenceResponseData(response, rawResponse);
     }
 
     public static ListOrderReferenceByNextTokenResponseData listOrderReferenceByNextToken(ResponseData rawResponse) throws AmazonServiceException {
         final ListOrderReferenceByNextTokenResponse response = marshalXML(ListOrderReferenceByNextTokenResponse.class, rawResponse);
-        return new ListOrderReferenceByNextTokenResponseData(response,rawResponse);
+        return new ListOrderReferenceByNextTokenResponseData(response, rawResponse);
     }
 
     public static SetOrderAttributesResponseData setOrderAttributes(ResponseData rawResponse) throws AmazonServiceException {
         final SetOrderAttributesResponse response = marshalXML(SetOrderAttributesResponse.class, rawResponse);
-        return new SetOrderAttributesResponseData(response,rawResponse);
+        return new SetOrderAttributesResponseData(response, rawResponse);
+    }
+
+    public static GetMerchantAccountStatusResponseData getMerchantAccountStatus(ResponseData rawResponse) throws AmazonServiceException {
+        final GetMerchantAccountStatusResponse response = marshalXML(GetMerchantAccountStatusResponse.class, rawResponse);
+        return new GetMerchantAccountStatusResponseData(response, rawResponse);
     }
 
     public static <T> T marshalXML(Class<T> clazz, ResponseData rawResponse) throws AmazonServiceException  {

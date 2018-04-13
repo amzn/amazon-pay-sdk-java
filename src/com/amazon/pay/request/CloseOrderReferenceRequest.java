@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2016-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -16,20 +16,23 @@ package com.amazon.pay.request;
 
 import java.io.Serializable;
 
-
 /**
  * Container for the parameters to the CloseOrderReference operation.
  * For more information documentation, see
  * https://pay.amazon.com/documentation/
  */
-public class CloseOrderReferenceRequest implements Serializable{
+public class CloseOrderReferenceRequest extends DelegateRequest<CloseOrderReferenceRequest> implements Serializable {
+
+    @Override
+    protected CloseOrderReferenceRequest getThis() {
+        return this;
+    }
 
     //required parameters
     private String amazonOrderReferenceId;
 
     //optional parameters
     private String closureReason;
-    private String mwsAuthToken;
 
     /**
      * @param amazonOrderReferenceId
@@ -51,18 +54,6 @@ public class CloseOrderReferenceRequest implements Serializable{
     }
 
     /**
-     * @param mwsAuthToken Sets MWSAuthToken parameter in request. MWSAuthToken is required
-     *                     only for third-party solution providers and marketplaces. Do not
-     *                     specify this parameter for merchants creating their own custom integration.
-     *
-     * @return The MWSAuthToken
-     */
-    public CloseOrderReferenceRequest setMWSAuthToken(String mwsAuthToken) {
-        this.mwsAuthToken = mwsAuthToken;
-        return this;
-    }
-
-    /**
      * The ID of the order reference for which the details are being requested.
      *
      * @return AmazonOrderReferenceId
@@ -80,16 +71,6 @@ public class CloseOrderReferenceRequest implements Serializable{
     }
 
     /**
-     * Represents the MWSAuthToken parameter in request. MWSAuthToken is required only for third-party solution providers
-     * and marketplaces. Do not specify this parameter for merchants creating their own custom integration. 
-
-     * @return MWSAuthToken
-     */
-    public String getMwsAuthToken() {
-        return mwsAuthToken;
-    }
-
-    /**
      * Returns a string representation of this object; useful for testing and
      * debugging.
      *
@@ -99,9 +80,10 @@ public class CloseOrderReferenceRequest implements Serializable{
      */
     @Override
     public String toString() {
-        return "CloseOrderReferenceRequest{" + "amazonOrderReferenceId=" + amazonOrderReferenceId + ", closureReason=" + closureReason + ", mwsAuthToken="
-                + mwsAuthToken + '}';
+        return "CloseOrderReferenceRequest{"
+                + "amazonOrderReferenceId=" + amazonOrderReferenceId
+                + ", closureReason=" + closureReason
+                + ", mwsAuthToken=" + getMwsAuthToken() + '}';
     }
-
 
 }

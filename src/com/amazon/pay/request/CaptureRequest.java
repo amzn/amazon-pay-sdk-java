@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2016-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -15,16 +15,21 @@
 package com.amazon.pay.request;
 
 import com.amazon.pay.types.CurrencyCode;
-import java.util.*;
 import com.amazon.pay.response.model.ProviderCredit;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  *  For more information documentation, see
  * https://pay.amazon.com/documentation/
  */
 
-public class CaptureRequest implements Serializable {
+public class CaptureRequest extends DelegateRequest<CaptureRequest> implements Serializable {
+
+    @Override
+    protected CaptureRequest getThis() {
+        return this;
+    }
 
     //required parameters
     private String amazonAuthorizationId;
@@ -35,7 +40,6 @@ public class CaptureRequest implements Serializable {
     //optional parameters
     private String sellerCaptureNote;
     private String softDescriptor;
-    private String mwsAuthToken;
     private List<ProviderCredit> providerCredit;
 
     /*
@@ -88,20 +92,6 @@ public class CaptureRequest implements Serializable {
      */
     public CaptureRequest setSoftDescriptor(String softDescriptor) {
         this.softDescriptor = softDescriptor;
-        return this;
-    }
-
-    /**
-     * Applicable for third-party solution providers only.
-     *
-     * @param mwsAuthToken Sets MWSAuthToken parameter in request. MWSAuthToken is required
-     *                     only for third-party solution providers and marketplaces. Do not
-     *                     specify this parameter for merchants creating their own custom integration.
-     *
-     * @return Returns a reference to this object so that methods can be chained together.
-     */
-    public CaptureRequest setMWSAuthToken(String mwsAuthToken) {
-        this.mwsAuthToken = mwsAuthToken;
         return this;
     }
 
@@ -175,15 +165,6 @@ public class CaptureRequest implements Serializable {
     }
 
     /**
-     * Applicable for third-party solution providers only
-     *
-     * @return mwsAuthToken for Capture operation
-     */
-    public String getMwsAuthToken() {
-        return mwsAuthToken;
-    }
-
-    /**
      * Applicable for third-party solution providers only.
      *
      * @return ProviderCredit associated with Authorize operation
@@ -202,11 +183,15 @@ public class CaptureRequest implements Serializable {
      */
     @Override
     public String toString() {
-        return "CaptureRequest{" + "amazonAuthorizationId=" + amazonAuthorizationId + ", captureReferenceId=" + captureReferenceId + ", captureAmount="
-                + captureAmount + ", captureCurrencyCode=" + captureCurrencyCode + ", sellerCaptureNote=" + sellerCaptureNote + ", softDescriptor="
-                + softDescriptor + ", mwsAuthToken=" + mwsAuthToken + ", providerCredit=" + providerCredit + '}';
+        return "CaptureRequest{"
+                + "amazonAuthorizationId=" + amazonAuthorizationId
+                + ", captureReferenceId=" + captureReferenceId
+                + ", captureAmount=" + captureAmount
+                + ", captureCurrencyCode=" + captureCurrencyCode
+                + ", sellerCaptureNote=" + sellerCaptureNote
+                + ", softDescriptor=" + softDescriptor
+                + ", mwsAuthToken=" + getMwsAuthToken()
+                + ", providerCredit=" + providerCredit + '}';
     }
-
-
 
 }

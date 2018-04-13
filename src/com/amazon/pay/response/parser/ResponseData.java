@@ -59,6 +59,8 @@ public class ResponseData {
     /**
      * Converts the raw XML response to JSON format
      *
+     * @throws JSONException
+     *          If the XML response cannot be converted into JSON
      * @return
      *          JSON representation of response returned by Amazon Service API
      */

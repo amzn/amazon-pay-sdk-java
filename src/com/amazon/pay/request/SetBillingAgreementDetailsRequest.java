@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2016-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -21,7 +21,12 @@ import java.io.Serializable;
  * For more information documentation, see
  * https://pay.amazon.com/documentation/
  */
-public class SetBillingAgreementDetailsRequest implements Serializable{
+public class SetBillingAgreementDetailsRequest extends DelegateRequest<SetBillingAgreementDetailsRequest> implements Serializable {
+
+    @Override
+    protected SetBillingAgreementDetailsRequest getThis() {
+        return this;
+    }
 
     //required parameters
     private String amazonBillingAgreementId;
@@ -32,11 +37,10 @@ public class SetBillingAgreementDetailsRequest implements Serializable{
     private String sellerBillingAgreementId;
     private String storeName;
     private String customInformation;
-    private String mwsAuthToken;
 
     /**
      *
-     * @param amazonBillingAgreementId The billing agreement identifier. 
+     * @param amazonBillingAgreementId The billing agreement identifier.
      * This value is retrieved from the Amazon Button, AddressBook, or Wallet widgets.
      */
     public SetBillingAgreementDetailsRequest(String amazonBillingAgreementId) {
@@ -44,21 +48,9 @@ public class SetBillingAgreementDetailsRequest implements Serializable{
     }
 
     /**
-     * Sets MWSAuthToken. This is applicable for third-party solution providers only
-     * @param mwsAuthToken Sets MWSAuthToken. Applicable for third-party
-     *                     solution providers only.
-     *
-     * @return the MWSAuthToken
-     */
-    public SetBillingAgreementDetailsRequest setMWSAuthToken(String mwsAuthToken) {
-        this.mwsAuthToken = mwsAuthToken;
-        return this;
-    }
-
-    /**
-     * Sets the SellerId of the Solution Provider that developed the platform. 
-     * This value should only be provided by Solution Providers. It should not be 
-     * provided by merchants creating their own custom integration. Do not specify 
+     * Sets the SellerId of the Solution Provider that developed the platform.
+     * This value should only be provided by Solution Providers. It should not be
+     * provided by merchants creating their own custom integration. Do not specify
      * the SellerId of the merchant for this request parameter.
      * @param platformId Represents the SellerId of the Solution Provider that developed the platform.
      *                   This value should only be provided by Solution Providers. It should
@@ -94,7 +86,7 @@ public class SetBillingAgreementDetailsRequest implements Serializable{
     }
 
     /**
-     * Sets identifier of the store from which the order was placed. 
+     * Sets identifier of the store from which the order was placed.
      * This overrides the default value in Seller Central under Settings &gt; Account Settings.
      * @param storeName the identifier of the store from which the order was placed.
      *
@@ -165,14 +157,6 @@ public class SetBillingAgreementDetailsRequest implements Serializable{
     }
 
     /**
-     *
-     * @return mwsAuthToken
-     */
-    public String getMwsAuthToken() {
-        return mwsAuthToken;
-    }
-
-    /**
      * Returns a string representation of this object; useful for testing and
      * debugging.
      * @return A string representation of this object.
@@ -181,8 +165,14 @@ public class SetBillingAgreementDetailsRequest implements Serializable{
      */
     @Override
     public String toString() {
-        return "SetBillingAgreementDetailsRequest{" + "amazonBillingAgreementId=" + amazonBillingAgreementId + ", platformId="
-                + platformId + ", sellerNote=" + sellerNote + ", sellerBillingAgreementId=" + sellerBillingAgreementId + ", storeName="
-                + storeName + ", customInformation=" + customInformation + ", mwsAuthToken=" + mwsAuthToken + '}';
+        return "SetBillingAgreementDetailsRequest{"
+                + "amazonBillingAgreementId=" + amazonBillingAgreementId
+                + ", platformId=" + platformId
+                + ", sellerNote=" + sellerNote
+                + ", sellerBillingAgreementId=" + sellerBillingAgreementId
+                + ", storeName=" + storeName
+                + ", customInformation=" + customInformation
+                + ", mwsAuthToken=" + getMwsAuthToken() + '}';
     }
+
 }

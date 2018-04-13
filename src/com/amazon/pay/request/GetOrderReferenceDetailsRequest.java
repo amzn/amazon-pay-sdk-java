@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2016-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -23,19 +23,23 @@ import java.net.URLDecoder;
  * For more information documentation, see
  * https://pay.amazon.com/documentation/
  */
-public class GetOrderReferenceDetailsRequest implements Serializable {
+public class GetOrderReferenceDetailsRequest extends DelegateRequest<GetOrderReferenceDetailsRequest> implements Serializable {
+
+    @Override
+    protected GetOrderReferenceDetailsRequest getThis() {
+        return this;
+    }
 
     private String amazonOrderReferenceId;
     private String accessToken;
-    private String mwsAuthToken;
     @Deprecated
     private String addressConsentToken;
 
 
     /**
      *
-     * @param amazonOrderReferenceId The order reference identifier. 
-     *                               This value is retrieved from the Amazon Button widget 
+     * @param amazonOrderReferenceId The order reference identifier.
+     *                               This value is retrieved from the Amazon Button widget
      *                               after the buyer has successfully authenticated with Amazon.
      */
     public GetOrderReferenceDetailsRequest(String amazonOrderReferenceId) {
@@ -44,8 +48,8 @@ public class GetOrderReferenceDetailsRequest implements Serializable {
 
     /**
      *
-     * @param addressConsentToken The buyer address consent token. This value is retrieved 
-     *                            from the Amazon Button widget after the buyer has 
+     * @param addressConsentToken The buyer address consent token. This value is retrieved
+     *                            from the Amazon Button widget after the buyer has
      *                            successfully authenticated with Amazon.
      *
      * @return AddressConsentToken
@@ -86,35 +90,12 @@ public class GetOrderReferenceDetailsRequest implements Serializable {
         return this.accessToken;
     }
 
-
-    /**
-     * Sets MWSAuthToken parameter in request. MWSAuthToken is required only for third-party solution providers
-     * and marketplaces. Do not specify this parameter for merchants creating their own custom integration. 
-     *
-     * @param mwsAuthToken new value of mwsAuthToken
-     *
-     * @return The MWSAuthToken
-     */
-    public GetOrderReferenceDetailsRequest setMWSAuthToken(String mwsAuthToken) {
-        this.mwsAuthToken = mwsAuthToken;
-        return this;
-    }
-
-
     /**
      *
      * @return AmazonOrderReferenceId
      */
     public String getAmazonOrderReferenceId() {
         return amazonOrderReferenceId;
-    }
-
-    /**
-     *
-     * @return MWSAuthToken
-     */
-    public String getMwsAuthToken() {
-        return mwsAuthToken;
     }
 
     /**
@@ -130,6 +111,6 @@ public class GetOrderReferenceDetailsRequest implements Serializable {
         return "GetOrderReferenceDetailsRequest{"
                 + "amazonOrderReferenceId=" + amazonOrderReferenceId
                 + ", accessToken=" + accessToken
-                + ", mwsAuthToken=" + mwsAuthToken + '}';
+                + ", mwsAuthToken=" + getMwsAuthToken() + '}';
     }
 }

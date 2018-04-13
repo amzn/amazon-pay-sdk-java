@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2016-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -21,10 +21,14 @@ import java.io.Serializable;
  * For more information documentation, see
  * https://pay.amazon.com/documentation/
  */
-public class GetRefundDetailsRequest implements Serializable{
+public class GetRefundDetailsRequest extends DelegateRequest<GetRefundDetailsRequest> implements Serializable {
+
+    @Override
+    protected GetRefundDetailsRequest getThis() {
+        return this;
+    }
 
     private String amazonRefundId;
-    private String mwsAuthToken;
 
     /**
      *
@@ -35,31 +39,11 @@ public class GetRefundDetailsRequest implements Serializable{
     }
 
     /**
-     * @param mwsAuthToken Sets MWSAuthToken parameter in request. MWSAuthToken is required
-     *                     only for third-party solution providers and marketplaces. Do not
-     *                     specify this parameter for merchants creating their own custom integration.
-     *
-     * @return The MWSAuthToken
-     */
-    public GetRefundDetailsRequest setMWSAuthToken(String mwsAuthToken) {
-        this.mwsAuthToken = mwsAuthToken;
-        return this;
-    }
-
-    /**
      *
      * @return amazonRefundId
      */
     public String getAmazonRefundId() {
         return amazonRefundId;
-    }
-
-    /**
-     *
-     * @return mwsAuthToken
-     */
-    public String getMwsAuthToken() {
-        return mwsAuthToken;
     }
 
     /**
@@ -72,9 +56,9 @@ public class GetRefundDetailsRequest implements Serializable{
      */
     @Override
     public String toString() {
-        return "GetRefundDetailsRequest{" + "amazonRefundId=" + amazonRefundId + ", mwsAuthToken=" + mwsAuthToken + '}';
+        return "GetRefundDetailsRequest{"
+                + "amazonRefundId=" + amazonRefundId
+                + ", mwsAuthToken=" + getMwsAuthToken() + '}';
     }
-
-
 
 }
