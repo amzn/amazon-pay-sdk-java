@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.amazon.pay</groupId>
     <artifactId>amazon-pay-java-sdk</artifactId>
-    <packaging>jar</packaging>
+    <packaging>bundle</packaging>
     <version>3.4.0</version>
     <dependencies>
         <dependency>
@@ -55,9 +55,33 @@
         <version>7</version>
     </parent>
     <build>
-	<directory>target</directory>
+	    <directory>target</directory>
         <sourceDirectory>src</sourceDirectory>
         <testSourceDirectory>tst</testSourceDirectory>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>2.5.4</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Bundle-Name>${project.name}</Bundle-Name>
+                        <Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
+                        <Export-Package>com.amazon.pay*;version=${project.version}</Export-Package>
+                        <Implementation-Title>${project.name}</Implementation-Title>
+                        <Implementation-Version>${project.version}</Implementation-Version>
+                    </instructions>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>manifest</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
     <profiles>
         <profile>
