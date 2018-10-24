@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2016-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -22,18 +22,23 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "error",
-    "requestId"
+    "requestId",
+    "requestID"
 })
 @XmlRootElement(name = "ErrorResponse")
 public class ErrorResponse {
 
     @XmlElement(name = "Error", required = true)
     protected List<Error> error;
-    @XmlElement(name = "RequestId", required = true)
+    @XmlElement(name = "RequestId")
     protected String requestId;
+    // Throttled error requests come back with "RequestID" node names instaed of "RequestId"
+    @XmlElement(name = "RequestID")
+    protected String requestID;
 
     public ErrorResponse() {
         super();
@@ -47,8 +52,13 @@ public class ErrorResponse {
         return this.error;
     }
 
+    // Regardless of type of error, return the RequestId in a consistent way
     public String getRequestId() {
-        return requestId;
+        if (requestId != null) {
+            return requestId;
+        } else {
+            return requestID;
+        }
     }
 
 

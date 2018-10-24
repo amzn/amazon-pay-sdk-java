@@ -14,6 +14,7 @@
  */
 package com.amazon.pay.response;
 
+import com.amazon.pay.TestConstants;
 import com.amazon.pay.exceptions.AmazonServiceException;
 import com.amazon.pay.response.model.AccountStatus;
 import com.amazon.pay.response.model.AuthorizationDetails;
@@ -113,15 +114,16 @@ public class PaymentsAPIResponseTest {
         Assert.assertEquals(res.getRequestId(), "5f20169b-7ab2-11df-bcef-d35615e2b044");
         Assert.assertEquals(res.getDetails().getReleaseEnvironment().value(), "LIVE");
         Assert.assertEquals(res.getDetails().getDestination().getPhysicalDestination().getCountryCode(), "US");
-        Assert.assertEquals(res.getDetails().getDestination().getPhysicalDestination().getCity(), "New York");
+        Assert.assertEquals(res.getDetails().getDestination().getPhysicalDestination().getCity(), "äöüßâêîôûàèùé");
         Assert.assertEquals(res.getDetails().getDestination().getPhysicalDestination().getPostalCode(), "10101-9876");
-        Assert.assertEquals(res.getDetails().getDestination().getPhysicalDestination().getStateOrRegion(), "NY");
+        Assert.assertEquals(res.getDetails().getDestination().getPhysicalDestination().getStateOrRegion(), "宋 俊华 市区-徐汇区 广东省");
         Assert.assertNotNull(res.getDetails().getPaymentDescriptor());
         Assert.assertEquals(res.getDetails().getPaymentDescriptor().getName() , "Visa");
         Assert.assertEquals(res.getDetails().getPaymentDescriptor().getAccountNumberTail() , "11");
         Assert.assertEquals(res.getDetails().getPaymentDescriptor().getFullDescriptor() , "Amazon Pay (Visa **11)");
         Assert.assertEquals(res.getDetails().getPaymentDescriptor().isUseAmazonBalanceFirst() , false);
         Assert.assertNotEquals(res.getDetails().getPaymentDescriptor().isUseAmazonBalanceFirst(), true);
+        Assert.assertEquals(res.getDetails().getSellerOrderAttributes().getSupplementaryData(), TestConstants.SUPPLEMENTARY_DATA);
         Assert.assertEquals(res.toXML(), rawResponse);
     }
 
@@ -216,6 +218,7 @@ public class PaymentsAPIResponseTest {
         Assert.assertEquals(res.getDetails().getOrderTotal().getCurrencyCode(), "USD");
         Assert.assertEquals(res.getDetails().getSellerOrderAttributes().getSellerOrderId(), "test1234");
         Assert.assertEquals(res.getDetails().getSellerOrderAttributes().getStoreName(), "myTestStore");
+        Assert.assertEquals(res.getDetails().getSellerOrderAttributes().getSupplementaryData(), TestConstants.SUPPLEMENTARY_DATA);
         Assert.assertEquals(res.getDetails().getSellerOrderAttributes().getCustomInformation(), "myCustomInformation");
         Assert.assertEquals(res.getDetails().getRequestPaymentAuthorization(), false);
 
@@ -835,6 +838,21 @@ public class PaymentsAPIResponseTest {
             Assert.assertEquals(e.getErrorType(), "Sender");
             Assert.assertEquals(e.getRequestId(), "6d4699b8-1238-4c09-b539-176e2c2f5462");
             Assert.assertEquals(e.getErrorMessage(), "OrderReference S01-5695290-1354077 is not in draft state and cannot be modified with the request submitted by you.");
+        }
+    }
+
+    @Test
+    public void testThrottledRequest() throws Exception {
+        final String rawResponse = loadTestFile("Throttled.xml");
+        final ResponseData response = new ResponseData(HttpURLConnection.HTTP_UNAVAILABLE, rawResponse);
+        try {
+            Parser.marshalXML(ErrorResponse.class, response);
+            Assert.fail();
+        } catch (AmazonServiceException e) {
+            Assert.assertEquals(e.getResponseXml(), rawResponse);
+            Assert.assertEquals(e.getStatusCode(), HttpURLConnection.HTTP_UNAVAILABLE);
+            Assert.assertEquals(e.getErrorCode(), "RequestThrottled");
+            Assert.assertEquals(e.getRequestId(), "d702fd8e-206f-4da4-95e0-1e7422474077");
         }
     }
 

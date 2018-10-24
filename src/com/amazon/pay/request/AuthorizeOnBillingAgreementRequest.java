@@ -45,6 +45,7 @@ public class AuthorizeOnBillingAgreementRequest extends DelegateRequest<Authoriz
 
     private String sellerOrderId;
     private String storeName;
+    private String supplementaryData;
     private String customInformation;
 
     /**
@@ -177,6 +178,19 @@ public class AuthorizeOnBillingAgreementRequest extends DelegateRequest<Authoriz
      */
     public AuthorizeOnBillingAgreementRequest setStoreName(final String storeName) {
         this.storeName = storeName;
+        return this;
+    }
+
+    /**
+     * Set the trusted authorization supplementary data.
+     * Use only as directed by Amazon Pay.
+     *
+     * @param supplementaryData Trusted authorization supplementary data (JSON string)
+     *
+     * @return Request object
+     */
+    public AuthorizeOnBillingAgreementRequest setSupplementaryData(final String supplementaryData) {
+        this.supplementaryData = supplementaryData;
         return this;
     }
 
@@ -342,6 +356,15 @@ public class AuthorizeOnBillingAgreementRequest extends DelegateRequest<Authoriz
     }
 
     /**
+     * Returns the trusted authorization supplementary data.
+     *
+     * @return supplementaryData as a JSON string
+     */
+    public String getSupplementaryData() {
+        return supplementaryData;
+    }
+
+    /**
      * Sets any additional information that you want to include with this order reference.
      *
      * @return Returns customInformation status from request
@@ -374,6 +397,7 @@ public class AuthorizeOnBillingAgreementRequest extends DelegateRequest<Authoriz
                 + ", inheritShippingAddress=" + inheritShippingAddress
                 + ", sellerOrderId=" + sellerOrderId
                 + ", storeName=" + storeName
+                + ", supplementaryData=" + supplementaryData
                 + ", customInformation=" + customInformation
                 + ", mwsAuthToken=" + getMwsAuthToken() + '}';
     }

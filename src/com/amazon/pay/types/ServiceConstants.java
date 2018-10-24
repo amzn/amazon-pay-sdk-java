@@ -42,6 +42,9 @@ public class ServiceConstants {
     public static final String BA_CUSTOM_INFORMATION = "SellerOrderAttributes.CustomInformation";
     public static final String BA_SELLER_ORDER_ID = "SellerOrderAttributes.SellerOrderId";
     public static final String BA_STORE_NAME = "SellerOrderAttributes.StoreName";
+    public static final String BA_SUPPLEMENTARY_DATA = "SellerOrderAttributes.SupplementaryData";
+    public static final String BA_SELLER_NOTE = "SellerNote";
+    public static final String BA_PLATFORM_ID = "PlatformId";
     public static final String BILLING_AGREEMENT_PLATFORM_ID = "BillingAgreementAttributes.PlatformId";
     public static final String BILLING_AGREEMENT_SELLER_BILLING_AGREEMENT_ID = "BillingAgreementAttributes.SellerBillingAgreementAttributes.SellerBillingAgreementId";
     public static final String BILLING_AGREEMENT_SELLER_CUSTOM_INFORMATION = "BillingAgreementAttributes.SellerBillingAgreementAttributes.CustomInformation";
@@ -75,6 +78,7 @@ public class ServiceConstants {
     public static final String SELLER_REFUND_NOTE = "SellerRefundNote";
     public static final String SOFT_DESCRIPTOR = "SoftDescriptor";
     public static final String STORE_NAME = "OrderReferenceAttributes.SellerOrderAttributes.StoreName";
+    public static final String SUPPLEMENTARY_DATA = "OrderReferenceAttributes.SellerOrderAttributes.SupplementaryData";
     public static final String REQUEST_PAYMENT_AUTHORIZATION = "OrderReferenceAttributes.RequestPaymentAuthorization";
     public static final String TRANSACTION_TIMEOUT = "TransactionTimeout";
     public static final String ORDER_ATTRIBUTES_AMOUNT = "OrderAttributes.OrderTotal.Amount";
@@ -88,6 +92,7 @@ public class ServiceConstants {
     public static final String ORDER_ATTRIBUTES_ORDER_ITEM_CATEGORIES = "OrderAttributes.SellerOrderAttributes.OrderItemCategories.OrderItemCategory";
     public static final String ORDER_ATTRIBUTES_SELLER_ORDER_ID = "OrderAttributes.SellerOrderAttributes.SellerOrderId";
     public static final String ORDER_ATTRIBUTES_STORE_NAME = "OrderAttributes.SellerOrderAttributes.StoreName";
+    public static final String ORDER_ATTRIBUTES_SUPPLEMENTARY_DATA = "OrderAttributes.SellerOrderAttributes.SupplementaryData";
 
     // API Request Parameters - (Mostly) Required Parameters
     public static final String ACTION = "Action";
@@ -142,7 +147,7 @@ public class ServiceConstants {
     public static final String GET_MERCHANT_ACCOUNT_STATUS = "GetMerchantAccountStatus";
 
     // SDK version
-    public static final String APPLICATION_LIBRARY_VERSION = "3.4.0";
+    public static final String APPLICATION_LIBRARY_VERSION = "3.4.1";
     public static final String GITHUB_SDK_NAME = "amazon-pay-sdk-java";
 
     // Exponential backoff wait times (milliseconds) for retry operations
