@@ -45,6 +45,7 @@ public class SetOrderAttributesRequest extends DelegateRequest<SetOrderAttribute
     private Boolean requestPaymentAuthorization;
     private String sellerOrderId;
     private String storeName;
+    private String supplementaryData;
     private String customInformation;
     private String paymentServiceProviderId;
     private String paymentServiceProviderOrderId;
@@ -243,6 +244,28 @@ public class SetOrderAttributesRequest extends DelegateRequest<SetOrderAttribute
     }
 
     /**
+     * Returns the trusted authorization supplementary data.
+     *
+     * @return supplementaryData as a JSON string
+     */
+    public String getSupplementaryData() {
+        return supplementaryData;
+    }
+
+    /**
+     * Set the trusted authorization supplementary data.
+     * Use only as directed by Amazon Pay.
+     *
+     * @param supplementaryData Trusted authorization supplementary data (JSON string)
+     *
+     * @return Request object
+     */
+    public SetOrderAttributesRequest setSupplementaryData(final String supplementaryData) {
+        this.supplementaryData = supplementaryData;
+        return this;
+    }
+
+    /**
      * Returns the custom information
      *
      * @return customInformation
@@ -347,6 +370,7 @@ public class SetOrderAttributesRequest extends DelegateRequest<SetOrderAttribute
                 + ", sellerNote=" + sellerNote
                 + ", sellerOrderId=" + sellerOrderId
                 + ", storeName=" + storeName
+                + ", supplementaryData=" + supplementaryData
                 + ", customInformation=" + customInformation
                 + ", requesPaymentAuthorization=" + requestPaymentAuthorization.toString()
                 + ", paymentServiceProviderId=" + paymentServiceProviderId

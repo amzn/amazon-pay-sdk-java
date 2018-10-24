@@ -41,6 +41,7 @@ public class CreateOrderReferenceForIdRequest extends DelegateRequest<CreateOrde
     private String sellerNote;
     private String sellerOrderId;
     private String storeName;
+    private String supplementaryData;
     private String customInformation;
 
     //conditionally required
@@ -297,6 +298,28 @@ public class CreateOrderReferenceForIdRequest extends DelegateRequest<CreateOrde
     }
 
     /**
+     * Set the trusted authorization supplementary data.
+     * Use only as directed by Amazon Pay.
+     *
+     * @param supplementaryData Trusted authorization supplementary data (JSON string)
+     *
+     * @return Request object
+     */
+    public CreateOrderReferenceForIdRequest setSupplementaryData(final String supplementaryData) {
+        this.supplementaryData = supplementaryData;
+        return this;
+    }
+
+    /**
+     * Returns the trusted authorization supplementary data.
+     *
+     * @return supplementaryData as a JSON string
+     */
+    public String getSupplementaryData() {
+        return supplementaryData;
+    }
+
+    /**
      * Any additional information that you want to include with this order reference.
      * @param customInformation
      *        This string is never displayed in emails or Seller Central.
@@ -341,6 +364,7 @@ public class CreateOrderReferenceForIdRequest extends DelegateRequest<CreateOrde
                 ", sellerNote=" + sellerNote +
                 ", sellerOrderId=" + sellerOrderId +
                 ", storeName=" + storeName +
+                ", supplementaryData=" + supplementaryData +
                 ", customInformation=" + customInformation + "}";
     }
 

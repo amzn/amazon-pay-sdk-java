@@ -195,6 +195,7 @@ public class PaymentsAPIRequestTest {
                 .setPlatformId("platformId")
                 .setSellerOrderId("sellerOrderId")
                 .setStoreName("testStore")
+                .setSupplementaryData(TestConstants.SUPPLEMENTARY_DATA)
                 .setCustomInformation("customInfo")
                 .setSellerNote("sampleText")
                 .setOrderCurrencyCode(CurrencyCode.USD)
@@ -204,8 +205,9 @@ public class PaymentsAPIRequestTest {
         Assert.assertEquals(request.getOrderAmount(), "2");
         Assert.assertEquals(request.getOrderCurrencyCode(), CurrencyCode.USD);
         Assert.assertEquals(request.getMwsAuthToken(), TestConstants.mwsAuthToken);
-        Assert.assertEquals(request.getSellerOrderId(),"sellerOrderId");
+        Assert.assertEquals(request.getSellerOrderId(), "sellerOrderId");
         Assert.assertEquals(request.getStoreName(), "testStore");
+        Assert.assertEquals(request.getSupplementaryData(), TestConstants.SUPPLEMENTARY_DATA);
         Assert.assertEquals(request.getPlatformId(), "platformId");
         Assert.assertEquals(request.getCustomInformation(), "customInfo");
         Assert.assertEquals(request.getSellerNote(), "sampleText");
@@ -223,6 +225,7 @@ public class PaymentsAPIRequestTest {
                 .setSellerNote("sampletex")
                 .setSellerOrderId("Order123")
                 .setStoreName("Store")
+                .setSupplementaryData(TestConstants.SUPPLEMENTARY_DATA)
                 .setTransactionTimeout("10")
                 .setAuthorizationCurrencyCode(CurrencyCode.USD)
                 .setSoftDescriptor("AMZN*Test");
@@ -243,6 +246,7 @@ public class PaymentsAPIRequestTest {
         Assert.assertEquals("sampletex", request.getSellerNote());
         Assert.assertEquals("Order123", request.getSellerOrderId());
         Assert.assertEquals("Store", request.getStoreName());
+        Assert.assertEquals(TestConstants.SUPPLEMENTARY_DATA, request.getSupplementaryData());
         Assert.assertEquals("AMZN*Test", request.getSoftDescriptor());
     }
 
@@ -418,6 +422,7 @@ public class PaymentsAPIRequestTest {
                 .setSellerNote("Test Seller Note")
                 .setSellerOrderId("Test Order ID")
                 .setStoreName(TestConstants.storeName)
+                .setSupplementaryData(TestConstants.SUPPLEMENTARY_DATA)
                 .setCustomInformation("Test Custom Information")
                 .setOrderTotalAmount("567.89")
                 .setPlatformId(TestConstants.platformId);
@@ -430,6 +435,7 @@ public class PaymentsAPIRequestTest {
         Assert.assertEquals(request.getSellerNote(), "Test Seller Note");
         Assert.assertEquals(request.getSellerOrderId(), "Test Order ID");
         Assert.assertEquals(request.getStoreName(), TestConstants.storeName);
+        Assert.assertEquals(request.getSupplementaryData(), TestConstants.SUPPLEMENTARY_DATA);
         Assert.assertEquals(request.getCustomInformation(), "Test Custom Information");
         Assert.assertEquals(request.getOrderTotalAmount(), "567.89");
         Assert.assertEquals(request.getPlatformId(), TestConstants.platformId);
@@ -480,6 +486,7 @@ public class PaymentsAPIRequestTest {
                         .setPlatformId("platformId")
                         .setSellerOrderId("sellerOrderId")
                         .setStoreName("storeName")
+                        .setSupplementaryData(TestConstants.SUPPLEMENTARY_DATA)
                         .setRequestPaymentAuthorization(true)
                         .setPaymentServiceProviderId("paymentServiceProviderId")
                         .setPaymentServiceProviderOrderId("paymentServiceProviderOrderId")
@@ -490,8 +497,9 @@ public class PaymentsAPIRequestTest {
         Assert.assertEquals(request.getCustomInformation(), "customInfo");
         Assert.assertEquals(request.getSellerNote(), "sellerNote");
         Assert.assertEquals(request.getPlatformId(), "platformId");
-        Assert.assertEquals(request.getSellerOrderId(),"sellerOrderId");
-        Assert.assertEquals(request.getStoreName(),"storeName");
+        Assert.assertEquals(request.getSellerOrderId(), "sellerOrderId");
+        Assert.assertEquals(request.getStoreName(), "storeName");
+        Assert.assertEquals(request.getSupplementaryData(), TestConstants.SUPPLEMENTARY_DATA);
         Assert.assertEquals(request.getRequestPaymentAuthorization(),true);
         Assert.assertEquals(request.getPaymentServiceProviderId(),"paymentServiceProviderId");
         Assert.assertEquals(request.getPaymentServiceProviderOrderId(),"paymentServiceProviderOrderId");

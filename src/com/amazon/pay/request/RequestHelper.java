@@ -144,6 +144,9 @@ public class RequestHelper {
         if (request.getStoreName() != null) {
             parameters.put(ServiceConstants.STORE_NAME, request.getStoreName());
         }
+        if (request.getSupplementaryData() != null) {
+            parameters.put(ServiceConstants.SUPPLEMENTARY_DATA, request.getSupplementaryData());
+        }
         if (request.getCustomInformation() != null) {
             parameters.put(ServiceConstants.CUSTOM_INFORMATION, request.getCustomInformation());
         }
@@ -444,13 +447,15 @@ public class RequestHelper {
         if (request.getSoftDescriptor() != null)
             parameters.put(ServiceConstants.SOFT_DESCRIPTOR, request.getSoftDescriptor());
         if (request.getSellerNote() != null)
-            parameters.put(ServiceConstants.SELLER_NOTE, request.getSellerNote());
+            parameters.put(ServiceConstants.BA_SELLER_NOTE, request.getSellerNote());
         if (request.getPlatformId() != null)
-            parameters.put(ServiceConstants.PLATFORM_ID, request.getPlatformId());
+            parameters.put(ServiceConstants.BA_PLATFORM_ID, request.getPlatformId());
         if (request.getSellerOrderId() != null)
             parameters.put(ServiceConstants.BA_SELLER_ORDER_ID, request.getSellerOrderId());
         if (request.getStoreName() != null)
             parameters.put(ServiceConstants.BA_STORE_NAME, request.getStoreName());
+        if (request.getSupplementaryData() != null)
+            parameters.put(ServiceConstants.BA_SUPPLEMENTARY_DATA, request.getSupplementaryData());
         if (request.getCustomInformation() != null)
             parameters.put(ServiceConstants.BA_CUSTOM_INFORMATION, request.getCustomInformation());
         if (request.getInheritShippingAddress() != null)
@@ -501,6 +506,8 @@ public class RequestHelper {
             parameters.put(ServiceConstants.SELLER_ORDER_ID, request.getSellerOrderId());
         if (request.getStoreName() != null)
             parameters.put(ServiceConstants.STORE_NAME, request.getStoreName());
+        if (request.getSupplementaryData() != null)
+            parameters.put(ServiceConstants.SUPPLEMENTARY_DATA, request.getSupplementaryData());
         if (request.getCustomInformation() != null)
             parameters.put(ServiceConstants.CUSTOM_INFORMATION, request.getCustomInformation());
 
@@ -587,6 +594,8 @@ public class RequestHelper {
             parameters.put(ServiceConstants.ORDER_ATTRIBUTES_SELLER_ORDER_ID, request.getSellerOrderId());
         if (request.getStoreName() != null)
             parameters.put(ServiceConstants.ORDER_ATTRIBUTES_STORE_NAME, request.getStoreName());
+        if (request.getSupplementaryData() != null)
+            parameters.put(ServiceConstants.ORDER_ATTRIBUTES_SUPPLEMENTARY_DATA, request.getSupplementaryData());
         if (request.getPlatformId() != null)
             parameters.put(ServiceConstants.ORDER_ATTRIBUTES_PLATFORM_ID, request.getPlatformId());
         if (request.getCustomInformation() != null)

@@ -26,6 +26,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "SellerOrderAttributes", propOrder = {
     "sellerOrderId",
     "storeName",
+    "supplementaryData",
     "orderItemCategories",
     "customInformation",
     "sellerId"
@@ -36,6 +37,8 @@ public class SellerOrderAttributes {
     protected String sellerOrderId;
     @XmlElement(name = "StoreName")
     protected String storeName;
+    @XmlElement(name = "SupplementaryData")
+    protected String supplementaryData;
     @XmlElement(name = "OrderItemCategories")
     protected OrderItemCategories orderItemCategories;
     @XmlElement(name = "CustomInformation")
@@ -69,6 +72,16 @@ public class SellerOrderAttributes {
      */
     public String getStoreName() {
         return storeName;
+    }
+
+
+    /**
+     * Returns the trusted authorization supplementary data.
+     *
+     * @return supplementaryData as a JSON string
+     */
+    public String getSupplementaryData() {
+        return supplementaryData;
     }
 
 
@@ -110,6 +123,7 @@ public class SellerOrderAttributes {
         return "SellerOrderAttributes{"
                 + "sellerOrderId=" + sellerOrderId
                 + ", storeName=" + storeName
+                + ", supplementaryData=" + supplementaryData
                 + ", sellerId=" + sellerId
                 + ", orderItemCategorie=" + orderItemCategories
                 + ", customInformation=" + customInformation + '}';

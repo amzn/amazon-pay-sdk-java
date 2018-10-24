@@ -39,6 +39,7 @@ public class SetOrderReferenceDetailsRequest extends DelegateRequest<SetOrderRef
     private String sellerNote;
     private String sellerOrderId;
     private String storeName;
+    private String supplementaryData;
     private String customInformation;
     private Boolean requestPaymentAuthorization;
 
@@ -126,6 +127,19 @@ public class SetOrderReferenceDetailsRequest extends DelegateRequest<SetOrderRef
     }
 
     /**
+     * Set the trusted authorization supplementary data.
+     * Use only as directed by Amazon Pay.
+     *
+     * @param supplementaryData Trusted authorization supplementary data (JSON string)
+     *
+     * @return Request object
+     */
+    public SetOrderReferenceDetailsRequest setSupplementaryData(final String supplementaryData) {
+        this.supplementaryData = supplementaryData;
+        return this;
+    }
+
+    /**
      * Any additional information that you want to include with this order reference.
      *
      * @param customInformation Additional information that merchant wants to pass for the order.
@@ -194,6 +208,15 @@ public class SetOrderReferenceDetailsRequest extends DelegateRequest<SetOrderRef
     }
 
     /**
+     * Returns the trusted authorization supplementary data.
+     *
+     * @return supplementaryData as a JSON string
+     */
+    public String getSupplementaryData() {
+        return supplementaryData;
+    }
+
+    /**
      *
      * @return CustomInformation
      */
@@ -241,6 +264,7 @@ public class SetOrderReferenceDetailsRequest extends DelegateRequest<SetOrderRef
                 + ", sellerNote=" + sellerNote
                 + ", sellerOrderId=" + sellerOrderId
                 + ", storeName=" + storeName
+                + ", supplementaryData=" + supplementaryData
                 + ", customInformation=" + customInformation
                 + ", mwsAuthToken=" + getMwsAuthToken() + '}';
     }

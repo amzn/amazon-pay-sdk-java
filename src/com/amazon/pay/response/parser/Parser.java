@@ -238,7 +238,7 @@ public class Parser {
         final StringReader reader = new StringReader(noNamespaceXML);
         final Unmarshaller unmarshaller = context.createUnmarshaller();
 
-        final XMLInputFactory xmlInputFactory = XMLInputFactory.newFactory();
+        final XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
         xmlInputFactory.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, false);
         xmlInputFactory.setProperty(XMLInputFactory.SUPPORT_DTD, false);
         try {

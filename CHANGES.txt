@@ -1,3 +1,10 @@
+Version 3.4.1 - October 2018
+- Updated XMLInputFactory.newFactory() to XMLInputFactory.newInstance() in generateErrorException method (now consistent with 3.0.1 release).
+- Add parameter SupplementaryData to SetOrderAttributes and SetOrderReferenceDetails API calls.  Only use this field at the specific direction of Amazon Pay.
+- Force InputStreamReader to use UTF-8 encoding for request responses, overriding any local environment setting.
+- ErrorResponse object collects both "RequestID" (returned from Throttled calls) and "RequestId" (everywhere else) in the XML instead so that it is accessible via getRequestId().
+- AuthorizeOnBillingAgreement can now properly set the sellerNote and platformId fields
+
 Version 3.4.0 - April 2018
 - Add support for GetMerchantAccountStatus API
 - Solution Providers can now override the Seller ID on a per-request basis instead of having to instantiate a new Client object for each request.
