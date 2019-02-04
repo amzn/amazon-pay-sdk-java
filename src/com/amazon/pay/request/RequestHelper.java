@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2016-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -252,6 +252,22 @@ public class RequestHelper {
         if (request.getAmazonOrderReferenceId() != null) {
             parameters.put(ServiceConstants.AMAZON_ORDER_REFERENCE_ID, request.getAmazonOrderReferenceId());
         }
+        if (request.getSuccessUrl() != null) {
+            parameters.put(ServiceConstants.SUCCESS_URL, request.getSuccessUrl());
+        }
+        if (request.getFailureUrl() != null) {
+            parameters.put(ServiceConstants.FAILURE_URL, request.getFailureUrl());
+        }
+
+        if (request.getAuthorizationAmount() != null) {
+            parameters.put(ServiceConstants.AUTHORIZATION_AMOUNT, request.getAuthorizationAmount());
+
+            if (request.getAuthorizationCurrencyCode() == null) {
+                request.setAuthorizationCurrencyCode(payConfig.getCurrencyCode());
+            }
+            parameters.put(ServiceConstants.AUTHORIZATION_CURRENCEYCODE, request.getAuthorizationCurrencyCode().toString());
+        }
+
         addClientParameters(parameters, request);
         return Util.convertParameterMapToString(parameters);
     }
@@ -298,9 +314,9 @@ public class RequestHelper {
     public  String getPostURL(RefundRequest request) {
         Map<String,String> parameters = new TreeMap<String,String>();
         parameters.put(ServiceConstants.ACTION, ServiceConstants.REFUND);
-        if (request.getRefundCurrencyCode() == null)
+        if (request.getRefundCurrencyCode() == null) {
             request.setRefundCurrencyCode(payConfig.getCurrencyCode());
-
+        }
         if (request.getAmazonCaptureId() != null) {
             parameters.put(ServiceConstants.AMAZON_CAPTURE_ID, request.getAmazonCaptureId());
         }
@@ -432,13 +448,13 @@ public class RequestHelper {
             request.setAuthorizationCurrencyCode(payConfig.getCurrencyCode());
         if (request.getAmazonBillingAgreementId() != null)
             parameters.put(ServiceConstants.AMAZON_BILLING_AGREEMENT_ID, request.getAmazonBillingAgreementId());
-        if (request.getAuthorizationReferenceId()  != null)
+        if (request.getAuthorizationReferenceId() != null)
             parameters.put(ServiceConstants.AUTHORIZATION_REFERENCE_ID, request.getAuthorizationReferenceId());
-        if (request.getAuthorizationAmount()  != null)
+        if (request.getAuthorizationAmount() != null)
             parameters.put(ServiceConstants.AUTHORIZATION_AMOUNT, request.getAuthorizationAmount());
-        if (request.getAuthorizationCurrencyCode()  != null)
+        if (request.getAuthorizationCurrencyCode() != null)
             parameters.put(ServiceConstants.AUTHORIZATION_CURRENCEYCODE, request.getAuthorizationCurrencyCode().toString());
-        if (request.getSellerAuthorizationNote()  != null)
+        if (request.getSellerAuthorizationNote() != null)
             parameters.put(ServiceConstants.SELLER_AUTHORIZATION_NOTE, request.getSellerAuthorizationNote());
         if (request.getTransactionTimeout() != null)
             parameters.put(ServiceConstants.TRANSACTION_TIMEOUT, request.getTransactionTimeout());

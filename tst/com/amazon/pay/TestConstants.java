@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2016-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -57,5 +57,8 @@ public class TestConstants {
     public static final int pageSize = 5;
     public static final String nextPageToken = "1eUc0QkJMVnJpcGgrbDNHclpIUT09IiwibWFya2V0cGxhY2VJZCI6IkEzQlhCMFlOM1hIMTdIIn0=";
     public static final String SUPPLEMENTARY_DATA = "{\"AirlineMetaData\" : {\"version\": 1.0, \"airlineCode\": \"PAX\", \"flightDate\": \"2018-03-24T20:29:19.22Z\", \"departureAirport\": \"CDG\", \"destinationAirport\": \"LUX\", \"bookedLastTime\": -1, \"classOfTravel\": \"F\", \"passengers\": {\"numberOfPassengers\": 4, \"numberOfChildren\": 1, \"numberOfInfants\": 1 }}, \"AccommodationMetaData\": {\"version\": 1.0, \"startDate\": \"2018-03-24T20:29:19.22Z\", \"endDate\": \"2018-03-24T20:29:19.22Z\", \"lengthOfStay\": 5, \"numberOfGuests\": 4, \"class\": \"Standard\", \"starRating\": 5, \"bookedLastTime\": -1 }, \"OrderMetaData\": {\"version\": 1.0, \"numberOfItems\": 3, \"type\": \"Digital\" }, \"BuyerMetaData\": {\"version\" : 1.0, \"isFirstTimeCustomer\" : true, \"numberOfPastPurchases\" : 2, \"numberOfDisputedPurchases\" : 3, \"hasOpenDispute\" : true, \"riskScore\" : 0.75 }}";
+    public static final String AUTHORIZE_AMOUNT = "0.01";
+    public static final String SUCCESS_URL = "https://pay.amazon.com/success.html";
+    public static final String FAILURE_URL = "https://pay.amazon.com/failure.html";
 
 }
