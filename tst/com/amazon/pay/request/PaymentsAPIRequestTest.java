@@ -1,5 +1,5 @@
 /**
- * Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2018-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -118,10 +118,18 @@ public class PaymentsAPIRequestTest {
     @Test
     public void testConfirmOrderReferenceRequest() {
         final ConfirmOrderReferenceRequest request = new ConfirmOrderReferenceRequest(TestConstants.amazonOrderReferenceId)
-                .setMWSAuthToken(TestConstants.mwsAuthToken);
+                .setMWSAuthToken(TestConstants.mwsAuthToken)
+                .setAuthorizationAmount(TestConstants.AUTHORIZE_AMOUNT)
+                .setAuthorizationCurrencyCode(CurrencyCode.EUR)
+                .setSuccessUrl(TestConstants.SUCCESS_URL)
+                .setFailureUrl(TestConstants.FAILURE_URL);
 
         Assert.assertEquals(request.getAmazonOrderReferenceId(),TestConstants.amazonOrderReferenceId);
         Assert.assertEquals(request.getMwsAuthToken(), TestConstants.mwsAuthToken);
+        Assert.assertEquals(request.getAuthorizationAmount(), TestConstants.AUTHORIZE_AMOUNT);
+        Assert.assertEquals(request.getAuthorizationCurrencyCode(), CurrencyCode.EUR);
+        Assert.assertEquals(request.getSuccessUrl(), TestConstants.SUCCESS_URL);
+        Assert.assertEquals(request.getFailureUrl(), TestConstants.FAILURE_URL);
     }
 
     @Test

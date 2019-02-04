@@ -1,3 +1,9 @@
+Version 3.5.0 - February 2019
+- ConfirmOrderReference API has four new request parameters:
+      SuccessUrl, FailureUrl, AuthorizationAmount, and AuthorizationCurrencyCode
+  For usage instructions, please consult the
+  Amazon Pay Strong Customer Authentication (SCA) Upgrade Integration Guide
+
 Version 3.4.1 - October 2018
 - Updated XMLInputFactory.newFactory() to XMLInputFactory.newInstance() in generateErrorException method (now consistent with 3.0.1 release).
 - Add parameter SupplementaryData to SetOrderAttributes and SetOrderReferenceDetails API calls.  Only use this field at the specific direction of Amazon Pay.
