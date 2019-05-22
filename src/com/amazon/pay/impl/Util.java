@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2016-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -107,6 +107,9 @@ public class Util {
 
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+        con.setConnectTimeout(ServiceConstants.HTTP_CONNECT_TIMEOUT);
+        con.setReadTimeout(ServiceConstants.HTTP_READ_TIMEOUT);
+
         if (headers != null && !headers.isEmpty()) {
             for (String key : headers.keySet()) {
                 con.setRequestProperty(key, headers.get(key));

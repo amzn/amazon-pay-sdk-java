@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><SetOrderReferenceDetailsResponse xmlns="http://mws.amazonservices.com/schema/OffAmazonPayments/2013-01-01">
+<?xml version="1.0" encoding="UTF-8"?>
+<SetOrderReferenceDetailsResponse xmlns="http://mws.amazonservices.com/schema/OffAmazonPayments/2013-01-01">
     <SetOrderReferenceDetailsResult>
         <OrderReferenceDetails>
             <OrderReferenceStatus>
@@ -6,7 +7,12 @@
             </OrderReferenceStatus>
             <Destination>
                 <DestinationType>Physical</DestinationType>
-                <PhysicalDestination>*** Removed ***</PhysicalDestination>
+                <PhysicalDestination>
+                    <City>äöüßâêîôûàèùé</City>
+                    <StateOrRegion>宋 俊华 市区-徐汇区 广东省</StateOrRegion>
+                    <PostalCode>10101-9876</PostalCode>
+                    <CountryCode>US</CountryCode>
+                </PhysicalDestination>
             </Destination>
             <ExpirationTimestamp>2016-04-27T20:43:45.183Z</ExpirationTimestamp>
             <PlatformId>ANDRCTOTP9</PlatformId>
@@ -20,7 +26,7 @@
                 <Amount>500.00</Amount>
             </OrderTotal>
             <ReleaseEnvironment>Sandbox</ReleaseEnvironment>
-            <SellerNote>*** Removed ***</SellerNote>
+            <SellerNote>This is a note that will get sanitized!</SellerNote>
             <AmazonOrderReferenceId>S01-9821095-0000200</AmazonOrderReferenceId>
             <CreationTimestamp>2015-10-30T20:43:45.183Z</CreationTimestamp>
         </OrderReferenceDetails>

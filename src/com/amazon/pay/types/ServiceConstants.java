@@ -149,13 +149,17 @@ public class ServiceConstants {
     public static final String GET_MERCHANT_ACCOUNT_STATUS = "GetMerchantAccountStatus";
 
     // SDK version
-    public static final String APPLICATION_LIBRARY_VERSION = "3.5.0";
+    public static final String APPLICATION_LIBRARY_VERSION = "3.5.1";
     public static final String GITHUB_SDK_NAME = "amazon-pay-sdk-java";
 
     // Exponential backoff wait times (milliseconds) for retry operations
     public static final int FIRST_RETRY_WAIT_TIME = 1000;
     public static final int SECOND_RETRY_WAIT_TIME = 4000;
     public static final int THIRD_RETRY_WAIT_TIME = 10000;
+
+    // HTTP timeouts (milliseconds)
+    public static final int HTTP_READ_TIMEOUT = 30000;
+    public static final int HTTP_CONNECT_TIMEOUT = 30000;
 
     static {
         Map<Region, String> mwsEndpointMappingsMap = new HashMap<Region,String>();
