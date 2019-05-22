@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2016-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -24,7 +24,10 @@ import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.*;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
@@ -56,9 +59,9 @@ public class PayLogUtil implements LogUtil{
      * @return sanitized data not containing SellerNote, SellerAuthorizationNote, SellerCaptureNote, SellerRefundNote, Buyer, PhysicalDestination,
      * BillingAddress, AuthorizationBillingAddress
      */
-    public String sanitizeString(String responseData) {
+    public String sanitizeString(final String responseData) {
 
-        List<String> restrictedDataList = new ArrayList<String>() {{
+        final List<String> restrictedDataList = new ArrayList<String>() {{
             add("SellerNote");
             add("SellerAuthorizationNote");
             add("SellerCaptureNote");
@@ -66,50 +69,60 @@ public class PayLogUtil implements LogUtil{
             add("Buyer");
             add("PhysicalDestination");
             add("BillingAddress");
-            add("AuthorizationBillingAddress");}};
+            add("AuthorizationBillingAddress");
+        }};
 
-        String sanitizedData;
-        sanitizedData = getSanitizedData(responseData,restrictedDataList);
+        final String sanitizedData = getSanitizedData(responseData, restrictedDataList);
         return sanitizedData;
     }
 
 
     /**
-     *
      * @param data  - data to be sanitized.
      * @param removedata - List of strings to be removed from the data object.
      * @return - an XML not containing 'removedata' lists of strings.
      *
-     * @throws TransformerFactoryConfigurationError - Thrown when a problem with configuration with the Transformer Factories exists. This error will typically be thrown when the class of a transformation factory specified in the system properties cannot be found or instantiated.
+     * @throws AmazonClientException - upon issue sanitizing data
      */
-    public String getSanitizedData(String data, List<String> removedata) throws AmazonClientException{
+    public String getSanitizedData(final String data, final List<String> removedata) throws AmazonClientException {
 
-        try{
-            DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            InputSource is = new InputSource();
+        try {
+            final DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+
+            // settings for XXE: External Entity Prevention
+            // see https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/XML_External_Entity_Prevention_Cheat_Sheet.md
+            dbf.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+            dbf.setFeature("http://xml.org/sax/features/external-general-entities", false);
+            dbf.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
+            dbf.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+            dbf.setXIncludeAware(false);
+            dbf.setExpandEntityReferences(false);
+
+            final DocumentBuilder db = dbf.newDocumentBuilder();
+            final InputSource is = new InputSource();
             is.setCharacterStream(new StringReader(data));
 
-            Document doc = db.parse(is);
+            final Document doc = db.parse(is);
 
-            NodeList list = doc.getElementsByTagName("*");
+            final NodeList list = doc.getElementsByTagName("*");
             for (int i = 0; i < list.getLength(); i++) {
                 //Get Node
-                Node node = (Node) list.item(i);
+                final Node node = (Node) list.item(i);
 
-                for(Iterator<String> j = removedata.iterator(); j.hasNext(); ) {
-                    String item = j.next();
+                final Iterator<String> j = removedata.iterator();
+                while (j.hasNext()) {
+                    final String item = j.next();
                     if (node.getNodeName().equalsIgnoreCase(item)) {
                         node.setTextContent("*** Removed ***");
                     }
                 }
             }
 
-            StringWriter sw = new StringWriter();
-            Transformer serializer = TransformerFactory.newInstance().newTransformer();
+            final StringWriter sw = new StringWriter();
+            final Transformer serializer = TransformerFactory.newInstance().newTransformer();
             serializer.transform(new DOMSource(list.item(0)), new StreamResult(sw));
 
-            String result = sw.toString();
-
+            final String result = sw.toString();
             return result;
         } catch (ParserConfigurationException e) {
             throw new AmazonClientException("Encountered UnsupportedEncodingException:", e);

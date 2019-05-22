@@ -1,0 +1,49 @@
+<SetOrderAttributesResponse xmlns="http://mws.amazonservices.com/schema/OffAmazonPayments/2013-01-01">
+  <SetOrderAttributesResult>
+    <OrderReferenceDetails>
+      <OrderReferenceStatus>
+        <LastUpdateTimestamp>2019-04-30T23:41:30.926Z</LastUpdateTimestamp>
+        <State>Open</State>
+      </OrderReferenceStatus>
+      <OrderLanguage>en-GB</OrderLanguage>
+      <Destination>
+        <DestinationType>Physical</DestinationType>
+        <PhysicalDestination>
+          <StateOrRegion>IL</StateOrRegion>
+          <City>Chicago</City>
+          <Phone>800-000-0000</Phone>
+          <CountryCode>US</CountryCode>
+          <PostalCode>60602</PostalCode>
+          <Name>Susie Smith</Name>
+          <AddressLine1>10 Ditka Ave</AddressLine1>
+          <AddressLine2>Suite 2500</AddressLine2>
+        </PhysicalDestination>
+      </Destination>
+      <ExpirationTimestamp>2019-10-27T23:24:14.907Z</ExpirationTimestamp>
+      <SellerOrderAttributes>
+        <StoreName>SDK Sample Store Name</StoreName>
+        <CustomInformation>abcdef</CustomInformation>
+        <SellerOrderId>abcdef</SellerOrderId>
+      </SellerOrderAttributes>
+      <OrderTotal>
+        <CurrencyCode>GBP</CurrencyCode>
+        <Amount>10.00</Amount>
+      </OrderTotal>
+      <PaymentAuthenticationStatus>
+        <State>REQUIRED</State>
+      </PaymentAuthenticationStatus>
+      <Buyer>
+        <Name>Sandbox Guillot</Name>
+        <Email>guillotb+sandbox@amazon.com</Email>
+      </Buyer>
+      <ReleaseEnvironment>Sandbox</ReleaseEnvironment>
+      <SellerNote>The Seller Note</SellerNote>
+      <AmazonOrderReferenceId>S02-4946804-1132193</AmazonOrderReferenceId>
+      <CreationTimestamp>2019-04-30T23:24:14.907Z</CreationTimestamp>
+      <RequestPaymentAuthorization>false</RequestPaymentAuthorization>
+    </OrderReferenceDetails>
+  </SetOrderAttributesResult>
+  <ResponseMetadata>
+    <RequestId>68258c6f-9a7b-4cdf-b72b-9e0886f39d9b</RequestId>
+  </ResponseMetadata>
+</SetOrderAttributesResponse>

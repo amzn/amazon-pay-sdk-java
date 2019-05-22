@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2016-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -44,7 +44,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
         "idList",
         "orderLanguage",
         "requestPaymentAuthorization",
-        "paymentServiceProviderAttributes"
+        "paymentServiceProviderAttributes",
+        "paymentReference",
+        "paymentAuthenticationStatus"
 })
 public class OrderReferenceDetails {
 
@@ -88,6 +90,10 @@ public class OrderReferenceDetails {
     protected Boolean requestPaymentAuthorization;
     @XmlElement(name = "PaymentServiceProviderAttributes")
     protected PaymentServiceProviderAttributes paymentServiceProviderAttributes;
+    @XmlElement(name = "PaymentReference")
+    protected PaymentReference paymentReference;
+    @XmlElement(name = "PaymentAuthenticationStatus")
+    protected PaymentAuthenticationStatus paymentAuthenticationStatus;
 
     public OrderReferenceDetails() {
         super();
@@ -284,9 +290,24 @@ public class OrderReferenceDetails {
     }
 
     /**
+     *
+     * @return paymentReference
+     */
+    public PaymentReference getPaymentReference() {
+        return paymentReference;
+    }
+
+    /**
+     *
+     * @return paymentAuthenticationStatus
+     */
+    public PaymentAuthenticationStatus getPaymentAuthenticationStatus() {
+        return paymentAuthenticationStatus;
+    }
+
+    /**
      * String representation of OrderReferenceDetails
      */
-
     @Override
     public String toString() {
         return "OrderReferenceDetails{"
@@ -308,6 +329,9 @@ public class OrderReferenceDetails {
                 + ", idList=" + idList
                 + ", orderLanguage=" + orderLanguage
                 + ", requestPaymentAuthorization=" + requestPaymentAuthorization
-                + ", paymentServiceProviderAttributes=" + paymentServiceProviderAttributes + '}';
+                + ", paymentServiceProviderAttributes=" + paymentServiceProviderAttributes
+                + ", paymentReference=" + paymentReference
+                + ", paymentAuthenticationStatus=" + paymentAuthenticationStatus
+                + '}';
     }
 }

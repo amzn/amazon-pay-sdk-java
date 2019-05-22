@@ -1,0 +1,62 @@
+<GetOrderReferenceDetailsResponse xmlns="http://mws.amazonservices.com/schema/OffAmazonPayments/2013-01-01">
+  <GetOrderReferenceDetailsResult>
+    <OrderReferenceDetails>
+      <OrderReferenceStatus>
+        <LastUpdateTimestamp>2019-04-18T14:44:14.086Z</LastUpdateTimestamp>
+        <ReasonCode>InvalidPaymentMethod</ReasonCode>
+        <State>Suspended</State>
+      </OrderReferenceStatus>
+      <OrderLanguage>en-GB</OrderLanguage>
+      <PaymentReference>
+        <StaticToken>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx20=</StaticToken>
+      </PaymentReference>
+      <Destination>
+        <DestinationType>Physical</DestinationType>
+        <PhysicalDestination>
+          <StateOrRegion>IL</StateOrRegion>
+          <City>Chicago</City>
+          <Phone>800-000-0000</Phone>
+          <CountryCode>US</CountryCode>
+          <PostalCode>60602</PostalCode>
+          <Name>Susie Smith</Name>
+          <AddressLine1>10 Ditka Ave</AddressLine1>
+          <AddressLine2>Suite 2500</AddressLine2>
+        </PhysicalDestination>
+      </Destination>
+      <ExpirationTimestamp>2019-10-15T14:43:34.847Z</ExpirationTimestamp>
+      <IdList>
+        <member>S02-7295856-8712939-A063411</member>
+      </IdList>
+      <SellerOrderAttributes>
+        <StoreName>SDK Sample Store Name</StoreName>
+        <CustomInformation>Any custom information</CustomInformation>
+        <SellerOrderId>123456-TestOrder-123456</SellerOrderId>
+      </SellerOrderAttributes>
+      <Constraints>
+        <Constraint>
+          <ConstraintID>PaymentPlanNotSet</ConstraintID>
+          <Description>The buyer has not been able to select a Payment method for the given Order Reference.</Description>
+        </Constraint>
+      </Constraints>
+      <OrderTotal>
+        <CurrencyCode>GBP</CurrencyCode>
+        <Amount>19.95</Amount>
+      </OrderTotal>
+      <PaymentAuthenticationStatus>
+        <State>REQUIRED</State>
+      </PaymentAuthenticationStatus>
+      <Buyer>
+        <Name>Sandbox Test</Name>
+        <Email>test+sandbox@amazon.com</Email>
+      </Buyer>
+      <ReleaseEnvironment>Sandbox</ReleaseEnvironment>
+      <SellerNote>The Seller Note</SellerNote>
+      <AmazonOrderReferenceId>S02-7295856-8712939</AmazonOrderReferenceId>
+      <CreationTimestamp>2019-04-18T14:43:34.847Z</CreationTimestamp>
+      <RequestPaymentAuthorization>false</RequestPaymentAuthorization>
+    </OrderReferenceDetails>
+  </GetOrderReferenceDetailsResult>
+  <ResponseMetadata>
+    <RequestId>df57b851-c556-46f0-a561-9e412d3b651d</RequestId>
+  </ResponseMetadata>
+</GetOrderReferenceDetailsResponse>

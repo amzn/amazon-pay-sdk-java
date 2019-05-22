@@ -16,6 +16,7 @@ package com.amazon.pay.response;
 
 import com.amazon.pay.TestConstants;
 import com.amazon.pay.exceptions.AmazonServiceException;
+import com.amazon.pay.impl.PayLogUtil;
 import com.amazon.pay.response.model.AccountStatus;
 import com.amazon.pay.response.model.AuthorizationDetails;
 import com.amazon.pay.response.model.CaptureDetails;
@@ -150,19 +151,32 @@ public class PaymentsAPIResponseTest {
     }
 
     @Test
-    public void testSanitizedData() throws Exception {
-        final String rawResponse = loadTestFile("SanitizedData.xml");
+    public void testGetOrderReferenceDetailsScaResponse() throws Exception {
+        final String rawResponse = loadTestFile("GetOrderReferenceDetailsScaResponse.xml");
         final ResponseData response = new ResponseData(HttpURLConnection.HTTP_OK, rawResponse);
-        final SetOrderReferenceDetailsResponseData res = Parser.setOrderReferenceDetails(response);
+        final GetOrderReferenceDetailsResponseData res = Parser.getOrderReferenceDetails(response);
+        Assert.assertEquals(res.getDetails().getPaymentReference().getStaticToken(), "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx20=");
+        Assert.assertEquals(res.getDetails().getPaymentAuthenticationStatus().getState(), "REQUIRED");
+        Assert.assertEquals(res.toXML(), rawResponse);
+    }
 
-        Assert.assertEquals(res.getDetails().getAmazonOrderReferenceId(), "S01-9821095-0000200");
-        Assert.assertEquals(res.getDetails().getOrderReferenceStatus().getState(), "Draft");
-        Assert.assertEquals(res.getDetails().getDestination().getDestinationType(), "Physical");
-        Assert.assertEquals(res.getDetails().getDestination().getPhysicalDestination().getCountryCode(), null);
-        Assert.assertEquals(res.getDetails().getDestination().getPhysicalDestination().getStateOrRegion(), null);
-        Assert.assertEquals(res.getDetails().getDestination().getPhysicalDestination().getCity(), null);
-        Assert.assertEquals(res.getDetails().getDestination().getPhysicalDestination().getPostalCode(), null);
-        Assert.assertEquals(res.getDetails().getSellerNote(), "*** Removed ***");
+    @Test
+    public void testSetOrderAttributesScaResponse() throws Exception {
+        final String rawResponse = loadTestFile("SetOrderAttributesScaResponse.xml");
+        final ResponseData response = new ResponseData(HttpURLConnection.HTTP_OK, rawResponse);
+        final SetOrderAttributesResponseData res = Parser.setOrderAttributes(response);
+        Assert.assertEquals(res.getOrderReferenceDetails().getPaymentAuthenticationStatus().getState(), "REQUIRED");
+        Assert.assertEquals(res.toXML(), rawResponse);
+    }
+
+    @Test
+    public void testSanitizedData() throws Exception {
+        final String rawResponse = loadTestFile("SanitizedDataBefore.xml").trim();
+        final String expectedSanitizedResponse = loadTestFile("SanitizedData.xml").trim();
+
+        final PayLogUtil logUtil = new PayLogUtil();
+        final String sanitizedString = logUtil.sanitizeString(rawResponse);
+        Assert.assertEquals(expectedSanitizedResponse, sanitizedString);
     }
 
     @Test
