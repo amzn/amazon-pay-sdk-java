@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2016-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -14,6 +14,8 @@
  */
 package com.amazon.pay.response.model;
 
+import com.amazon.pay.types.BillingAgreementType;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -23,21 +25,23 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "BillingAgreementDetails", propOrder = {
-    "amazonBillingAgreementId",
-    "billingAgreementLimits",
-    "buyer",
-    "sellerNote",
-    "platformId",
-    "destination",
-    "billingAddress",
-    "releaseEnvironment",
-    "sellerBillingAgreementAttributes",
-    "billingAgreementStatus",
-    "constraints",
-    "creationTimestamp",
-    "expirationTimestamp",
-    "billingAgreementConsent",
-    "orderLanguage"
+        "amazonBillingAgreementId",
+        "billingAgreementLimits",
+        "buyer",
+        "sellerNote",
+        "platformId",
+        "destination",
+        "billingAddress",
+        "releaseEnvironment",
+        "sellerBillingAgreementAttributes",
+        "billingAgreementStatus",
+        "constraints",
+        "creationTimestamp",
+        "expirationTimestamp",
+        "billingAgreementConsent",
+        "orderLanguage",
+        "subscriptionAmount",
+        "billingAgreementType"
 })
 public class BillingAgreementDetails {
 
@@ -73,7 +77,11 @@ public class BillingAgreementDetails {
     protected Boolean billingAgreementConsent;
     @XmlElement(name = "OrderLanguage")
     protected String orderLanguage;
-    
+    @XmlElement(name = "SubscriptionAmount")
+    protected Price subscriptionAmount;
+    @XmlElement(name = "BillingAgreementType")
+    protected BillingAgreementType billingAgreementType;
+
 
     public BillingAgreementDetails() {
         super();
@@ -81,7 +89,7 @@ public class BillingAgreementDetails {
 
     /**
      * This value is retrieved from the Amazon Button, AddressBook, or Wallet widgets.
-     * 
+     *
      * @return amazonBillingAgreementId
      */
     public String getAmazonBillingAgreementId() {
@@ -91,7 +99,7 @@ public class BillingAgreementDetails {
 
     /**
      * Represents the total amount that you can charge a buyer in a given time period.
-     * 
+     *
      * @return billingAgreementLimits
      */
     public BillingAgreementLimits getBillingAgreementLimits() {
@@ -99,9 +107,9 @@ public class BillingAgreementDetails {
     }
 
     /**
-     * Provides details about the buyer. This information will 
+     * Provides details about the buyer. This information will
      * only be returned after you confirm the billing agreement.
-     * 
+     *
      * @return buyer
      */
     public Buyer getBuyer() {
@@ -109,11 +117,11 @@ public class BillingAgreementDetails {
     }
 
     /**
-     * Represents a description of the billing agreement that is displayed 
+     * Represents a description of the billing agreement that is displayed
      * in emails to the buyer and on the Amazon Pay website. This response
-     * element is not returned if you have not set it by calling the 
+     * element is not returned if you have not set it by calling the
      * SetBillingAgreementDetails operation.
-     * 
+     *
      * @return sellerNote
      */
     public String getSellerNote() {
@@ -122,7 +130,7 @@ public class BillingAgreementDetails {
 
     /**
      * Represents the SellerId of the Solution Provider that developed the platform.
-     * 
+     *
      * @return platformId
      */
     public String getPlatformId() {
@@ -130,13 +138,13 @@ public class BillingAgreementDetails {
     }
 
     /**
-     * 
-     * Represents the address selected by the buyer through the AddressBook widget. 
-     * Complete buyer information will only be returned after you have confirmed the 
-     * billing agreement or have specified a valid AddressConsentToken in the 
+     *
+     * Represents the address selected by the buyer through the AddressBook widget.
+     * Complete buyer information will only be returned after you have confirmed the
+     * billing agreement or have specified a valid AddressConsentToken in the
      * GetBillingAgreementDetails operation. Until then, only the City, StateOrRegion,
      * PostalCode, and CountryCode elements are returned.
-     * 
+     *
      * @return destination
      */
     public Destination getDestination() {
@@ -149,7 +157,7 @@ public class BillingAgreementDetails {
 
     /**
      * Indicates if the order is for a Live (Production) or Sandbox environment.
-     * 
+     *
      * @return releaseEnvironment
      */
     public Environment getReleaseEnvironment() {
@@ -157,10 +165,10 @@ public class BillingAgreementDetails {
     }
 
     /**
-     * Provides more context about the billing agreement represented by this Billing Agreement object. 
-     * This response element is not returned if you have not set it by calling the 
+     * Provides more context about the billing agreement represented by this Billing Agreement object.
+     * This response element is not returned if you have not set it by calling the
      * SetBillingAgreementDetails operation.
-     * 
+     *
      * @return sellerBillingAgreementAttributes
      */
     public SellerBillingAgreementAttributes getSellerBillingAgreementAttributes() {
@@ -168,10 +176,10 @@ public class BillingAgreementDetails {
     }
 
     /**
-     * Indicates the current status of the billing agreement. 
-     * For more information about the State and ReasonCode response elements, 
+     * Indicates the current status of the billing agreement.
+     * For more information about the State and ReasonCode response elements,
      * see Billing Agreement States and Reason Codes.
-     * 
+     *
      * @return billingAgreementStatus
      */
     public BillingAgreementStatus getBillingAgreementStatus() {
@@ -179,10 +187,10 @@ public class BillingAgreementDetails {
     }
 
     /**
-     * A list of constraints that indicates mandatory information that is missing 
-     * or incorrect. The presence of constraints indicates that the billing agreement 
+     * A list of constraints that indicates mandatory information that is missing
+     * or incorrect. The presence of constraints indicates that the billing agreement
      * is not ready to be confirmed and cannot be used for payment operations.
-     * 
+     *
      * @return constraints
      */
     public Constraints getConstraints() {
@@ -191,7 +199,7 @@ public class BillingAgreementDetails {
 
     /**
      * The date and time, in UTC, when the billing agreement was created. In ISO 8601 format.
-     * 
+     *
      * @return creationTimestamp
      */
     public XMLGregorianCalendar getCreationTimestamp() {
@@ -199,7 +207,7 @@ public class BillingAgreementDetails {
     }
 
     /**
-     * 
+     *
      * @return expirationTimestamp
      */
     public XMLGregorianCalendar getExpirationTimestamp() {
@@ -215,11 +223,27 @@ public class BillingAgreementDetails {
     }
 
     /**
-     * 
+     *
      * @return orderLanguage
      */
     public String getOrderLanguage() {
         return orderLanguage;
+    }
+
+    /**
+     *
+     * @return subscriptionAmount
+     */
+    public Price getSubscriptionAmount() {
+        return subscriptionAmount;
+    }
+
+    /**
+     *
+     * @return billingAgreementType
+     */
+    public BillingAgreementType getBillingAgreementType() {
+        return billingAgreementType;
     }
 
     /**
@@ -242,7 +266,9 @@ public class BillingAgreementDetails {
                 + ", creationTimestamp=" + creationTimestamp
                 + ", expirationTimestamp=" + expirationTimestamp
                 + ", billingAgreementConsent=" + billingAgreementConsent
-                + ", orderLanguage=" + orderLanguage + '}';
+                + ", orderLanguage=" + orderLanguage
+                + ", subscriptionAmount=" + subscriptionAmount
+                + ", billingAgreementType=" + billingAgreementType + '}';
     }
 
 
