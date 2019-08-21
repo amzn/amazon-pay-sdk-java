@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2016-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -14,6 +14,8 @@
  */
 package com.amazon.pay.request;
 
+import com.amazon.pay.response.model.Price;
+import com.amazon.pay.types.BillingAgreementType;
 import java.io.Serializable;
 
 /**
@@ -37,6 +39,8 @@ public class SetBillingAgreementDetailsRequest extends DelegateRequest<SetBillin
     private String sellerBillingAgreementId;
     private String storeName;
     private String customInformation;
+    private BillingAgreementType billingAgreementType;
+    private Price subscriptionAmount;
 
     /**
      *
@@ -109,6 +113,28 @@ public class SetBillingAgreementDetailsRequest extends DelegateRequest<SetBillin
     }
 
     /**
+     * Sets attribute to determine whether the BillingAgreement is merchant initiated or customer initiated.
+     * @param billingAgreementType can be either "CustomerInitiatedTransaction” or “MerchantInitiatedTransaction"
+     *
+     * @return BillingAgreementType
+     */
+    public SetBillingAgreementDetailsRequest setBillingAgreementType(BillingAgreementType billingAgreementType) {
+        this.billingAgreementType = billingAgreementType;
+        return this;
+    }
+
+    /**
+     * Sets the subscription amount for every charge till the subscription period
+     * @param subscriptionAmount The subscription amount for every charge till the subscription period.
+     *
+     * @return Subscription Amount
+     */
+    public SetBillingAgreementDetailsRequest setSubscriptionAmount(Price subscriptionAmount) {
+        this.subscriptionAmount = subscriptionAmount;
+        return this;
+    }
+
+    /**
      *
      * @return amazonBillingAgreementId
      */
@@ -157,6 +183,22 @@ public class SetBillingAgreementDetailsRequest extends DelegateRequest<SetBillin
     }
 
     /**
+     *
+     * @return billingAgreementType
+     */
+    public BillingAgreementType getBillingAgreementType() {
+        return billingAgreementType;
+    }
+
+    /**
+     *
+     * @return subscriptionAmount
+     */
+    public Price getSubscriptionAmount() {
+        return subscriptionAmount;
+    }
+
+    /**
      * Returns a string representation of this object; useful for testing and
      * debugging.
      * @return A string representation of this object.
@@ -172,6 +214,8 @@ public class SetBillingAgreementDetailsRequest extends DelegateRequest<SetBillin
                 + ", sellerBillingAgreementId=" + sellerBillingAgreementId
                 + ", storeName=" + storeName
                 + ", customInformation=" + customInformation
+                + ", billingAgreementType=" + billingAgreementType
+                + ", subscriptionAmount=" + subscriptionAmount
                 + ", mwsAuthToken=" + getMwsAuthToken() + '}';
     }
 

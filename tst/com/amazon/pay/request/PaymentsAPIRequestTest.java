@@ -17,6 +17,7 @@ package com.amazon.pay.request;
 import com.amazon.pay.response.model.Price;
 import com.amazon.pay.response.model.ProviderCredit;
 import com.amazon.pay.types.AmazonReferenceIdType;
+import com.amazon.pay.types.BillingAgreementType;
 import com.amazon.pay.types.CurrencyCode;
 import com.amazon.pay.types.OrderReferenceStatus;
 import com.amazon.pay.types.SortOrder;
@@ -37,7 +38,8 @@ import java.util.Set;
 public class PaymentsAPIRequestTest {
 
     private final List<ProviderCredit> PCL = Collections.singletonList(
-                new ProviderCredit("providerId", new Price("1", "USD")));
+            new ProviderCredit("providerId", new Price("1", "USD")));
+    private final Price subscriptionAmount = new Price("1.25", "EUR");
 
     @Test
     public void testAuthorizeRequest() {
@@ -65,8 +67,8 @@ public class PaymentsAPIRequestTest {
     public void testCancelOrderReferenceRequest() {
         final CancelOrderReferenceRequest request =
                 new CancelOrderReferenceRequest(TestConstants.amazonOrderReferenceId)
-                .setMWSAuthToken(TestConstants.mwsAuthToken)
-                .setCancelReason(TestConstants.sampletext);
+                        .setMWSAuthToken(TestConstants.mwsAuthToken)
+                        .setCancelReason(TestConstants.sampletext);
         Assert.assertEquals(request.getAmazonOrderReferenceId(),TestConstants.amazonOrderReferenceId);
         Assert.assertEquals(request.getCancelationReason(), TestConstants.sampletext);
         Assert.assertEquals(request.getMwsAuthToken(), TestConstants.mwsAuthToken);
@@ -95,8 +97,8 @@ public class PaymentsAPIRequestTest {
     public void testCloseAuthorizationRequest() {
         final CloseAuthorizationRequest request =
                 new CloseAuthorizationRequest("Auth123")
-                .setMWSAuthToken(TestConstants.mwsAuthToken)
-                .setClosureReason(TestConstants.sampletext);
+                        .setMWSAuthToken(TestConstants.mwsAuthToken)
+                        .setClosureReason(TestConstants.sampletext);
 
         Assert.assertEquals(request.getAmazonAuthorizationId(), "Auth123");
         Assert.assertEquals(request.getClosureReason(), TestConstants.sampletext);
@@ -107,8 +109,8 @@ public class PaymentsAPIRequestTest {
     public void testCloseOrderReferenceRequest() {
         final CloseOrderReferenceRequest request =
                 new CloseOrderReferenceRequest(TestConstants.amazonOrderReferenceId)
-                .setMWSAuthToken(TestConstants.mwsAuthToken)
-                .setClosureReason(TestConstants.sampletext);
+                        .setMWSAuthToken(TestConstants.mwsAuthToken)
+                        .setClosureReason(TestConstants.sampletext);
 
         Assert.assertEquals(request.getAmazonOrderReferenceId(),TestConstants.amazonOrderReferenceId);
         Assert.assertEquals(request.getClosureReason(), TestConstants.sampletext);
@@ -151,11 +153,11 @@ public class PaymentsAPIRequestTest {
 
     @Test
     public void testGetOrderReferenceDetailsRequest() {
-         final GetOrderReferenceDetailsRequest request =
+        final GetOrderReferenceDetailsRequest request =
                 new GetOrderReferenceDetailsRequest(TestConstants.amazonOrderReferenceId)
-                .setAddressConsentToken("Atza|IwEBIDcwh13A-nf8EuZahCu")
-                .setAccessToken("Atza|oVsmstLsCYekhCdyR1Hu6FFveZC")
-                .setMWSAuthToken(TestConstants.mwsAuthToken);
+                        .setAddressConsentToken("Atza|IwEBIDcwh13A-nf8EuZahCu")
+                        .setAccessToken("Atza|oVsmstLsCYekhCdyR1Hu6FFveZC")
+                        .setMWSAuthToken(TestConstants.mwsAuthToken);
 
         Assert.assertEquals(request.getAmazonOrderReferenceId(), TestConstants.amazonOrderReferenceId);
         Assert.assertEquals(request.getAddressConsentToken(), "Atza|IwEBIDcwh13A-nf8EuZahCu");
@@ -292,6 +294,20 @@ public class PaymentsAPIRequestTest {
     }
 
     @Test
+    public void testConfirmBillingAgreementWithSCA() {
+        ConfirmBillingAgreementRequest request = new ConfirmBillingAgreementRequest(TestConstants.billingAgreementId)
+                .setMWSAuthToken(TestConstants.mwsAuthToken)
+                .setSuccessUrl(TestConstants.SUCCESS_URL)
+                .setFailureUrl(TestConstants.FAILURE_URL);
+
+
+        Assert.assertEquals(request.getAmazonBillingAgreementId(), TestConstants.billingAgreementId);
+        Assert.assertEquals(request.getMwsAuthToken(), TestConstants.mwsAuthToken);
+        Assert.assertEquals(request.getSuccessUrl(), TestConstants.SUCCESS_URL);
+        Assert.assertEquals(request.getFailureUrl(), TestConstants.FAILURE_URL);
+    }
+
+    @Test
     public void testGetBillingAgreementDetails() {
         GetBillingAgreementDetailsRequest request = new GetBillingAgreementDetailsRequest(TestConstants.billingAgreementId)
                 .setMWSAuthToken(TestConstants.mwsAuthToken)
@@ -321,10 +337,34 @@ public class PaymentsAPIRequestTest {
     }
 
     @Test
+    public void testSetBillingAgreementDetailsWithSCA() {
+        final SetBillingAgreementDetailsRequest request = new SetBillingAgreementDetailsRequest(TestConstants.billingAgreementId)
+                .setMWSAuthToken(TestConstants.mwsAuthToken)
+                .setCustomInformation("custom")
+                .setPlatformId("platformId")
+                .setSellerBillingAgreementId("B12")
+                .setSellerNote("note12")
+                .setStoreName("store")
+                .setBillingAgreementType(BillingAgreementType.CustomerInitiatedTransaction)
+                .setSubscriptionAmount(subscriptionAmount);
+
+        Assert.assertEquals(request.getAmazonBillingAgreementId(), TestConstants.billingAgreementId);
+        Assert.assertEquals(request.getMwsAuthToken(), TestConstants.mwsAuthToken);
+        Assert.assertEquals(request.getCustomInformation(), "custom");
+        Assert.assertEquals(request.getPlatformId(), "platformId");
+        Assert.assertEquals(request.getSellerBillingAgreementId(), "B12");
+        Assert.assertEquals(request.getSellerNote(), "note12");
+        Assert.assertEquals(request.getStoreName(), "store");
+        Assert.assertEquals(request.getBillingAgreementType(), BillingAgreementType.CustomerInitiatedTransaction);
+        Assert.assertEquals(request.getSubscriptionAmount().getAmount(), "1.25");
+        Assert.assertEquals(request.getSubscriptionAmount().getCurrencyCode(), "EUR");
+    }
+
+    @Test
     public void testValidateBillingAgreement() {
         final ValidateBillingAgreementRequest request =
                 new ValidateBillingAgreementRequest(TestConstants.billingAgreementId)
-                .setMWSAuthToken(TestConstants.mwsAuthToken);
+                        .setMWSAuthToken(TestConstants.mwsAuthToken);
 
         Assert.assertEquals(request.getAmazonBillingAgreementId(), TestConstants.billingAgreementId);
         Assert.assertEquals(request.getMwsAuthToken(), TestConstants.mwsAuthToken);
@@ -334,7 +374,7 @@ public class PaymentsAPIRequestTest {
     public void testGetProviderCreditDetails() {
         final GetProviderCreditDetailsRequest request =
                 new GetProviderCreditDetailsRequest(TestConstants.providerCreditId, TestConstants.providerSellerId)
-                .setMWSAuthToken(TestConstants.mwsAuthToken);
+                        .setMWSAuthToken(TestConstants.mwsAuthToken);
 
         Assert.assertEquals(request.getAmazonProviderCreditId(), TestConstants.providerCreditId);
         Assert.assertEquals(request.getSellerId(), TestConstants.providerSellerId);
@@ -344,9 +384,9 @@ public class PaymentsAPIRequestTest {
     @Test
     public void testGetProviderCreditReversalDetails() {
         final GetProviderCreditReversalDetailsRequest request =
-                  new GetProviderCreditReversalDetailsRequest(
-                  TestConstants.reversalProviderCreditId, TestConstants.providerSellerId)
-                  .setMWSAuthToken(TestConstants.mwsAuthToken);
+                new GetProviderCreditReversalDetailsRequest(
+                        TestConstants.reversalProviderCreditId, TestConstants.providerSellerId)
+                        .setMWSAuthToken(TestConstants.mwsAuthToken);
 
         Assert.assertEquals(TestConstants.reversalProviderCreditId, request.getAmazonProviderCreditReversalId());
         Assert.assertEquals(TestConstants.providerSellerId, request.getSellerId());
@@ -370,7 +410,7 @@ public class PaymentsAPIRequestTest {
         Assert.assertEquals(request.getMwsAuthToken(), TestConstants.mwsAuthToken);
         Assert.assertEquals(request.getCreditReversalAmountCurrencyCode(), CurrencyCode.USD);
         Assert.assertEquals(request.getCreditReversalNote(), TestConstants.sampletext);
-      }
+    }
 
     private ChargeRequest testChargeSetup() {
         return new ChargeRequest()
@@ -423,17 +463,17 @@ public class PaymentsAPIRequestTest {
     public void testCreateOrderReferenceForId() {
         final CreateOrderReferenceForIdRequest request =
                 new CreateOrderReferenceForIdRequest(
-                TestConstants.billingAgreementId, AmazonReferenceIdType.BILLING_AGREEMENT_ID)
-                .setInheritShippingAddress(false)
-                .setConfirmNow(true)
-                .setOrderTotalCurrencyCode(CurrencyCode.USD)
-                .setSellerNote("Test Seller Note")
-                .setSellerOrderId("Test Order ID")
-                .setStoreName(TestConstants.storeName)
-                .setSupplementaryData(TestConstants.SUPPLEMENTARY_DATA)
-                .setCustomInformation("Test Custom Information")
-                .setOrderTotalAmount("567.89")
-                .setPlatformId(TestConstants.platformId);
+                        TestConstants.billingAgreementId, AmazonReferenceIdType.BILLING_AGREEMENT_ID)
+                        .setInheritShippingAddress(false)
+                        .setConfirmNow(true)
+                        .setOrderTotalCurrencyCode(CurrencyCode.USD)
+                        .setSellerNote("Test Seller Note")
+                        .setSellerOrderId("Test Order ID")
+                        .setStoreName(TestConstants.storeName)
+                        .setSupplementaryData(TestConstants.SUPPLEMENTARY_DATA)
+                        .setCustomInformation("Test Custom Information")
+                        .setOrderTotalAmount("567.89")
+                        .setPlatformId(TestConstants.platformId);
 
         Assert.assertEquals(request.getId(), TestConstants.billingAgreementId);
         Assert.assertEquals(request.getIdType(), AmazonReferenceIdType.BILLING_AGREEMENT_ID);

@@ -1,5 +1,5 @@
 /**
- * Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2018-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ import com.amazon.pay.exceptions.AmazonServiceException;
 import com.amazon.pay.impl.PayLogUtil;
 import com.amazon.pay.response.model.AccountStatus;
 import com.amazon.pay.response.model.AuthorizationDetails;
+import com.amazon.pay.response.model.BillingAgreementDetails;
 import com.amazon.pay.response.model.CaptureDetails;
 import com.amazon.pay.response.model.Environment;
 import com.amazon.pay.response.model.ErrorResponse;
@@ -62,6 +63,7 @@ import com.amazon.pay.response.parser.SetOrderAttributesResponseData;
 import com.amazon.pay.exceptions.AmazonClientException;
 import com.amazon.pay.exceptions.AmazonServiceException;
 import com.amazon.pay.response.parser.ResponseData;
+import com.amazon.pay.types.BillingAgreementType;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -401,7 +403,7 @@ public class PaymentsAPIResponseTest {
         Assert.assertEquals(res.toXML(), rawResponse);
     }
 
-   @Test
+    @Test
     public void testCancelOrderReferenceResponse() throws Exception {
         final String rawResponse = loadTestFile("CancelOrderReferenceResponse.xml");
         final ResponseData response = new ResponseData(HttpURLConnection.HTTP_OK, rawResponse);
@@ -410,7 +412,7 @@ public class PaymentsAPIResponseTest {
         Assert.assertEquals(res.toXML(), rawResponse);
     }
 
-   @Test
+    @Test
     public void testCloseOrderReferenceResponse() throws Exception {
         final String rawResponse = loadTestFile("CloseOrderReferenceResponse.xml");
         final ResponseData response = new ResponseData(HttpURLConnection.HTTP_OK, rawResponse);
@@ -419,7 +421,7 @@ public class PaymentsAPIResponseTest {
         Assert.assertEquals(res.toXML(), rawResponse);
     }
 
-   @Test
+    @Test
     public void testCloseAuthorizationResponse() throws Exception {
         final String rawResponse = loadTestFile("CloseAuthorizationResponse.xml");
         final ResponseData response = new ResponseData(HttpURLConnection.HTTP_OK, rawResponse);
@@ -552,8 +554,50 @@ public class PaymentsAPIResponseTest {
         Assert.assertEquals(res.getDetails().getBillingAddress(), null);
         Assert.assertEquals(res.getDetails().getPlatformId(), null);
         Assert.assertEquals(res.getDetails().getSellerNote(), null);
-
         Assert.assertEquals(res.getRequestId(), "d69e8d60-3682-43d7-bf5e-e2ef64dc685e");
+        Assert.assertEquals(res.toXML(), rawResponse);
+    }
+
+    @Test
+    public void testGetBillingAgreementDetailsWithSCAResponse() throws Exception {
+        final String rawResponse = loadTestFile("GetBillingAgreementDetailsWithSCAResponse.xml");
+        final ResponseData response = new ResponseData(HttpURLConnection.HTTP_OK, rawResponse);
+        final GetBillingAgreementDetailsResponseData res = Parser.getBillingAgreementDetailsData(response);
+        Assert.assertEquals(res.getDetails().getAmazonBillingAgreementId(), "C02-5533845-8537141");
+        Assert.assertEquals(res.getDetails().getBillingAgreementStatus().getLastUpdatedTimestamp(), null);
+        Assert.assertEquals(res.getDetails().getBillingAgreementStatus().getState(), "Draft");
+        Assert.assertEquals(res.getDetails().getDestination().getDestinationType(), "Physical");
+        Assert.assertEquals(res.getDetails().getDestination().getPhysicalDestination().getCity(), "Chicago");
+        Assert.assertEquals(res.getDetails().getDestination().getPhysicalDestination().getCountryCode(), "US");
+        Assert.assertEquals(res.getDetails().getDestination().getPhysicalDestination().getPostalCode(), "60602");
+        Assert.assertEquals(res.getDetails().getDestination().getPhysicalDestination().getCounty(), null);
+        Assert.assertEquals(res.getDetails().getDestination().getPhysicalDestination().getDistrict(), null);
+        Assert.assertEquals(res.getDetails().getConstraints().getConstraint().get(0).getConstraintID(), "BuyerConsentNotSet");
+        Assert.assertEquals(res.getDetails().getConstraints().getConstraint().get(0).getDescription(), "The buyer has not given consent for this billing agreement.");
+        Assert.assertEquals(res.getDetails().getBillingAgreementType(), BillingAgreementType.MerchantInitiatedTransaction);
+        Assert.assertEquals(res.getDetails().getReleaseEnvironment().SANDBOX, Environment.SANDBOX);
+        final XMLGregorianCalendar xgc3 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2019-08-20T22:03:09.297Z");
+        Assert.assertEquals(res.getDetails().getCreationTimestamp(), xgc3);
+        Assert.assertEquals(res.getDetails().getBillingAgreementLimits().getAmountLimitPerTimePeriod().getAmount(), "500");
+        Assert.assertEquals(res.getDetails().getBillingAgreementLimits().getAmountLimitPerTimePeriod().getCurrencyCode(), "GBP");
+        Assert.assertEquals(res.getDetails().getBillingAgreementLimits().getCurrentRemainingBalance().getAmount(), "500.00");
+        Assert.assertEquals(res.getDetails().getBillingAgreementLimits().getCurrentRemainingBalance().getCurrencyCode(), "GBP");
+        final XMLGregorianCalendar xgc2 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2019-09-01T00:00:00Z");
+        Assert.assertEquals(res.getDetails().getBillingAgreementLimits().getTimePeriodEndDate(), xgc2);
+        final XMLGregorianCalendar xgc4 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2019-08-01T00:00:00Z");
+        Assert.assertEquals(res.getDetails().getBillingAgreementLimits().getTimePeriodStartDate(), xgc4);
+        Assert.assertEquals(res.getDetails().getOrderLanguage(), "en-GB");
+        Assert.assertEquals(res.getDetails().isBillingAgreementConsent(), false);
+        Assert.assertEquals(res.getDetails().getExpirationTimestamp(), null);
+        Assert.assertEquals(res.getDetails().getSellerBillingAgreementAttributes().getCustomInformation(), "any custom information");
+        Assert.assertEquals(res.getDetails().getSellerBillingAgreementAttributes().getSellerBillingAgreementId(), "5678-example-order");
+        Assert.assertEquals(res.getDetails().getSellerBillingAgreementAttributes().getStoreName(), "SDK Sample Store Name");
+        Assert.assertEquals(res.getDetails().getBillingAddress(), null);
+        Assert.assertEquals(res.getDetails().getPlatformId(), null);
+        Assert.assertEquals(res.getDetails().getSellerNote(), "Testing PHP SDK Recurring Samples");
+        Assert.assertEquals(res.getDetails().getSubscriptionAmount().getAmount(), "25.00");
+        Assert.assertEquals(res.getDetails().getSubscriptionAmount().getCurrencyCode(), "GBP");
+        Assert.assertEquals(res.getRequestId(), "954d87bd-b48f-4eb2-b84b-a0200da333cf");
         Assert.assertEquals(res.toXML(), rawResponse);
     }
 
@@ -585,6 +629,40 @@ public class PaymentsAPIResponseTest {
         final XMLGregorianCalendar xgc4 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2015-11-01T00:00:00Z");
         Assert.assertEquals(res.getDetails().getBillingAgreementLimits().getTimePeriodStartDate(), xgc4);
         Assert.assertEquals(res.getRequestId(), "a01ae213-296b-4c33-bb92-0c4ad4192787");
+        Assert.assertEquals(res.toXML(), rawResponse);
+    }
+
+    @Test
+    public void testSetBillingAgreementDetailsWithSCAResponse() throws Exception {
+        final String rawResponse = loadTestFile("SetBillingAgreementDetailsWithSCAResponse.xml");
+        final ResponseData response = new ResponseData(HttpURLConnection.HTTP_OK, rawResponse);
+        final SetBillingAgreementDetailsResponseData res = Parser.getSetBillingAgreementDetailsResponse(response);
+        Assert.assertEquals(res.getDetails().getAmazonBillingAgreementId(), "C02-5533845-8537141");
+        Assert.assertEquals(res.getDetails().getBillingAgreementStatus().getLastUpdatedTimestamp(), null);
+        Assert.assertEquals(res.getDetails().getBillingAgreementStatus().getState(), "Draft");
+        Assert.assertEquals(res.getDetails().getBillingAgreementStatus().getReasonCode(), null);
+        Assert.assertEquals(res.getDetails().getBillingAgreementStatus().getReasonDescription(), null);
+        Assert.assertEquals(res.getDetails().getDestination().getDestinationType(), "Physical");
+        Assert.assertEquals(res.getDetails().getDestination().getPhysicalDestination().getCity(), "Chicago");
+        Assert.assertEquals(res.getDetails().getDestination().getPhysicalDestination().getCountryCode(), "US");
+        Assert.assertEquals(res.getDetails().getDestination().getPhysicalDestination().getPostalCode(), "60602");
+        Assert.assertEquals(res.getDetails().getConstraints().getConstraint().get(0).getConstraintID(), "BuyerConsentNotSet");
+        Assert.assertEquals(res.getDetails().getConstraints().getConstraint().get(0).getDescription(), "The buyer has not given consent for this billing agreement.");
+        Assert.assertEquals(res.getDetails().getReleaseEnvironment().SANDBOX, Environment.SANDBOX);
+        final XMLGregorianCalendar xgc3 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2019-08-20T22:03:09.297Z");
+        Assert.assertEquals(res.getDetails().getCreationTimestamp(), xgc3);
+        Assert.assertEquals(res.getDetails().getBillingAgreementLimits().getAmountLimitPerTimePeriod().getAmount(), "500");
+        Assert.assertEquals(res.getDetails().getBillingAgreementLimits().getAmountLimitPerTimePeriod().getCurrencyCode(), "GBP");
+        Assert.assertEquals(res.getDetails().getBillingAgreementLimits().getCurrentRemainingBalance().getAmount(), "500.00");
+        Assert.assertEquals(res.getDetails().getBillingAgreementLimits().getCurrentRemainingBalance().getCurrencyCode(), "GBP");
+        final XMLGregorianCalendar xgc2 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2019-09-01T00:00:00Z");
+        Assert.assertEquals(res.getDetails().getBillingAgreementLimits().getTimePeriodEndDate(), xgc2);
+        final XMLGregorianCalendar xgc4 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2019-08-01T00:00:00Z");
+        Assert.assertEquals(res.getDetails().getBillingAgreementLimits().getTimePeriodStartDate(), xgc4);
+        Assert.assertEquals(res.getDetails().getBillingAgreementType(), BillingAgreementType.MerchantInitiatedTransaction);
+        Assert.assertEquals(res.getDetails().getSubscriptionAmount().getAmount(), "25.00");
+        Assert.assertEquals(res.getDetails().getSubscriptionAmount().getCurrencyCode(), "GBP");
+        Assert.assertEquals(res.getRequestId(), "2dee6992-29f6-4d3e-bc86-2cf339241c58");
         Assert.assertEquals(res.toXML(), rawResponse);
     }
 
@@ -718,7 +796,7 @@ public class PaymentsAPIResponseTest {
         final XMLGregorianCalendar xgc2 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2017-06-28T18:14:34.752Z");
         Assert.assertEquals(res.getDetails().getCreationTimestamp(), xgc2);
         Assert.assertEquals(res.getDetails().getProviderCreditReversalSummaryList(), null);
-	Assert.assertEquals(res.getDetails().getSoftDescriptor(), "AMZ*Matt's Test Stor");
+        Assert.assertEquals(res.getDetails().getSoftDescriptor(), "AMZ*Matt's Test Stor");
 
         // The three new multi-currency specific fields
         Assert.assertEquals(res.getDetails().getConvertedAmount().getAmount(), "0.03");

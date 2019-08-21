@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2016-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -32,6 +32,10 @@ public class ConfirmBillingAgreementRequest extends DelegateRequest<ConfirmBilli
     //required parameters
     private String amazonBillingAgreementId;
 
+    //optional parameters
+    private String successUrl;
+    private String failureUrl;
+
     /**
      *
      * @param amazonBillingAgreementId
@@ -51,6 +55,46 @@ public class ConfirmBillingAgreementRequest extends DelegateRequest<ConfirmBilli
     }
 
     /**
+     * Sets the URL where AmazonPay need to return after buyer successfully authenticate a transaction.
+     * @param successUrl After Successful authentication AmazonPay redirects
+     *                  to the SuccessUrl provided by the merchant
+     *
+     * @return Success Url
+     */
+    public ConfirmBillingAgreementRequest setSuccessUrl(String successUrl) {
+        this.successUrl = successUrl;
+        return this;
+    }
+
+    /**
+     * Sets the URL where AmazonPay need to return after buyer fails to authenticate a transaction.
+     * @param failureUrl If the buyer failed to provide correct Authentication AmazonPay redirects
+     *                  to FailureUrl provided by the merchant.
+     *
+     * @return Failure Url
+     */
+    public ConfirmBillingAgreementRequest setFailureUrl(String failureUrl) {
+        this.failureUrl = failureUrl;
+        return this;
+    }
+
+    /**
+     *
+     * @return successUrl
+     */
+    public String getSuccessUrl() {
+        return successUrl;
+    }
+
+    /**
+     *
+     * @return failureUrl
+     */
+    public String getFailureUrl() {
+        return failureUrl;
+    }
+
+    /**
      * Returns a string representation of this object; useful for testing and
      * debugging.
      *
@@ -62,6 +106,8 @@ public class ConfirmBillingAgreementRequest extends DelegateRequest<ConfirmBilli
     public String toString() {
         return "ConfirmBillingAgreementRequest{"
                 + "amazonBillingAgreementId=" + amazonBillingAgreementId
+                + ", successUrl=" + successUrl
+                + ", failureUrl=" + failureUrl
                 + ", mwsAuthToken=" + getMwsAuthToken() + '}';
     }
 

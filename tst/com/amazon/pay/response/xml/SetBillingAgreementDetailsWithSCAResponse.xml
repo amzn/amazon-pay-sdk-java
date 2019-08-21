@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SetBillingAgreementDetailsResponse xmlns="http://mws.amazonservices.com/schema/OffAmazonPayments/2013-01-01">
+    <SetBillingAgreementDetailsResult>
+        <BillingAgreementDetails>
+            <AmazonBillingAgreementId>C02-5533845-8537141</AmazonBillingAgreementId>
+            <BillingAgreementStatus>
+                <State>Draft</State>
+            </BillingAgreementStatus>
+            <OrderLanguage>en-GB</OrderLanguage>
+            <BillingAgreementConsent>false</BillingAgreementConsent>
+            <Destination>
+                <DestinationType>Physical</DestinationType>
+                <PhysicalDestination>
+                    <StateOrRegion>IL</StateOrRegion>
+                    <City>Chicago</City>
+                    <CountryCode>US</CountryCode>
+                    <PostalCode>60602</PostalCode>
+                </PhysicalDestination>
+            </Destination>
+            <Constraints>
+                <Constraint>
+                    <ConstraintID>BuyerConsentNotSet</ConstraintID>
+                    <Description>The buyer has not given consent for this billing agreement.</Description>
+                </Constraint>
+            </Constraints>
+            <BillingAgreementType>MerchantInitiatedTransaction</BillingAgreementType>
+            <SellerBillingAgreementAttributes>
+                <StoreName>SDK Sample Store Name</StoreName>
+                <CustomInformation>any custom information</CustomInformation>
+                <SellerBillingAgreementId>5678-example-order</SellerBillingAgreementId>
+            </SellerBillingAgreementAttributes>
+            <ReleaseEnvironment>Sandbox</ReleaseEnvironment>
+            <SellerNote>Testing PHP SDK Recurring Samples</SellerNote>
+            <SubscriptionAmount>
+                <CurrencyCode>GBP</CurrencyCode>
+                <Amount>25.00</Amount>
+            </SubscriptionAmount>
+            <CreationTimestamp>2019-08-20T22:03:09.297Z</CreationTimestamp>
+            <BillingAgreementLimits>
+                <TimePeriodStartDate>2019-08-01T00:00:00Z</TimePeriodStartDate>
+                <CurrentRemainingBalance>
+                    <CurrencyCode>GBP</CurrencyCode>
+                    <Amount>500.00</Amount>
+                </CurrentRemainingBalance>
+                <AmountLimitPerTimePeriod>
+                    <CurrencyCode>GBP</CurrencyCode>
+                    <Amount>500</Amount>
+                </AmountLimitPerTimePeriod>
+                <TimePeriodEndDate>2019-09-01T00:00:00Z</TimePeriodEndDate>
+            </BillingAgreementLimits>
+        </BillingAgreementDetails>
+    </SetBillingAgreementDetailsResult>
+    <ResponseMetadata>
+        <RequestId>2dee6992-29f6-4d3e-bc86-2cf339241c58</RequestId>
+    </ResponseMetadata>
+</SetBillingAgreementDetailsResponse>
