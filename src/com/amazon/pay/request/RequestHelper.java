@@ -89,12 +89,16 @@ public class RequestHelper {
             final String stringToSign = postHeader + Util.convertParameterMapToString(sortedParams);
             signature = Util.urlEncode(Util.getSignature(stringToSign, payConfig.getSecretKey()));
         } catch (UnsupportedEncodingException ex) {
+            ex.printStackTrace();
             throw new AmazonClientException("Encountered UnsupportedEncodingException:", ex);
         } catch (IllegalStateException ex) {
+            ex.printStackTrace();
             throw new AmazonClientException("Encountered IllegalStateException:", ex);
         } catch (NoSuchAlgorithmException ex) {
+            ex.printStackTrace();
             throw new AmazonClientException("Encountered NoSuchAlgorithmException:", ex);
         } catch (InvalidKeyException ex) {
+            ex.printStackTrace();
             throw new AmazonClientException("Encountered InvalidKeyException:", ex);
         }
         return signature;
@@ -417,7 +421,14 @@ public class RequestHelper {
             parameters.put(ServiceConstants.BILLING_AGREEMENT_SELLER_STORE_NAME, request.getStoreName());
         if (request.getCustomInformation() != null)
             parameters.put(ServiceConstants.BILLING_AGREEMENT_SELLER_CUSTOM_INFORMATION, request.getCustomInformation());
+        if (request.getBillingAgreementType() != null)
+            parameters.put(ServiceConstants.BILLING_AGREEMENT_TYPE, request.getBillingAgreementType().toString());
+        if (request.getSubscriptionAmount() != null)
+            parameters.put(ServiceConstants.BILLING_AGREEMENT_SUBSCRIPTION_AMOUNT_CURRENCY_CODE, request.getSubscriptionAmount().getCurrencyCode());
+        if (request.getSubscriptionAmount() != null)
+            parameters.put(ServiceConstants.BILLING_AGREEMENT_SUBSCRIPTION_AMOUNT_AMOUNT, request.getSubscriptionAmount().getAmount());
         addClientParameters(parameters, request);
+
         return Util.convertParameterMapToString(parameters);
     }
 
@@ -426,6 +437,10 @@ public class RequestHelper {
         parameters.put(ServiceConstants.ACTION, ServiceConstants.CONFIRM_BILLING_AGREEMENT_DETAILS);
         if (request.getAmazonBillingAgreementId() != null)
             parameters.put(ServiceConstants.AMAZON_BILLING_AGREEMENT_ID, request.getAmazonBillingAgreementId());
+        if (request.getSuccessUrl() != null)
+            parameters.put(ServiceConstants.SUCCESS_URL, request.getSuccessUrl());
+        if (request.getFailureUrl() != null)
+            parameters.put(ServiceConstants.FAILURE_URL, request.getFailureUrl());
         addClientParameters(parameters, request);
         return Util.convertParameterMapToString(parameters);
     }

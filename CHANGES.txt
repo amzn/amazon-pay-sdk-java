@@ -1,3 +1,6 @@
+Version 3.6.1 - August 2019
+Strong Customer Authentication (SCA) implementation bug fix.
+
 Version 3.6.0 - August 2019
 Added additional attributes (successUrl, failureUrl) to ConfirmBillingAgreement and (subscriptionAmount, billingAgreementType) to SetBillingAgreement Details.
 See Amazon Pay Strong Customer Authentication (SCA) Upgrade Integration Guide for more information.

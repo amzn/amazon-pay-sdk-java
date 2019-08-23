@@ -50,6 +50,9 @@ public class ServiceConstants {
     public static final String BILLING_AGREEMENT_SELLER_CUSTOM_INFORMATION = "BillingAgreementAttributes.SellerBillingAgreementAttributes.CustomInformation";
     public static final String BILLING_AGREEMENT_SELLER_NOTE = "BillingAgreementAttributes.SellerNote";
     public static final String BILLING_AGREEMENT_SELLER_STORE_NAME = "BillingAgreementAttributes.SellerBillingAgreementAttributes.StoreName";
+    public static final String BILLING_AGREEMENT_TYPE = "BillingAgreementAttributes.BillingAgreementType";
+    public static final String BILLING_AGREEMENT_SUBSCRIPTION_AMOUNT_CURRENCY_CODE = "BillingAgreementAttributes.SubscriptionAmount.CurrencyCode";
+    public static final String BILLING_AGREEMENT_SUBSCRIPTION_AMOUNT_AMOUNT = "BillingAgreementAttributes.SubscriptionAmount.Amount";
     public static final String CANCELATION_REASON = "CancelationReason";
     public static final String CAPTURE_AMOUNT = "CaptureAmount.Amount";
     public static final String CAPTURE_CURRENCEYCODE = "CaptureAmount.CurrencyCode";

@@ -1196,6 +1196,7 @@ public class PayClient implements Client  {
     }
 
     private ResponseData sendRequest(String httpPostRequest)  {
+        System.out.println("Request" + httpPostRequest);
         ResponseData response = null;
 
         try {
