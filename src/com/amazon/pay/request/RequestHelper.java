@@ -89,16 +89,12 @@ public class RequestHelper {
             final String stringToSign = postHeader + Util.convertParameterMapToString(sortedParams);
             signature = Util.urlEncode(Util.getSignature(stringToSign, payConfig.getSecretKey()));
         } catch (UnsupportedEncodingException ex) {
-            ex.printStackTrace();
             throw new AmazonClientException("Encountered UnsupportedEncodingException:", ex);
         } catch (IllegalStateException ex) {
-            ex.printStackTrace();
             throw new AmazonClientException("Encountered IllegalStateException:", ex);
         } catch (NoSuchAlgorithmException ex) {
-            ex.printStackTrace();
             throw new AmazonClientException("Encountered NoSuchAlgorithmException:", ex);
         } catch (InvalidKeyException ex) {
-            ex.printStackTrace();
             throw new AmazonClientException("Encountered InvalidKeyException:", ex);
         }
         return signature;
@@ -423,9 +419,9 @@ public class RequestHelper {
             parameters.put(ServiceConstants.BILLING_AGREEMENT_SELLER_CUSTOM_INFORMATION, request.getCustomInformation());
         if (request.getBillingAgreementType() != null)
             parameters.put(ServiceConstants.BILLING_AGREEMENT_TYPE, request.getBillingAgreementType().toString());
-        if (request.getSubscriptionAmount() != null)
+        if (request.getSubscriptionAmount().getCurrencyCode() != null)
             parameters.put(ServiceConstants.BILLING_AGREEMENT_SUBSCRIPTION_AMOUNT_CURRENCY_CODE, request.getSubscriptionAmount().getCurrencyCode());
-        if (request.getSubscriptionAmount() != null)
+        if (request.getSubscriptionAmount().getAmount() != null)
             parameters.put(ServiceConstants.BILLING_AGREEMENT_SUBSCRIPTION_AMOUNT_AMOUNT, request.getSubscriptionAmount().getAmount());
         addClientParameters(parameters, request);
 
