@@ -419,10 +419,12 @@ public class RequestHelper {
             parameters.put(ServiceConstants.BILLING_AGREEMENT_SELLER_CUSTOM_INFORMATION, request.getCustomInformation());
         if (request.getBillingAgreementType() != null)
             parameters.put(ServiceConstants.BILLING_AGREEMENT_TYPE, request.getBillingAgreementType().toString());
-        if (request.getSubscriptionAmount().getCurrencyCode() != null)
-            parameters.put(ServiceConstants.BILLING_AGREEMENT_SUBSCRIPTION_AMOUNT_CURRENCY_CODE, request.getSubscriptionAmount().getCurrencyCode());
-        if (request.getSubscriptionAmount().getAmount() != null)
-            parameters.put(ServiceConstants.BILLING_AGREEMENT_SUBSCRIPTION_AMOUNT_AMOUNT, request.getSubscriptionAmount().getAmount());
+        if (request.getSubscriptionAmount() != null) {
+            if (request.getSubscriptionAmount().getCurrencyCode() != null)
+                parameters.put(ServiceConstants.BILLING_AGREEMENT_SUBSCRIPTION_AMOUNT_CURRENCY_CODE, request.getSubscriptionAmount().getCurrencyCode());
+            if (request.getSubscriptionAmount().getAmount() != null)
+                parameters.put(ServiceConstants.BILLING_AGREEMENT_SUBSCRIPTION_AMOUNT_AMOUNT, request.getSubscriptionAmount().getAmount());
+        }
         addClientParameters(parameters, request);
 
         return Util.convertParameterMapToString(parameters);

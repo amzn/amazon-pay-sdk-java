@@ -4,7 +4,7 @@
     <groupId>com.amazon.pay</groupId>
     <artifactId>amazon-pay-java-sdk</artifactId>
     <packaging>jar</packaging>
-    <version>3.6.1</version>
+    <version>3.6.2</version>
     <dependencies>
         <dependency>
             <groupId>commons-codec</groupId>
