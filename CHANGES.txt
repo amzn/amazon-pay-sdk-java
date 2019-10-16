@@ -1,3 +1,6 @@
+Version 3.6.2 - August 2019
+Fix SetBillingAgreementDetails NPE for US and JP regions.
+
 Version 3.6.1 - August 2019
 Strong Customer Authentication (SCA) implementation bug fix.
 
