@@ -247,7 +247,7 @@ client.closeBillingAgreement(request);
 ### Get Login Profile API
 ```java
 
-This API call allows you to obtain user profile information once a user has logged into your application using their Amazon credentials. 
+// This API call allows you to obtain user profile information once a user has logged into your application using their Amazon credentials. 
 
 // Your client id is located in your Seller Central account.
 String clientId = "YOUR_CLIENT_ID";
@@ -257,7 +257,7 @@ String accessToken = "USER_ACCESS_TOKEN";
 
 User user = client.getUserInfo(accessToken, clientId);
 
-Below profile information can be retrieved from User object.
+// Below profile information can be retrieved from User object.
 user.getName();
 user.getEmail();
 user.getUserId();
