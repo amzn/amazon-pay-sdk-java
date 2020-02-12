@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2016-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -152,7 +152,7 @@ public class ServiceConstants {
     public static final String GET_MERCHANT_ACCOUNT_STATUS = "GetMerchantAccountStatus";
 
     // SDK version
-    public static final String APPLICATION_LIBRARY_VERSION = "3.6.2";
+    public static final String APPLICATION_LIBRARY_VERSION = "3.6.3";
     public static final String GITHUB_SDK_NAME = "amazon-pay-sdk-java";
 
     // Exponential backoff wait times (milliseconds) for retry operations

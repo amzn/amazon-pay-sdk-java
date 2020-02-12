@@ -1,12 +1,16 @@
+Version 3.6.3 - February 2020
+- Fix Refund operation so that the ProviderCreditList is handled properly
+- Add ProviderCreditList support to the AuthorizeOnBillingAgreement operation
+
 Version 3.6.2 - August 2019
-Fix SetBillingAgreementDetails NPE for US and JP regions.
+- Fix SetBillingAgreementDetails NPE for US and JP regions
 
 Version 3.6.1 - August 2019
-Strong Customer Authentication (SCA) implementation bug fix.
+- Strong Customer Authentication (SCA) implementation bug fix
 
 Version 3.6.0 - August 2019
-Added additional attributes (successUrl, failureUrl) to ConfirmBillingAgreement and (subscriptionAmount, billingAgreementType) to SetBillingAgreement Details.
-See Amazon Pay Strong Customer Authentication (SCA) Upgrade Integration Guide for more information.
+- Added additional attributes (successUrl, failureUrl) to ConfirmBillingAgreement and (subscriptionAmount, billingAgreementType) to SetBillingAgreement Details
+  See Amazon Pay Strong Customer Authentication (SCA) Upgrade Integration Guide for more information
 
 Version 3.5.1 - May 2019
 - PaymentAuthenticationStatus getter added for GetOrderReferenceDetails, SetOrderReferenceDetails, and SetOrderAttributes API calls

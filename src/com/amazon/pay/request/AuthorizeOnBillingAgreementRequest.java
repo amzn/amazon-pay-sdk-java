@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2016-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -14,8 +14,10 @@
  */
 package com.amazon.pay.request;
 
+import com.amazon.pay.response.model.ProviderCredit;
 import com.amazon.pay.types.CurrencyCode;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * For more information documentation, see
@@ -42,11 +44,11 @@ public class AuthorizeOnBillingAgreementRequest extends DelegateRequest<Authoriz
     private String platformId;
     private String sellerNote;
     private Boolean inheritShippingAddress;
-
     private String sellerOrderId;
     private String storeName;
     private String supplementaryData;
     private String customInformation;
+    private List<ProviderCredit> providerCredit;
 
     /**
      * Constructs request for AuthorizeOnBillingAgreement operation
@@ -374,6 +376,27 @@ public class AuthorizeOnBillingAgreementRequest extends DelegateRequest<Authoriz
     }
 
     /**
+     * Applicable for third-party solution providers only.
+     *
+     * @return ProviderCredit associated with this operation
+     */
+    public List<ProviderCredit> getProviderCredit() {
+        return providerCredit;
+    }
+
+    /**
+     * Applicable for third-party solution providers only.
+     *
+     * @param providerCreditList associated with this operation
+     *
+     * @return Returns a reference to this object so that methods can be chained together.
+     */
+    public AuthorizeOnBillingAgreementRequest setProviderCredit(List<ProviderCredit> providerCreditList) {
+        this.providerCredit = providerCreditList;
+        return this;
+    }
+
+    /**
      * Returns a string representation of this object; useful for testing and
      * debugging.
      *
@@ -399,6 +422,7 @@ public class AuthorizeOnBillingAgreementRequest extends DelegateRequest<Authoriz
                 + ", storeName=" + storeName
                 + ", supplementaryData=" + supplementaryData
                 + ", customInformation=" + customInformation
+                + ", providerCredit=" + providerCredit
                 + ", mwsAuthToken=" + getMwsAuthToken() + '}';
     }
 
