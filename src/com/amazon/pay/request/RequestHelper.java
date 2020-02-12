@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2016-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -336,7 +336,7 @@ public class RequestHelper {
             parameters.put(ServiceConstants.SOFT_DESCRIPTOR, request.getSoftDescriptor());
         }
         if (request.getProviderCredit() != null) {
-            addProviderCreditToParamMap(request.getProviderCredit(), parameters);
+            addProviderCreditReversalToParamMap(request.getProviderCredit(), parameters);
         }
         addClientParameters(parameters, request);
         return Util.convertParameterMapToString(parameters);
@@ -489,6 +489,8 @@ public class RequestHelper {
             parameters.put(ServiceConstants.BA_CUSTOM_INFORMATION, request.getCustomInformation());
         if (request.getInheritShippingAddress() != null)
             parameters.put(ServiceConstants.INHERIT_SHIPPING_ADDRESS, Boolean.toString(request.getInheritShippingAddress()));
+        if (request.getProviderCredit() != null)
+            addProviderCreditToParamMap(request.getProviderCredit(), parameters);
         addClientParameters(parameters, request);
         return Util.convertParameterMapToString(parameters);
     }
@@ -662,10 +664,29 @@ public class RequestHelper {
                     if (member.getProviderId() != null) {
                         parameters.put("ProviderCreditList" + "." + "member" + "."  + memberListIndex + "." + "ProviderId", member.getProviderId());
                     }
-                    Price creditAmount = member.getCreditAmount();
+                    final Price creditAmount = member.getCreditAmount();
                     if (creditAmount != null) {
                         parameters.put("ProviderCreditList" + "." + "member" + "."  + memberListIndex + "." + "CreditAmount" + "." + "Amount", creditAmount.getAmount());
                         parameters.put("ProviderCreditList" + "." + "member" + "."  + memberListIndex + "." + "CreditAmount" + "." + "CurrencyCode", creditAmount.getCurrencyCode());
+                    }
+                    memberListIndex++;
+                }
+            }
+        }
+    }
+
+    private void addProviderCreditReversalToParamMap(List<ProviderCredit> providerCreditList, Map<String,String> parameters) {
+        if (providerCreditList != null) {
+            int memberListIndex = 1;
+            for (ProviderCredit member : providerCreditList) {
+                if (member != null) {
+                    if (member.getProviderId() != null) {
+                        parameters.put("ProviderCreditReversalList" + "." + "member" + "."  + memberListIndex + "." + "ProviderId", member.getProviderId());
+                    }
+                    final Price creditAmount = member.getCreditAmount();
+                    if (creditAmount != null) {
+                        parameters.put("ProviderCreditReversalList" + "." + "member" + "."  + memberListIndex + "." + "CreditReversalAmount" + "." + "Amount", creditAmount.getAmount());
+                        parameters.put("ProviderCreditReversalList" + "." + "member" + "."  + memberListIndex + "." + "CreditReversalAmount" + "." + "CurrencyCode", creditAmount.getCurrencyCode());
                     }
                     memberListIndex++;
                 }
