@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -118,8 +118,16 @@ public class PayLogUtil implements LogUtil{
                 }
             }
 
+            final TransformerFactory tf = TransformerFactory.newInstance();
+
+            // settings for XXE: External Entity Prevention
+            // XMLConstants we need were introduced in Java 7, but we need to maintain backward compatibility
+            // with Java 6 in this SDK, so we reference them as their native strings
+            tf.setAttribute("http://javax.xml.XMLConstants/property/accessExternalDTD", ""); // XMLConstants.ACCESS_EXTERNAL_DTD
+            tf.setAttribute("http://javax.xml.XMLConstants/property/accessExternalStylesheet", ""); // XMLConstants.ACCESS_EXTERNAL_STYLESHEET
+
+            final Transformer serializer = tf.newTransformer();
             final StringWriter sw = new StringWriter();
-            final Transformer serializer = TransformerFactory.newInstance().newTransformer();
             serializer.transform(new DOMSource(list.item(0)), new StreamResult(sw));
 
             final String result = sw.toString();

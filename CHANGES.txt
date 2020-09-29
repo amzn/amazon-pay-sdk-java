@@ -1,3 +1,7 @@
+Version 3.6.4 - September 2020
+- getPaymentDetails was throwing NPE instead of AmazonServiceException in certain situations
+- Remediate weakly configured XML processor in PayLogUtil class
+
 Version 3.6.3 - February 2020
 - Fix Refund operation so that the ProviderCreditList is handled properly
 - Add ProviderCreditList support to the AuthorizeOnBillingAgreement operation

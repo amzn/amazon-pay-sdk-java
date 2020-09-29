@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -21,16 +21,16 @@ import java.io.Serializable;
 /**
  * Response from GetOrderReferenceDetails service API, as returned by Amazon Pay
  */
-public final class GetOrderReferenceDetailsResponseData  extends ResponseData implements Serializable{
-    
+public final class GetOrderReferenceDetailsResponseData  extends ResponseData implements Serializable {
+
     private String requestId;
     private OrderReferenceDetails orderReferenceDetails;
-    
+
     public GetOrderReferenceDetailsResponseData(GetOrderReferenceDetailsResponse response , ResponseData rawResponse) {
         super(rawResponse);
-        if(response != null) {
+        if (response != null) {
             this.requestId = response.getResponseMetadata().getRequestId();
-            if(response.getGetOrderReferenceDetailsResult() != null) { 
+            if (response.getGetOrderReferenceDetailsResult() != null) {
                orderReferenceDetails = response.getGetOrderReferenceDetailsResult().getOrderReferenceDetails();
             }
         }
@@ -39,7 +39,7 @@ public final class GetOrderReferenceDetailsResponseData  extends ResponseData im
     /**
      * The requestID that uniquely identifies the service request
      * the caller made.
-     * 
+     *
      * @return  The requestID that uniquely identifies the service request
      * the caller made.
      */
@@ -63,8 +63,5 @@ public final class GetOrderReferenceDetailsResponseData  extends ResponseData im
     public String toString() {
         return "GetOrderReferenceDetailsResponseData{" + "requestId=" + requestId + ", orderReferenceDetails=" + orderReferenceDetails.toString() + '}';
     }
-    
-    
-    
 
 }
