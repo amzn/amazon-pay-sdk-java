@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -235,40 +235,42 @@ public class PayClient implements Client  {
             throws AmazonServiceException {
         GetPaymentDetails paymentDetails = new GetPaymentDetails();
 
-        GetOrderReferenceDetailsRequest getOrderReferenceDetailsRequest =
-                new GetOrderReferenceDetailsRequest(orderReferenceID)
-                .setMWSAuthToken(MWSAuthToken);
-        OrderReferenceDetails orderReferenceResponse = getOrderReferenceDetails(getOrderReferenceDetailsRequest).getDetails();
+        final GetOrderReferenceDetailsRequest getOrderReferenceDetailsRequest =
+                new GetOrderReferenceDetailsRequest(orderReferenceID).setMWSAuthToken(MWSAuthToken);
+        final OrderReferenceDetails orderReferenceResponse = getOrderReferenceDetails(getOrderReferenceDetailsRequest).getDetails();
 
         paymentDetails.putOrderReferenceDetails(orderReferenceID, orderReferenceResponse);
-        List<String> amazon_authorization_id = orderReferenceResponse.getIdList().getMember();
+        if (orderReferenceResponse.getIdList() != null) {
+            final List<String> amazonAuthorizations = orderReferenceResponse.getIdList().getMember();
 
-        for (String authorizeID : amazon_authorization_id) {
-                GetAuthorizationDetailsRequest getAuthDetailsRequest =
-                        new GetAuthorizationDetailsRequest(authorizeID)
-                        .setMWSAuthToken(MWSAuthToken);
-                AuthorizationDetails responseAuthorize = getAuthorizationDetails(getAuthDetailsRequest).getDetails();
-                paymentDetails.putAuthorizationDetails(authorizeID, responseAuthorize);
+            for (String authorizeId : amazonAuthorizations) {
+                final GetAuthorizationDetailsRequest getAuthDetailsRequest =
+                        new GetAuthorizationDetailsRequest(authorizeId).setMWSAuthToken(MWSAuthToken);
+                final AuthorizationDetails responseAuthorize = getAuthorizationDetails(getAuthDetailsRequest).getDetails();
+                paymentDetails.putAuthorizationDetails(authorizeId, responseAuthorize);
 
-                List<String> amazon_capture_id = responseAuthorize.getIdList().getMember();
+                if (responseAuthorize.getIdList() != null) {
+                    final List<String> amazonCaptures = responseAuthorize.getIdList().getMember();
 
-                for (String captureID : amazon_capture_id) {
-                        GetCaptureDetailsRequest getCaptureDetailsRequest =
-                                new GetCaptureDetailsRequest(captureID)
-                                .setMWSAuthToken(MWSAuthToken);
-                        CaptureDetails responseCapture = getCaptureDetails(getCaptureDetailsRequest).getDetails();
-                        paymentDetails.putCaptureDetails(captureID, responseCapture);
+                    for (String captureId : amazonCaptures) {
+                        final GetCaptureDetailsRequest getCaptureDetailsRequest =
+                                new GetCaptureDetailsRequest(captureId).setMWSAuthToken(MWSAuthToken);
+                        final CaptureDetails responseCapture = getCaptureDetails(getCaptureDetailsRequest).getDetails();
+                        paymentDetails.putCaptureDetails(captureId, responseCapture);
 
-                        List<String> amazon_refund_id = responseCapture.getIdList().getMember();
+                        if (responseCapture.getIdList() != null) {
+                            final List<String> amazonRefunds = responseCapture.getIdList().getMember();
 
-                        for (String refundID : amazon_refund_id) {
-                                GetRefundDetailsRequest getRefundDetailsRequest =
-                                        new GetRefundDetailsRequest(refundID)
-                                        .setMWSAuthToken(MWSAuthToken);
-                                RefundDetails responseRefund = getRefundDetails(getRefundDetailsRequest).getDetails();
-                                paymentDetails.putRefundDetails(refundID, responseRefund);
+                            for (String refundId : amazonRefunds) {
+                                final GetRefundDetailsRequest getRefundDetailsRequest =
+                                        new GetRefundDetailsRequest(refundId).setMWSAuthToken(MWSAuthToken);
+                                final RefundDetails responseRefund = getRefundDetails(getRefundDetailsRequest).getDetails();
+                                paymentDetails.putRefundDetails(refundId, responseRefund);
+                            }
                         }
-                 }
+                    }
+                }
+            }
         }
 
         return paymentDetails;
