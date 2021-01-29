@@ -267,7 +267,9 @@ public class RequestHelper {
             }
             parameters.put(ServiceConstants.AUTHORIZATION_CURRENCEYCODE, request.getAuthorizationCurrencyCode().toString());
         }
-
+        if (request.isExpectImmediateAuthorization() != null) {
+            parameters.put(ServiceConstants.EXPECT_IMMEDIATE_AUTHORIZATION, request.isExpectImmediateAuthorization().toString());
+        }
         addClientParameters(parameters, request);
         return Util.convertParameterMapToString(parameters);
     }

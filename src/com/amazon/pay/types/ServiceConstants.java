@@ -98,6 +98,7 @@ public class ServiceConstants {
     public static final String ORDER_ATTRIBUTES_SUPPLEMENTARY_DATA = "OrderAttributes.SellerOrderAttributes.SupplementaryData";
     public static final String SUCCESS_URL = "SuccessUrl";
     public static final String FAILURE_URL = "FailureUrl";
+    public static final String EXPECT_IMMEDIATE_AUTHORIZATION = "ExpectImmediateAuthorization";
 
     // API Request Parameters - (Mostly) Required Parameters
     public static final String ACTION = "Action";
@@ -152,7 +153,7 @@ public class ServiceConstants {
     public static final String GET_MERCHANT_ACCOUNT_STATUS = "GetMerchantAccountStatus";
 
     // SDK version
-    public static final String APPLICATION_LIBRARY_VERSION = "3.6.4";
+    public static final String APPLICATION_LIBRARY_VERSION = "3.6.5";
     public static final String GITHUB_SDK_NAME = "amazon-pay-sdk-java";
 
     // Exponential backoff wait times (milliseconds) for retry operations

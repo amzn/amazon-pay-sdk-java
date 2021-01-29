@@ -124,7 +124,8 @@ public class PaymentsAPIRequestTest {
                 .setAuthorizationAmount(TestConstants.AUTHORIZE_AMOUNT)
                 .setAuthorizationCurrencyCode(CurrencyCode.EUR)
                 .setSuccessUrl(TestConstants.SUCCESS_URL)
-                .setFailureUrl(TestConstants.FAILURE_URL);
+                .setFailureUrl(TestConstants.FAILURE_URL)
+                .setExpectImmediateAuthorization(true);
 
         Assert.assertEquals(request.getAmazonOrderReferenceId(),TestConstants.amazonOrderReferenceId);
         Assert.assertEquals(request.getMwsAuthToken(), TestConstants.mwsAuthToken);
@@ -132,6 +133,7 @@ public class PaymentsAPIRequestTest {
         Assert.assertEquals(request.getAuthorizationCurrencyCode(), CurrencyCode.EUR);
         Assert.assertEquals(request.getSuccessUrl(), TestConstants.SUCCESS_URL);
         Assert.assertEquals(request.getFailureUrl(), TestConstants.FAILURE_URL);
+        Assert.assertEquals(request.isExpectImmediateAuthorization(), true);
     }
 
     @Test
