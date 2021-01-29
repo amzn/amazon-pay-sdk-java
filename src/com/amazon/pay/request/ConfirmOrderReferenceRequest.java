@@ -38,6 +38,7 @@ public class ConfirmOrderReferenceRequest extends DelegateRequest<ConfirmOrderRe
     private String failureUrl;
     private String authorizationAmount;
     private CurrencyCode authorizationCurrencyCode;
+    private Boolean expectImmediateAuthorization;
 
     /**
      * Constructor requires an order reference identifier.
@@ -147,6 +148,28 @@ public class ConfirmOrderReferenceRequest extends DelegateRequest<ConfirmOrderRe
     public String getFailureUrl() {
         return failureUrl;
     }
+    
+    /**
+     * The ExpectImmediateAuthorization set in the request
+     *
+     * @return Boolean
+     */
+    public Boolean isExpectImmediateAuthorization() {
+        return expectImmediateAuthorization;
+    }
+
+    /**
+     * Sets the ExpectImmediateAuthorization in ConfirmOrderReference
+     *
+     * @param  expectImmediateAuthorization Sets the expectImmediateAuthorization in ConfirmOrderReference
+     *
+     * @return ConfirmOrderReferenceRequest
+     *       Container holding Confirm Order Reference operation parameters
+     */
+    public ConfirmOrderReferenceRequest setExpectImmediateAuthorization(Boolean expectImmediateAuthorization) {
+        this.expectImmediateAuthorization = expectImmediateAuthorization;
+        return this;
+    }
 
     /**
      * Returns a string representation of this object; useful for testing and
@@ -164,7 +187,8 @@ public class ConfirmOrderReferenceRequest extends DelegateRequest<ConfirmOrderRe
                 + ", authorizationCurrencyCode=" + authorizationCurrencyCode
                 + ", successUrl=" + successUrl
                 + ", failureUrl=" + failureUrl
-                + ", mwsAuthToken=" + getMwsAuthToken() + '}';
+                + ", mwsAuthToken=" + getMwsAuthToken() 
+                + ", expectImmediateAuthorize=" + isExpectImmediateAuthorization() +'}';
     }
 
 }

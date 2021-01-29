@@ -1,3 +1,6 @@
+Version 3.6.5 - January 2021
+- Added additional attribute (expectImmediateAuthorization) to ConfirmOrderReference. This value can be set to true or false (Boolean). See Amazon Pay Strong Customer Authentication (SCA) Upgrade Integration Guide for more information.
+
 Version 3.6.4 - September 2020
 - getPaymentDetails was throwing NPE instead of AmazonServiceException in certain situations
 - Remediate weakly configured XML processor in PayLogUtil class
