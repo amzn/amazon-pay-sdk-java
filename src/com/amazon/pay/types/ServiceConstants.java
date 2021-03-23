@@ -153,7 +153,7 @@ public class ServiceConstants {
     public static final String GET_MERCHANT_ACCOUNT_STATUS = "GetMerchantAccountStatus";
 
     // SDK version
-    public static final String APPLICATION_LIBRARY_VERSION = "3.6.5";
+    public static final String APPLICATION_LIBRARY_VERSION = "3.7.0";
     public static final String GITHUB_SDK_NAME = "amazon-pay-sdk-java";
 
     // Exponential backoff wait times (milliseconds) for retry operations
@@ -187,5 +187,14 @@ public class ServiceConstants {
         profileEndpointSandboxMappingsMap.put(Region.JP, "https://api.sandbox.amazon.co.jp");
         profileEndpointSandboxMappings = Collections.unmodifiableMap(profileEndpointSandboxMappingsMap);
     }
+
+    public static final String ERROR_DESCRIPTION = "error_description";
+    public static final String ERROR = "error";
+    public static final String GET = "GET";
+    public static final String UTF_8 = "UTF-8";
+    public static final String X_AMZ_ACCESS_TOKEN = "x-amz-access-token";
+    public static final String AUTH_O2_TOKENINFO_URI = "/auth/o2/tokeninfo";
+    public static final String USER_PROFILE_URI = "/user/profile";
+    public static final String HMAC_SHA256 = "HmacSHA256";
 
 }

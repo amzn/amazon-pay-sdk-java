@@ -916,7 +916,7 @@ public class PayClient implements Client  {
     @Override
     public User getUserInfo(String accessToken , String clientId) throws AmazonServiceException, IOException {
 
-        final String decodedAccessToken = URLDecoder.decode(accessToken, "UTF-8");
+        final String decodedAccessToken = URLDecoder.decode(accessToken, ServiceConstants.UTF_8);
         String profileEndpoint;
 
         if (payConfig.getOverrideProfileURL() != null) {
@@ -930,11 +930,12 @@ public class PayClient implements Client  {
         }
 
         Map<String,String> headerValues = new HashMap<String, String>();
-        ResponseData response = Util.httpSendRequest("GET" , profileEndpoint + "/auth/o2/tokeninfo?access_token=" + decodedAccessToken, null, headerValues, null);
+        headerValues.put(ServiceConstants.X_AMZ_ACCESS_TOKEN, decodedAccessToken);
+        ResponseData response = Util.httpSendRequest(ServiceConstants.GET, profileEndpoint + ServiceConstants.AUTH_O2_TOKENINFO_URI, null, headerValues, null);
 
         Map m = Util.convertJsonToObject(response.toXML(), Map.class);
-        if (m.containsKey("error")) {
-            throw new AmazonServiceException("Retrieving User Info Failed. "+(String)m.get("error_description"));
+        if (m.containsKey(ServiceConstants.ERROR)) {
+            throw new AmazonServiceException("Retrieving User Info Failed. " + (String)m.get(ServiceConstants.ERROR_DESCRIPTION));
         }
 
         if (clientId == null || !clientId.equals(m.get("aud"))) {
@@ -942,11 +943,10 @@ public class PayClient implements Client  {
             throw new AmazonClientException("Access token does not belong to clientId: " + clientId);
         }
 
-        headerValues.put("Authorization", "bearer " + decodedAccessToken);
-        response = Util.httpSendRequest("GET" , profileEndpoint + "/user/profile", null, headerValues);
+        response = Util.httpSendRequest(ServiceConstants.GET , profileEndpoint + ServiceConstants.USER_PROFILE_URI, null, headerValues);
         m = Util.convertJsonToObject(response.toXML() , Map.class);
-        if (m.containsKey("error")) {
-            throw new AmazonServiceException("Retrieving User Info Failed. " + (String)m.get("error_description"));
+        if (m.containsKey(ServiceConstants.ERROR)) {
+            throw new AmazonServiceException("Retrieving User Info Failed. " + (String)m.get(ServiceConstants.ERROR_DESCRIPTION));
         }
 
         final User user = Util.convertJsonToObject(response.toXML() , User.class);

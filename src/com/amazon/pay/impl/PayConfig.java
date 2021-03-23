@@ -26,7 +26,7 @@ import java.util.Properties;
 public class PayConfig implements Config  {
 
     private String accessKey;
-    private String secretKey;
+    private char[] secretKey;
     private String merchantId;
     private Region region;
     private Environment environment;
@@ -143,27 +143,46 @@ public class PayConfig implements Config  {
      *
      */
     @Override
-    public String getSecretKey() {
+    public char[] getSecretKey() {
         return secretKey;
     }
 
 
     /**
-     *
+     * @deprecated(since = "3.7.0") This method is deprecated, instead use setSecretKey(char[] secretKey)
      * @param secretKey - Sets SecretKey in PayConfig
      */
     @Override
+    @Deprecated
     public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
+        this.secretKey = secretKey.toCharArray();
     }
+    
+    /**
+    * @param secretKey - Sets SecretKey in PayConfig
+    */
+   @Override
+   public void setSecretKey(char[] secretKey) {
+       this.secretKey = secretKey;
+   }
 
 
     /**
-     *
+     * @deprecated(since = "3.7.0") This method is deprecated, instead use withSecretKey(char[] privateKey)
      * @param secretKey - Sets SecretKey in PayConfig
      * @return Returns updated PayConfig object
      */
+   @Deprecated
     public PayConfig withSecretKey(String secretKey) {
+        this.secretKey = secretKey.toCharArray();
+        return this;
+    }
+    
+    /**
+     * @param secretKey - Sets SecretKey in PayConfig
+     * @return Returns updated PayConfig object
+     */
+    public PayConfig withSecretKey(char[] secretKey) {
         this.secretKey = secretKey;
         return this;
     }
@@ -605,7 +624,7 @@ public class PayConfig implements Config  {
                         this.setAccessKey(prop.getProperty(property));
                         break;
                     case SECRET_KEY:
-                        this.setSecretKey(prop.getProperty(property));
+                        this.setSecretKey(prop.getProperty(property).toCharArray());
                         break;
                     case MERCHANT_ID:
                         this.setSellerId(prop.getProperty(property));
@@ -681,7 +700,7 @@ public class PayConfig implements Config  {
     private boolean checkIfRequriedPropertiesExist() {
         if (this.accessKey == null)
             generateException(Key.ACCESS_KEY);
-        else if (this.secretKey == null)
+        else if (this.secretKey == null || this.secretKey.length == 0)
             generateException(Key.SECRET_KEY);
         else if (this.merchantId == null)
             generateException(Key.MERCHANT_ID);
@@ -711,7 +730,6 @@ public class PayConfig implements Config  {
     public String toString() {
         return "PayConfig{" +
                 "accessKeyId=" + accessKey +
-                ", secretAccessKey=" + secretKey +
                 ", sellerId=" + merchantId +
                 ", region=" + region +
                 ", environment=" + environment +

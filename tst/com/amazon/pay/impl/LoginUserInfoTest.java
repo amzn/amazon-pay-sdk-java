@@ -19,6 +19,7 @@ import com.amazon.pay.exceptions.AmazonServiceException;
 import com.amazon.pay.response.parser.ResponseData;
 import com.amazon.pay.types.CurrencyCode;
 import com.amazon.pay.types.Region;
+import com.amazon.pay.types.ServiceConstants;
 import com.amazon.pay.types.User;
 import java.net.HttpURLConnection;
 import java.net.URLDecoder;
@@ -56,14 +57,14 @@ public class LoginUserInfoTest {
 
     @Test
     public void testGetUserInfo() throws Exception {
-        final ResponseData tokenInfoResponse = new ResponseData(HttpURLConnection.HTTP_OK, TestConstants.tokenInfoResponse);
-        final String tokenInfoURL = TestConstants.tokenInfoURL + URLDecoder.decode(accessToken, "UTF-8");
-        PowerMockito.doReturn(tokenInfoResponse).when(Util.class, "httpSendRequest", "GET", tokenInfoURL, null, new HashMap<String,String>(), null);
-        final ResponseData userInfoResponse = new ResponseData(HttpURLConnection.HTTP_OK, TestConstants.userInfoResponse);
         final Map<String,String> headerValues = new HashMap<String,String>();
-        headerValues.put("Authorization", "bearer " + URLDecoder.decode(accessToken, "UTF-8"));
+        headerValues.put(ServiceConstants.X_AMZ_ACCESS_TOKEN, accessToken);
+        final ResponseData tokenInfoResponse = new ResponseData(HttpURLConnection.HTTP_OK, TestConstants.tokenInfoResponse);
+        final String tokenInfoURL = TestConstants.tokenInfoURL;
+        PowerMockito.doReturn(tokenInfoResponse).when(Util.class, "httpSendRequest", ServiceConstants.GET, tokenInfoURL, null, headerValues, null);
+        final ResponseData userInfoResponse = new ResponseData(HttpURLConnection.HTTP_OK, TestConstants.userInfoResponse);
         PowerMockito.doReturn(userInfoResponse).when(Util.class, "httpSendRequest",
-                "GET", TestConstants.userProfileURL, null, headerValues);
+                ServiceConstants.GET, TestConstants.userProfileURL, null, headerValues);
 
         User user = client.getUserInfo(accessToken, clientId);
 
@@ -74,9 +75,11 @@ public class LoginUserInfoTest {
 
     @Test(expected=AmazonServiceException.class)
     public void testInvalidAccessToken() throws Exception {
+        final Map<String,String> headerValues = new HashMap<String,String>();
+        headerValues.put(ServiceConstants.X_AMZ_ACCESS_TOKEN, accessToken);
         final ResponseData userProfileErrorResponse = new ResponseData(HttpURLConnection.HTTP_OK, TestConstants.userProfileErrorResponse);
-        final String tokenInfoURL = TestConstants.tokenInfoURL + URLDecoder.decode(accessToken, "UTF-8");
-        PowerMockito.doReturn(userProfileErrorResponse).when(Util.class, "httpSendRequest", "GET", tokenInfoURL, null, new HashMap<String,String>());
+        final String tokenInfoURL = TestConstants.tokenInfoURL;
+        PowerMockito.doReturn(userProfileErrorResponse).when(Util.class, "httpSendRequest", ServiceConstants.GET, tokenInfoURL, null, headerValues);
         final User user = client.getUserInfo(accessToken, clientId);
     }
 }

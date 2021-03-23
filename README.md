@@ -25,7 +25,7 @@ import com.amazon.pay.impl.PayConfig;
 ```java
 String merchantId = "YOUR_MERCHANT_ID";
 String accessKey = "YOUR_ACCESS_KEY";
-String secretKey = "YOUR_SECRET_Key";
+char[] secretKey = getSecretKey() // Replace with your implementation
 
 Config config = new PayConfig()
                 .withSellerId(merchantId)

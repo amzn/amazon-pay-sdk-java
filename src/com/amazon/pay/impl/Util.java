@@ -30,9 +30,13 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.charset.Charset;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -70,11 +74,12 @@ public class Util {
      *
      * @return signatureBase64 base64 encoded signature using specified secret key
      */
-    public static String getSignature(String stringToSign, String secretKey) throws IllegalStateException, InvalidKeyException, NoSuchAlgorithmException, UnsupportedEncodingException {
-        Mac mac = Mac.getInstance("HmacSHA256");
-        mac.init(new SecretKeySpec(secretKey.getBytes("UTF-8"), "HmacSHA256"));
-        byte[] signature = mac.doFinal(stringToSign.getBytes("UTF-8"));
-        String signatureBase64 = new String(Base64.encodeBase64(signature), "UTF-8");
+    public static String getSignature(String stringToSign, char[] secretKey) throws IllegalStateException, InvalidKeyException, NoSuchAlgorithmException, UnsupportedEncodingException {
+        final ByteBuffer byteBuffer = Charset.forName(ServiceConstants.UTF_8).encode(CharBuffer.wrap(secretKey));
+        final Mac mac = Mac.getInstance(ServiceConstants.HMAC_SHA256);
+        mac.init(new SecretKeySpec(Arrays.copyOf(byteBuffer.array(), byteBuffer.limit()), ServiceConstants.HMAC_SHA256));
+        final byte[] signature = mac.doFinal(stringToSign.getBytes(ServiceConstants.UTF_8));
+        final String signatureBase64 = new String(Base64.encodeBase64(signature), ServiceConstants.UTF_8);
         return signatureBase64;
     }
 
@@ -159,6 +164,9 @@ public class Util {
     public static ResponseData httpSendRequest(String method, String url, String urlParameters, Map<String,String> headers, PayConfig config) throws IOException {
 
         Map<String,String> headerMap = new HashMap<String,String>();
+        if (headers != null) {
+            headerMap.putAll(headers);
+        }
 
         if (config != null) {
 

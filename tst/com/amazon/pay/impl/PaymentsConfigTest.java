@@ -92,7 +92,7 @@ public class PaymentsConfigTest {
 
     private void assertConfigValues(PayConfig config, boolean usingOverride) {
         Assert.assertEquals(config.getAccessKey() , TestConstants.accessKey);
-        Assert.assertEquals(config.getSecretKey() , TestConstants.secretKey);
+        Assert.assertArrayEquals(config.getSecretKey() , TestConstants.secretKey);
         Assert.assertEquals(config.getRegion(), Region.US);
         Assert.assertEquals(config.getRegion().toString().toLowerCase(), "us");
         Assert.assertEquals(Region.valueOf("US"), Region.US);
