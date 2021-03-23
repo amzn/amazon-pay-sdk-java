@@ -1,3 +1,9 @@
+Version 3.7.0 - March 2021
+- Fixed following two security risks :
+1. Deprecated setSecretKey(String) method & enabled setSecretKey(char[]) in Config & PayConfig
+2. Buyer Access token is passed as HTTP header instead of query parameter in URL for GetUserInfo API
+- Note: Consumers of previous SDK versions strongly recommended to update data type of secret key from string to char[] as of this SDK Version 3.7.0. Please check the link : https://www.techiedelight.com/why-character-array-preferred-over-string-storing-passwords/ to know why char array is preferred over string for string. 
+
 Version 3.6.5 - January 2021
 - Added additional attribute (expectImmediateAuthorization) to ConfirmOrderReference. This value can be set to true or false (Boolean). See Amazon Pay Strong Customer Authentication (SCA) Upgrade Integration Guide for more information.
 

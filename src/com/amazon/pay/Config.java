@@ -74,7 +74,7 @@ public interface Config {
     /**
      * @return Returns SecretKey from PayConfig
      */
-    String getSecretKey();
+    char[] getSecretKey();
 
     /**
      * @return Returns the MerchantId/SellerId from PayConfig
@@ -138,9 +138,16 @@ public interface Config {
     void setRegion(Region region);
 
     /**
+     * @deprecated(since = "3.7.0") This method is deprecated, instead use setSecretKey(char[] secretAccessKey)
      * @param secretAccessKey Sets SecretKey in PayConfig
      */
+    @Deprecated
     void setSecretKey(String secretAccessKey);
+    
+    /**
+     * @param secretAccessKey Sets SecretKey in PayConfig
+     */
+    void setSecretKey(char[] secretAccessKey);
 
     /**
      * @param sellerId Sets MerchantId/SellerId in PayConfig

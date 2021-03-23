@@ -26,7 +26,7 @@ public class TestConstants {
     public static final String userInfoResponse = "{\"user_id\":\"amzn1.account.AF5W6J2OG52NKFJGEN52GEZ5CWFQ\",\"name\":\"Test Buyer\",\"email\":\"testbuyer2@amazon.com\"}";
     public static final String merchantId = "TEST_MERCHANT_ID";
     public static final String accessKey = "TEST_ACCESS_KEY";
-    public static final String secretKey = "TEST_SECRET_KEY";
+    public static final char [] secretKey = new char[] {'T','E','S','T','_','S','E','C','R','E','T','_','K','E','Y'};
     public static final String region = "us";
     public static final String sandbox_mode = "true";
     public static final String timeStamp = "2015-12-31T23:59:58Z";
@@ -49,7 +49,7 @@ public class TestConstants {
     public static final String creditReferenceReversalId = "TEST_CREDIT_REFERENCE_REVERSAL_ID";
     public static final String authorizationReferenceId = "TEST_AUTHORIZATION_REFERENCE_ID";
     public static final String userProfileURL = "https://api.sandbox.amazon.com/user/profile";
-    public static final String tokenInfoURL = "https://api.sandbox.amazon.com/auth/o2/tokeninfo?access_token=";
+    public static final String tokenInfoURL = "https://api.sandbox.amazon.com/auth/o2/tokeninfo";
     public static final String OVERRIDE_SERVICE_URL = "https://override.service.test";
     public static final String OVERRIDE_PROFILE_URL = "https://override.profile.test";
     public static final String queryId = "OR-12345";
