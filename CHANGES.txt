@@ -1,3 +1,6 @@
+Version 3.7.1 - July 2022
+- Fixed security vulnerabilities in dependencies.
+
 Version 3.7.0 - March 2021
 - Fixed following two security risks :
 1. Deprecated setSecretKey(String) method & enabled setSecretKey(char[]) in Config & PayConfig

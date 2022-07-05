@@ -8,7 +8,7 @@
 * Java 1.6 or higher *(including JCE Java Cryptography Extension)*
 * Apache Commons Logging 1.2 *(or JCL-over-SLF4J drop in replacement)*
 * Apache Commons Codec 1.10
-* Google Gson 2.2.2 or higher *(for GetUserInfo and IPN handling only)*
+* Google Gson 2.8.9 or higher *(for GetUserInfo and IPN handling only)*
 
 Amazon Pay API Integration
 
