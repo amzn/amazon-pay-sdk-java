@@ -153,7 +153,7 @@ public class ServiceConstants {
     public static final String GET_MERCHANT_ACCOUNT_STATUS = "GetMerchantAccountStatus";
 
     // SDK version
-    public static final String APPLICATION_LIBRARY_VERSION = "3.7.0";
+    public static final String APPLICATION_LIBRARY_VERSION = "3.7.1";
     public static final String GITHUB_SDK_NAME = "amazon-pay-sdk-java";
 
     // Exponential backoff wait times (milliseconds) for retry operations
