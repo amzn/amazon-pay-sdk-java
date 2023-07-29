@@ -16,6 +16,7 @@ package com.amazon.pay.impl.ipn;
 
 import com.amazon.pay.exceptions.AmazonClientException;
 import com.amazon.pay.response.ipn.model.Notification;
+import com.amazon.pay.types.ServiceConstants;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -121,7 +122,7 @@ public class NotificationVerification {
         stringToSign += notification.toMap().get("TopicArn") + "\n";
         stringToSign += "Type\n";
         stringToSign += notification.toMap().get("Type") + "\n";
-        return stringToSign.getBytes();
+        return stringToSign.getBytes(ServiceConstants.UTF_8);
     }
 
 }
