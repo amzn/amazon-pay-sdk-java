@@ -48,6 +48,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 import com.sun.org.apache.xpath.internal.SourceTree;
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.binary.StringUtils;
 
 public class Util {
 
@@ -194,9 +195,9 @@ public class Util {
                 systemSettings.put("http.proxyPort", config.getProxyPort());
                 if (config.getProxyUsername() != null && config.getProxyPassword() != null) {
                     String password = config.getProxyUsername() + ":" + config.getProxyPassword();
-                    byte[] encodedPassword = Base64.encodeBase64(password.getBytes());
+                    byte[] encodedPassword = Base64.encodeBase64(password.getBytes(ServiceConstants.UTF_8));
                     if (encodedPassword != null) {
-                        headerMap.put("Proxy-Authorization", new String(encodedPassword));
+                        headerMap.put("Proxy-Authorization", StringUtils.newString(encodedPassword, ServiceConstants.UTF_8));
                     }
                 }
             }
