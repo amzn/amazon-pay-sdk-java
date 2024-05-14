@@ -1,5 +1,7 @@
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.amazon.pay/amazon-pay-java-sdk/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.amazon.pay/amazon-pay-java-sdk)
 
+> **Important:** This SDK has been deprecated. Amazon Pay will continue to support this version but it will not be updated with new features. New integrations should use [Amazon Pay API SDK (Java)](https://github.com/amzn/amazon-pay-api-sdk-java) & refer this [documentation](https://developer.amazon.com/docs/amazon-pay/intro.html) for more details.
+
 ### Amazon Pay Java SDK
 
 ### Requirements
