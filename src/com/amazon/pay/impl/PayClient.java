@@ -1070,7 +1070,6 @@ public class PayClient implements Client  {
                             .setProviderCredit(chargeRequest.getProviderCredit())
                             .setSellerAuthorizationNote(chargeRequest.getSellerNote())
                             .setSoftDescriptor(chargeRequest.getSoftDescriptor())
-                            .setProviderCredit(chargeRequest.getProviderCredit())
             ).getDetails().getAmazonAuthorizationId();
             authDetails = getAuthorizationDetails(new GetAuthorizationDetailsRequest(authId).setMWSAuthToken(mwsAuthToken));
         } else {
